@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陈敏祥 · 计算机视觉与智能系统</title>
+  <meta name="description" content="大连海洋大学 计算机科学与技术 本科生 陈敏祥的个人学术主页 — 专注计算机视觉、AI 智能体与系统工程">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=7">
+</head>
+
+<body>
+
+  <canvas id="constellation"></canvas>
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav" id="nav" role="navigation" aria-label="主导航">
+    <a href="#" class="nav-logo">CMX.</a>
+    <ul class="nav-links">
+      <li><a href="#about">关于</a></li>
+      <li><a href="#education">教育</a></li>
+      <li><a href="#research">科研</a></li>
+      <li><a href="#projects">工程</a></li>
+      <li><a href="#awards">获奖</a></li>
+      <li><a href="#skills">技能</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="移动端导航">
+    <a href="#about">关于</a>
+    <a href="#education">教育</a>
+    <a href="#research">科研</a>
+    <a href="#projects">工程</a>
+    <a href="#awards">获奖</a>
+    <a href="#skills">技能</a>
+    <a href="#contact">联系</a>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      大连海洋大学 · 信息工程学院
+    </div>
+    <div class="hero-avatar">
+      <img src="avatar.png" alt="陈敏祥">
+    </div>
+    <h1 class="hero-name">陈敏祥</h1>
+    <p class="hero-tagline">
+      <span class="typing" id="typing"></span><span class="cursor"></span>
+    </p>
+    <p class="hero-sub-info">
+      大连海洋大学 · 计算机科学与技术
+    </p>
+    <div class="hero-cta">
+      <a href="#research" class="btn btn-primary">科研项目</a>
+      <a href="https://github.com/TianyaSKY" target="_blank" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+        </svg>
+        GitHub
+      </a>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" aria-label="关于我">
+    <div class="section-inner">
+      <div class="section-label reveal">About Me</div>
+      <h2 class="section-title reveal reveal-delay-1">关于我</h2>
+      <div class="about-grid">
+        <div class="about-text reveal reveal-delay-2">
+          <p>
+            大连海洋大学 · 计算机科学与技术 · GPA <strong>3.64</strong>。
+            主要关注<strong>计算机视觉</strong>与<strong>AI 智能体</strong>方向。
+          </p>
+          <p>
+            国家级大创第一负责人，独立设计单目视觉定位系统，海上实测 <strong>10–15cm</strong> 精度、<strong>26 FPS</strong>
+            实时运行。在大模型微调、RAG 链路、Agent 工作流等方向有较多工程实践。
+          </p>
+          <p>
+            目前希望在计算机视觉与智能系统方向继续深入学习。
+          </p>
+          <div class="interest-tags">
+            <span class="interest-tag">计算机视觉</span>
+            <span class="interest-tag">三维重建</span>
+            <span class="interest-tag">目标检测</span>
+            <span class="interest-tag">大语言模型</span>
+            <span class="interest-tag">智能体系统</span>
+            <span class="interest-tag">推荐系统</span>
+          </div>
+        </div>
+        <div class="stat-grid reveal reveal-delay-3">
+          <div class="stat-card">
+            <div class="stat-value">9<small style="font-size:.5em;opacity:.6">/117</small></div>
+            <div class="stat-label">专业排名</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">3.64</div>
+            <div class="stat-label">GPA</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">2</div>
+            <div class="stat-label">国家级大创</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">10+</div>
+            <div class="stat-label">竞赛获奖</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EDUCATION ═══ -->
+  <section id="education" aria-label="教育背景">
+    <div class="section-inner">
+      <div class="section-label reveal">Education</div>
+      <h2 class="section-title reveal reveal-delay-1">教育背景</h2>
+      <p class="section-desc reveal reveal-delay-2">本科在读 · 2023.09 — 2027.07</p>
+      <div class="edu-card reveal reveal-delay-3">
+        <div class="edu-logo-wrap">
+          <img src="school_logo.png" alt="大连海洋大学校徽"
+            onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem\'>🎓</span>'">
+        </div>
+        <div class="edu-info">
+          <h3>大连海洋大学</h3>
+          <p class="edu-sub">信息工程学院 · 计算机科学与技术 · 本科 · 2023.09 — 2027.07</p>
+          <div class="edu-tags">
+            <span class="edu-tag">CET-4 510</span>
+            <span class="edu-tag">排名 9/117</span>
+            <span class="edu-tag">GPA 3.64</span>
+            <span class="edu-tag">二等奖学金</span>
+          </div>
+          <div class="edu-detail">
+            <p><strong>核心课程：</strong>算法分析与设计 (95)、机器学习 (95)、概率论 (98)、数据库 (93)、Java (92)、高等数学 (97)</p>
+            <p><strong>个人技能：</strong>Python / PyTorch / OpenCV / YOLO 系列 / 三维几何重建 / LLM 微调 / Agent 开发</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ RESEARCH ═══ -->
+  <section id="research" aria-label="科研项目">
+    <div class="section-inner">
+      <div class="section-label reveal">Research</div>
+      <h2 class="section-title reveal reveal-delay-1">科研项目</h2>
+      <p class="section-desc reveal reveal-delay-2">已完成和正在进行的研究工作</p>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <h3 class="project-name">基于杆状标志物的单目视觉定位系统</h3>
+          <span class="project-role role-lead">国家级大创 · 第一负责人</span>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">YOLO11</span>
+          <span class="tech-tag">OpenCV</span>
+          <span class="tech-tag">Jetson Orin</span>
+        </div>
+        <p class="project-desc">
+          近海 GPS 易受干扰，传统 PnP 在共线结构上存在几何退化。
+          设计低成本单目视觉定位系统，在强光、运动模糊等极端工况下实现厘米级定位。
+        </p>
+        <ul class="project-highlights">
+          <li><strong>视觉感知：</strong>级联检测：YOLO11 ROI 提取 + Harris 亚像素角点精炼 + 轻量 CNN 语义识别（96.8% 准确率）</li>
+          <li><strong>位姿估计：</strong>提出光线夹角不变性几何约束，LM/TRR 双并发非线性优化克服共线退化</li>
+          <li><strong>海上实测：</strong>大连沿海实地验证：10–15cm RMSE、26 FPS、92% 特征检出率</li>
+          <li><strong>成果：</strong>辽宁省创新创业年会三等奖 · 软件著作权《基于单目视觉的相机定位系统》</li>
+        </ul>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <h3 class="project-name">科幻奇点 — 刘慈欣风格科幻生成系统</h3>
+          <span class="project-role role-lead">项目负责人</span>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Qwen2.5-7B</span>
+          <span class="tech-tag">LoRA</span>
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">SFT</span>
+        </div>
+        <p class="project-desc">
+          双卡 T4 有限算力下，高效微调 Qwen2.5-7B 赋予「慈欣体」风格，端到端科幻文本生成。
+          清洗 120 万字语料，LoRA 注入 Attention 层，可训练参数仅 0.3%，权重不足 50MB。
+        </p>
+        <ul class="project-highlights">
+          <li>滑动窗口 + 语义切分构建 SFT 数据，风格一致性显著优于基线</li>
+          <li>LoRA 微调，有限算力高效训练，可训练参数仅 0.3%</li>
+          <li><strong>获奖：</strong>辽宁省大学生智能技术应用大赛一等奖</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ENGINEERING PROJECTS ═══ -->
+  <section id="projects" aria-label="工程项目">
+    <div class="section-inner">
+      <div class="section-label reveal">Engineering</div>
+      <h2 class="section-title reveal reveal-delay-1">工程项目</h2>
+      <p class="section-desc reveal reveal-delay-2">个人开发或主导的工程实践</p>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <h3 class="project-name">AI 原生云盘 — SKYCloud</h3>
+          <span class="project-role role-lead">中软国际 AI 挑战赛省一等奖</span>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">Redis</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">pgvector</span>
+          <span class="tech-tag">LangGraph</span>
+          <span class="tech-tag">Docker</span>
+        </div>
+        <p class="project-desc">
+          大模型驱动的智能云盘：文件自动归档、多模态语义检索、AI 代理自主操作。
+        </p>
+        <ul class="project-highlights">
+          <li><strong>沙箱工作区：</strong>Docker SDK 动态调度隔离容器，FastMCP 暴露 17 个运维工具，大模型工具调用无感鉴权</li>
+          <li><strong>RAG 链路：</strong>6 维关键词改写 + Multi-Query 并行召回 + RRF 融合 + Rerank 重排，首 Token 响应 4s</li>
+          <li><strong>存储优化：</strong>大文件分片上云、断点续传、Hash 秒传；布隆过滤器 + Redis Bitmap 权限预判</li>
+        </ul>
+        <a href="https://github.com/TianyaSKY/SKYCloud" target="_blank" class="project-link">
+          查看项目 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <h3 class="project-name">短视频推荐系统</h3>
+          <span class="project-role role-member">多模态内容理解与个性化推荐</span>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">Redis</span>
+          <span class="tech-tag">RabbitMQ</span>
+          <span class="tech-tag">Milvus</span>
+          <span class="tech-tag">FastAPI</span>
+        </div>
+        <p class="project-desc">
+          多模态大模型 + 三层用户画像 + 双路召回，构建高并发短视频推荐引擎。
+        </p>
+        <ul class="project-highlights">
+          <li>视频标题 / 封面 / 内容联合语义向量，热门池 + 语义向量双路并行召回</li>
+          <li>行为上报、画像更新、统计聚合全链路 MQ 异步解耦</li>
+          <li>唯一键幂等写入保障数据库与缓存双写一致性</li>
+        </ul>
+        <a href="https://github.com/TianyaSKY/MyDouyin" target="_blank" class="project-link">
+          查看项目 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <h3 class="project-name">SKYOJ — 在线评测系统</h3>
+          <span class="project-role role-lead">独立开发</span>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Vue3</span>
+          <span class="tech-tag">Flask</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">RabbitMQ</span>
+          <span class="tech-tag">PostgreSQL</span>
+        </div>
+        <p class="project-desc">
+          基于微服务架构的在线评测平台，支持 ACM 模式、OOP 测试与数据科学评测，集成大模型辅助代码分析能力。
+        </p>
+        <ul class="project-highlights">
+          <li><strong>安全沙箱：</strong>Docker 容器隔离执行用户代码，限制 CPU / 内存 / 网络资源，防止恶意提交</li>
+          <li><strong>多评测模式：</strong>支持标准 ACM 对拍、OOP 单元测试、数据科学 Notebook 评分等多种判题方式</li>
+          <li><strong>AI 辅助：</strong>集成大模型对提交代码进行风格检查与错误提示，辅助教学场景</li>
+        </ul>
+        <a href="https://github.com/TianyaSKY/SKYOJ" target="_blank" class="project-link">
+          查看项目 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AWARDS ═══ -->
+  <section id="awards" aria-label="竞赛获奖">
+    <div class="section-inner">
+      <div class="section-label reveal">Honors & Awards</div>
+      <h2 class="section-title reveal reveal-delay-1">竞赛获奖</h2>
+      <p class="section-desc reveal reveal-delay-2">部分竞赛与荣誉记录</p>
+      <div class="awards-grid">
+        <div class="award-card reveal">
+          <span class="award-year">2026</span>
+          <div class="award-content">
+            <h4>蓝桥杯全国总决赛一等奖</h4>
+            <p>第 17 届 · Python 组 · 全国第 10 名</p>
+          </div>
+        </div>
+        <div class="award-card reveal reveal-delay-1">
+          <span class="award-year">2026</span>
+          <div class="award-content">
+            <h4>中软国际 · 卓越杯 AI 挑战赛一等奖</h4>
+            <p>辽宁赛区</p>
+          </div>
+        </div>
+        <div class="award-card reveal reveal-delay-1">
+          <span class="award-year">2026</span>
+          <div class="award-content">
+            <h4>智能技术应用大赛 · 一等奖</h4>
+            <p>辽宁赛区</p>
+          </div>
+        </div>
+        <div class="award-card reveal reveal-delay-2">
+          <span class="award-year">2025</span>
+          <div class="award-content">
+            <h4>iCAN 创新创业大赛三等奖</h4>
+            <p>全国总决赛·第 19 届</p>
+          </div>
+        </div>
+        <div class="award-card reveal reveal-delay-3">
+          <span class="award-year">2024</span>
+          <div class="award-content">
+            <h4>大学生数学竞赛二等奖</h4>
+            <p>第 16 届</p>
+          </div>
+        </div>
+        <div class="award-card reveal reveal-delay-4">
+          <span class="award-year">2024</span>
+          <div class="award-content">
+            <h4>金砖技能大赛三等奖</h4>
+            <p>全国总决赛·一带一路技术创新赛道</p>
+          </div>
+        </div>
+        <div class="award-card reveal reveal-delay-5">
+          <span class="award-year">2025</span>
+          <div class="award-content">
+            <h4>辽宁省创新创业年会三等奖</h4>
+            <p>单目视觉定位系统</p>
+          </div>
+        </div>
+        <div class="award-card reveal reveal-delay-5">
+          <span class="award-year">2025</span>
+          <div class="award-content">
+            <h4>大学生计算机设计大赛三等奖</h4>
+            <p>辽宁赛区·软件应用开发</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section id="skills" aria-label="技术栈">
+    <div class="section-inner">
+      <div class="section-label reveal">Technical Skills</div>
+      <h2 class="section-title reveal reveal-delay-1">技术栈</h2>
+      <p class="section-desc reveal reveal-delay-2">常用的技术工具与框架</p>
+      <div class="skills-container">
+        <div class="skill-group reveal">
+          <h3 class="skill-group-title" style="color:var(--gold)">计算机视觉</h3>
+          <div class="hex-grid">
+            <div class="hex hex--gold hex-row-odd"
+              data-projects="车牌识别::利用形态学处理与边缘检测提取车牌区域|基于双目视觉的鱼体测量::通过极线几何与特征匹配估算真实尺寸"><span
+                class="hex-name">OpenCV</span></div>
+            <div class="hex hex--gold hex-row-odd" data-projects="单目视觉定位系统::结合相机姿态与坐标系变换，实现海上10–15cm精度的实时定位"><span
+                class="hex-name">视觉定位</span></div>
+            <div class="hex hex--gold hex-row-odd" data-projects="人群计数::基于预训练扩散模型进行高密度人群定位与数量估算"><span
+                class="hex-name">目标检测</span></div>
+            <div class="hex hex--gold hex-row-odd" data-projects="WHAM关键点检测::引入WHAM进行3D人体关键点估计与运动姿态重构"><span
+                class="hex-name">姿态识别</span></div>
+            <div class="hex hex--gold hex-row-even" data-projects="虚拟眼镜试戴::基于Yolo-pose提取面部关键点，结合3D旋转实现头部追踪与眼镜贴合"><span
+                class="hex-name">位姿估计</span></div>
+            <div class="hex hex--gold hex-row-even" data-projects="单目视觉定位系统::通过流水线方式在海面上实现三维坐标映射"><span
+                class="hex-name">三维重建</span></div>
+            <div class="hex hex--gold hex-row-even" data-projects="扩散模型点云补全::利用预训练点云模型，以随机向量初始化并使用倒角距离作为损失函数进行优化"><span
+                class="hex-name">点云补全</span></div>
+            <div class="hex hex--gold hex-row-even" data-projects="SKYCloud多模态管线::集成视觉与文本模型，构建从多模态输入到特征提取的端到端自动化分析流">
+              <span class="hex-name">多模态</span><span class="hex-sub">管线</span>
+            </div>
+          </div>
+        </div>
+        <div class="skill-group reveal reveal-delay-1">
+          <h3 class="skill-group-title" style="color:var(--teal)">AI &amp; 大模型</h3>
+          <div class="hex-grid">
+            <div class="hex hex--teal hex-row-odd" data-projects="深度学习架构::在3D赛车、单目定位及点云补全项目中负责模型构建、训练与推理引擎优化"><span
+                class="hex-name">PyTorch</span></div>
+            <div class="hex hex--teal hex-row-odd" data-projects="文本情感建模::针对推荐算法中的用户评论，提取情感特征以优化多模态推荐性能"><span
+                class="hex-name">NLP</span></div>
+            <div class="hex hex--teal hex-row-odd"
+              data-projects="代码查重系统::利用大模型生成不同样本，对Sentence-Transformers模型进行对比学习微调|科幻奇点::运用LoRA技术进行领域知识对齐"><span
+                class="hex-name">大模型微调</span></div>
+            <div class="hex hex--teal hex-row-odd" data-projects="水质预测系统::将向量化的所有站点数据结合时序模型，进行联合趋势预测"><span
+                class="hex-name">时序处理</span></div>
+            <div class="hex hex--teal hex-row-even"
+              data-projects="SKYCloud智能体群组::使用LangGraph编排归档智能体，利用OpenAI SDK构建RAG知识库智能体"><span
+                class="hex-name">Agent</span><span class="hex-sub">架构</span></div>
+            <div class="hex hex--teal hex-row-even" data-projects="Docker隔离评测::结合Docker与Opencode，为代码生成型智能体提供安全受限的执行环境">
+              <span class="hex-name">沙盒智能体</span>
+            </div>
+            <div class="hex hex--teal hex-row-even" data-projects="3D赛车避障::构建带有雷达射线的车体环境，使用PPO策略优化算法训练无人驾驶与避障策略"><span
+                class="hex-name">强化学习</span></div>
+          </div>
+        </div>
+        <div class="skill-group reveal reveal-delay-2">
+          <h3 class="skill-group-title" style="color:var(--coral)">后端工程</h3>
+          <div class="hex-grid">
+            <div class="hex hex--coral hex-row-odd" data-projects="高性能API::利用FastAPI高并发特性，为多模态智能体管线和推荐引擎提供支撑"><span
+                class="hex-name">FastAPI</span></div>
+            <div class="hex hex--coral hex-row-odd" data-projects="短视频推荐架构::综合提取用户的点赞、停留等显隐式行为数据进行协同过滤建模"><span
+                class="hex-name">推荐系统</span></div>
+            <div class="hex hex--coral hex-row-odd" data-projects="高速特征缓存::作为推荐系统的高速缓存层，支撑用户特征与召回列表的毫秒级读取"><span
+                class="hex-name">Redis</span></div>
+            <div class="hex hex--coral hex-row-odd" data-projects="基础数据存储::结构化存储短视频推荐系统的用户画像属性、物品特征与历史交互日志"><span
+                class="hex-name">MySQL</span></div>
+            <div class="hex hex--coral hex-row-even" data-projects="复杂业务支撑::利用PostgreSQL高级特性存储SKYCloud与SKYOJ的微服务业务逻辑">
+              <span class="hex-name">PostgreSQL</span>
+            </div>
+            <div class="hex hex--coral hex-row-even" data-projects="异步任务解耦::解耦SKYOJ高耗时的代码沙盒评测任务，实现异步削峰与系统高可用"><span
+                class="hex-name">RabbitMQ</span></div>
+            <div class="hex hex--coral hex-row-even" data-projects="沙盒与服务容器化::将安全受限的智能体环境与基础服务全面容器化部署，保证资源隔离"><span
+                class="hex-name">Docker</span></div>
+            <div class="hex hex--coral hex-row-even" data-projects="SKYCloud交互规范::基于模型上下文协议统一多智能体之间的数据传输与接口规范"><span
+                class="hex-name">MCP</span><span class="hex-sub">协议</span></div>
+          </div>
+        </div>
+        <div class="skill-group reveal reveal-delay-3">
+          <h3 class="skill-group-title" style="color:#8b8798">编程语言</h3>
+          <div class="hex-grid">
+            <div class="hex hex--gray hex-row-odd"
+              data-projects="核心算法实现::主导所有的模型微调(PyTorch)、智能体流(LangGraph)与FastAPI后端开发"><span
+                class="hex-name">Python</span></div>
+            <div class="hex hex--gray hex-row-odd" data-projects="后端基座::参与早期业务系统、服务解耦与数据处理流的强类型开发实践"><span
+                class="hex-name">Java</span></div>
+            <div class="hex hex--gray hex-row-odd" data-projects="数据分析支撑::编写复杂的高并发查询、数据统计分析以及核心业务表结构设计"><span
+                class="hex-name">SQL</span></div>
+            <div class="hex hex--gray hex-row-odd" data-projects="全栈交互设计::构建SKYOJ的动态评测面板与当前个人主页的视觉动效逻辑"><span
+                class="hex-name">JavaScript</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" aria-label="联系方式">
+    <div class="section-inner">
+      <div class="section-label reveal">Contact</div>
+      <h2 class="section-title reveal reveal-delay-1">联系方式</h2>
+      <div class="contact-grid">
+        <a href="mailto:tianyaguest@qq.com" class="contact-card reveal">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </div>
+          <div class="contact-info">
+            <div class="label">Email</div>
+            <div class="value">tianyaguest@qq.com</div>
+          </div>
+        </a>
+        <a href="https://github.com/TianyaSKY" target="_blank" class="contact-card reveal reveal-delay-1">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </div>
+          <div class="contact-info">
+            <div class="label">GitHub</div>
+            <div class="value">github.com/TianyaSKY</div>
+          </div>
+        </a>
+        <a href="tel:13517001469" class="contact-card reveal reveal-delay-2">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+          </div>
+          <div class="contact-info">
+            <div class="label">Phone</div>
+            <div class="value">135-1700-1469</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <button class="back-to-top" id="backToTop" aria-label="回到顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button>
+
+  <footer class="footer">
+    <p>Designed & Built by <a href="https://github.com/TianyaSKY">陈敏祥</a> · 2026</p>
+  </footer>
+
+  <script src="script.js?v=7"></script>
+</body>
+
+</html>
