@@ -437,6 +437,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   let typingTimeout = null;
   let isRunning = false;
 
+  // Toggle console visibility
   toggleBtn.addEventListener('click', () => {
     if (consoleEl.style.display === 'none') {
       consoleEl.style.display = 'block';
@@ -445,9 +446,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
           <polyline points="4 17 10 11 4 5"></polyline>
           <line x1="12" y1="19" x2="20" y2="19"></line>
         </svg>
-        重置生成测试
+        关闭「慈欣体」生成器
       `;
-      startSimulation();
+      resetSimulation();
     } else {
       consoleEl.style.display = 'none';
       toggleBtn.innerHTML = `
@@ -455,7 +456,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
           <polyline points="4 17 10 11 4 5"></polyline>
           <line x1="12" y1="19" x2="20" y2="19"></line>
         </svg>
-        运行「二向箔降维」生成测试
+        启动「慈欣体」生成器
       `;
       resetSimulation();
     }
@@ -463,8 +464,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
   function resetSimulation() {
     if (typingTimeout) clearTimeout(typingTimeout);
-    consoleScreen.innerHTML = '<p class="console-hint">点击上方按钮启动生成测试...</p>';
     isRunning = false;
+    consoleScreen.innerHTML = `
+      <div class="console-start-screen" id="consoleStartScreen">
+        <p class="console-hint">Qwen2.5-7B-LoRA 慈欣体生成测试模型就绪</p>
+        <button id="runSimulationBtn" class="btn-run-simulation">运行「二向箔降维」生成测试</button>
+      </div>
+    `;
+    const runBtn = document.getElementById('runSimulationBtn');
+    if (runBtn) {
+      runBtn.addEventListener('click', startSimulation);
+    }
   }
 
   function startSimulation() {
@@ -520,33 +530,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   }
 
-  // Handle Generate Button Click
-  generateBtn.addEventListener('click', () => {
-    const inputVal = consoleInput.value.trim();
-    if (!inputVal) {
-      consoleScreen.innerHTML = '<p class="console-hint" style="color: #ef4444;">请输入灵感词或点击上方预设！</p>';
-      return;
-    }
-    // Determine the key to use based on input
-    let key = inputVal;
-    if (inputVal.includes('水滴')) key = '水滴';
-    else if (inputVal.includes('二向箔') || inputVal.includes('降维')) key = '二向箔';
-    else if (inputVal.includes('红岸') || inputVal.includes('广播') || inputVal.includes('发射')) key = '红岸';
-    else if (inputVal.includes('群星') || inputVal.includes('闪烁') || inputVal.includes('星空')) key = '群星';
-
-    promptChips.forEach(chip => {
-      if (chip.textContent === inputVal) chip.classList.add('active');
-      else chip.classList.remove('active');
-    });
-
-    generateText(key);
-  });
-
-  // Press Enter key to generate
-  consoleInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      generateBtn.click();
-    }
-  });
+  // Initial binding
+  resetSimulation();
 })();
 
