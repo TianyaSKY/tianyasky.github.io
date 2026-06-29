@@ -1106,3 +1106,31 @@ section + section::before{
     opacity:1;transform:none;
   }
 }
+
+/* ═══ PROJECT VIDEO EMBED ═══ */
+.project-video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  margin-top: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  background: var(--bg-deep);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.project-video-container:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 15px 45px rgba(212, 168, 67, 0.08), 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.project-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
