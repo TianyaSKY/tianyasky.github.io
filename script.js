@@ -430,14 +430,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 (function () {
   const toggleBtn = document.getElementById('sciFiToggleBtn');
   const consoleEl = document.getElementById('sciFiConsole');
-  const generateBtn = document.getElementById('generateBtn');
-  const consoleInput = document.getElementById('consoleInput');
   const consoleScreen = document.getElementById('consoleScreen');
-  const promptChips = document.querySelectorAll('.prompt-chip');
 
   if (!toggleBtn || !consoleEl) return;
 
-  // Toggle console visibility
+  let typingTimeout = null;
+  let isRunning = false;
+
   toggleBtn.addEventListener('click', () => {
     if (consoleEl.style.display === 'none') {
       consoleEl.style.display = 'block';
@@ -446,8 +445,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
           <polyline points="4 17 10 11 4 5"></polyline>
           <line x1="12" y1="19" x2="20" y2="19"></line>
         </svg>
-        关闭「慈欣体」生成器
+        重置生成测试
       `;
+      startSimulation();
     } else {
       consoleEl.style.display = 'none';
       toggleBtn.innerHTML = `
@@ -455,50 +455,32 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
           <polyline points="4 17 10 11 4 5"></polyline>
           <line x1="12" y1="19" x2="20" y2="19"></line>
         </svg>
-        启动「慈欣体」生成器
+        运行「二向箔降维」生成测试
       `;
+      resetSimulation();
     }
   });
 
-  const cixinQuotes = {
-    '水滴': "水滴在星空中划出一条完美的超高频折线，没有任何减速或缓冲，瞬间撞击了恒星级战舰。在静默的太空中，那一抹镜面反射着毁灭的光芒，两千艘人类战舰在绝对冷酷的几何美学面前崩塌为一团团恒星火花。这是宇宙的法则：毁灭你，与你无关。",
-    '二向箔': "纸片以接近光速的速度展开，将原本立体的恒星系拉平为一幅二维画卷。光线在退化，引力在坍缩，一切生命与文明在绝对的扁平化中凝固为永恒的静止。那是宇宙中最壮丽的死亡，三维的宏伟交响乐被粗暴地压制成单音符的二维低吟。",
-    '红岸': "巨大的抛物面天线直指向无垠的星空，将那条跨越数光年的低频电波广播出去。叶文洁扣下了那个决定人类命运的发射键，那一刻，太阳成了最强大的放大器。弱小与无知不是生存的障碍，傲慢才是。宇宙这片黑暗森林，正式向人类敞开了它冰冷的大门。",
-    '群星': "星空不再宁静。在超高敏感度引力波雷达中，整个银河系的群星正按照某种不可名状的频率闪烁着。每一个光斑的暗淡与明亮，都代表着一个星际文明的跃迁或覆灭。在这场宇宙规模 of 无声交响中，人类终于意识到，我们不过是海滩上仰望潮汐的沙粒。"
-  };
-
-  const getSystemFallback = (inputVal) => {
-    return `在浩瀚冷酷的宇宙尺度中，关于“${inputVal}”的一切都不过是微不足道的涟漪。热力学第二定律如同死神的镰刀，无情地将有序的星系切割为无序的尘埃。在这片黑暗森林中，生存是一种幸运，而无知则是最坚固的铠甲。文明在死寂的星空深处默默燃烧，直到最后一颗恒星也化为冷却的铁球。`;
-  };
-
-  // Click chips to fill input and focus
-  promptChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      promptChips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      const prompt = chip.dataset.prompt;
-      consoleInput.value = chip.textContent;
-      generateText(prompt);
-    });
-  });
-
-  let typingTimeout = null;
-
-  function generateText(key) {
+  function resetSimulation() {
     if (typingTimeout) clearTimeout(typingTimeout);
-    
+    consoleScreen.innerHTML = '<p class="console-hint">点击上方按钮启动生成测试...</p>';
+    isRunning = false;
+  }
+
+  function startSimulation() {
+    if (isRunning) return;
+    isRunning = true;
     consoleScreen.innerHTML = '';
-    
-    // Create log steps
+
     const logs = [
       `[system] 初始化 Qwen2.5-7B LoRA 微调权重...`,
       `[system] 载入 120 万字“慈欣体”科幻语料特征向量...`,
-      `[system] 检测到灵感特征: "${key}"，正在执行 SFT 风格解码...`,
-      `[system] 解码完成，开始文本输出:`
+      `[system] 接收输入灵感特征: "二向箔降维"`,
+      `[system] 正在执行 SFT 风格解码并流式输出:`
     ];
 
     let logIdx = 0;
-    
+
     function printLogs() {
       if (logIdx < logs.length) {
         const logLine = document.createElement('div');
@@ -516,23 +498,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     printLogs();
 
     function startTyping() {
-      // Find quote
-      let fullText = cixinQuotes[key];
-      if (!fullText) {
-        // Try fallback
-        let matchedKey = Object.keys(cixinQuotes).find(k => key.includes(k) || k.includes(key));
-        fullText = matchedKey ? cixinQuotes[matchedKey] : getSystemFallback(key);
-      }
-
+      const quote = "纸片以接近光速的速度展开，将原本立体的恒星系拉平为一幅二维画卷。光线在退化，引力在坍缩，一切生命与文明在绝对的扁平化中凝固为永恒的静止。那是宇宙中最壮丽的死亡，三维的宏伟交响乐被粗暴地压制成单音符的二维低吟。";
+      
       const textContainer = document.createElement('div');
       textContainer.className = 'console-gen-text';
       consoleScreen.appendChild(textContainer);
 
       let charIdx = 0;
-      
+
       function typeChar() {
-        if (charIdx < fullText.length) {
-          textContainer.textContent += fullText[charIdx];
+        if (charIdx < quote.length) {
+          textContainer.textContent += quote[charIdx];
           consoleScreen.scrollTop = consoleScreen.scrollHeight;
           charIdx++;
           typingTimeout = setTimeout(typeChar, Math.random() * 25 + 10);

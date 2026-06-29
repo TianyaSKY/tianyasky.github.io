@@ -1201,85 +1201,6 @@ section + section::before{
 .console-body {
   padding: 1.2rem;
 }
-.prompt-selection {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-.prompt-label {
-  font-family: var(--font-body);
-  font-size: 0.76rem;
-  color: var(--text-dim);
-}
-.prompt-chip {
-  padding: 0.25rem 0.6rem;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-secondary);
-  font-size: 0.74rem;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.prompt-chip:hover {
-  background: var(--violet-dim);
-  border-color: rgba(159, 140, 240, 0.3);
-  color: var(--violet);
-}
-.prompt-chip.active {
-  background: var(--violet-dim);
-  border-color: var(--violet);
-  color: var(--violet);
-}
-.console-input-row {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 6px;
-  padding: 0.4rem 0.6rem 0.4rem 0.8rem;
-  margin-bottom: 1rem;
-  transition: border-color 0.3s;
-}
-.console-input-row:focus-within {
-  border-color: rgba(159, 140, 240, 0.4);
-}
-.console-prefix {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--violet);
-}
-.console-input-row input {
-  flex: 1;
-  background: none;
-  border: none;
-  outline: none;
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-}
-.console-input-row input::placeholder {
-  color: var(--text-muted);
-}
-.console-input-row button {
-  background: var(--violet);
-  border: none;
-  border-radius: 4px;
-  color: var(--bg-deep);
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 0.35rem 0.9rem;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.console-input-row button:hover {
-  background: #bfaeff;
-  box-shadow: 0 0 12px rgba(159, 140, 240, 0.4);
-}
 .console-screen {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.03);
@@ -1328,5 +1249,6 @@ section + section::before{
 @keyframes blink {
   50% { opacity: 0; }
 }
+
 
 
