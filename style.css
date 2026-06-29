@@ -1134,3 +1134,199 @@ section + section::before{
   border: 0;
 }
 
+/* ═══ SCI-FI GENERATOR MOCK ═══ */
+.sci-fi-mock-wrapper {
+  margin-top: 1.5rem;
+}
+.btn-sci-fi-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--violet-dim);
+  border: 1px solid rgba(159, 140, 240, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--violet);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(159, 140, 240, 0.05);
+}
+.btn-sci-fi-toggle:hover {
+  background: rgba(159, 140, 240, 0.18);
+  border-color: rgba(159, 140, 240, 0.4);
+  color: #cbbffd;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(159, 140, 240, 0.12);
+}
+.btn-sci-fi-toggle svg {
+  width: 14px;
+  height: 14px;
+}
+.sci-fi-console {
+  margin-top: 1.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(159, 140, 240, 0.15);
+  background: rgba(8, 8, 18, 0.85);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(159, 140, 240, 0.05);
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: slideDownFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.console-header {
+  background: rgba(159, 140, 240, 0.06);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-bottom: 1px solid rgba(159, 140, 240, 0.08);
+}
+.console-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.console-dot.red { background: #ef4444; }
+.console-dot.yellow { background: #f59e0b; }
+.console-dot.green { background: #10b981; }
+.console-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-left: 0.6rem;
+}
+.console-body {
+  padding: 1.2rem;
+}
+.prompt-selection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.prompt-label {
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  color: var(--text-dim);
+}
+.prompt-chip {
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.prompt-chip:hover {
+  background: var(--violet-dim);
+  border-color: rgba(159, 140, 240, 0.3);
+  color: var(--violet);
+}
+.prompt-chip.active {
+  background: var(--violet-dim);
+  border-color: var(--violet);
+  color: var(--violet);
+}
+.console-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem 0.4rem 0.8rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+}
+.console-input-row:focus-within {
+  border-color: rgba(159, 140, 240, 0.4);
+}
+.console-prefix {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--violet);
+}
+.console-input-row input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.console-input-row input::placeholder {
+  color: var(--text-muted);
+}
+.console-input-row button {
+  background: var(--violet);
+  border: none;
+  border-radius: 4px;
+  color: var(--bg-deep);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.console-input-row button:hover {
+  background: #bfaeff;
+  box-shadow: 0 0 12px rgba(159, 140, 240, 0.4);
+}
+.console-screen {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  padding: 1rem;
+  min-height: 120px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: #9f8cf0;
+  text-shadow: 0 0 4px rgba(159, 140, 240, 0.2);
+}
+.console-hint {
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-style: italic;
+  text-align: center;
+  margin-top: 2.2rem;
+}
+.console-log {
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
+}
+.console-gen-text {
+  color: var(--text);
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+.console-gen-text::after {
+  content: '▋';
+  animation: blink 1s step-end infinite;
+  color: var(--violet);
+  margin-left: 2px;
+}
+.console-gen-text.done::after {
+  display: none;
+}
+
+@keyframes slideDownFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+
