@@ -206,6 +206,37 @@
           <li><strong>获奖：</strong>辽宁省大学生智能技术应用大赛一等奖</li>
         </ul>
       </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <h3 class="project-name">基于强化学习的 3D 赛车自动驾驶系统</h3>
+          <span class="project-role role-lead">独立开发</span>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">Stable-Baselines3</span>
+          <span class="tech-tag">PPO</span>
+          <span class="tech-tag">Pygame</span>
+        </div>
+        <p class="project-desc">
+          基于 Pygame 与物理引擎构建 3D 赛车仿真环境，并使用近端策略优化（PPO）算法训练无人驾驶智能体，实现复杂赛道下的自动避障与高效巡航。
+        </p>
+        <ul class="project-highlights">
+          <li><strong>环境构建：</strong>自主搭建 3D 赛车运动学模拟环境，配备多维雷达射线检测模块，实现车体与赛道边缘/障碍物的实时距离感知。</li>
+          <li><strong>策略训练：</strong>应用 SB3 中的 PPO 算法，优化转向与速度控制的连续动作空间，设计结合速度奖励与碰撞惩罚的复合奖励函数。</li>
+          <li><strong>工程优化：</strong>采用多进程并行采样环境（SubprocVecEnv），大幅加速样本收集；支持模型断点保存、续训微调与 TensorBoard 实时监控。</li>
+          <li><strong>运行成效：</strong>在复杂多弯道的赛道上实现 100% 自动绕障与稳定巡航，具备优异的控制精度与避障泛化性能。</li>
+        </ul>
+        <a href="https://github.com/TianyaSKY/RacingCar" target="_blank" class="project-link">
+          查看项目 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </a>
+        <div class="project-video-container">
+          <iframe src="https://player.bilibili.com/player.html?bvid=BV1EBqSBcEnL&page=1&high_quality=1&as_wide=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -242,6 +273,9 @@
             <path d="M7 17L17 7M17 7H7M17 7v10" />
           </svg>
         </a>
+        <div class="project-video-container">
+          <iframe src="https://player.bilibili.com/player.html?bvid=BV1Ez5x6kE1R&page=1&high_quality=1&as_wide=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+        </div>
       </div>
 
       <div class="project-card reveal">
