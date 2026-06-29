@@ -205,6 +205,43 @@
           <li>LoRA 微调，有限算力高效训练，可训练参数仅 0.3%</li>
           <li><strong>获奖：</strong>辽宁省大学生智能技术应用大赛一等奖</li>
         </ul>
+        
+        <!-- Sci-Fi Generator Live Mock -->
+        <div class="sci-fi-mock-wrapper">
+          <button class="btn-sci-fi-toggle" id="sciFiToggleBtn">
+            <svg class="icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            启动「慈欣体」生成器
+          </button>
+          
+          <div class="sci-fi-console" id="sciFiConsole" style="display: none;">
+            <div class="console-header">
+              <span class="console-dot red"></span>
+              <span class="console-dot yellow"></span>
+              <span class="console-dot green"></span>
+              <span class="console-title">Qwen2.5-7B-LoRA-Cixin-Singularity Console</span>
+            </div>
+            <div class="console-body">
+              <div class="prompt-selection">
+                <span class="prompt-label">灵感预设：</span>
+                <button class="prompt-chip" data-prompt="水滴">水滴拦截</button>
+                <button class="prompt-chip" data-prompt="二向箔">二向箔降维</button>
+                <button class="prompt-chip" data-prompt="红岸">红岸广播</button>
+                <button class="prompt-chip" data-prompt="群星">群星闪烁</button>
+              </div>
+              <div class="console-input-row">
+                <span class="console-prefix">&gt;</span>
+                <input type="text" id="consoleInput" placeholder="输入自定义科幻灵感词，或选择上方预设..." />
+                <button id="generateBtn">生成</button>
+              </div>
+              <div class="console-screen" id="consoleScreen">
+                <p class="console-hint">等待指令输入...（推荐点击上方灵感预设）</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="project-card reveal">
