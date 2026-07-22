@@ -1,22 +1,28 @@
 import React from 'react';
 import { researchProjects } from '../data/personalData';
+import VisionSimulator from './VisionSimulator';
 import SciFiTerminal from './SciFiTerminal';
-import { Microscope, ExternalLink } from 'lucide-react';
+import { Microscope, ExternalLink, Sparkles } from 'lucide-react';
 
 export default function Research() {
   return (
     <section id="research" className="section-inner">
       <div className="section-label">
-        <Microscope size={14} /> Research
+        <Microscope size={14} /> Research & Breakthroughs
       </div>
-      <h2 class="section-title">科研项目</h2>
-      <p className="section-desc">专注三维视觉定位、强泛化位姿估计与大模型微调工程</p>
+      <h2 className="section-title">科研项目与算法攻关</h2>
+      <p className="section-desc">主导与攻关近海厘米级单目姿态估计、大模型 SFT 风格微调与强化学习算法</p>
 
       <div className="projects-list">
         {researchProjects.map((proj) => (
-          <div key={proj.id} className="project-card">
+          <div key={proj.id} className="project-card bento-card">
             <div className="project-header">
-              <h3 className="project-name">{proj.title}</h3>
+              <div>
+                <span style={{ fontSize: '0.78rem', color: 'var(--color-primary)', fontFamily: 'var(--font-mono)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  {proj.category}
+                </span>
+                <h3 className="project-name">{proj.title}</h3>
+              </div>
               <span className="project-badge">{proj.badge}</span>
             </div>
 
@@ -50,6 +56,8 @@ export default function Research() {
                 </a>
               </div>
             )}
+
+            {proj.hasVisionDemo && <VisionSimulator />}
 
             {proj.hasTerminalSim && <SciFiTerminal />}
 

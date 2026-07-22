@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "陈敏祥",
   englishName: "Chen Minxiang",
-  title: "计算机视觉与智能系统",
+  title: "计算机视觉 · AI 智能体 · 系统工程",
   school: "大连海洋大学 · 信息工程学院",
   major: "计算机科学与技术 · 本科 (2023.09 — 2027.07)",
   avatar: "./avatar.png",
@@ -10,27 +10,27 @@ export const personalInfo = {
   github: "https://github.com/TianyaSKY",
   phone: "135-1700-1469",
   taglines: [
-    "专注计算机视觉与单目姿态几何估计",
-    "精通 AI 智能体 (Agent) 与 RAG 架构",
-    "国家级大创项目第一负责人",
-    "近海厘米级单目视觉定位系统开发者"
+    "近海 10–15cm 厘米级单目姿态估计架构师",
+    "专注计算机视觉与三维几何姿态重建",
+    "精通 AI 智能体 (Agent) 与 RAG 并行召回",
+    "国家级大创项目第一负责人 · 竞赛国奖得主"
   ]
 };
 
 export const stats = [
-  { label: "专业排名", value: "9", sub: "/117", icon: "Trophy" },
-  { label: "GPA", value: "3.64", sub: "", icon: "GraduationCap" },
-  { label: "国家级大创", value: "2", sub: "项", icon: "Rocket" },
-  { label: "竞赛获奖", value: "10+", sub: "项", icon: "Award" }
+  { id: "rank", label: "专业排名", value: "9", sub: "/117", icon: "Trophy", color: "#2563eb" },
+  { id: "gpa", label: "GPA 成绩", value: "3.64", sub: "", icon: "GraduationCap", color: "#0284c7" },
+  { id: "projects", label: "国家级大创", value: "2", sub: "项", icon: "Rocket", color: "#3b82f6" },
+  { id: "awards", label: "竞赛获奖", value: "10+", sub: "项", icon: "Award", color: "#1d4ed8" }
 ];
 
 export const interestTags = [
-  "计算机视觉",
-  "三维重建",
-  "目标检测",
-  "大语言模型",
-  "智能体系统",
-  "推荐系统"
+  "单目视觉定位",
+  "三维几何重建",
+  "YOLO 目标检测",
+  "大语言模型 SFT",
+  "FastMCP 智能体",
+  "多模态推荐系统"
 ];
 
 export const educationInfo = {
@@ -42,7 +42,7 @@ export const educationInfo = {
   courses: [
     { name: "算法分析与设计", score: "95" },
     { name: "机器学习", score: "95" },
-    { name: "概率论", score: "98" },
+    { name: "概率论与数理统计", score: "98" },
     { name: "数据库系统", score: "93" },
     { name: "Java 程序设计", score: "92" },
     { name: "高等数学", score: "97" }
@@ -55,25 +55,28 @@ export const researchProjects = [
     id: "vision-positioning",
     title: "基于杆状标志物的单目视觉定位系统",
     badge: "国家级大创 · 第一负责人",
+    category: "Computer Vision & Pose Estimation",
     tech: ["Python", "PyTorch", "YOLO11", "OpenCV", "Jetson Orin"],
-    description: "近海 GPS 易受干扰，传统 PnP 在共线结构上存在几何退化。设计低成本单目视觉定位系统，在强光、运动模糊等极端工况下实现厘米级定位。",
+    description: "针对近海环境 GPS 信号易受干扰、传统 PnP 在共线杆状结构上几何退化的致命痛点，自主设计低成本单目视觉定位系统。海上实测 10–15cm RMSE 精度，26 FPS 实时解算。",
     highlights: [
-      "视觉感知：级联检测：YOLO11 ROI 提取 + Harris 亚像素角点精炼 + 轻量 CNN 语义识别（96.8% 准确率）",
-      "位姿估计：提出光线夹角不变性几何约束，LM/TRR 双并发非线性优化克服共线退化",
-      "海上实测：大连沿海实地验证：10–15cm RMSE、26 FPS、92% 特征检出率",
-      "成果：辽宁省创新创业年会三等奖 · 软件著作权《基于单目视觉的相机定位系统》"
-    ]
+      "级联检测网络：YOLO11 ROI 提取 + Harris 亚像素角点精炼 + 轻量 CNN 语义识别（96.8% 准确率）",
+      "非线性求解：提出光线夹角不变性几何约束，LM/TRR 双并发求解器克服共线点退化",
+      "海上实操验证：大连沿海实测 10–15cm RMSE 定位精度，具备强抗光照与抗波浪抖动能力",
+      "学术与知识产权：辽宁省创新创业年会三等奖 · 软件著作权《基于单目视觉的相机定位系统》"
+    ],
+    hasVisionDemo: true
   },
   {
     id: "cixin-singularity",
     title: "科幻奇点 — 刘慈欣风格科幻生成系统",
     badge: "项目负责人",
+    category: "LLM Fine-Tuning & SFT",
     tech: ["Qwen2.5-7B", "LoRA", "PyTorch", "SFT"],
-    description: "双卡 T4 有限算力下，高效微调 Qwen2.5-7B 赋予「慈欣体」风格，端到端科幻文本生成。清洗 120 万字语料，LoRA 注入 Attention 层，可训练参数仅 0.3%，权重不足 50MB。",
+    description: "双卡 T4 有限算力约束下，高效微调 Qwen2.5-7B 赋能「慈欣体」风格生成。清洗 120 万字语料，LoRA 注入 Attention 层，可训练参数仅 0.3%，权重不足 50MB。",
     highlights: [
-      "滑动窗口 + 语义切分构建 SFT 数据，风格一致性显著优于基线",
-      "LoRA 微调，有限算力高效训练，可训练参数仅 0.3%",
-      "获奖：辽宁省大学生智能技术应用大赛一等奖"
+      "滑动窗口 + 语义切分构建高质量 SFT 训练集，文风逼真度显著超越基线大模型",
+      "轻量化 LoRA 注入 Attention 投影层，显存占用降低 70%，推演响应时间 < 2s",
+      "竞赛荣誉：辽宁省大学生智能技术应用大赛一等奖"
     ],
     hasTerminalSim: true
   },
@@ -81,13 +84,13 @@ export const researchProjects = [
     id: "rl-racing",
     title: "基于强化学习的 3D 赛车自动驾驶系统",
     badge: "独立开发",
+    category: "Reinforcement Learning",
     tech: ["Python", "PyTorch", "Stable-Baselines3", "PPO", "Pygame"],
-    description: "基于 Pygame 与物理引擎构建 3D 赛车仿真环境，并使用近端策略优化（PPO）算法训练无人驾驶智能体，实现复杂赛道下的自动避障与高效巡航。",
+    description: "基于 Pygame 与物理引擎构建 3D 赛车运动学仿真环境，结合多维雷达传感器，采用 PPO 算法训练无人驾驶智能体，实现 100% 自动绕障与最优路径巡航。",
     highlights: [
-      "环境构建：自主搭建 3D 赛车运动学模拟环境，配备多维雷达射线检测模块，实现车体与赛道边缘/障碍物的实时距离感知。",
-      "策略训练：应用 SB3 中的 PPO 算法，优化转向与速度控制的连续动作空间，设计结合速度奖励与碰撞惩罚的复合奖励函数。",
-      "工程优化：采用多进程并行采样环境（SubprocVecEnv），大幅加速样本收集；支持模型断点保存、续训微调与 TensorBoard 实时监控。",
-      "运行成效：在复杂多弯道的赛道上实现 100% 自动绕障与稳定巡航，具备优异的控制精度与避障泛化性能。"
+      "运动学环境：构建 3D 赛车物理运动模型，配备多方向雷达射线束进行毫米级边界感知",
+      "复合奖励设计：设计速度与轨迹偏离度惩罚的连续动作空间 PPO 训练逻辑",
+      "并行训练加速：利用 SubprocVecEnv 多进程并行采样，训练效率提升 4 倍以上"
     ],
     github: "https://github.com/TianyaSKY/RacingCar",
     bilibiliBvid: "BV1EBqSBcEnL"
@@ -99,12 +102,13 @@ export const engineeringProjects = [
     id: "sky-cloud",
     title: "SKYCloud —— AI 原生云盘",
     badge: "中软国际 AI 挑战赛省一等奖",
+    category: "AI Agent & RAG Architecture",
     tech: ["FastAPI", "Redis", "PostgreSQL", "pgvector", "LangGraph", "Docker"],
-    description: "大模型驱动的智能云盘：文件自动归档、多模态语义检索、AI 代理自主操作。",
+    description: "大模型驱动的智能云盘系统：文件智能自动归档、多模态语义搜索、沙箱智能体自主运维。",
     highlights: [
-      "沙箱工作区：Docker SDK 动态调度隔离容器，FastMCP 暴露 17 个运维工具，大模型工具调用无感鉴权",
-      "RAG 链路：6 维关键词改写 + Multi-Query 并行召回 + RRF 融合 + Rerank 重排，首 Token 响应 4s",
-      "存储优化：大文件分片上云、断点续传、Hash 秒传；布隆过滤器 + Redis Bitmap 权限预判"
+      "沙箱工作区：Docker SDK 动态调度隔离容器，FastMCP 暴露 17 个运维工具，大模型无感鉴权",
+      "RAG 混合召回：6 维关键词改写 + Multi-Query 并行召回 + RRF 融合 + Rerank 重排，首 Token 响应 4s",
+      "海量存储：大文件分片秒传、断点续传；布隆过滤器 + Redis Bitmap 实现高并发权限预判"
     ],
     github: "https://github.com/TianyaSKY/SKYCloud",
     bilibiliBvid: "BV1Ez5x6kE1R"
@@ -112,26 +116,28 @@ export const engineeringProjects = [
   {
     id: "sky-douyin",
     title: "SKYDouyin —— 短视频推荐系统",
-    badge: "多模态内容理解与个性化推荐",
+    badge: "多模态推荐引擎",
+    category: "High Performance Backend",
     tech: ["MySQL", "Redis", "RabbitMQ", "Milvus", "FastAPI"],
-    description: "多模态大模型 + 三层用户画像 + 双路召回，构建高并发短视频推荐引擎。",
+    description: "多模态大模型 + 三层用户画像 + 双路召回，构建毫秒级高并发短视频推荐引擎。",
     highlights: [
-      "视频标题 / 封面 / 内容联合语义向量，热门池 + 语义向量双路并行召回",
-      "行为上报、画像更新、统计聚合全链路 MQ 异步解耦",
-      "唯一键幂等写入保障数据库与缓存双写一致性"
+      "多模态向量化：联合视频标题、封面与音频语义向量，基于 Milvus 实现向量 + 热门双路召回",
+      "消息队列解耦：用户行为上报、实时画像更新与统计聚合全链路 RabbitMQ 削峰解耦",
+      "高可用存储：唯一键幂等写入与 Redis 缓存击穿防护，保障双写一致性"
     ],
     github: "https://github.com/TianyaSKY/MyDouyin"
   },
   {
     id: "sky-oj",
-    title: "SKYOJ —— 在线评测系统",
+    title: "SKYOJ —— 在线代码评测系统",
     badge: "独立开发",
+    category: "Microservice Platform",
     tech: ["Vue3", "Flask", "Docker", "RabbitMQ", "PostgreSQL"],
-    description: "基于微服务架构的在线评测平台，支持 ACM 模式、OOP 测试与数据科学评测，集成大模型辅助代码分析能力。",
+    description: "基于微服务架构的在线评测平台，支持 ACM 判题、OOP 测试与 Notebook 数据科学评测，集成 LLM 智能代码分析。",
     highlights: [
-      "安全沙箱：Docker 容器隔离执行用户代码，限制 CPU / 内存 / 网络资源，防止恶意提交",
-      "多评测模式：支持标准 ACM 对拍、OOP 单元测试、数据科学 Notebook 评分等多种判题方式",
-      "AI 辅助：集成大模型对提交代码进行风格检查与错误提示，辅助教学场景"
+      "Docker 安全沙箱：容器隔离执行用户提交代码，严格限制 CPU/内存/网络权限，杜绝恶意脚本",
+      "多模式评测：支持 ACM 标准对拍、OOP 单元测试以及 Jupyter Notebook 自动化评分",
+      "AI 教学辅助：接入大模型对错误代码进行静态分析与优化诊断建议"
     ],
     github: "https://github.com/TianyaSKY/SKYOJ"
   }
@@ -150,54 +156,54 @@ export const awardsList = [
 
 export const skillCategories = [
   {
-    category: "计算机视觉",
+    id: "cv",
+    category: "计算机视觉 & 3D 几何",
     theme: "blue",
     skills: [
-      { name: "OpenCV", projects: "车牌识别::利用形态学处理与边缘检测提取车牌区域 | 基于双目视觉的鱼体测量::通过极线几何与特征匹配估算真实尺寸" },
-      { name: "视觉定位", projects: "单目视觉定位系统::结合相机姿态与坐标系变换，实现海上 10–15cm 精度的实时定位" },
-      { name: "目标检测", projects: "人群计数::基于预训练扩散模型进行高密度人群定位与数量估算" },
-      { name: "姿态识别", projects: "WHAM 关键点检测::引入 WHAM 进行 3D 人体关键点估计与运动姿态重构" },
-      { name: "位姿估计", projects: "虚拟眼镜试戴::基于 YOLO-pose 提取面部关键点，结合 3D 旋转实现头部追踪与眼镜贴合" },
-      { name: "三维重建", projects: "单目视觉定位系统::通过流水线方式在海面上实现三维坐标映射" },
-      { name: "点云补全", projects: "扩散模型点云补全::利用预训练点云模型，以随机向量初始化并使用倒角距离优化" },
-      { name: "多模态管线", projects: "SKYCloud 多模态管线::集成视觉与文本模型，构建从多模态输入到特征提取的端到端自动化分析流" }
+      { name: "OpenCV", projects: "车牌提取 | 双目鱼体尺寸估算" },
+      { name: "单目视觉定位", projects: "杆状标志物 10-15cm RMSE 海上实时解算" },
+      { name: "YOLO 目标检测", projects: "YOLO11 ROI 提取 & 人群计数定位" },
+      { name: "3D 姿态识别", projects: "WHAM 关键点估计与运动姿态重构" },
+      { name: "位姿估计", projects: "YOLO-pose 头部追踪与虚拟眼镜贴合" },
+      { name: "三维几何重建", projects: "海面坐标系光线夹角不变性映射" },
+      { name: "点云补全", projects: "扩散模型 Chamfer Distance 优化" },
+      { name: "多模态管线", projects: "端到端视觉与文本自动化特征流" }
     ]
   },
   {
-    category: "AI & 大模型",
+    id: "ai",
+    category: "AI & 大模型工程",
     theme: "cyan",
     skills: [
-      { name: "PyTorch", projects: "深度学习架构::在 3D 赛车、单目定位及点云补全项目中负责模型构建与训练优化" },
-      { name: "NLP", projects: "文本情感建模::针对推荐算法中的用户评论，提取情感特征以优化多模态推荐性能" },
-      { name: "大模型微调", projects: "代码查重系统::利用大模型生成不同样本微调对比学习模型 | 科幻奇点::LoRA 技术领域知识对齐" },
-      { name: "时序处理", projects: "水质预测系统::将向量化的所有站点数据结合时序模型，进行联合趋势预测" },
-      { name: "Agent 架构", projects: "SKYCloud 智能体群组::使用 LangGraph 编排归档智能体，利用 OpenAI SDK 构建 RAG 知识库智能体" },
-      { name: "沙盒智能体", projects: "Docker 隔离评测::结合 Docker 与 Opencode，为代码生成型智能体提供安全受限的执行环境" },
-      { name: "强化学习", projects: "3D 赛车避障::构建带有雷达射线的车体环境，使用 PPO 策略优化算法训练无人驾驶与避障策略" }
+      { name: "PyTorch", projects: "单目定位、3D 赛车与点云补全架构" },
+      { name: "LLM LoRA 微调", projects: "科幻奇点 0.3% 参数量高效对齐" },
+      { name: "FastMCP Agent", projects: "SKYCloud 17 运维工具无感鉴权调度" },
+      { name: "RAG 多路召回", projects: "6 维改写 + Multi-Query + RRF 融合" },
+      { name: "强化学习 (PPO)", projects: "3D 赛车雷达避障与最优巡航控制" },
+      { name: "沙盒智能体", projects: "Docker 隔离代码生成受限执行环境" }
     ]
   },
   {
-    category: "后端工程",
+    id: "backend",
+    category: "后端架构 & 高并发",
     theme: "indigo",
     skills: [
-      { name: "FastAPI", projects: "高性能 API::利用 FastAPI 高并发特性，为多模态智能体管线和推荐引擎提供支撑" },
-      { name: "推荐系统", projects: "短视频推荐架构::综合提取用户的点赞、停留等显隐式行为数据进行协同过滤建模" },
-      { name: "Redis", projects: "高速特征缓存::作为推荐系统的高速缓存层，支撑用户特征与召回列表的毫秒级读取" },
-      { name: "MySQL", projects: "基础数据存储::结构化存储短视频推荐系统的用户画像属性、物品特征与历史交互日志" },
-      { name: "PostgreSQL", projects: "复杂业务支撑::利用 PostgreSQL 高级特性存储 SKYCloud 与 SKYOJ 的微服务业务逻辑" },
-      { name: "RabbitMQ", projects: "异步任务解耦::解耦 SKYOJ 高耗时的代码沙盒评测任务，实现异步削峰与系统高可用" },
-      { name: "Docker", projects: "沙盒与服务容器化::将安全受限的智能体环境与基础服务全面容器化部署，保证资源隔离" },
-      { name: "MCP 协议", projects: "SKYCloud 交互规范::基于模型上下文协议统一多智能体之间的数据传输与接口规范" }
+      { name: "FastAPI", projects: "SKYCloud & 多模态推荐系统高性能 API" },
+      { name: "Redis / Milvus", projects: "用户特征毫秒级缓存 & 向量双路召回" },
+      { name: "RabbitMQ", projects: "解耦代码评测与视频日志全链路异步削峰" },
+      { name: "PostgreSQL / pgvector", projects: "结构化业务与 1536 维向量检索" },
+      { name: "Docker 容器化", projects: "智能体沙盒与评测隔离环境" }
     ]
   },
   {
-    category: "编程语言",
+    id: "lang",
+    category: "编程语言 & 全栈",
     theme: "sky",
     skills: [
-      { name: "Python", projects: "核心算法实现::主导所有的模型微调(PyTorch)、智能体流(LangGraph)与 FastAPI 后端开发" },
-      { name: "Java", projects: "后端基座::参与早期业务系统、服务解耦与数据处理流的强类型开发实践" },
-      { name: "SQL", projects: "数据分析支撑::编写复杂的高并发查询、数据统计分析以及核心业务表结构设计" },
-      { name: "JavaScript", projects: "全栈交互设计::构建 React / Vue3 动态面板与个人主页的高级动效逻辑" }
+      { name: "Python", projects: "深度学习、Agent、FastAPI 核心语言" },
+      { name: "JavaScript / React", projects: "现代 React 全栈交互与炫酷 HUD 动效" },
+      { name: "Java", projects: "后端基座与强类型服务解耦" },
+      { name: "SQL", projects: "高并发查询优化与数据库架构" }
     ]
   }
 ];
@@ -221,4 +227,21 @@ export const sciFiPresetPrompts = [
     prompt: "面壁者逻辑，请向宇宙发射太阳电磁波放大广播（187J3X1 恒星坐标）",
     response: "【太阳电磁辐射层功率增益：10^8 倍级联放大】\n咒语已随着能量波束撕裂星尘。在漫漫暗森林中，一颗恒星的位置已暴露在万千冷酷猎手的视线之下。50年或100年后，毁灭将从天而降。这是弱小的碳基生命，向全宇宙发出的死神请柬。"
   }
+];
+
+// Search dataset for Quick Search Command Palette (⌘K)
+export const searchDataset = [
+  { type: "Research", title: "单目视觉定位系统", subtitle: "国家级大创 · 10-15cm 精度", href: "#research" },
+  { type: "Research", title: "科幻奇点 — 慈欣体生成", subtitle: "Qwen2.5-7B SFT 微调", href: "#research" },
+  { type: "Research", title: "3D 赛车自动驾驶系统", subtitle: "PPO 强化学习", href: "#research" },
+  { type: "Engineering", title: "SKYCloud AI 原生云盘", subtitle: "FastAPI + LangGraph + FastMCP", href: "#projects" },
+  { type: "Engineering", title: "SKYDouyin 短视频推荐", subtitle: "多模态向量 + 双路召回", href: "#projects" },
+  { type: "Engineering", title: "SKYOJ 在线评测平台", subtitle: "Docker 沙盒 + ACM 对拍", href: "#projects" },
+  { type: "Award", title: "蓝桥杯全国一等奖", subtitle: "第17届 Python 组全国第 10 名", href: "#awards" },
+  { type: "Award", title: "卓越杯 AI 挑战赛一等奖", subtitle: "中软国际 辽宁赛区", href: "#awards" },
+  { type: "Course", title: "算法分析与设计 (95分)", subtitle: "大连海洋大学 核心高分课程", href: "#education" },
+  { type: "Course", title: "机器学习 (95分)", subtitle: "大连海洋大学 核心高分课程", href: "#education" },
+  { type: "Course", title: "概率论与数理统计 (98分)", subtitle: "大连海洋大学 核心高分课程", href: "#education" },
+  { type: "Contact", title: "Email: tianyaguest@qq.com", subtitle: "点击直接发送邮件交流", href: "mailto:tianyaguest@qq.com" },
+  { type: "Contact", title: "GitHub: github.com/TianyaSKY", subtitle: "查看全部开源代码库", href: "https://github.com/TianyaSKY" }
 ];
