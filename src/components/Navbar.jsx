@@ -71,8 +71,7 @@ export default function Navbar({ onOpenCmdPalette }) {
           className="nav-brand"
           onClick={() => isHome && window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <span className="nav-brand-dot"></span>
-          CMX.
+          <img className="nav-brand-logo" src="/logo.png" alt="CMX" />
           <span className="nav-brand-version">v2.0</span>
         </Link>
 
