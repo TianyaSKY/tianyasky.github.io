@@ -19,3 +19,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local scratch / legacy backups
+src/_legacy/
+image.png
