@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>陈敏祥 · 计算机视觉与智能系统</title>
+<style>
+  body{font-family:'Plus Jakarta Sans','Noto Sans SC',system-ui,-apple-system,sans-serif;background:#f4f8fc;color:#09152e;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;}
+  .box{text-align:center;padding:2rem 2.5rem;border-radius:22px;background:#fff;border:1px solid rgba(37,99,235,.14);box-shadow:0 20px 50px rgba(37,99,235,.12);max-width:480px;}
+  .box h1{font-size:1.4rem;margin:0 0 .8rem;color:#2563eb;}
+  .box p{margin:.4rem 0;color:#475569;}
+  .box a{color:#2563eb;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;}
+</style>
+<script>
+  // GitHub Pages SPA 重定向：
+  // 如果访问路径不是已知的 index 路径，则把当前 path 存入 sessionStorage 并跳回首页。
+  (function () {
+    var path = window.location.pathname;
+    var isAsset = /\.[a-z0-9]{2,5}$/i.test(path);
+    var isRoot = path === '/' || path.endsWith('/index.html');
+    if (!isAsset && !isRoot) {
+      try { sessionStorage.setItem('gh-pages-redirect', path + window.location.search + window.location.hash); } catch (e) {}
+      window.location.replace('./');
+    }
+  })();
+</script>
+</head>
+<body>
+  <div class="box">
+    <h1>页面找不到了？</h1>
+    <p>正在带你回到首页…</p>
+    <p style="margin-top:1rem;font-size:.9rem;">如果浏览器没有自动跳转，<a href="./">点此回到首页</a>。</p>
+  </div>
+</body>
+</html>
