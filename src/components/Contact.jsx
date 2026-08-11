@@ -9,8 +9,7 @@ export default function Contact() {
       <div className="contact-letter">
         <div>
           <p className="contact-letter-text">
-            这本小刊仍在缓慢增订。如果你的工作是 <em>计算机视觉、AI 智能体或推荐系统</em>，希望讨论选题、合作研究、岗位方向，或者只是想留一句鼓励，<br />
-            都可以写信给我——<em>我读每一封。</em>
+            这本小刊仍在缓慢增订。<em>我将等待您的每一封来信。</em>
           </p>
           <div className="contact-letter-signoff">— 敏祥</div>
         </div>
