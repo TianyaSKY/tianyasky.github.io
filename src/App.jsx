@@ -1,36 +1,41 @@
 import React, { useState } from 'react';
-import TelemetryBar from './components/TelemetryBar';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import BackgroundCanvas from './components/BackgroundCanvas';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Education from './components/Education';
-import Research from './components/Research';
-import Engineering from './components/Engineering';
-import Awards from './components/Awards';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import ProjectDetail from './pages/ProjectDetail';
+import NotFound from './pages/NotFound';
 import CommandPalette from './components/CommandPalette';
 
-export default function App() {
+function Shell() {
   const [isCmdOpen, setIsCmdOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   return (
     <div className="app-container">
-      <TelemetryBar />
       <BackgroundCanvas />
       <Navbar onOpenCmdPalette={() => setIsCmdOpen(true)} />
+
       <main>
-        <Hero onOpenCmdPalette={() => setIsCmdOpen(true)} />
-        <About />
-        <Education />
-        <Research />
-        <Engineering />
-        <Awards />
-        <Skills />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<Home onOpenCmdPalette={() => setIsCmdOpen(true)} />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:id" element={<ProjectDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
+
       <CommandPalette isOpen={isCmdOpen} onClose={() => setIsCmdOpen(false)} />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Shell />
+    </BrowserRouter>
   );
 }
