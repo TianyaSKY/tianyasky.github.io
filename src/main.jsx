@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import './styles/search-palette.css'
 import App from './App.jsx'
 
 // GitHub Pages SPA 重定向恢复：从 404.html 跳回首页后，把原路径写回 location。
