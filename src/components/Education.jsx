@@ -26,12 +26,11 @@ export default function Education() {
         </div>
 
         <div>
-          <div className="kicker kicker-mid" style={{ marginBottom: '0.8rem' }}>Coursework · 核心课程</div>
+          <div className="kicker kicker-mid" style={{ marginBottom: '0.8rem' }}>Coursework · 课程</div>
           <table className="course-table">
             <thead>
               <tr>
                 <th style={{ width: '44%' }}>课程</th>
-                <th style={{ width: '12%', textAlign: 'right' }}>学分</th>
                 <th style={{ width: '12%', textAlign: 'right' }}>成绩</th>
               </tr>
             </thead>
@@ -39,7 +38,6 @@ export default function Education() {
               {educationInfo.courses.map((c) => (
                 <tr key={c.name}>
                   <td>{c.name}</td>
-                  <td className="credit">{c.credit}</td>
                   <td className="score">{c.score}</td>
                 </tr>
               ))}

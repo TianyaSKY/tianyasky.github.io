@@ -43,7 +43,7 @@ export default function Hero({ onOpenCmdPalette }) {
         <span style={{ opacity: 0.4 }}>·</span>
         <span>{dateStr}</span>
         <span style={{ opacity: 0.4 }}>·</span>
-        <span>本期主题：<em style={{ fontStyle: 'italic', fontFamily: 'var(--font-serif)', color: 'var(--color-vermilion)' }}>计算机视觉的三维几何</em></span>
+        <span>本期主题：<em style={{ fontStyle: 'italic', fontFamily: 'var(--font-serif)', color: 'var(--color-vermilion)' }}>机器视觉与深度学习</em></span>
       </header>
 
       <div className="hero-grid">
@@ -54,7 +54,7 @@ export default function Hero({ onOpenCmdPalette }) {
           </h1>
 
           <p className="hero-lede">
-            一个关心厘米级单目姿态估计、AI 智能体自治与推荐召回算法的工科生；把毕业论文、产品 demo、竞赛记号写进这本仍在增订的小刊。
+            一个学习姿态估计、AI 智能体自治与推荐召回算法的工科生；把产品 demo、竞赛记号写进这本仍在增订的小刊。
           </p>
 
           <div className="hero-typing-box" aria-live="polite">
@@ -100,8 +100,8 @@ export default function Hero({ onOpenCmdPalette }) {
           <span className="hero-stat-label">专业排名</span>
         </div>
         <div className="hero-stat">
-          <span className="hero-stat-value">3.64</span>
-          <span className="hero-stat-label">GPA · 4 学期</span>
+          <span className="hero-stat-value">3.74</span>
+          <span className="hero-stat-label">GPA · 6 学期</span>
         </div>
         <div className="hero-stat">
           <span className="hero-stat-value">2<sup> 项</sup></span>

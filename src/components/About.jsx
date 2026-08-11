@@ -9,8 +9,8 @@ export default function About() {
       <div className="about-grid">
         <div className="about-prose">
           <p className="dropcap">
-            <span className="dropcap-letter">我</span>是<strong>陈敏祥</strong>，大连海洋大学计算机科学与技术专业 2022 级本科生，GPA 3.64 排名
-            <strong>9/117</strong>。把<em>计算机视觉的三维几何</em>与<em>AI 智能体系统</em>作为长期的两条线索。前者以厘米级单目姿态估计起步，后者从推荐召回流到 FastMCP 工作流。
+            <span className="dropcap-letter">我</span>是<strong>陈敏祥</strong>，大连海洋大学计算机科学与技术专业 2023 级本科生。把
+            <em>计算机视觉的三维几何</em>与<em>AI 智能体系统</em>作为长期的两条学习主线。前者以厘米级单目姿态估计起步，后者的探究从推荐召回流到 FastMCP 工作流。
           </p>
           <p>
             作为<strong>国家级大创项目第一负责人</strong>，独立设计近海单目视觉定位系统，RMSE
@@ -18,7 +18,7 @@ export default function About() {
             全栈与科研落地。
           </p>
           <p>
-            同时在做笔名实验：在 B 站 & Qwen2.5-7B 上，<em>以刘慈欣科幻文风</em>训一个可以连续输出"末日感"
+            同时有过大模型微调的经历：在 Qwen2.5-7B 上，<em>以刘慈欣科幻文风</em>训练一个可以连续输出“科幻风格”
             的小型 LLM。这是兴趣，也是阅读训练。
           </p>
         </div>
