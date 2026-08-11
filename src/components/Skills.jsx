@@ -1,79 +1,47 @@
 import React, { useState } from 'react';
 import { skillCategories } from '../data/personalData';
-import { Layers, Info, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState('ALL');
-  const [selectedSkill, setSelectedSkill] = useState(null);
-
-  const categories = [
-    { id: 'ALL', name: '全部技术栈' },
-    ...skillCategories.map((c) => ({ id: c.id, name: c.category })),
-  ];
-
-  const filteredCategories = activeCategory === 'ALL'
-    ? skillCategories
-    : skillCategories.filter((c) => c.id === activeCategory);
+  const [openId, setOpenId] = useState(null);
 
   return (
     <section id="skills" className="section-inner">
-      <div className="section-label">
-        <Layers size={14} /> Tech Stack & System Matrix
-      </div>
-      <h2 className="section-title">全栈技术拓扑与能力矩阵</h2>
-      <p className="section-desc">点击技能卡片可展开与该技术栈绑定的具体科研算法与工程落地实践</p>
+      <div className="section-label">技术栈 · Tech Stack</div>
+      <h2 className="section-title">
+        工具与语言 / <em>tooling & languages</em>
+      </h2>
+      <p className="section-desc">
+        真实可调用的栈：科研与工程两条线索都走相同的全栈脚手架。
+      </p>
 
-      {/* Category Pills Filter */}
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            className={`btn ${activeCategory === cat.id ? 'btn-primary' : 'btn-outline'}`}
-            style={{ padding: '0.4rem 1.1rem', fontSize: '0.88rem' }}
-            onClick={() => setActiveCategory(cat.id)}
-          >
-            {cat.name}
-          </button>
-        ))}
-      </div>
-
-      {filteredCategories.map((cat, catIdx) => (
-        <div key={cat.id} className="skills-category-block">
-          <div className="skills-category-title">
-            <span className="nav-brand-dot" style={{ width: 10, height: 10 }}></span>
-            {cat.category}
+      {skillCategories.map((cat, idx) => (
+        <div key={cat.id} className="skills-block">
+          <div>
+            <span className="skills-cat-num">/ 0{idx + 1}</span>
+            <h3 className="skills-cat-label">{cat.category}</h3>
+            {cat.bullets && <p className="skills-cat-bullets">{cat.bullets}</p>}
           </div>
 
           <div className="skills-grid">
-            {cat.skills.map((sk, skIdx) => {
-              const key = `${cat.id}-${skIdx}`;
-              const isSelected = selectedSkill === key;
+            {cat.skills.map((sk) => {
+              const id = `${cat.id}-${sk.name}`;
+              const open = openId === id;
               return (
                 <div
-                  key={skIdx}
-                  className={`skill-card ${isSelected ? 'selected' : ''}`}
-                  onClick={() => setSelectedSkill(isSelected ? null : key)}
+                  key={sk.name}
+                  className="skill-item"
+                  onClick={() => setOpenId(open ? null : id)}
+                  style={{ flexDirection: 'column', alignItems: 'flex-start', cursor: 'pointer', gap: 4 }}
                 >
-                  <div className="skill-header">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                     <span className="skill-name">{sk.name}</span>
-                    <span className="skill-icon-dot"></span>
+                    <span className="skill-detail">{sk.level || 'PROFICIENT'}</span>
                   </div>
-
-                  {isSelected ? (
-                    <div className="skill-details-popup">
-                      <div style={{ fontWeight: 700, marginBottom: 4, color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <CheckCircle2 size={13} />
-                        落地工程与项目实践：
-                      </div>
-                      {sk.projects.split('|').map((proj, pIdx) => (
-                        <div key={pIdx} style={{ marginBottom: 4 }}>
-                          • {proj.trim()}
-                        </div>
+                  {open && sk.projects && (
+                    <div style={{ marginTop: 6, fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
+                      {sk.projects.split('|').map((p, i) => (
+                        <div key={i}>· {p.trim()}</div>
                       ))}
-                    </div>
-                  ) : (
-                    <div style={{ fontSize: '0.78rem', color: 'var(--color-text-light)', marginTop: '0.4rem' }}>
-                      点击查看关联项目 →
                     </div>
                   )}
                 </div>

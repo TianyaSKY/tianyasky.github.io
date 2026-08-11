@@ -1,85 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { personalInfo } from '../data/personalData';
-import { Mail, Github, Phone, ChevronUp } from 'lucide-react';
 
 export default function Contact() {
-  const [showTopBtn, setShowTopBtn] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowTopBtn(window.scrollY > 400);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <section id="contact" className="section-inner" style={{ paddingBottom: '3rem' }}>
-      <div className="section-label">
-        <Mail size={14} /> Contact
+      <div className="section-label">联系 · Letter to the editor</div>
+
+      <div className="contact-letter">
+        <div>
+          <p className="contact-letter-text">
+            这本小刊仍在缓慢增订。如果你的工作是 <em>计算机视觉、AI 智能体或推荐系统</em>，希望讨论选题、合作研究、岗位方向，或者只是想留一句鼓励，<br />
+            都可以写信给我——<em>我读每一封。</em>
+          </p>
+          <div className="contact-letter-signoff">— 敏祥</div>
+        </div>
+
+        <ul className="contact-list">
+          <li>
+            <span className="lbl">E-mail</span>
+            <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+          </li>
+          <li>
+            <span className="lbl">GitHub</span>
+            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">
+              github.com/TianyaSKY
+            </a>
+          </li>
+          <li>
+            <span className="lbl">Phone</span>
+            <span className="v">{personalInfo.phone}</span>
+          </li>
+          <li>
+            <span className="lbl">Bilibili</span>
+            <a href="https://space.bilibili.com/" target="_blank" rel="noopener noreferrer">
+              space.bilibili.com
+            </a>
+          </li>
+        </ul>
       </div>
-      <h2 className="section-title">联系方式</h2>
-      <p className="section-desc">非常欢迎学术交流、技术讨论与合作意向</p>
-
-      <div className="contact-grid">
-        <a href={`mailto:${personalInfo.email}`} className="contact-card">
-          <div className="contact-icon-box">
-            <Mail size={24} />
-          </div>
-          <div>
-            <div className="contact-label">Email</div>
-            <div className="contact-value">{personalInfo.email}</div>
-          </div>
-        </a>
-
-        <a
-          href={personalInfo.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="contact-card"
-        >
-          <div className="contact-icon-box">
-            <Github size={24} />
-          </div>
-          <div>
-            <div className="contact-label">GitHub</div>
-            <div className="contact-value">github.com/TianyaSKY</div>
-          </div>
-        </a>
-
-        <a href={`tel:${personalInfo.phone}`} className="contact-card">
-          <div className="contact-icon-box">
-            <Phone size={24} />
-          </div>
-          <div>
-            <div className="contact-label">Phone</div>
-            <div className="contact-value">{personalInfo.phone}</div>
-          </div>
-        </a>
-      </div>
-
-      {showTopBtn && (
-        <button
-          className="back-to-top"
-          onClick={scrollToTop}
-          aria-label="Back to top"
-        >
-          <ChevronUp size={24} />
-        </button>
-      )}
 
       <footer className="footer" style={{ marginTop: '4rem' }}>
-        <p>
-          Designed & Built with React by{' '}
-          <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">
-            {personalInfo.name}
-          </a>{' '}
-          · 2026
-        </p>
+        © 2026 {personalInfo.name} · Designed in editorial bento ·{' '}
+        <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">
+          view source
+        </a>
       </footer>
     </section>
   );

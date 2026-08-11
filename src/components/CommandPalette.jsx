@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { searchDataset } from '../data/personalData';
 import { Search, X, Command, ArrowRight, CornerDownLeft } from 'lucide-react';
 
 export default function CommandPalette({ isOpen, onClose }) {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -35,8 +37,25 @@ export default function CommandPalette({ isOpen, onClose }) {
     onClose();
     if (item.href.startsWith('http') || item.href.startsWith('mailto')) {
       window.open(item.href, '_blank');
+      return;
+    }
+    // href 形如 "#projects" / "#research" => 滚动到目标锚点
+    if (item.href.startsWith('#')) {
+      const id = item.href.slice(1);
+      // 优先尝试在当前页内滚动
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      // 否则回到首页并定位
+      navigate('/');
+      setTimeout(() => {
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 200);
     } else {
-      window.location.hash = item.href;
+      navigate(item.href);
     }
   };
 

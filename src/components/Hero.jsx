@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { personalInfo } from '../data/personalData';
-import { Github, ArrowRight, Sparkles, Terminal, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Github, Search } from 'lucide-react';
 
 export default function Hero({ onOpenCmdPalette }) {
   const [taglineIndex, setTaglineIndex] = useState(0);
@@ -12,8 +13,7 @@ export default function Hero({ onOpenCmdPalette }) {
     let speed = isDeleting ? 35 : 75;
 
     if (!isDeleting && currentText === fullText) {
-      speed = 2200;
-      const timeout = setTimeout(() => setIsDeleting(true), speed);
+      const timeout = setTimeout(() => setIsDeleting(true), 2200);
       return () => clearTimeout(timeout);
     } else if (isDeleting && currentText === '') {
       setIsDeleting(false);
@@ -32,77 +32,81 @@ export default function Hero({ onOpenCmdPalette }) {
     return () => clearTimeout(timer);
   }, [currentText, isDeleting, taglineIndex]);
 
+  const now = new Date();
+  const dateStr = `${now.getFullYear()} · vol.${(now.getMonth() + 1).toString().padStart(2, '0')}`;
+
   return (
     <section id="hero" className="hero-section">
-      <div className="hero-badge">
-        <span className="pulse-dot"></span>
-        {personalInfo.school}
-        <span style={{ opacity: 0.5, margin: '0 4px' }}>|</span>
-        <span style={{ color: 'var(--color-primary)', fontWeight: 700 }}>GPA 3.64 (9/117)</span>
-      </div>
+      <header className="hero-eyebrow">
+        <span className="dot pulse" />
+        <span>{personalInfo.school}</span>
+        <span style={{ opacity: 0.4 }}>·</span>
+        <span>{dateStr}</span>
+        <span style={{ opacity: 0.4 }}>·</span>
+        <span>本期主题：<em style={{ fontStyle: 'italic', fontFamily: 'var(--font-serif)', color: 'var(--color-vermilion)' }}>计算机视觉的三维几何</em></span>
+      </header>
 
-      <div className="hero-avatar-wrapper">
-        <div className="hero-avatar-glow"></div>
-        <img
-          src={personalInfo.avatar}
-          alt={personalInfo.name}
-          className="hero-avatar-img"
-          onError={(e) => {
-            e.target.src = 'https://via.placeholder.com/150?text=CMX';
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '-4px',
-            right: '-4px',
-            background: 'linear-gradient(135deg, #2563eb, #0284c7)',
-            color: '#ffffff',
-            borderRadius: '50%',
-            width: '36px',
-            height: '36px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '3px solid #ffffff',
-            boxShadow: '0 4px 12px rgba(37,99,235,0.4)',
-          }}
-          title="国家级大创第一负责人"
-        >
-          <Sparkles size={18} />
+      <div className="hero-grid">
+        <div>
+          <h1 className="hero-title">
+            <span className="cn">{personalInfo.name}</span>
+            <span className="en">{personalInfo.englishName}, 编辑寄语</span>
+          </h1>
+
+          <p className="hero-lede">
+            一个关心厘米级单目姿态估计、AI 智能体自治与推荐召回算法的工科生；把毕业论文、产品 demo、竞赛记号写进这本仍在增订的小刊。
+          </p>
+
+          <div className="hero-typing-box" aria-live="polite">
+            <span className="hero-typing-prefix">&gt;</span>
+            <span>{currentText}</span>
+            <span className="typing-cursor" />
+          </div>
+
+          <div className="hero-cta-group">
+            <Link to="/projects" className="btn btn-primary">
+              翻阅项目 <ArrowRight size={16} />
+            </Link>
+            <button onClick={onOpenCmdPalette} className="btn btn-outline">
+              <Search size={14} /> 全站检索
+            </button>
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-link"
+            >
+              <Github size={14} style={{ marginRight: 4, verticalAlign: '-2px' }} />
+              github.com/TianyaSKY
+            </a>
+          </div>
         </div>
+
+        <aside className="hero-portrait" aria-label="作者">
+          <div className="hero-portrait-frame">
+            <img src={personalInfo.avatar} alt={personalInfo.name} />
+          </div>
+          <div className="hero-portrait-caption">
+            <span>封面摄影</span>
+            <span className="name">{personalInfo.englishName}</span>
+            <span>{personalInfo.major}</span>
+          </div>
+        </aside>
       </div>
 
-      <h1 className="hero-name-gradient">
-        {personalInfo.name}
-        <span className="hero-english-sub">{personalInfo.englishName}</span>
-      </h1>
-
-      <div className="hero-typing-box">
-        <span className="tagline-prefix">&gt; </span>
-        <span>{currentText}</span>
-        <span className="typing-cursor"></span>
-      </div>
-
-      <p className="hero-sub">{personalInfo.major}</p>
-
-      <div className="hero-cta-group">
-        <a href="#research" className="btn btn-primary">
-          探索科研与工程成果 <ArrowRight size={18} />
-        </a>
-
-        <button onClick={onOpenCmdPalette} className="btn btn-outline">
-          <Terminal size={18} /> 全局 HUD 极速检索
-        </button>
-
-        <a
-          href={personalInfo.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-outline"
-        >
-          <Github size={18} /> GitHub 主页
-        </a>
+      <div className="hero-stats">
+        <div className="hero-stat">
+          <span className="hero-stat-value">9<sup>/117</sup></span>
+          <span className="hero-stat-label">专业排名</span>
+        </div>
+        <div className="hero-stat">
+          <span className="hero-stat-value">3.64</span>
+          <span className="hero-stat-label">GPA · 4 学期</span>
+        </div>
+        <div className="hero-stat">
+          <span className="hero-stat-value">2<sup> 项</sup></span>
+          <span className="hero-stat-label">国家级大创</span>
+        </div>
       </div>
     </section>
   );
