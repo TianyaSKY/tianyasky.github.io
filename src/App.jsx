@@ -7,6 +7,7 @@ import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import NotFound from './pages/NotFound';
 import CommandPalette from './components/CommandPalette';
+import ScrollToTop from './components/ScrollToTop';
 
 function Shell() {
   const [isCmdOpen, setIsCmdOpen] = useState(false);
@@ -15,6 +16,7 @@ function Shell() {
 
   return (
     <div className="app-container">
+      <ScrollToTop />
       <BackgroundCanvas />
       <Navbar onOpenCmdPalette={() => setIsCmdOpen(true)} />
 
