@@ -1,28 +1,45 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Search, Command } from 'lucide-react';
+
+const NAV_ITEMS = [
+  { id: 'about', label: '关于', anchor: '#about' },
+  { id: 'education', label: '教育', anchor: '#education' },
+  { id: 'projects', label: '项目', anchor: '#projects', route: '/projects' },
+  { id: 'awards', label: '竞赛', anchor: '#awards' },
+  { id: 'skills', label: '技术栈', anchor: '#skills' },
+  { id: 'contact', label: '联系', anchor: '#contact' }
+];
+
+function scrollToAnchor(id, navigate) {
+  if (id === 'hero') return;
+  const onHome = window.location.pathname === '/';
+  if (!onHome) {
+    navigate('/');
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 220);
+    return;
+  }
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 export default function Navbar({ onOpenCmdPalette }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-
-  const navItems = [
-    { id: 'about', label: '关于' },
-    { id: 'education', label: '教育' },
-    { id: 'research', label: '科研项目' },
-    { id: 'projects', label: '工程体系' },
-    { id: 'awards', label: '竞赛荣誉' },
-    { id: 'skills', label: '技术栈' },
-    { id: 'contact', label: '联系' },
-  ];
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);
-
-      const sections = ['hero', ...navItems.map((item) => item.id)];
+      if (!isHome) return;
+      const sections = ['hero', ...NAV_ITEMS.map((i) => i.id)];
       const scrollPos = window.scrollY + 200;
-
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el && el.offsetTop <= scrollPos) {
@@ -31,28 +48,41 @@ export default function Navbar({ onOpenCmdPalette }) {
         }
       }
     };
-
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHome]);
+
+  const handleNav = (e, item) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    if (item.route) {
+      navigate(item.route);
+      return;
+    }
+    scrollToAnchor(item.id, navigate);
+  };
 
   return (
     <>
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-        <a href="#hero" className="nav-brand">
+        <Link
+          to="/"
+          className="nav-brand"
+          onClick={() => isHome && window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <span className="nav-brand-dot"></span>
           CMX.
-          <span style={{ fontSize: '0.72rem', opacity: 0.6, fontFamily: 'var(--font-mono)', fontWeight: 600, marginLeft: 4 }}>
-            v2.0
-          </span>
-        </a>
+          <span className="nav-brand-version">v2.0</span>
+        </Link>
 
         <ul className="nav-links">
-          {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
-                className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+                onClick={(e) => handleNav(e, item)}
+                className={`nav-link ${isHome && activeSection === item.id ? 'active' : ''}`}
               >
                 {item.label}
               </a>
@@ -63,27 +93,12 @@ export default function Navbar({ onOpenCmdPalette }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
           <button
             onClick={onOpenCmdPalette}
-            style={{
-              background: 'var(--color-primary-subtle)',
-              border: '1px solid var(--border-color)',
-              color: 'var(--color-primary)',
-              borderRadius: '9999px',
-              padding: '0.4rem 0.85rem',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-            }}
+            className="nav-cmd-btn"
             title="快捷搜索 (Ctrl+K)"
           >
             <Search size={14} />
             <span>搜索</span>
-            <span style={{ fontSize: '0.7rem', opacity: 0.7, fontFamily: 'var(--font-mono)', background: 'rgba(37,99,235,0.15)', padding: '0.1rem 0.35rem', borderRadius: '4px' }}>
-              ⌘K
-            </span>
+            <span className="nav-cmd-shortcut">⌘K</span>
           </button>
 
           <button
@@ -98,16 +113,23 @@ export default function Navbar({ onOpenCmdPalette }) {
 
       {mobileOpen && (
         <div className="mobile-drawer">
-          {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
               className="mobile-drawer-link"
-              onClick={() => setMobileOpen(false)}
+              onClick={(e) => handleNav(e, item)}
             >
               {item.label}
             </a>
           ))}
+          <Link
+            to="/projects"
+            className="mobile-drawer-link"
+            onClick={() => setMobileOpen(false)}
+          >
+            所有项目
+          </Link>
         </div>
       )}
     </>
