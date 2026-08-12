@@ -193,10 +193,20 @@ export const projects = [
     category: "AI Workspace · RAG · Agent Runtime",
     cover: "/projects/sky-cloud/cover.png",
     gallery: [
-      "/projects/sky-cloud/01.svg",
-      "/projects/sky-cloud/02.svg",
-      "/projects/sky-cloud/03.svg"
+      { src: "/projects/sky-cloud/agent_chat.png", caption: "RAG 智能助手与文件引用" },
+      { src: "/projects/sky-cloud/workspace.png", caption: "独立 OpenCode 工作区" },
+      { src: "/projects/sky-cloud/work-finish.png", caption: "Agent 创建并回传文件" },
+      { src: "/projects/sky-cloud/work_file.png", caption: "生成文档在线预览" },
+      { src: "/projects/sky-cloud/mcp.png", caption: "MCP Token 与客户端配置" },
+      { src: "/projects/sky-cloud/token-usage.png", caption: "模型 Token 用量统计" },
+      { src: "/projects/sky-cloud/file_preview.png", caption: "Markdown 文件在线预览" },
+      { src: "/projects/sky-cloud/share.png", caption: "带有效期的文件分享管理" }
     ],
+    caseFigures: {
+      background: { src: "/projects/sky-cloud/agent_chat.png", caption: "文件管理与 RAG 智能助手" },
+      method: { src: "/projects/sky-cloud/architecture.png", caption: "Frontend / API / Worker / Data 四层架构" },
+      results: { src: "/projects/sky-cloud/rag_pipeline.png", caption: "Multi-Query、RRF 与 Rerank 检索链路" }
+    },
     accent: "cyan",
     bento: { size: "lg", col: 1, row: 2 },
     tech: ["Vue 3", "FastAPI", "PostgreSQL", "pgvector", "RabbitMQ", "FastMCP", "Docker", "OpenCode"],

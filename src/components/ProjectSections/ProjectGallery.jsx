@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function ProjectGallery({ project }) {
-  const items = (project.gallery || []).slice(0, 5);
+  const items = project.gallery || [];
   const [open, setOpen] = useState(null);
 
   if (items.length === 0) return null;
@@ -13,20 +13,24 @@ export default function ProjectGallery({ project }) {
         视觉证据 / <em>visual evidence</em>
       </h2>
 
-      <div className="project-gallery">
-        {items.map((src, i) => (
-          <figure key={i} onClick={() => setOpen(src)}>
-            <img src={src} alt={`${project.id} ${i + 1}`} />
-            <figcaption>{project.id} · fig {i + 1}</figcaption>
-          </figure>
-        ))}
+      <div className={`project-gallery ${items.length > 5 ? 'project-gallery-expanded' : ''}`}>
+        {items.map((item, i) => {
+          const src = typeof item === 'string' ? item : item.src;
+          const caption = typeof item === 'string' ? `${project.id} · fig ${i + 1}` : item.caption;
+          return (
+            <figure key={src} onClick={() => setOpen({ src, caption })}>
+              <img src={src} alt={caption || `${project.title} ${i + 1}`} />
+              <figcaption>{caption || `${project.id} · fig ${i + 1}`}</figcaption>
+            </figure>
+          );
+        })}
       </div>
 
       {open && (
-        <div className="inline-demo-modal" onClick={() => setOpen(null)} role="dialog">
+        <div className="inline-demo-modal" onClick={() => setOpen(null)} role="dialog" aria-label={open.caption}>
           <div className="inline-demo-image" onClick={(e) => e.stopPropagation()}>
             <button className="inline-demo-close" onClick={() => setOpen(null)}>✕ 关闭</button>
-            <img src={open} alt="" />
+            <img src={open.src} alt={open.caption || ''} />
           </div>
         </div>
       )}

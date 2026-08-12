@@ -2818,8 +2818,7 @@ body::before {
   margin-top: 0.4rem;
 }
 
-/* Gallery strip */
-/* Gallery strip · 5 tiles: 1 hero (2 rows) + 4 small (1 row each) */
+/* Gallery strip · compact editorial layout for short galleries */
 .project-gallery {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
@@ -2848,6 +2847,27 @@ body::before {
 .project-gallery figure:nth-child(4) { grid-column: 2; grid-row: 2; }
 .project-gallery figure:nth-child(5) { grid-column: 3; grid-row: 2; }
 
+/* Real product captures need legible, uncropped evidence rather than collage crops. */
+.project-gallery-expanded {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: none;
+  gap: 1rem;
+}
+
+.project-gallery-expanded figure,
+.project-gallery-expanded figure:nth-child(n) {
+  grid-column: auto;
+  grid-row: auto;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+}
+
+.project-gallery-expanded figure:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 2200 / 1341;
+}
+
 .project-gallery img {
   position: absolute;
   inset: 0;
@@ -2856,6 +2876,10 @@ body::before {
   object-fit: cover;
   display: block;
   transition: transform 0.5s;
+}
+
+.project-gallery-expanded img {
+  object-fit: contain;
 }
 
 .project-gallery figure:hover img {
@@ -3127,6 +3151,8 @@ body::before {
   .project-stat-cell:nth-child(2) { border-bottom: 1px solid var(--rule); }
   .project-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
   .project-gallery figure:nth-child(1) { grid-row: span 2; }
+  .project-gallery-expanded { grid-template-columns: 1fr 1fr; }
+  .project-gallery-expanded figure:nth-child(n) { grid-row: auto; }
   .project-reflection { grid-template-columns: 1fr; gap: 2rem; }
   .section-title { font-size: 2.6rem; }
   .hero-title { font-size: clamp(3.5rem, 12vw, 5.5rem); }
@@ -3175,6 +3201,13 @@ body::before {
   .project-hero-copy {
     padding: 1.65rem 1.25rem 1.5rem;
     gap: 1.5rem;
+  }
+  .project-gallery-expanded {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .project-gallery-expanded figure:first-child {
+    grid-column: auto;
   }
   .project-hero-title {
     font-size: clamp(2.35rem, 13vw, 3.25rem);
