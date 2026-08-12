@@ -61,7 +61,7 @@ export const projects = [
     subtitle: "近海 10–15cm 厘米级单目姿态估计与解算",
     badge: "国家级大创 · 第一负责人",
     category: "Computer Vision & Pose Estimation",
-    cover: "./projects/vision-positioning/cover.svg",
+    cover: "./projects/vision-positioning/cover.png",
     gallery: [
       "./projects/vision-positioning/01.svg",
       "./projects/vision-positioning/02.svg",
@@ -106,7 +106,7 @@ export const projects = [
     subtitle: "刘慈欣风格长文本生成的轻量化 SFT",
     badge: "项目负责人",
     category: "LLM Fine-Tuning & SFT",
-    cover: "./projects/cixin-singularity/cover.svg",
+    cover: "./projects/cixin-singularity/cover.png",
     gallery: [
       "./projects/cixin-singularity/01.svg",
       "./projects/cixin-singularity/02.svg",
@@ -148,7 +148,7 @@ export const projects = [
     subtitle: "雷达 + PPO 的端到端赛道巡航",
     badge: "独立开发",
     category: "Reinforcement Learning",
-    cover: "./projects/rl-racing/cover.svg",
+    cover: "./projects/rl-racing/cover.png",
     gallery: [
       "./projects/rl-racing/01.svg",
       "./projects/rl-racing/02.svg"
@@ -190,7 +190,7 @@ export const projects = [
     subtitle: "AI 原生云盘：智能归档 + 多模态语义搜索",
     badge: "中软国际 AI 挑战赛省一等奖",
     category: "AI Agent & RAG Architecture",
-    cover: "./projects/sky-cloud/cover.svg",
+    cover: "./projects/sky-cloud/cover.png",
     gallery: [
       "./projects/sky-cloud/01.svg",
       "./projects/sky-cloud/02.svg",
@@ -233,7 +233,7 @@ export const projects = [
     subtitle: "多模态召回 + 三层画像的短视频推荐引擎",
     badge: "多模态推荐引擎",
     category: "High Performance Backend",
-    cover: "./projects/sky-douyin/cover.svg",
+    cover: "./projects/sky-douyin/cover.png",
     gallery: [
       "./projects/sky-douyin/01.svg",
       "./projects/sky-douyin/02.svg"
@@ -273,7 +273,7 @@ export const projects = [
     subtitle: "支持 ACM/OOP/Notebook 的在线评测与教学平台",
     badge: "独立开发",
     category: "Microservice Platform",
-    cover: "./projects/sky-oj/cover.svg",
+    cover: "./projects/sky-oj/cover.png",
     gallery: [
       "./projects/sky-oj/01.svg",
       "./projects/sky-oj/02.svg"
