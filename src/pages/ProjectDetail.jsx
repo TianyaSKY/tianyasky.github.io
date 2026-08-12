@@ -40,7 +40,7 @@ export default function ProjectDetail() {
         index="01"
         title={<>问题<span style={{ fontStyle: 'italic', color: 'var(--color-vermilion)' }}>与动机</span></>}
         lead={project.background}
-        figure={{ src: project.cover, caption: `${project.id} · cover · 1600×900` }}
+        figure={project.caseFigures?.background || { src: project.cover, caption: `${project.id} · cover · 1600×900` }}
       />
 
       {/* Method · alt spread 左正文 + 右引文 */}
@@ -50,7 +50,7 @@ export default function ProjectDetail() {
         title={<>方法与<em>实现</em></>}
         lead={project.method}
         bullets={project.highlights}
-        figure={{ src: project.gallery?.[0] || project.cover, caption: `${project.id} · pipeline schematic` }}
+        figure={project.caseFigures?.method || { src: typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src || project.cover, caption: `${project.id} · pipeline schematic` }}
       />
 
       {/* Results · 用 pullquote + stats grid */}
@@ -59,7 +59,7 @@ export default function ProjectDetail() {
         index="03"
         title={<>成果与<em>指标</em></>}
         lead={project.results}
-        figure={{ src: project.gallery?.[1] || project.gallery?.[0] || project.cover, caption: `${project.id} · evaluation table` }}
+        figure={project.caseFigures?.results || { src: typeof project.gallery?.[1] === 'string' ? project.gallery[1] : project.gallery?.[1]?.src || (typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src) || project.cover, caption: `${project.id} · evaluation table` }}
         stats={project.stats}
       />
 
