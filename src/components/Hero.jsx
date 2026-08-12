@@ -43,7 +43,7 @@ export default function Hero({ onOpenCmdPalette }) {
         <span style={{ opacity: 0.4 }}>·</span>
         <span>{dateStr}</span>
         <span style={{ opacity: 0.4 }}>·</span>
-        <span>本期主题：<em style={{ fontStyle: 'italic', fontFamily: 'var(--font-serif)', color: 'var(--color-vermilion)' }}>机器视觉与深度学习</em></span>
+        <span>本期主题：<em style={{ fontStyle: 'italic', fontFamily: 'var(--font-serif)', color: 'var(--color-vermilion)' }}>视觉智能与 AI 原生系统</em></span>
       </header>
 
       <div className="hero-grid">
@@ -54,7 +54,7 @@ export default function Hero({ onOpenCmdPalette }) {
           </h1>
 
           <p className="hero-lede">
-            一个学习姿态估计、AI 智能体自治与推荐召回算法的工科生；把产品 demo、竞赛记号写进这本仍在增订的小刊。
+            从近海单目定位出发，把“感知—决策—执行—反馈”的方法延伸到 AI Workspace、多智能体世界、在线评测与推荐系统；这里收录能运行、可复现、也经得起复盘的研究与工程。
           </p>
 
           <div className="hero-typing-box" aria-live="polite">
@@ -100,7 +100,7 @@ export default function Hero({ onOpenCmdPalette }) {
           <span className="hero-stat-label">专业排名</span>
         </div>
         <div className="hero-stat">
-          <span className="hero-stat-value">3.74</span>
+          <span className="hero-stat-value">3.64</span>
           <span className="hero-stat-label">GPA · 6 学期</span>
         </div>
         <div className="hero-stat">

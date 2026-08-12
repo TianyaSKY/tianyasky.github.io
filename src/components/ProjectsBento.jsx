@@ -23,10 +23,10 @@ export default function ProjectsBento({ standalone = false }) {
         <div className="bento-header-text">
           <div className="kicker">Featured · Index</div>
           <h2 className="section-title">
-            六个项目 / <em>six installations</em>
+            六个项目 / <em>six case studies</em>
           </h2>
           <p className="section-desc">
-            三项科研攻关 · 三项系统工程。每张卡片下附完整案例研究：问题、方法、数据、反思与延伸阅读。
+            精选三项研究与三项系统工程，不只展示结果，也拆解问题定义、关键数据流、技术边界与下一步。近期的 SKYCity 多智能体世界、NonameSkill 检索工具等开源实验持续更新于 GitHub。
           </p>
         </div>
         <div className="bento-header-meta">
@@ -102,7 +102,7 @@ function ProjectCard({ project, indexInList, totalCount }) {
         <span>{project.type === 'research' ? 'RES' : 'ENG'}/0{number}</span>
       </div>
 
-      {project.description && (layout === 'feature' || layout === 'tall' || layout === 'wide') && (
+      {project.description && (
         <p className="desc">{project.description}</p>
       )}
 
