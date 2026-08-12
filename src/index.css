@@ -2148,13 +2148,8 @@ body::before {
   vertical-align: super;
 }
 
-/* ===== Editorial asymmetric 12-col grid =====
-   ROW 1: 视觉定位 (cols 1-7 rows 1-2) · 科幻奇点 (cols 8-12 row 1) · 3D赛车 (cols 8-12 row 2)
-   ROW 2: SKYCloud (cols 1-8 rows 3-4) · SKYDouyin (cols 9-12 row 3) · SKYOJ (cols 9-12 row 4)
-*/
 /* ============================================================
-   BENTO · 12-column asymmetric grid (cards auto-size)
-   6 = 3 rows × 2 cols · 3 = 1 row × 3 cols
+   6 cards = 3 staggered rows × 2 columns · filtered 3 = 1 row × 3 columns
    ============================================================ */
 
 .bento-grid {
@@ -2182,20 +2177,17 @@ body::before {
   min-height: 340px;
 }
 
-/* default: 6 cols × 1 row of stretch — cards in same row share height */
-.bento-card.bento-feature,
-.bento-card.bento-tall,
-.bento-card.bento-wide {
-  grid-column: span 6;
+/* Alternating 7:5 / 5:7 splits fill the rectangle without a rigid center seam. */
+.bento-grid:not(.cols-3) .bento-card:nth-child(1),
+.bento-grid:not(.cols-3) .bento-card:nth-child(4),
+.bento-grid:not(.cols-3) .bento-card:nth-child(5) {
+  grid-column: span 7;
 }
 
-/* half / half-r / quad  → 4 cols */
-.bento-card.bento-half,
-.bento-card.bento-half-r,
-.bento-card.bento-quad {
-  grid-column: span 4;
-  padding: 1.2rem 1.4rem;
-  min-height: 280px;
+.bento-grid:not(.cols-3) .bento-card:nth-child(2),
+.bento-grid:not(.cols-3) .bento-card:nth-child(3),
+.bento-grid:not(.cols-3) .bento-card:nth-child(6) {
+  grid-column: span 5;
 }
 
 /* when there are 3 cards (filtered), each takes 4 cols */
