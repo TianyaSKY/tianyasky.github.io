@@ -19,7 +19,7 @@ export const personalInfo = {
 
 export const stats = [
   { id: "rank", label: "专业排名", value: "9", sub: "/117", icon: "Trophy", color: "#2563eb" },
-  { id: "gpa", label: "GPA 成绩", value: "3.64", sub: "", icon: "GraduationCap", color: "#0284c7" },
+  { id: "gpa", label: "GPA 成绩", value: "3.74", sub: "", icon: "GraduationCap", color: "#0284c7" },
   { id: "projects", label: "国家级大创", value: "2", sub: "项", icon: "Rocket", color: "#3b82f6" },
   { id: "awards", label: "竞赛获奖", value: "10+", sub: "项", icon: "Award", color: "#1d4ed8" }
 ];
@@ -38,7 +38,7 @@ export const educationInfo = {
   college: "信息工程学院",
   major: "计算机科学与技术 · 本科",
   period: "2023.09 — 2027.07",
-  tags: ["CET-4 510", "排名 9/117", "GPA 3.64", "二等奖学金"],
+  tags: ["CET-4 510", "排名 9/117", "GPA 3.74", "二等奖学金"],
   courses: [
     { name: "算法分析与设计", score: "95" },
     { name: "机器学习", score: "95" },
