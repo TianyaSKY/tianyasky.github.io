@@ -62,11 +62,7 @@ export const projects = [
     badge: "国家级大创 · 第一负责人",
     category: "Computer Vision & Pose Estimation",
     cover: "/projects/vision-positioning/cover.png",
-    gallery: [
-      "/projects/vision-positioning/01.svg",
-      "/projects/vision-positioning/02.svg",
-      "/projects/vision-positioning/03.svg"
-    ],
+    gallery: [],
     accent: "blue",
     bento: { size: "lg", col: 1, row: 1 },
     tech: ["Python", "PyTorch", "YOLO11", "OpenCV", "Jetson Orin"],
@@ -289,10 +285,7 @@ export const projects = [
     badge: "独立开发 · 开源",
     category: "Online Judge & Secure Sandbox",
     cover: "/projects/sky-oj/cover.png",
-    gallery: [
-      "/projects/sky-oj/01.svg",
-      "/projects/sky-oj/02.svg"
-    ],
+    gallery: [],
     accent: "blue",
     bento: { size: "tall", col: 2, row: 2 },
     tech: ["Vue 3", "FastAPI", "MySQL", "RabbitMQ", "Celery", "Docker", "Nginx"],
