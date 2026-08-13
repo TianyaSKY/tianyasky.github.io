@@ -92,8 +92,7 @@ export const projects = [
     reflection:
       "如果重做一次，我会把训练数据采集协议做得更前置：早期模型对镜头雾气、防水罩反光的鲁棒度不够，本质是缺数据；后续可以引入合成数据 + domain randomization 节省 2/3 的现场采集成本；同时把整套管线打包成 Docker 镜像，让渔业合作社的非工程同事也能一键升级。",
     links: {
-      github: "https://github.com/TianyaSKY",
-      bilibili: "BV1EBqSBcEnL"
+      github: "https://github.com/TianyaSKY"
     },
     featured: true,
     hasVisionDemo: true,
@@ -184,11 +183,9 @@ export const projects = [
     reflection:
       "当前版本更适合作为可读的强化学习实验场，而不是真实自动驾驶模拟器：传感器仍是规则化射线，动力学模型较轻，策略效果也依赖人工奖励塑形。下一步应先加入课程学习、随机赛道难度与传感噪声，再讨论从状态向量迁移到视觉输入，避免用更复杂的网络掩盖环境设计问题。",
     links: {
-      github: "https://github.com/TianyaSKY/RacingCar",
-      bilibili: "BV1EBqSBcEnL"
+      github: "https://github.com/TianyaSKY/RacingCar"
     },
-    featured: false,
-    bilibiliBvid: "BV1EBqSBcEnL"
+    featured: false
   },
   {
     id: "sky-cloud",
@@ -238,12 +235,10 @@ export const projects = [
     reflection:
       "这个系统最重要的工程判断不是继续增加工具数量，而是区分“读取知识”和“执行动作”。快速模式保持只读，专家模式才启动 Runtime；高风险命令必须确认，改动必须能看 Diff，凭证必须短期且可撤销。继续生产化时，应优先完善 Runtime 生命周期回收、镜像版本固定、密钥轮换与审计追踪，而不是让 Agent 获得更宽的默认权限。",
     links: {
-      github: "https://github.com/TianyaSKY/SKYCloud",
-      bilibili: "BV1Ez5x6kE1R"
+      github: "https://github.com/TianyaSKY/SKYCloud"
     },
     video: "https://media.tianyasky.top/SKYCloudPromo.mp4",
-    featured: true,
-    bilibiliBvid: "BV1Ez5x6kE1R"
+    featured: true
   },
   {
     id: "sky-douyin",

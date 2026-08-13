@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { projects } from '../data/personalData';
 import NotFound from './NotFound';
-import { ArrowLeft, Github, PlayCircle, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Github, ArrowRight } from 'lucide-react';
 import ProjectHero from '../components/ProjectSections/ProjectHero';
 import ProjectSpread from '../components/ProjectSections/ProjectSpread';
 import ProjectGallery from '../components/ProjectSections/ProjectGallery';
@@ -93,16 +93,6 @@ export default function ProjectDetail() {
             {project.links.github && (
               <a className="btn btn-primary" href={project.links.github} target="_blank" rel="noopener noreferrer">
                 <Github size={16} /> 查看 GitHub
-              </a>
-            )}
-            {project.links.bilibili && (
-              <a
-                className="btn btn-outline"
-                href={`https://www.bilibili.com/video/${project.links.bilibili}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <PlayCircle size={16} /> B 站视频
               </a>
             )}
           </div>
