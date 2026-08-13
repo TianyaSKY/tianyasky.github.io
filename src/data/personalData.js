@@ -285,7 +285,19 @@ export const projects = [
     badge: "独立开发 · 开源",
     category: "Online Judge & Secure Sandbox",
     cover: "/projects/sky-oj/cover.png",
-    gallery: [],
+    gallery: [
+      { src: "/projects/sky-oj/homepage-landing.png", caption: "平台首页落地页" },
+      { src: "/projects/sky-oj/problem-list.png", caption: "题目列表与筛选" },
+      { src: "/projects/sky-oj/problem-detail-editor.png", caption: "题目详情与在线编辑器" },
+      { src: "/projects/sky-oj/problem-draft.png", caption: "题目草稿与发布" },
+      { src: "/projects/sky-oj/submission-result.png", caption: "提交与判题结果" },
+      { src: "/projects/sky-oj/teacher-dashboard.png", caption: "教师工作台" },
+      { src: "/projects/sky-oj/admin-problem-management.png", caption: "管理员题目管理" }
+    ],
+    caseFigures: {
+      method: { src: "/projects/sky-oj/problem-detail-editor.png", caption: "题目详情与在线编辑器" },
+      results: { src: "/projects/sky-oj/submission-result.png", caption: "提交与判题结果" }
+    },
     accent: "blue",
     bento: { size: "tall", col: 2, row: 2 },
     tech: ["Vue 3", "FastAPI", "MySQL", "RabbitMQ", "Celery", "Docker", "Nginx"],
@@ -313,6 +325,7 @@ export const projects = [
     links: {
       github: "https://github.com/TianyaSKY/SKYOJ"
     },
+    video: "https://media.tianyasky.top/skyoj-intro.mp4",
     featured: false
   }
 ];
