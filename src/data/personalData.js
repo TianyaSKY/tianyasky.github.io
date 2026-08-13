@@ -150,9 +150,15 @@ export const projects = [
     category: "Reinforcement Learning & Environment Design",
     cover: "/projects/rl-racing/cover.png",
     gallery: [
-      "/projects/rl-racing/01.svg",
-      "/projects/rl-racing/02.svg"
+      { src: "/projects/rl-racing/game.png", caption: "3D 赛道环境实机画面" },
+      { src: "/projects/rl-racing/training_curves.png", caption: "PPO 训练奖励曲线" },
+      { src: "/projects/rl-racing/training_curves_diag.png", caption: "训练诊断曲线" }
     ],
+    caseFigures: {
+      method: { src: "/projects/rl-racing/game.png", caption: "3D 赛道环境实机画面" },
+      results: { src: "/projects/rl-racing/training_curves.png", caption: "PPO 训练奖励曲线" }
+    },
+    video: "https://media.tianyasky.top/RacingCar.webm",
     accent: "sky",
     bento: { size: "sm", col: 2, row: 2 },
     tech: ["Python", "Gymnasium", "Stable-Baselines3", "PPO", "Pygame", "OpenGL"],

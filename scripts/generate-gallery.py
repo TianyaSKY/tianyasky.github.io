@@ -157,59 +157,6 @@ def cixin_gallery():
     open(os.path.join(base, "03.svg"), "w").write(svg)
 
 
-def racing_gallery():
-    base = os.path.join(OUT, "rl-racing")
-    svg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
-<rect width="1600" height="900" fill="#f4f8fc"/>
-<text x="80" y="120" font-family="Noto Sans SC" font-size="48" font-weight="900" fill="#09152e">PPO 训练奖励曲线</text>
-<text x="80" y="170" font-family="JetBrains Mono" font-size="20" fill="#475569">2.4M 步收敛 · SubprocVecEnv 16 路并行</text>
-<g transform="translate(120,260)">
-<line x1="0" y1="380" x2="1400" y2="380" stroke="#475569" stroke-width="2"/>
-<line x1="0" y1="0" x2="0" y2="380" stroke="#475569" stroke-width="2"/>
-'''
-    curve = []
-    for i in range(50):
-        # smooth increasing then plateau
-        import math
-        v = 250 * (1 - math.exp(-i/12)) + (math.sin(i*0.5)*8)
-        curve.append((i*28, 380 - v))
-    poly = " ".join([f"{x},{y}" for x,y in curve])
-    svg += f'<polyline fill="none" stroke="#2563eb" stroke-width="3" points="{poly}"/>'
-    for x,y in curve[::4]:
-        svg += f'<circle cx="{x}" cy="{y}" r="4" fill="#2563eb"/>'
-    svg += '<text x="700" y="430" text-anchor="middle" font-family="JetBrains Mono" font-size="18" fill="#475569">训练步 (×40k)</text>'
-    svg += '<text x="-220" y="180" transform="rotate(-90)" font-family="JetBrains Mono" font-size="18" fill="#475569">episode reward</text>'
-    svg += '</g>'
-    svg += '<rect x="80" y="720" width="1440" height="120" rx="14" fill="white" stroke="#2563eb" stroke-width="2"/>'
-    svg += '<text x="120" y="770" font-family="JetBrains Mono" font-size="22" fill="#2563eb" font-weight="700">reward: 12 → 268</text>'
-    svg += '<text x="450" y="770" font-family="JetBrains Mono" font-size="22" fill="#2563eb" font-weight="700">圈速提升 22%</text>'
-    svg += '<text x="800" y="770" font-family="JetBrains Mono" font-size="22" fill="#475569">vs 纯 PID baseline</text>'
-    svg += '</svg>'
-    open(os.path.join(base, "01.svg"), "w").write(svg)
-
-    svg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
-<rect width="1600" height="900" fill="#f4f8fc"/>
-<text x="80" y="120" font-family="Noto Sans SC" font-size="48" font-weight="900" fill="#09152e">雷达感知 · 8 方向扇区</text>
-<text x="80" y="170" font-family="JetBrains Mono" font-size="20" fill="#475569">状态向量 8 维连续 · 动作空间 (throttle, brake, steer)</text>
-'''
-    import math
-    cx, cy = 800, 470
-    for i in range(8):
-        a = i*math.pi/4 - math.pi/2
-        x2, y2 = cx + math.cos(a)*240, cy + math.sin(a)*240
-        svg += f'<line x1="{cx}" y1="{cy}" x2="{x2}" y2="{y2}" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6"/>'
-        # distance label
-        dist = [380, 295, 220, 180, 210, 260, 340, 410][i]
-        x3, y3 = cx + math.cos(a)*280, cy + math.sin(a)*280
-        svg += f'<circle cx="{x3}" cy="{y3}" r="20" fill="#2563eb" opacity="0.85"/>'
-        svg += f'<text x="{x3}" y="{y3+6}" text-anchor="middle" font-family="JetBrains Mono" font-size="14" fill="white" font-weight="700">{dist}</text>'
-    svg += f'<circle cx="{cx}" cy="{cy}" r="36" fill="#1d4ed8"/>'
-    svg += f'<rect x="{cx-80}" y="{cy-15}" width="160" height="30" fill="#1d4ed8"/>'
-    svg += f'<circle cx="{cx}" cy="{cy}" r="10" fill="white"/>'
-    svg += f'<polygon points="{cx},{cy} {cx-12},{cy+10} {cx+12},{cy+10}" fill="#ef4444"/>'
-    svg += '</svg>'
-    open(os.path.join(base, "02.svg"), "w").write(svg)
-
 
 def cloud_gallery():
     base = os.path.join(OUT, "sky-cloud")
@@ -415,7 +362,6 @@ def oj_gallery():
 
 vision_gallery()
 cixin_gallery()
-racing_gallery()
 cloud_gallery()
 douyin_gallery()
 oj_gallery()
