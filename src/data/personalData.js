@@ -241,6 +241,7 @@ export const projects = [
       github: "https://github.com/TianyaSKY/SKYCloud",
       bilibili: "BV1Ez5x6kE1R"
     },
+    video: "https://media.tianyasky.top/SKYCloudPromo.mp4",
     featured: true,
     bilibiliBvid: "BV1Ez5x6kE1R"
   },
