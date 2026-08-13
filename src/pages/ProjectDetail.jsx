@@ -34,6 +34,23 @@ export default function ProjectDetail() {
 
       <ProjectHero project={project} />
 
+      {/* Demo · embedded video when recorded */}
+      {project.video && (
+        <section className="project-demo" style={{ padding: '4rem 0 0', borderTop: '1px solid var(--rule)' }}>
+          <div className="kicker">00 · Demo</div>
+          <h2 className="section-title" style={{ fontSize: '2.6rem', marginTop: '0.5rem' }}>
+            演示视频 / <em>demo</em>
+          </h2>
+          <video
+            className="project-demo-video"
+            src={project.video}
+            controls
+            preload="metadata"
+            poster={project.cover}
+          />
+        </section>
+      )}
+
       {/* Background · spread 左引文 + 右正文 */}
       <ProjectSpread
         layout="default"

@@ -2818,6 +2818,16 @@ body::before {
   margin-top: 0.4rem;
 }
 
+/* Demo video · embedded project recording */
+.project-demo-video {
+  width: 100%;
+  display: block;
+  margin-top: 1.5rem;
+  border: 1px solid var(--rule);
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
 /* Gallery strip · compact editorial layout for short galleries */
 .project-gallery {
   display: grid;
