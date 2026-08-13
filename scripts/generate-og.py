@@ -30,7 +30,7 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{
 <rect x="290" y="320" width="780" height="6" rx="3" fill="url(#og-stripe)"/>
 
 <text x="80" y="430" fill="#475569" font-family="Noto Sans SC" font-size="26">计算机视觉 · AI 智能体 · 系统工程</text>
-<text x="80" y="478" fill="#475569" font-family="JetBrains Mono" font-size="20">GPA 3.64 · 排名 9/117 · 国家级大创 · 10+ 项竞赛获奖</text>
+<text x="80" y="478" fill="#475569" font-family="JetBrains Mono" font-size="20">GPA 3.74 · 排名 9/117 · 国家级大创 · 10+ 项竞赛获奖</text>
 
 <rect x="80" y="510" width="220" height="40" rx="20" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
 <text x="190" y="538" text-anchor="middle" fill="#0284c7" font-family="Noto Sans Mono" font-size="18" font-weight="700">10-15 cm RMSE</text>

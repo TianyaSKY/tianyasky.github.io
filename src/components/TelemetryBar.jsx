@@ -35,7 +35,7 @@ export default function TelemetryBar() {
           单目姿态估计: <strong style={{ color: '#ffffff' }}>10-15cm / 26 FPS</strong>
         </span>
         <span style={{ display: 'none', smDisplay: 'inline' }}>
-          GPA: <strong style={{ color: '#60a5fa' }}>3.64</strong> (9/117)
+          GPA: <strong style={{ color: '#60a5fa' }}>3.74</strong> (9/117)
         </span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', color: '#22c55e' }}>
           <ShieldCheck size={12} /> VERIFIED
