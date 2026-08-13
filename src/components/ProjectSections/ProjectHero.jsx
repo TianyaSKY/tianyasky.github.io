@@ -40,16 +40,6 @@ export default function ProjectHero({ project }) {
                   GitHub →
                 </a>
               )}
-              {project.links.bilibili && (
-                <a
-                  className="btn btn-outline"
-                  href={`https://www.bilibili.com/video/${project.links.bilibili}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  ▶ 视频演示
-                </a>
-              )}
             </div>
           )}
         </div>

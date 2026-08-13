@@ -858,27 +858,6 @@ body {
   color: #38bdf8;
 }
 
-/* Embedded Bilibili Video Container */
-.video-container {
-  margin-top: 1.5rem;
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-color);
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
 /* Awards Timeline / Grid */
 .awards-grid {
   display: grid;

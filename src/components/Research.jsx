@@ -60,18 +60,6 @@ export default function Research() {
             {proj.hasVisionDemo && <VisionSimulator />}
 
             {proj.hasTerminalSim && <SciFiTerminal />}
-
-            {proj.bilibiliBvid && (
-              <div className="video-container">
-                <iframe
-                  src={`https://player.bilibili.com/player.html?bvid=${proj.bilibiliBvid}&page=1&high_quality=1&as_wide=1&danmaku=0`}
-                  scrolling="no"
-                  frameBorder="0"
-                  allowFullScreen={true}
-                  title={proj.title}
-                />
-              </div>
-            )}
           </div>
         ))}
       </div>
