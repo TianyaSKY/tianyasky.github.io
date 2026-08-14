@@ -87,75 +87,29 @@ def vision_gallery():
 
 
 def cixin_gallery():
+    """复制 QwenLoRA 训练产出的真实图表（图1 管线 / 图2 损失曲线 / 图3 动态指标）。
+
+    数据源: /home/tianya/WorkPlace/QwenLoRA/figures/（训练报告同源产出）。
+    源文件缺失时跳过并提示，不生成占位图。
+    """
+    import shutil
+
     base = os.path.join(OUT, "cixin-singularity")
-    # 01：训练 loss / reward 曲线
-    svg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
-<rect width="1600" height="900" fill="#f4f8fc"/>
-<text x="80" y="120" font-family="Noto Sans SC" font-size="48" font-weight="900" fill="#09152e">LoRA 微调训练曲线</text>
-<text x="80" y="170" font-family="JetBrains Mono" font-size="20" fill="#475569">Qwen2.5-7B · rank=16 · alpha=32 · 4 epoch</text>
-<g transform="translate(120,260)">
-'''
-    loss_curve = " ".join([f"{i*70},{320-((i*0.7+i*i*0.005)*0.6)}" for i in range(20)])
-    svg += f'<polyline fill="none" stroke="#4f46e5" stroke-width="4" points="{loss_curve}"/>'
-    for i,p in enumerate(loss_curve.split()):
-        x,y = p.split(",")
-        svg += f'<circle cx="{x}" cy="{y}" r="4" fill="#4f46e5"/>'
-    svg += '<line x1="0" y1="380" x2="1400" y2="380" stroke="#475569" stroke-width="2"/>'
-    svg += '<line x1="0" y1="0" x2="0" y2="380" stroke="#475569" stroke-width="2"/>'
-    svg += '<text x="700" y="430" text-anchor="middle" font-family="JetBrains Mono" font-size="18" fill="#475569">训练步 (×1000)</text>'
-    svg += '<text x="-220" y="190" transform="rotate(-90)" font-family="JetBrains Mono" font-size="18" fill="#475569">SFT loss</text>'
-    svg += '</g>'
-    svg += '<rect x="80" y="720" width="1440" height="120" rx="14" fill="white" stroke="#4f46e5" stroke-width="2"/>'
-    svg += '<text x="120" y="770" font-family="JetBrains Mono" font-size="22" fill="#4f46e5" font-weight="700">loss: 2.4 → 0.91</text>'
-    svg += '<text x="460" y="770" font-family="JetBrains Mono" font-size="22" fill="#4f46e5" font-weight="700">reward: 0.32 → 0.78</text>'
-    svg += '<text x="880" y="770" font-family="JetBrains Mono" font-size="22" fill="#475569">epoch 4 · 收敛</text>'
-    svg += '</svg>'
-    open(os.path.join(base, "01.svg"), "w").write(svg)
-
-    # 02：风格对比样例
-    svg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
-<rect width="1600" height="900" fill="#f4f8fc"/>
-<text x="80" y="120" font-family="Noto Sans SC" font-size="48" font-weight="900" fill="#09152e">A/B 风格一致度盲评</text>
-<text x="80" y="170" font-family="JetBrains Mono" font-size="20" fill="#475569">12 位科幻迷盲评 200 段生成文本</text>
-'''
-    rows = ["宏大叙事感", "硬设定感", "诗意感", "节奏感", "可读性"]
-    for r,t in enumerate(rows):
-        y = 260 + r*90
-        svg += f'<text x="80" y="{y+22}" font-family="Noto Sans SC" font-size="22" fill="#09152e" font-weight="700">{t}</text>'
-        # base
-        svg += f'<rect x="320" y="{y}" width="700" height="28" rx="14" fill="white" stroke="#cbd5e1" stroke-width="1.5"/>'
-        svg += f'<rect x="320" y="{y}" width="{250 + r*40}" height="28" rx="14" fill="#cbd5e1"/>'
-        svg += f'<text x="1060" y="{y+22}" font-family="JetBrains Mono" font-size="18" fill="#475569">基线 {38+r*5}%</text>'
-        # ours
-        svg += f'<rect x="1180" y="{y}" width="280" height="28" rx="14" fill="white" stroke="#4f46e5" stroke-width="2"/>'
-        svg += f'<rect x="1180" y="{y}" width="{180+r*18}" height="28" rx="14" fill="#4f46e5"/>'
-        svg += f'<text x="1490" y="{y+22}" font-family="JetBrains Mono" font-size="18" fill="#4f46e5" font-weight="700">{60+r*3}%</text>'
-    svg += '<text x="320" y="780" font-family="JetBrains Mono" font-size="18" fill="#475569">基线 Qwen2.5-7B</text>'
-    svg += '<text x="1180" y="780" font-family="JetBrains Mono" font-size="18" fill="#4f46e5" font-weight="700">本项目 LoRA 微调</text>'
-    svg += '</svg>'
-    open(os.path.join(base, "02.svg"), "w").write(svg)
-
-    # 03：硬件资源占用
-    svg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
-<rect width="1600" height="900" fill="#f4f8fc"/>
-<text x="80" y="120" font-family="Noto Sans SC" font-size="48" font-weight="900" fill="#09152e">训练 & 推理资源占用</text>
-'''
-    cards = [
-        ("可训练参数", "0.3%", "占总量", "#4f46e5"),
-        ("权重体积", "48 MB", "全部 LoRA", "#0284c7"),
-        ("显存占用", "14.2 GB", "T4 单卡", "#1d4ed8"),
-        ("首 Token", "1.7 s", "vLLM 模式", "#2563eb"),
-        ("吞吐", "32 tok/s", "stream 模式", "#38bdf8"),
+    src = "/home/tianya/WorkPlace/QwenLoRA/figures"
+    copies = [
+        ("图1_训练管线流程图.png", "pipeline.png"),
+        ("图2_训练与验证损失曲线.svg", "loss-curves.svg"),
+        ("图3_训练动态指标.svg", "dynamics.svg"),
     ]
-    for i,(t,v,s,c) in enumerate(cards):
-        x = 80 + i*290
-        svg += f'<rect x="{x}" y="280" width="270" height="220" rx="22" fill="white" stroke="{c}" stroke-width="3"/>'
-        svg += f'<text x="{x+135}" y="360" text-anchor="middle" font-family="Noto Sans SC" font-size="22" fill="#475569" font-weight="700">{t}</text>'
-        svg += f'<text x="{x+135}" y="430" text-anchor="middle" font-family="JetBrains Mono" font-size="44" font-weight="900" fill="{c}">{v}</text>'
-        svg += f'<text x="{x+135}" y="475" text-anchor="middle" font-family="JetBrains Mono" font-size="16" fill="#94a3b8">{s}</text>'
-    svg += '<text x="80" y="700" font-family="Noto Sans SC" font-size="22" fill="#475569">对比基线（同任务） · 显存 70% 降低 · 权重 92% 减小</text></svg>'
-    open(os.path.join(base, "03.svg"), "w").write(svg)
-
+    missing = []
+    for sname, dname in copies:
+        spath = os.path.join(src, sname)
+        if not os.path.exists(spath):
+            missing.append(spath)
+            continue
+        shutil.copyfile(spath, os.path.join(base, dname))
+    if missing:
+        print("[cixin] 警告: 源图缺失, 跳过:", ", ".join(missing))
 
 
 def cloud_gallery():

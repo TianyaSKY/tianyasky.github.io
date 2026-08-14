@@ -98,38 +98,42 @@ export const projects = [
     id: "cixin-singularity",
     type: "research",
     title: "科幻奇点",
-    subtitle: "刘慈欣风格长文本生成的轻量化 SFT",
+    subtitle: "Qwen3.6-27B · 4bit QLoRA · 单卡 RTX 5090 文风续写",
     badge: "项目负责人",
     category: "LLM Fine-Tuning & SFT",
     cover: "/projects/cixin-singularity/cover.png",
     gallery: [
-      "/projects/cixin-singularity/01.svg",
-      "/projects/cixin-singularity/02.svg",
-      "/projects/cixin-singularity/03.svg"
+      { src: "/projects/cixin-singularity/pipeline.png", caption: "数据与训练管线" },
+      { src: "/projects/cixin-singularity/loss-curves.svg", caption: "训练与验证损失曲线" },
+      { src: "/projects/cixin-singularity/dynamics.svg", caption: "训练动态指标面板" }
     ],
+    caseFigures: {
+      method: { src: "/projects/cixin-singularity/pipeline.png", caption: "数据与训练管线" },
+      results: { src: "/projects/cixin-singularity/loss-curves.svg", caption: "训练与验证损失曲线" }
+    },
     accent: "indigo",
     bento: { size: "md", col: 2, row: 1 },
-    tech: ["Qwen2.5-7B", "LoRA", "PyTorch", "SFT"],
-    description: "双卡 T4 有限算力约束下，高效微调 Qwen2.5-7B 赋能「慈欣体」风格生成。清洗 120 万字语料，LoRA 注入 Attention 层，可训练参数仅 0.3%，权重不足 50MB。",
+    tech: ["Qwen3.6-27B", "4bit NF4", "LoRA", "trl", "RTX 5090"],
+    description: "单卡 RTX 5090（32GB）上以 4bit NF4 QLoRA 微调 Qwen3.6-27B：2375 条刘慈欣续写样本教会模型「接上文续写、保持文风」；可训练参数仅 0.039%（10.5M），适配器每份 20MB，2 epoch / 238 步仅 3 小时完成。",
     stats: [
-      { label: "训练语料", value: "120 万字" },
-      { label: "可训练参数", value: "0.3 %" },
-      { label: "权重体积", value: "< 50 MB" },
-      { label: "首 Token 响应", value: "< 2 s" }
+      { label: "训练语料", value: "2375 条" },
+      { label: "可训练参数", value: "0.039 %" },
+      { label: "训练时长", value: "3.1 h" },
+      { label: "LoRA 权重", value: "20 MB" }
     ],
     highlights: [
-      "滑动窗口 + 语义切分构建高质量 SFT 训练集，文风逼真度显著超越基线大模型",
-      "轻量化 LoRA 注入 Attention 投影层，显存占用降低 70%，推演响应时间 < 2s",
-      "竞赛荣誉：辽宁省大学生智能技术应用大赛一等奖"
+      "单卡 RTX 5090 训 27B：4bit NF4 + BF16（Blackwell 原生加速），2 epoch / 238 步 / 3h04m，显存峰值 16–18GB / 32GB",
+      "completion-only loss 只对续写输出计梯度：train 4.59 → 2.97，eval 收敛至 3.122，token 准确率 0.22 → 0.43",
+      "1.0 / 1.5 / 2.0 epoch 三份 checkpoint 精确落盘；eval 在 1.5 epoch 后走平，最终靠人工对比续写风格选型"
     ],
     background:
-      "在做 LLM 应用的过程中我发现，「慈欣体」那种把硬科学概念、宏大时空尺度与冷峻英雄主义糅在一起的文风，是任何基础模型都模仿不出来的；这类风格如果想让模型掌握，要么用 RLHF 让 50B+ 模型自悟，要么在小模型上做指令微调。我们组没有大算力，只有两卡 T4，于是走 LoRA 微调这条路。",
+      "「慈欣体」那种把硬科学概念、宏大时空尺度与冷峻英雄主义糅在一起的文风，是任何基础模型都模仿不出来的。让模型掌握它的两条路：要么 RLHF 训 50B+ 级模型，要么在目标风格数据上做低资源微调。后者的关键是算力约束下「接上文续写」任务本身很轻——单卡 RTX 5090 的 32GB 显存足够放下 27B 模型的 4bit 量化权重，于是把目标定为：Qwen3.6-27B 上做 4bit QLoRA 文风续写微调，从 2375 条刘慈欣小说续写样本中学到「给一段上文、续下一段」的能力。",
     method:
-      "数据侧：用自研的语料切分器把《三体》《球状闪电》等公开文本按章节与对话切片，结合「中心句识别」剔除次要叙述，得到约 120 万字高质量 SFT 数据；模型侧：在 Qwen2.5-7B 的 Attention 投影层注入 rank=16 的 LoRA，所有可训练参数占比 0.3%，权重文件约 48MB；推理侧：采用 vLLM-style 的 PagedAttention 推理，单卡 T4 上首 Token 响应 1.7 秒。",
+      "数据侧：2375 条 instruction/input/output 续写对（《宇宙坍缩》等公开文本），按书序连续切分为 train 1900 / val 238 / test 237，同书内容不跨切分；按 ChatML 组装 prompt/completion，由 trl 的 completion_mask 把上文与指令的 labels 置 -100——只学续写、不学提示。模型侧：Qwen3.6-27B 以 4bit NF4 + double_quant 量化、BF16 计算加载，在 q/k/v/o_proj 注入 rank=16、alpha=32 的 LoRA，可训练参数 10.5M（0.039%）。训练侧：paged_adamw_8bit，lr 5e-5 cosine + 3% warmup，有效 batch 16（1×16 梯度累积），2048 ctx，梯度检查点；小数 epoch 回调在 1.0 / 1.5 / 2.0 epoch 精确落盘三份 checkpoint。",
     results:
-      "在自建的「慈欣体风格一致度」盲评集上，由 12 位科幻迷做 A/B 盲评，我们的微调模型相较基座 Qwen2.5-7B 在「宏大叙事感」「硬设定感」两个维度胜出比例分别为 71% 和 68%。同一套流程后来被组里迁移到「传统武侠体」与「法庭辩论体」两个项目，可复用性强。",
+      "2 epoch / 238 步 / 3h04m 完成，无 OOM、无 NaN。train loss 4.59 → 2.97（最低 2.79），eval loss 3.243 → 3.122，token 预测准确率 0.22 → 0.43；grad_norm 在 warmup 后稳定 0.2–0.5，梯度裁剪未触发。eval 在第 1.5 epoch 后完全走平（3.124 → 3.122）——额外训练不再带来验证集收益，最终选型落在人工对比 epoch-1.5 / epoch-2 的续写风格上。三份 checkpoint 各含 20MB LoRA 适配器，支持从任意中间点断点续训。",
     reflection:
-      "两个值得改进的点：一是数据多样性，单一作家的风格迁移容易过拟合到该作家的「口头禅」上，后续应该引入多种相似风格作家并控制采样权重；二是评估，「风格一致度」目前只能用人类盲评，建议建立一套 LLM-as-a-judge 的自动评测流程，并把奖励信号直接反哺 RLHF。",
+      "两个值得改进的点：一是 Qwen3.6-27B 实为多模态 VLM（64 层中 48 层为线性注意力 DeltaNet），当前只跑了文本分支（AutoModelForCausalLM），vision tower 未覆盖，下一步应换 VLM 加载入口并适配混合注意力层的 LoRA target_modules；二是数据仅 2375 条、单作者文风，train/eval 差距约 0.2 说明存在轻微过拟合，风格泛化到其他作者未验证——后续应扩大多作者数据、拉长上下文到 4096、追加 MLP target_modules，并建立 LLM-as-a-judge 自动评测流程。",
     links: {
       github: "https://github.com/TianyaSKY"
     },
@@ -367,7 +371,7 @@ export const skillCategories = [
     theme: "cyan",
     skills: [
       { name: "PyTorch", projects: "单目定位、PPO 赛车与多模态向量生成" },
-      { name: "LLM LoRA 微调", projects: "科幻奇点 0.3% 参数量高效对齐" },
+      { name: "LLM LoRA 微调", projects: "科幻奇点 0.039% 参数量高效对齐" },
       { name: "FastMCP Agent", projects: "SKYCloud 的 16 Tool / 4 Prompt / 2 Resource" },
       { name: "RAG 多路召回", projects: "6 维改写 + Multi-Query + RRF + Rerank" },
       { name: "强化学习 (PPO)", projects: "16 维状态、9 向雷达与 8 环境并行训练" },
@@ -424,7 +428,7 @@ export const sciFiPresetPrompts = [
 // Search dataset for Quick Search Command Palette (⌘K)
 export const searchDataset = [
   { type: "Research", title: "单目视觉定位系统", subtitle: "国家级大创 · 共线标志物几何解算", href: "/projects/vision-positioning" },
-  { type: "Research", title: "科幻奇点 — 慈欣体生成", subtitle: "Qwen2.5-7B · LoRA SFT 微调", href: "/projects/cixin-singularity" },
+  { type: "Research", title: "科幻奇点 — 慈欣体生成", subtitle: "Qwen3.6-27B · 4bit QLoRA 微调", href: "/projects/cixin-singularity" },
   { type: "Research", title: "3D 赛车自动驾驶系统", subtitle: "Gymnasium · PPO · 9 向雷达", href: "/projects/rl-racing" },
   { type: "Engineering", title: "SKYCloud AI Workspace", subtitle: "双模式助手 · RAG · MCP 运行时", href: "/projects/sky-cloud" },
   { type: "Engineering", title: "SKYDouyin 短视频推荐", subtitle: "Spring Boot + FastAPI + Milvus", href: "/projects/sky-douyin" },

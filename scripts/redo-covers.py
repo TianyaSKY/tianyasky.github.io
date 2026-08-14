@@ -149,7 +149,7 @@ def cixin_cover():
 <!-- 副标 -->
 <g font-family="Noto Serif SC, serif" text-anchor="middle" fill="#dfe7ee">
 <text x="800" y="540" font-size="26" font-style="italic">「维度收缩场已降临目标星域。」</text>
-<text x="800" y="585" font-size="18" letter-spacing="2" fill="#94a0b0">— 刘慈欣体 · Qwen2.5-7B · LoRA 微调</text>
+<text x="800" y="585" font-size="18" letter-spacing="2" fill="#94a0b0">— 刘慈欣体 · Qwen3.6-27B · 4bit QLoRA 微调</text>
 </g>
 <!-- 上眉头部 -->
 <g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="4" fill="#94a0b0">
@@ -161,7 +161,7 @@ def cixin_cover():
 <g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="3" fill="#94a0b0">
 <rect x="1320" y="780" width="200" height="60" fill="none" stroke="#b53a2a" stroke-width="1"/>
 <text x="1335" y="805" fill="#f3e1c5">trained on</text>
-<text x="1335" y="825" fill="#b53a2a">120 万字 · 49MB</text>
+<text x="1335" y="825" fill="#b53a2a">2375 条续写 · 20MB</text>
 </g>
 <!-- 左下版次 -->
 <g font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="3" fill="#94a0b0">
