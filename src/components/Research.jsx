@@ -44,16 +44,39 @@ export default function Research() {
               ))}
             </ul>
 
-            {proj.github && (
+            {(proj.links || proj.github) && (
               <div className="project-links-bar">
-                <a
-                  href={proj.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-github-link"
-                >
-                  查看 GitHub 源码 <ExternalLink size={14} />
-                </a>
+                {proj.links?.gitee && (
+                  <a
+                    href={proj.links.gitee}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-github-link"
+                  >
+                    查看 Gitee 仓库 <ExternalLink size={14} />
+                  </a>
+                )}
+                {(proj.links?.github || proj.github) && (
+                  <a
+                    href={proj.links?.github || proj.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-github-link"
+                  >
+                    查看 GitHub 源码 <ExternalLink size={14} />
+                  </a>
+                )}
+                {proj.links?.download && (
+                  <a
+                    href={proj.links.download}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-github-link"
+                    download={proj.links.downloadLabel || 'liucixin_train.zip'}
+                  >
+                    下载训练结果 ({proj.links.downloadLabel || 'ZIP'}) <ExternalLink size={14} />
+                  </a>
+                )}
               </div>
             )}
 
