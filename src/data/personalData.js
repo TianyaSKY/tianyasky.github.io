@@ -103,12 +103,13 @@ export const projects = [
     category: "LLM Fine-Tuning & SFT",
     cover: "/projects/cixin-singularity/cover.png",
     gallery: [
-      { src: "/projects/cixin-singularity/pipeline.png", caption: "数据与训练管线" },
-      { src: "/projects/cixin-singularity/loss-curves.svg", caption: "训练与验证损失曲线" },
-      { src: "/projects/cixin-singularity/dynamics.svg", caption: "训练动态指标面板" }
+      { src: "/projects/cixin-singularity/pipeline.png", caption: "数据切分、ChatML 掩码与 QLoRA 训练管线架构图", aspect: "wide" },
+      { src: "/projects/cixin-singularity/loss-curves.svg", caption: "Train / Eval Loss 损失收敛与准确率曲线", aspect: "chart" },
+      { src: "/projects/cixin-singularity/dynamics.svg", caption: "学习率衰减、梯度范数与显存占用动态监控", aspect: "chart" }
     ],
     caseFigures: {
-      method: { src: "/projects/cixin-singularity/pipeline.png", caption: "数据与训练管线" },
+      background: { src: "/projects/cixin-singularity/dynamics.svg", caption: "训练动态与监控指标" },
+      method: { src: "/projects/cixin-singularity/pipeline.png", caption: "数据与训练管线架构图", wide: true },
       results: { src: "/projects/cixin-singularity/loss-curves.svg", caption: "训练与验证损失曲线" }
     },
     accent: "indigo",
@@ -135,7 +136,9 @@ export const projects = [
     reflection:
       "两个值得改进的点：一是 Qwen3.6-27B 实为多模态 VLM（64 层中 48 层为线性注意力 DeltaNet），当前只跑了文本分支（AutoModelForCausalLM），vision tower 未覆盖，下一步应换 VLM 加载入口并适配混合注意力层的 LoRA target_modules；二是数据仅 2375 条、单作者文风，train/eval 差距约 0.2 说明存在轻微过拟合，风格泛化到其他作者未验证——后续应扩大多作者数据、拉长上下文到 4096、追加 MLP target_modules，并建立 LLM-as-a-judge 自动评测流程。",
     links: {
-      github: "https://github.com/TianyaSKY"
+      gitee: "https://gitee.com/tianyasky/qwen3.6-27b-liu-lora",
+      download: "https://media.tianyasky.top/liucixin_train.zip",
+      downloadLabel: "liucixin_train.zip"
     },
     featured: true,
     hasTerminalSim: true

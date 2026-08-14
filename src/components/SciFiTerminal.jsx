@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { sciFiPresetPrompts } from '../data/personalData';
 import { Terminal, Play, RefreshCw, ChevronDown, ChevronUp, Cpu, Send } from 'lucide-react';
 
-export default function SciFiTerminal() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function SciFiTerminal({ defaultOpen = false }) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
   const [customInput, setCustomInput] = useState('');
   const [output, setOutput] = useState('Qwen3.6-27B-4bit-QLoRA 慈欣体续写生成终端就绪。\n输入一段上文（或点击上方预设指令），模型接续刘慈欣风格续写...');
   const [isGenerating, setIsGenerating] = useState(false);

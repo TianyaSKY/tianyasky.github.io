@@ -35,9 +35,29 @@ export default function ProjectHero({ project }) {
 
           {project.links && (
             <div className="project-hero-actions">
+              {project.links.gitee && (
+                <a className="btn btn-primary" href={project.links.gitee} target="_blank" rel="noopener noreferrer">
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                    Gitee 仓库 →
+                  </span>
+                </a>
+              )}
               {project.links.github && (
                 <a className="btn btn-primary" href={project.links.github} target="_blank" rel="noopener noreferrer">
                   GitHub →
+                </a>
+              )}
+              {project.links.download && (
+                <a
+                  className="btn btn-outline"
+                  href={project.links.download}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download={project.links.downloadLabel || 'liucixin_train.zip'}
+                >
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                    下载训练结果 ({project.links.downloadLabel || 'ZIP'}) ↓
+                  </span>
                 </a>
               )}
             </div>
