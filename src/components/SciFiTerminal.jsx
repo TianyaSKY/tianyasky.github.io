@@ -5,14 +5,14 @@ import { Terminal, Play, RefreshCw, ChevronDown, ChevronUp, Cpu, Send } from 'lu
 export default function SciFiTerminal() {
   const [isOpen, setIsOpen] = useState(false);
   const [customInput, setCustomInput] = useState('');
-  const [output, setOutput] = useState('Qwen2.5-7B-LoRA 慈欣体生成测试终端就绪。\n请输入自定义场景描述，或点击上方预设指令发起大模型推理推演...');
+  const [output, setOutput] = useState('Qwen3.6-27B-4bit-QLoRA 慈欣体续写生成终端就绪。\n输入一段上文（或点击上方预设指令），模型接续刘慈欣风格续写...');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [tokensPerSec, setTokensPerSec] = useState('46.8');
+  const [tokensPerSec, setTokensPerSec] = useState('110');
 
   const runGeneration = (promptText) => {
     if (isGenerating || !promptText.trim()) return;
     setIsGenerating(true);
-    setOutput(`> INPUT: ${promptText}\n\n[LoRA Attention 权重激活 | VRAM: 1.2GB/16GB | SFT 0.3% 参数量 | 提示词温度 T=0.75]\n\n`);
+    setOutput(`> INPUT: ${promptText}\n\n[LoRA Attention 权重激活 | VRAM: 16.8GB/32GB | SFT 0.039% 参数量 | 采样温度 T=0.8]\n\n`);
 
     let fullText = "";
     const matchedPreset = sciFiPresetPrompts.find((p) => promptText.includes(p.label) || promptText.includes(p.prompt));
@@ -38,7 +38,7 @@ export default function SciFiTerminal() {
   const handleReset = () => {
     setIsGenerating(false);
     setCustomInput('');
-    setOutput('Qwen2.5-7B-LoRA 慈欣体生成测试终端就绪。\n请输入自定义场景描述，或点击上方预设指令发起大模型推理推演...');
+    setOutput('Qwen3.6-27B-4bit-QLoRA 慈欣体续写生成终端就绪。\n输入一段上文（或点击上方预设指令），模型接续刘慈欣风格续写...');
   };
 
   return (
@@ -61,13 +61,13 @@ export default function SciFiTerminal() {
               <span className="console-dot yellow"></span>
               <span className="console-dot green"></span>
               <span className="console-title">
-                Qwen2.5-7B-LoRA-Cixin-Singularity Terminal
+                Qwen3.6-27B-4bit-QLoRA-Cixin-Singularity Terminal
               </span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', fontSize: '0.75rem', color: '#60a5fa', fontFamily: 'var(--font-mono)' }}>
               <span><Cpu size={12} style={{ display: 'inline', marginRight: 2 }} /> {tokensPerSec} tok/s</span>
-              <span>GPU: Dual T4</span>
+              <span>GPU: RTX 5090 · 32GB</span>
             </div>
           </div>
 

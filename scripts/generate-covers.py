@@ -72,15 +72,15 @@ def cover_svg(group_id, meta, filename):
           <circle cx="824" cy="181" r="6" fill="#ef4444"/>
           <circle cx="844" cy="181" r="6" fill="#f59e0b"/>
           <circle cx="864" cy="181" r="6" fill="#10b981"/>
-          <text x="900" y="186" fill="#94a3b8" font-family="JetBrains Mono" font-size="14">qwen2.5-7b · cixin-lora</text>
+          <text x="900" y="186" fill="#94a3b8" font-family="JetBrains Mono" font-size="14">qwen3.6-27b · 4bit-qlora</text>
           <text x="830" y="260" fill="#38bdf8" font-family="JetBrains Mono" font-size="18">$ lora-infer --prompt "二向箔降维"</text>
           <text x="830" y="310" fill="#e2e8f0" font-family="Noto Sans SC, sans-serif" font-size="20">【警告：空间拓扑维度衰减机制启动】</text>
           <text x="830" y="350" fill="#cbd5e1" font-family="Noto Sans SC, sans-serif" font-size="18">维度收缩场已降临目标星域...</text>
           <text x="830" y="395" fill="#cbd5e1" font-family="Noto Sans SC, sans-serif" font-size="18">矢量膜展现出绝对平滑的光学反射...</text>
           <text x="830" y="450" fill="#cbd5e1" font-family="Noto Sans SC, sans-serif" font-size="18">三维宏观结构在 0.00004 秒内坍缩</text>
           <text x="830" y="495" fill="#93c5fd" font-family="Noto Sans SC, sans-serif" font-size="18">为无厚度的二维巨幅画卷...</text>
-          <text x="830" y="560" fill="#10b981" font-family="JetBrains Mono" font-size="16">▎ inference · 1.7s/tok · GPU 14.2GB</text>
-          <text x="830" y="600" fill="#94a3b8" font-family="JetBrains Mono" font-size="14">LoRA params: 0.3% · Weights: 48MB</text>
+          <text x="830" y="560" fill="#10b981" font-family="JetBrains Mono" font-size="16">▎ inference · RTX 5090 · VRAM 16.8GB/32GB</text>
+          <text x="830" y="600" fill="#94a3b8" font-family="JetBrains Mono" font-size="14">LoRA params: 0.039% · Weights: 20MB</text>
         </g>'''
     elif meta["kind"] == "track":
         deco = f'''
