@@ -16,6 +16,9 @@ import {
   Sparkles,
   Layers,
   ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Maximize2,
   Compass,
   Cpu,
   BarChart3,
@@ -67,6 +70,189 @@ function MathBlock({ formula }) {
     }
   }, [formula]);
   return <div className="math-formula-box" dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
+function FigureLightboxModal({ figure, onClose }) {
+  const [scale, setScale] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+
+  React.useEffect(() => {
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  }, [figure]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === '+' || e.key === '=') setScale((s) => Math.min(Number((s + 0.25).toFixed(2)), 4.0));
+      if (e.key === '-' || e.key === '_') setScale((s) => Math.max(Number((s - 0.25).toFixed(2)), 0.5));
+      if (e.key === '0') {
+        setScale(1);
+        setPosition({ x: 0, y: 0 });
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  if (!figure) return null;
+
+  const handleZoomIn = () => setScale((s) => Math.min(Number((s + 0.25).toFixed(2)), 4.0));
+  const handleZoomOut = () => setScale((s) => Math.max(Number((s - 0.25).toFixed(2)), 0.5));
+  const handleReset = () => {
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
+  const handleActualSize = () => {
+    setScale((s) => (s === 1.6 ? 1 : 1.6));
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const handleWheel = (e) => {
+    e.stopPropagation();
+    const delta = e.deltaY < 0 ? 0.2 : -0.2;
+    setScale((s) => Math.min(Math.max(Number((s + delta).toFixed(2)), 0.5), 4.0));
+  };
+
+  const handleMouseDown = (e) => {
+    if (scale > 1) {
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging && scale > 1) {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => setIsDragging(false);
+
+  const handleDoubleClick = () => {
+    if (scale > 1) {
+      handleReset();
+    } else {
+      setScale(1.8);
+    }
+  };
+
+  return (
+    <div className="project-modal-backdrop" onClick={onClose}>
+      <div className="project-modal-shell" onClick={(e) => e.stopPropagation()}>
+        {/* Header with full inspection tools */}
+        <header className="project-modal-header">
+          <div className="modal-header-meta">
+            <span className="modal-fig-label">{figure.label || 'FIG'}</span>
+            <span className="project-modal-title">
+              <strong>{figure.title || figure.caption}</strong>
+            </span>
+          </div>
+
+          <div className="modal-header-actions">
+            <div className="modal-zoom-controls">
+              <button
+                type="button"
+                className="zoom-btn"
+                onClick={handleZoomOut}
+                title="缩小 (Zoom Out, -)"
+              >
+                <ZoomOut size={15} />
+              </button>
+              <span className="zoom-level-badge">{Math.round(scale * 100)}%</span>
+              <button
+                type="button"
+                className="zoom-btn"
+                onClick={handleZoomIn}
+                title="放大 (Zoom In, +)"
+              >
+                <ZoomIn size={15} />
+              </button>
+              <button
+                type="button"
+                className="zoom-btn text-btn"
+                onClick={handleReset}
+                title="适应窗口 (Reset, 0)"
+              >
+                <RotateCcw size={13} style={{ marginRight: 3 }} /> 适应窗口
+              </button>
+              <button
+                type="button"
+                className={`zoom-btn text-btn ${scale > 1 ? 'is-active' : ''}`}
+                onClick={handleActualSize}
+                title="大图细节模式"
+              >
+                <Maximize2 size={13} style={{ marginRight: 3 }} /> {scale > 1 ? '还原尺寸' : '高清细节'}
+              </button>
+            </div>
+
+            <a
+              href={figure.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="modal-origin-link"
+              title="在新标签页中打开超高清原图"
+            >
+              <ExternalLink size={14} /> 原图直达
+            </a>
+
+            <button
+              type="button"
+              className="project-modal-close"
+              onClick={onClose}
+              aria-label="Close modal"
+              title="按 ESC 键或点击关闭"
+            >
+              ✕ 关闭
+            </button>
+          </div>
+        </header>
+
+        {/* Viewport Canvas with high contrast and smooth drag-pan */}
+        <div
+          className={`project-modal-image-wrap ${scale > 1 ? 'is-zoomable' : ''} ${isDragging ? 'is-dragging' : ''}`}
+          onWheel={handleWheel}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onDoubleClick={handleDoubleClick}
+        >
+          <img
+            src={figure.src}
+            alt={figure.caption || ''}
+            style={{
+              transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+              transition: isDragging ? 'none' : 'transform 0.15s cubic-bezier(0.2, 0, 0, 1)'
+            }}
+            draggable={false}
+          />
+          <div className="modal-canvas-hint">
+            {scale > 1 ? '按住鼠标左键可平移拖拽 · 滚轮缩放 · 双击重置' : '滚轮或双击放大 · 支持拖拽平移查看细节'}
+          </div>
+        </div>
+
+        {/* Informative Captions & Diagnostics Footer */}
+        {(figure.caption || figure.analysis) && (
+          <footer className="project-modal-footer">
+            <p className="modal-caption-text">
+              <strong>学术图释：</strong>{renderMathText(figure.caption)}
+            </p>
+            {figure.analysis && (
+              <p className="modal-analysis-text">
+                <strong>实验机理与归因：</strong>{renderMathText(figure.analysis)}
+              </p>
+            )}
+          </footer>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default function ProjectDetail() {
@@ -843,37 +1029,7 @@ export default function ProjectDetail() {
 
       {/* Lightbox Modal for Any Zoomed Figure */}
       {modalFigure && (
-        <div className="project-modal-backdrop" onClick={() => setModalFigure(null)}>
-          <div className="project-modal-shell" onClick={(e) => e.stopPropagation()}>
-            <header className="project-modal-header">
-              <div className="modal-header-meta">
-                <span className="modal-fig-label">{modalFigure.label || 'FIG'}</span>
-                <span className="project-modal-title">
-                  <strong>{modalFigure.title || modalFigure.caption}</strong>
-                </span>
-              </div>
-              <button
-                type="button"
-                className="project-modal-close"
-                onClick={() => setModalFigure(null)}
-                aria-label="Close modal"
-              >
-                ✕ 关闭
-              </button>
-            </header>
-            <div className="project-modal-image-wrap">
-              <img src={modalFigure.src} alt={modalFigure.caption || ''} />
-            </div>
-            {(modalFigure.caption || modalFigure.analysis) && (
-              <footer className="project-modal-footer">
-                <p className="modal-caption-text"><strong>图释说明：</strong>{renderMathText(modalFigure.caption)}</p>
-                {modalFigure.analysis && (
-                  <p className="modal-analysis-text"><strong>实验机理分析：</strong>{renderMathText(modalFigure.analysis)}</p>
-                )}
-              </footer>
-            )}
-          </div>
-        </div>
+        <FigureLightboxModal figure={modalFigure} onClose={() => setModalFigure(null)} />
       )}
 
       {/* Related · next project */}
