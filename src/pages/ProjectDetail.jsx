@@ -443,60 +443,7 @@ export default function ProjectDetail() {
       {/* ========================================================================= */}
       {paperArticle ? (
         <div className="paper-article-layout">
-          {/* Sticky Sidebar Outline Table of Contents */}
-          <aside className="paper-sidebar-toc" aria-label="Paper outline navigation">
-            <div className="sidebar-toc-inner">
-              <div className="sidebar-toc-header">
-                <div className="sidebar-toc-label">
-                  <Compass size={14} className="toc-icon" />
-                  <span>论文目录导览</span>
-                </div>
-                <span className="sidebar-toc-count">{paperArticle.sections.length + 1} 节</span>
-              </div>
-
-              <div className="sidebar-toc-scroll">
-                <nav className="sidebar-toc-list">
-                  {paperArticle.sections.map((sec) => (
-                    <button
-                      key={sec.id}
-                      type="button"
-                      className={`sidebar-toc-item ${activeSecId === sec.id ? 'is-active' : ''}`}
-                      onClick={() => scrollToSection(sec.id)}
-                    >
-                      <span className="toc-num">{sec.number}</span>
-                      <div className="toc-text">
-                        <span className="toc-title">{sec.title.split('/')[0].trim()}</span>
-                        <span className="toc-kicker">{sec.kicker}</span>
-                      </div>
-                    </button>
-                  ))}
-                  <button
-                    type="button"
-                    className={`sidebar-toc-item ${activeSecId === 'sec-citation' ? 'is-active' : ''}`}
-                    onClick={() => scrollToSection('sec-citation')}
-                  >
-                    <span className="toc-num">08</span>
-                    <div className="toc-text">
-                      <span className="toc-title">BibTeX 引用与代码</span>
-                      <span className="toc-kicker">Citation & Repository</span>
-                    </div>
-                  </button>
-                </nav>
-              </div>
-
-              <div className="sidebar-toc-footer">
-                <button
-                  type="button"
-                  className="sidebar-top-btn"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                >
-                  <ArrowLeft size={13} style={{ transform: 'rotate(90deg)' }} /> 返回顶部
-                </button>
-              </div>
-            </div>
-          </aside>
-
-          {/* Paper Sections Stream */}
+          {/* Main Paper Sections Stream */}
           <div className="paper-article-container">
             {paperArticle.sections.map((sec) => (
               <section key={sec.id} id={sec.id} className="paper-section-block">
@@ -828,58 +775,85 @@ export default function ProjectDetail() {
                 </div>
               </section>
             ))}
+
+            {/* Section 08: BibTeX Citation Block */}
+            {project.bibtex && (
+              <section id="sec-citation" className="paper-bibtex-section" style={{ padding: '4rem 0 2rem', borderTop: '1px solid var(--rule)' }}>
+                <div className="paper-section-kicker">
+                  <span className="sec-num">08</span>
+                  <span className="sec-divider">/</span>
+                  <span className="sec-kicker-text">Academic Citation & Code Archive</span>
+                </div>
+                <h2 className="paper-section-title" style={{ fontSize: '2.2rem', marginTop: '0.5rem', marginBottom: '1.25rem' }}>
+                  论文引用与代码归档 / <em>BibTeX & Code Repository</em>
+                </h2>
+
+                <div className="bibtex-box">
+                  <div className="bibtex-header">
+                    <span className="bibtex-label"><FileCode size={14} style={{ marginRight: 6 }} /> BibTeX Citation Entry</span>
+                    <button type="button" className="btn-copy-bibtex" onClick={handleCopyBibtex}>
+                      {copiedBibtex ? (
+                        <><CheckCircle2 size={14} style={{ color: 'var(--color-primary)' }} /> 已复制到剪贴板</>
+                      ) : (
+                        <><Copy size={14} /> 复制 BibTeX</>
+                      )}
+                    </button>
+                  </div>
+                  <pre className="bibtex-code">
+                    <code>{project.bibtex}</code>
+                  </pre>
+                </div>
+
+                {project.links && (
+                  <div className="project-reflection-links" style={{ marginTop: '2rem' }}>
+                    {links.github && (
+                      <a className="btn btn-primary" href={links.github} target="_blank" rel="noopener noreferrer">
+                        <Github size={16} /> 访问 GitHub 开源仓库
+                      </a>
+                    )}
+                    {links.download && (
+                      <a
+                        className="btn btn-outline"
+                        href={links.download}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download={links.downloadLabel || 'weights.zip'}
+                      >
+                        <Download size={16} /> 下载模型权重归档
+                      </a>
+                    )}
+                  </div>
+                )}
+              </section>
+            )}
           </div>
 
-          {/* Section 08: BibTeX Citation Block */}
-          {project.bibtex && (
-            <section id="sec-citation" className="paper-bibtex-section" style={{ padding: '4rem 0 2rem', borderTop: '1px solid var(--rule)' }}>
-              <div className="paper-section-kicker">
-                <span className="sec-num">08</span>
-                <span className="sec-divider">/</span>
-                <span className="sec-kicker-text">Academic Citation & Code Archive</span>
-              </div>
-              <h2 className="paper-section-title" style={{ fontSize: '2.2rem', marginTop: '0.5rem', marginBottom: '1.25rem' }}>
-                论文引用与代码归档 / <em>BibTeX & Code Repository</em>
-              </h2>
-
-              <div className="bibtex-box">
-                <div className="bibtex-header">
-                  <span className="bibtex-label"><FileCode size={14} style={{ marginRight: 6 }} /> BibTeX Citation Entry</span>
-                  <button type="button" className="btn-copy-bibtex" onClick={handleCopyBibtex}>
-                    {copiedBibtex ? (
-                      <><CheckCircle2 size={14} style={{ color: 'var(--color-primary)' }} /> 已复制到剪贴板</>
-                    ) : (
-                      <><Copy size={14} /> 复制 BibTeX</>
-                    )}
-                  </button>
-                </div>
-                <pre className="bibtex-code">
-                  <code>{project.bibtex}</code>
-                </pre>
-              </div>
-
-              {project.links && (
-                <div className="project-reflection-links" style={{ marginTop: '2rem' }}>
-                  {links.github && (
-                    <a className="btn btn-primary" href={links.github} target="_blank" rel="noopener noreferrer">
-                      <Github size={16} /> 访问 GitHub 开源仓库
-                    </a>
-                  )}
-                  {links.download && (
-                    <a
-                      className="btn btn-outline"
-                      href={links.download}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      download={links.downloadLabel || 'weights.zip'}
-                    >
-                      <Download size={16} /> 下载模型权重归档
-                    </a>
-                  )}
-                </div>
-              )}
-            </section>
-          )}
+          {/* Right-Side Minimalist Line + Number TOC Rail */}
+          <aside className="paper-rail-toc" aria-label="Paper section timeline">
+            <div className="rail-toc-track">
+              {paperArticle.sections.map((sec) => (
+                <button
+                  key={sec.id}
+                  type="button"
+                  className={`rail-toc-node ${activeSecId === sec.id ? 'is-active' : ''}`}
+                  onClick={() => scrollToSection(sec.id)}
+                  aria-label={`${sec.number} · ${sec.title}`}
+                >
+                  <span className="rail-node-num">{sec.number}</span>
+                  <span className="rail-tooltip">{sec.title.split('/')[0].trim()}</span>
+                </button>
+              ))}
+              <button
+                type="button"
+                className={`rail-toc-node ${activeSecId === 'sec-citation' ? 'is-active' : ''}`}
+                onClick={() => scrollToSection('sec-citation')}
+                aria-label="08 · BibTeX 引用与代码"
+              >
+                <span className="rail-node-num">08</span>
+                <span className="rail-tooltip">BibTeX 引用</span>
+              </button>
+            </div>
+          </aside>
         </div>
       ) : (
         /* ========================================================================= */
