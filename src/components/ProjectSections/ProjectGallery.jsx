@@ -42,9 +42,6 @@ export default function ProjectGallery({ project }) {
             >
               <div className="gallery-figure-inner">
                 <img src={src} alt={caption || `${project.title} ${i + 1}`} loading="lazy" />
-                <div className="gallery-hover-overlay">
-                  <span><ZoomIn size={15} /> 点击放大查看</span>
-                </div>
               </div>
               <figcaption>
                 <span className="fig-tag">FIG · 0{i + 1}</span>
