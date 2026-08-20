@@ -8,9 +8,9 @@ export default function Projects() {
       <div className="section-label">
         <Grid3x3 size={14} /> Projects Index
       </div>
-      <h2 className="section-title">六个精选项目的完整案例</h2>
+      <h2 className="section-title">精选科研与工程项目案例</h2>
       <p className="section-desc">
-        从单目几何、LLM 微调与强化学习，到 AI Workspace、推荐链路和安全判题；每个案例均按背景、架构、实现、结果与技术复盘展开。SKYCity 等持续迭代项目可在 GitHub 查看。
+        从单目几何解算、YOLO-PGMD 人群计数、LLM 微调与强化学习，到 AI Workspace、推荐链路和安全判题；每个案例均按背景、架构、实现、学术/工程结果与技术复盘展开。SKYCity 等持续迭代项目可在 GitHub 查看。
       </p>
       <ProjectsBento standalone />
     </section>

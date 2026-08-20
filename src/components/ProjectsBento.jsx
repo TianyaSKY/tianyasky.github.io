@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { projects } from '../data/personalData';
 import { ArrowUpRight, Github, PlayCircle } from 'lucide-react';
 
-const FILTER_TABS = [
-  { id: 'all', label: 'All', count: 6 },
-  { id: 'research', label: 'Research', count: 3 },
-  { id: 'engineering', label: 'Engineering', count: 3 }
-];
-
 export default function ProjectsBento({ standalone = false }) {
   const [filter, setFilter] = useState('all');
+
+  const filterTabs = useMemo(() => [
+    { id: 'all', label: 'All', count: projects.length },
+    { id: 'research', label: 'Research', count: projects.filter((p) => p.type === 'research').length },
+    { id: 'engineering', label: 'Engineering', count: projects.filter((p) => p.type === 'engineering').length }
+  ], []);
 
   const list = useMemo(() => {
     if (filter === 'all') return projects;
@@ -23,10 +23,10 @@ export default function ProjectsBento({ standalone = false }) {
         <div className="bento-header-text">
           <div className="kicker">Featured · Index</div>
           <h2 className="section-title">
-            六个项目 / <em>six case studies</em>
+            精选项目 / <em>{projects.length} case studies</em>
           </h2>
           <p className="section-desc">
-            精选三项研究与三项系统工程，不只展示结果，也拆解问题定义、关键数据流、技术边界与下一步。近期的 SKYCity 多智能体世界、NonameSkill 检索工具等开源实验持续更新于 GitHub。
+            精选四项前沿科研（单目几何解算、YOLO-PGMD 概率引导人群计数、Qwen-27B 风格微调、PPO 自动驾驶）与三项系统工程（AI Workspace、推荐系统链路、Docker 安全沙箱），不只展示结果，也拆解问题定义、关键数据流、技术边界与下一步。
           </p>
         </div>
         <div className="bento-header-meta">
@@ -39,7 +39,7 @@ export default function ProjectsBento({ standalone = false }) {
       </header>
 
       <div className="bento-filter" role="tablist">
-        {FILTER_TABS.map((t) => (
+        {filterTabs.map((t) => (
           <button
             key={t.id}
             type="button"
@@ -54,8 +54,7 @@ export default function ProjectsBento({ standalone = false }) {
         ))}
       </div>
 
-      <div className={`bento-grid ${list.length === 3 ? 'cols-3' : ''}`}>
-
+      <div className={`bento-grid ${list.length <= 4 ? 'cols-auto' : ''}`}>
         {list.map((p, idx) => (
           <ProjectCard key={p.id} project={p} indexInList={idx} totalCount={list.length} />
         ))}
@@ -65,11 +64,9 @@ export default function ProjectsBento({ standalone = false }) {
 }
 
 function ProjectCard({ project, indexInList, totalCount }) {
-  // Spread sizes so the grid never collapses: rotate among 4 shapes
-  const layoutOrder = ['feature', 'tall', 'half-r', 'wide', 'half', 'quad'];
-  // Filter-aware mapping so all 6 stay visible
   const layout =
     project.id === 'vision-positioning' ? 'feature'
+    : project.id === 'crowd-sigmod' ? 'wide'
     : project.id === 'cixin-singularity' ? 'tall'
     : project.id === 'rl-racing' ? 'half-r'
     : project.id === 'sky-cloud' ? 'wide'
