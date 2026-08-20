@@ -276,6 +276,28 @@ export default function ProjectDetail() {
   const links = project.links || {};
   const paperArticle = project.paperArticle;
 
+  const [activeSecId, setActiveSecId] = useState(paperArticle?.sections?.[0]?.id || '');
+
+  React.useEffect(() => {
+    if (!paperArticle) return;
+    const sectionIds = [...paperArticle.sections.map((s) => s.id), 'sec-citation'];
+
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 200;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSecId(sectionIds[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [paperArticle]);
+
   const handleCopyBibtex = () => {
     if (project.bibtex) {
       navigator.clipboard.writeText(project.bibtex);
@@ -287,7 +309,14 @@ export default function ProjectDetail() {
   const scrollToSection = (secId) => {
     const el = document.getElementById(secId);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const topOffset = 84;
+      const elPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elPosition + window.pageYOffset - topOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      setActiveSecId(secId);
     }
   };
 
@@ -414,33 +443,58 @@ export default function ProjectDetail() {
       {/* ========================================================================= */}
       {paperArticle ? (
         <div className="paper-article-layout">
-          {/* Quick-Nav Sticky / Outline Bar */}
-          <nav className="paper-quick-nav" aria-label="Paper sections navigation">
-            <div className="paper-nav-label">
-              <Compass size={13} style={{ marginRight: 6 }} /> 论文目录导航
-            </div>
-            <div className="paper-nav-links">
-              {paperArticle.sections.map((sec) => (
+          {/* Sticky Sidebar Outline Table of Contents */}
+          <aside className="paper-sidebar-toc" aria-label="Paper outline navigation">
+            <div className="sidebar-toc-inner">
+              <div className="sidebar-toc-header">
+                <div className="sidebar-toc-label">
+                  <Compass size={14} className="toc-icon" />
+                  <span>论文目录导览</span>
+                </div>
+                <span className="sidebar-toc-count">{paperArticle.sections.length + 1} 节</span>
+              </div>
+
+              <div className="sidebar-toc-scroll">
+                <nav className="sidebar-toc-list">
+                  {paperArticle.sections.map((sec) => (
+                    <button
+                      key={sec.id}
+                      type="button"
+                      className={`sidebar-toc-item ${activeSecId === sec.id ? 'is-active' : ''}`}
+                      onClick={() => scrollToSection(sec.id)}
+                    >
+                      <span className="toc-num">{sec.number}</span>
+                      <div className="toc-text">
+                        <span className="toc-title">{sec.title.split('/')[0].trim()}</span>
+                        <span className="toc-kicker">{sec.kicker}</span>
+                      </div>
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    className={`sidebar-toc-item ${activeSecId === 'sec-citation' ? 'is-active' : ''}`}
+                    onClick={() => scrollToSection('sec-citation')}
+                  >
+                    <span className="toc-num">08</span>
+                    <div className="toc-text">
+                      <span className="toc-title">BibTeX 引用与代码</span>
+                      <span className="toc-kicker">Citation & Repository</span>
+                    </div>
+                  </button>
+                </nav>
+              </div>
+
+              <div className="sidebar-toc-footer">
                 <button
-                  key={sec.id}
                   type="button"
-                  className="paper-nav-btn"
-                  onClick={() => scrollToSection(sec.id)}
+                  className="sidebar-top-btn"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
-                  <span className="nav-num">{sec.number}</span>
-                  <span className="nav-title">{sec.title.split('/')[0].trim()}</span>
+                  <ArrowLeft size={13} style={{ transform: 'rotate(90deg)' }} /> 返回顶部
                 </button>
-              ))}
-              <button
-                type="button"
-                className="paper-nav-btn"
-                onClick={() => scrollToSection('sec-citation')}
-              >
-                <span className="nav-num">08</span>
-                <span className="nav-title">BibTeX 引用</span>
-              </button>
+              </div>
             </div>
-          </nav>
+          </aside>
 
           {/* Paper Sections Stream */}
           <div className="paper-article-container">
