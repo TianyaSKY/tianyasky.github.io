@@ -46,9 +46,6 @@ export default function ProjectSpread({
           >
             <div className="figure-canvas">
               <img src={figure.src} alt={figure.caption || ''} loading="lazy" />
-              <div className="figure-zoom-overlay">
-                <span><ZoomIn size={15} /> 点击放大查看高清原图</span>
-              </div>
             </div>
             <figcaption className="figure-caption">
               <span className="fig-label">FIG · {index}</span>

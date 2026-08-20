@@ -1,13 +1,73 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { projects } from '../data/personalData';
 import NotFound from './NotFound';
-import { ArrowLeft, Github, ArrowRight, Download, ExternalLink, Package, FileCode, CheckCircle2 } from 'lucide-react';
+import {
+  ArrowLeft,
+  Github,
+  ArrowRight,
+  Download,
+  ExternalLink,
+  Package,
+  FileCode,
+  CheckCircle2,
+  Copy,
+  BookOpen,
+  Sparkles,
+  Layers,
+  ZoomIn,
+  Compass,
+  Cpu,
+  BarChart3,
+  SearchCode,
+  ShieldCheck,
+  CheckCircle
+} from 'lucide-react';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 import ProjectHero from '../components/ProjectSections/ProjectHero';
 import ProjectSpread from '../components/ProjectSections/ProjectSpread';
 import ProjectGallery from '../components/ProjectSections/ProjectGallery';
 import SciFiTerminal from '../components/SciFiTerminal';
 import VisionSimulator from '../components/VisionSimulator';
+
+function renderMathText(text) {
+  if (typeof text !== 'string') return text;
+  if (!text.includes('$')) return text;
+
+  const parts = text.split(/(\$\$[\s\S]+?\$\$|\$[^\$]+?\$)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('$$') && part.endsWith('$$')) {
+      const tex = part.slice(2, -2).trim();
+      try {
+        const html = katex.renderToString(tex, { displayMode: true, throwOnError: false });
+        return <span key={i} className="math-display" dangerouslySetInnerHTML={{ __html: html }} />;
+      } catch (e) {
+        return <code key={i}>{part}</code>;
+      }
+    } else if (part.startsWith('$') && part.endsWith('$')) {
+      const tex = part.slice(1, -1).trim();
+      try {
+        const html = katex.renderToString(tex, { displayMode: false, throwOnError: false });
+        return <span key={i} className="math-inline" dangerouslySetInnerHTML={{ __html: html }} />;
+      } catch (e) {
+        return <code key={i}>{part}</code>;
+      }
+    }
+    return part;
+  });
+}
+
+function MathBlock({ formula }) {
+  const html = useMemo(() => {
+    try {
+      return katex.renderToString(formula, { displayMode: true, throwOnError: false });
+    } catch (e) {
+      return `<pre><code>${formula}</code></pre>`;
+    }
+  }, [formula]);
+  return <div className="math-formula-box" dangerouslySetInnerHTML={{ __html: html }} />;
+}
 
 export default function ProjectDetail() {
   const { id } = useParams();
@@ -17,6 +77,10 @@ export default function ProjectDetail() {
     [project]
   );
 
+  const [abstractLang, setAbstractLang] = useState('zh');
+  const [copiedBibtex, setCopiedBibtex] = useState(false);
+  const [modalFigure, setModalFigure] = useState(null);
+
   if (!project) return <NotFound />;
 
   const num = String(projects.findIndex((p) => p.id === project.id) + 1).padStart(2, '0');
@@ -24,9 +88,26 @@ export default function ProjectDetail() {
     String(projects.findIndex((p) => p.id === rid) + 1).padStart(2, '0');
 
   const links = project.links || {};
+  const paperArticle = project.paperArticle;
+
+  const handleCopyBibtex = () => {
+    if (project.bibtex) {
+      navigator.clipboard.writeText(project.bibtex);
+      setCopiedBibtex(true);
+      setTimeout(() => setCopiedBibtex(false), 2000);
+    }
+  };
+
+  const scrollToSection = (secId) => {
+    const el = document.getElementById(secId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <article className="project-detail">
+      {/* Backbar */}
       <div className="project-detail-backbar">
         <Link to="/projects" className="btn-link" style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
           <ArrowLeft size={14} /> 返回目录
@@ -36,7 +117,68 @@ export default function ProjectDetail() {
         </span>
       </div>
 
+      {/* Hero */}
       <ProjectHero project={project} />
+
+      {/* 00 · Academic Paper Abstract Block (When paperInfo is present) */}
+      {project.paperInfo && (
+        <section className="paper-abstract-section" style={{ padding: '3.5rem 0 0', borderTop: '1px solid var(--rule)' }}>
+          <div className="paper-abstract-card">
+            <header className="paper-card-header">
+              <div className="paper-meta-top">
+                <span className="paper-type-badge">
+                  <BookOpen size={13} style={{ marginRight: 4 }} /> Academic Paper Specification · 学术论文规范
+                </span>
+                <div className="paper-lang-tabs" role="tablist">
+                  <button
+                    type="button"
+                    className={`lang-tab-btn ${abstractLang === 'zh' ? 'active' : ''}`}
+                    onClick={() => setAbstractLang('zh')}
+                  >
+                    中文摘要 (Abstract)
+                  </button>
+                  <button
+                    type="button"
+                    className={`lang-tab-btn ${abstractLang === 'en' ? 'active' : ''}`}
+                    onClick={() => setAbstractLang('en')}
+                  >
+                    English Abstract
+                  </button>
+                </div>
+              </div>
+
+              <h2 className="paper-main-title">
+                {abstractLang === 'zh' ? project.paperInfo.titleZh : project.paperInfo.titleEn}
+              </h2>
+
+              <div className="paper-author-row">
+                <span className="paper-author"><strong>{project.paperInfo.authors}</strong></span>
+                {project.paperInfo.affiliation && (
+                  <span className="paper-affil">{project.paperInfo.affiliation}</span>
+                )}
+              </div>
+            </header>
+
+            <div className="paper-abstract-body">
+              <div className="abstract-label-pill">ABSTRACT · 论文摘要</div>
+              <p className="abstract-text">
+                {abstractLang === 'zh' ? project.paperInfo.abstractZh : project.paperInfo.abstractEn}
+              </p>
+            </div>
+
+            <footer className="paper-abstract-footer">
+              <span className="keywords-label">
+                <strong>{abstractLang === 'zh' ? '关键词 (Keywords)：' : 'Keywords:'}</strong>
+              </span>
+              <div className="keywords-list">
+                {(abstractLang === 'zh' ? project.paperInfo.keywordsZh : project.paperInfo.keywordsEn).map((kw, i) => (
+                  <span key={i} className="paper-keyword-tag">{kw}</span>
+                ))}
+              </div>
+            </footer>
+          </div>
+        </section>
+      )}
 
       {/* Interactive AI Terminal or Simulator when available */}
       {project.hasTerminalSim && (
@@ -81,159 +223,658 @@ export default function ProjectDetail() {
         </section>
       )}
 
-      {/* 01 · Background & Motivation */}
-      <ProjectSpread
-        index="01"
-        kicker="Background & Motivation"
-        title={<>问题<span style={{ fontStyle: 'italic', color: 'var(--color-vermilion)' }}>与动机</span></>}
-        lead={project.background}
-        figure={project.caseFigures?.background || { src: project.cover, caption: `${project.id} · cover · 1600×900` }}
-      />
+      {/* ========================================================================= */}
+      {/* MODE A: Publication-Grade Academic Paper Reader (When paperArticle is present) */}
+      {/* ========================================================================= */}
+      {paperArticle ? (
+        <div className="paper-article-layout">
+          {/* Quick-Nav Sticky / Outline Bar */}
+          <nav className="paper-quick-nav" aria-label="Paper sections navigation">
+            <div className="paper-nav-label">
+              <Compass size={13} style={{ marginRight: 6 }} /> 论文目录导航
+            </div>
+            <div className="paper-nav-links">
+              {paperArticle.sections.map((sec) => (
+                <button
+                  key={sec.id}
+                  type="button"
+                  className="paper-nav-btn"
+                  onClick={() => scrollToSection(sec.id)}
+                >
+                  <span className="nav-num">{sec.number}</span>
+                  <span className="nav-title">{sec.title.split('/')[0].trim()}</span>
+                </button>
+              ))}
+              <button
+                type="button"
+                className="paper-nav-btn"
+                onClick={() => scrollToSection('sec-citation')}
+              >
+                <span className="nav-num">08</span>
+                <span className="nav-title">BibTeX 引用</span>
+              </button>
+            </div>
+          </nav>
 
-      {/* 02 · Method & Architecture */}
-      <ProjectSpread
-        index="02"
-        kicker="Method & Architecture"
-        title={<>方法与<em>实现</em></>}
-        lead={project.method}
-        figure={project.caseFigures?.method || { src: typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src || project.cover, caption: `${project.id} · pipeline schematic`, wide: true }}
-        bullets={project.highlights}
-      />
+          {/* Paper Sections Stream */}
+          <div className="paper-article-container">
+            {paperArticle.sections.map((sec) => (
+              <section key={sec.id} id={sec.id} className="paper-section-block">
+                {/* Section Header */}
+                <header className="paper-section-header">
+                  <div className="paper-section-kicker">
+                    <span className="sec-num">{sec.number}</span>
+                    <span className="sec-divider">/</span>
+                    <span className="sec-kicker-text">{sec.kicker}</span>
+                  </div>
+                  <h2 className="paper-section-title">{sec.title}</h2>
+                </header>
 
-      {/* 03 · Results & Metrics */}
-      <ProjectSpread
-        index="03"
-        kicker="Results & Metrics"
-        title={<>成果与<em>指标</em></>}
-        lead={project.results}
-        figure={project.caseFigures?.results || { src: typeof project.gallery?.[1] === 'string' ? project.gallery[1] : project.gallery?.[1]?.src || (typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src) || project.cover, caption: `${project.id} · evaluation table` }}
-        stats={project.stats}
-      />
+                {/* Section Body */}
+                <div className="paper-section-content">
+                  {/* Lead Paragraphs */}
+                  {sec.paragraphs && sec.paragraphs.length > 0 && (
+                    <div className="paper-paragraphs-group">
+                      {sec.paragraphs.map((p, pIdx) => (
+                        <p key={pIdx} className="paper-p">{renderMathText(p)}</p>
+                      ))}
+                    </div>
+                  )}
 
-      {/* Download artifacts card when downloadable results exist */}
-      {links.download && (
-        <section className="project-download-section" style={{ padding: '4rem 0 2rem', borderTop: '1px solid var(--rule)' }}>
-          <div className="kicker">03.5 · Artifacts & Checkpoints</div>
-          <h2 className="section-title" style={{ fontSize: '2.4rem', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
-            训练成果与<em>权重交付</em>
-          </h2>
+                  {/* Core Contributions (Sec 1) */}
+                  {sec.contributions && (
+                    <div className="paper-contributions-card">
+                      <div className="contributions-header">
+                        <Sparkles size={16} style={{ color: 'var(--color-primary)' }} />
+                        <strong>核心学术贡献与工程突破 (Core Contributions)</strong>
+                      </div>
+                      <div className="contributions-grid">
+                        {sec.contributions.map((c, cIdx) => (
+                          <div key={cIdx} className="contribution-item">
+                            <div className="contribution-num">0{cIdx + 1}</div>
+                            <div className="contribution-desc">{renderMathText(c)}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
-          <div className="project-download-box">
-            <div className="project-download-header">
-              <div className="download-meta">
-                <span className="file-badge"><Package size={14} /> 权重归档包</span>
-                <h3 className="file-name">{links.downloadLabel || 'liucixin_train.zip'}</h3>
-                <p className="file-desc">
-                  内含 1.0 / 1.5 / 2.0 epoch 三份精选 LoRA 适配器权重（每份 ~20MB）、全量训练 loss/eval 评估记录、微调训练脚本与 ChatML completion 模板。
-                </p>
+                  {/* Math Formula Card (Sec 2, Sec 4, etc.) */}
+                  {sec.math && (
+                    <div className="paper-math-card">
+                      <div className="math-card-header">
+                        <span className="math-badge">EQUATION · 公式推导</span>
+                        <h4 className="math-title">{sec.math.title}</h4>
+                      </div>
+                      <MathBlock formula={sec.math.formula} />
+                      {sec.math.explanation && (
+                        <p className="math-explanation">{renderMathText(sec.math.explanation)}</p>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Standalone Embedded Figure (Sec 2, Sec 3, etc.) */}
+                  {sec.figure && (
+                    <figure
+                      className={`paper-inline-figure ${sec.figure.wide ? 'is-wide' : ''}`}
+                      onClick={() => setModalFigure(sec.figure)}
+                    >
+                      <div className="figure-canvas">
+                        <img src={sec.figure.src} alt={sec.figure.caption} loading="lazy" />
+                      </div>
+                      <figcaption className="paper-figure-caption">
+                        <div className="fig-meta-bar">
+                          <span className="fig-tag">{sec.figure.label}</span>
+                          <strong className="fig-heading">{sec.figure.title || sec.figure.caption}</strong>
+                        </div>
+                        <p className="fig-text">{renderMathText(sec.figure.caption)}</p>
+                        {sec.figure.analysis && (
+                          <div className="fig-analysis-box">
+                            <span className="analysis-pill">物理机理与质检分析</span>
+                            <p className="analysis-body">{renderMathText(sec.figure.analysis)}</p>
+                          </div>
+                        )}
+                      </figcaption>
+                    </figure>
+                  )}
+
+                  {/* Subsections with architectural explanations (Sec 3) */}
+                  {sec.subsections && (
+                    <div className="paper-subsections-flow">
+                      {sec.subsections.map((sub, sIdx) => (
+                        <div key={sIdx} className="paper-subsection-item">
+                          <h3 className="paper-subsection-title">{sub.title}</h3>
+                          <p className="paper-p">{renderMathText(sub.content)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Training Strategy Pillars (Sec 4) */}
+                  {sec.trainingPillars && (
+                    <div className="paper-training-pillars-grid">
+                      {sec.trainingPillars.map((tp, tpIdx) => (
+                        <div key={tpIdx} className="training-pillar-card">
+                          <div className="pillar-header">
+                            <Cpu size={16} style={{ color: 'var(--color-primary)' }} />
+                            <h4>{tp.title}</h4>
+                          </div>
+                          <p>{renderMathText(tp.detail)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Quantitative Benchmarks & Tables (Sec 5) */}
+                  {sec.id === 'sec-results' && (
+                    <div className="paper-benchmark-block">
+                      {/* Figure 3: Dataset Overview */}
+                      {sec.datasetFigure && (
+                        <figure
+                          className="paper-inline-figure"
+                          onClick={() => setModalFigure(sec.datasetFigure)}
+                        >
+                          <div className="figure-canvas">
+                            <img src={sec.datasetFigure.src} alt={sec.datasetFigure.caption} loading="lazy" />
+                          </div>
+                          <figcaption className="paper-figure-caption">
+                            <div className="fig-meta-bar">
+                              <span className="fig-tag">{sec.datasetFigure.label}</span>
+                              <strong className="fig-heading">{sec.datasetFigure.title}</strong>
+                            </div>
+                            <p className="fig-text">{renderMathText(sec.datasetFigure.caption)}</p>
+                          </figcaption>
+                        </figure>
+                      )}
+
+                      {/* Table 1: All Datasets */}
+                      {project.benchmarkTable && (
+                        <div className="academic-table-wrapper" style={{ marginTop: '2.5rem' }}>
+                          <div className="academic-table-caption">
+                            <strong>{project.benchmarkTable.caption}</strong>
+                          </div>
+                          <div className="academic-table-container">
+                            <table className="academic-booktabs-table">
+                              <thead>
+                                <tr>
+                                  {project.benchmarkTable.columns.map((col, idx) => (
+                                    <th key={idx} className={idx >= 1 && idx <= 4 ? 'col-num' : ''}>{col}</th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {project.benchmarkTable.rows.map((row, idx) => (
+                                  <tr key={idx} className={`${row.highlight ? 'row-highlight' : ''} ${row.isSummary ? 'row-summary' : ''}`}>
+                                    <td className="cell-dataset">
+                                      <strong>{row.dataset}</strong>
+                                      {row.highlight && <span className="highlight-tag">BEST</span>}
+                                    </td>
+                                    <td className="col-num">{row.testN}</td>
+                                    <td className="col-num val-mae"><strong>{row.mae}</strong></td>
+                                    <td className="col-num val-rmse"><strong>{row.rmse}</strong></td>
+                                    <td className="col-num">{row.nae}</td>
+                                    <td className="cell-comment">{row.comment}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                          <div className="table-footnote">
+                            注：↓ 表示数值越小越优；ShanghaiTech Part A 为模型最显著突破项；Macro Average 仅作多域均值参考。
+                          </div>
+                        </div>
+                      )}
+
+                      {/* SOTA Comparison Narrative & Table 2 */}
+                      <div className="paper-sota-narrative" style={{ marginTop: '3.5rem' }}>
+                        <h3 className="paper-subsection-title">
+                          与国际主流顶会 SOTA 模型纵横对比 (SOTA Cross-Benchmark Comparison)
+                        </h3>
+                        <p className="paper-p">
+                          我们将 YOLO-PGMD 与近年来在 CVPR、ICCV、NeurIPS 等顶级会议发表的 6 种代表性 SOTA 模型进行了同基准定量对比。在密集度最高的 ShanghaiTech Part A 上，YOLO-PGMD 取得了 <strong>48.13 MAE / 74.17 RMSE</strong>，超越了包括 CVPR'22 MAN (56.8) 及 NeurIPS'20 DM-Count (59.7) 在内的全部主流基准；在复杂恶劣场景的 JHU-Crowd 上取得 <strong>39.73 MAE</strong>，验证了显著的跨域泛化优势。
+                        </p>
+
+                        {/* Table 2: SOTA Comparison */}
+                        {project.sotaTable && (
+                          <div className="academic-table-wrapper" style={{ marginTop: '1.5rem' }}>
+                            <div className="academic-table-caption">
+                              <strong>{project.sotaTable.caption}</strong>
+                            </div>
+                            <div className="academic-table-container">
+                              <table className="academic-booktabs-table">
+                                <thead>
+                                  <tr>
+                                    {project.sotaTable.columns.map((col, idx) => (
+                                      <th key={idx} className={idx >= 1 && idx <= 5 ? 'col-num' : ''}>{col}</th>
+                                    ))}
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {project.sotaTable.rows.map((row, idx) => (
+                                    <tr key={idx} className={row.isOurs ? 'row-ours' : ''}>
+                                      <td className="cell-model">
+                                        <strong>{row.model}</strong>
+                                        {row.isOurs && <span className="highlight-tag ours-tag">OURS</span>}
+                                      </td>
+                                      <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.shaA}</td>
+                                      <td className="col-num">{row.shaB}</td>
+                                      <td className="col-num">{row.ucfQnrf}</td>
+                                      <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.jhu}</td>
+                                      <td className="col-num">{row.ucfCc50}</td>
+                                      <td className="cell-venue"><span className="venue-badge">{row.venue}</span></td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                            <div className="table-footnote">
+                              对比基准涵盖 CVPR'18 (CSRNet)、ICCV'19 (Bayesian Loss)、NeurIPS'20 (DM-Count)、CVPR'22 (MAN) 及 arXiv'24 (CLIP-EBC) 等权威公开工作。
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Figure 4: SOTA Comparison Bar Chart */}
+                        {sec.sotaFigure && (
+                          <figure
+                            className="paper-inline-figure"
+                            style={{ marginTop: '2.5rem' }}
+                            onClick={() => setModalFigure(sec.sotaFigure)}
+                          >
+                            <div className="figure-canvas">
+                              <img src={sec.sotaFigure.src} alt={sec.sotaFigure.caption} loading="lazy" />
+                            </div>
+                            <figcaption className="paper-figure-caption">
+                              <div className="fig-meta-bar">
+                                <span className="fig-tag">{sec.sotaFigure.label}</span>
+                                <strong className="fig-heading">{sec.sotaFigure.title}</strong>
+                              </div>
+                              <p className="fig-text">{renderMathText(sec.sotaFigure.caption)}</p>
+                            </figcaption>
+                          </figure>
+                        )}
+                      </div>
+
+                      {/* Scatter Regression Analysis (Figures 5 & 6) */}
+                      {sec.scatterFigures && (
+                        <div className="paper-scatter-analysis-block" style={{ marginTop: '3.5rem' }}>
+                          <h3 className="paper-subsection-title">
+                            真实人数 vs 预测人数回归拟合一致性分析 (Linear Regression Consistency)
+                          </h3>
+                          {sec.scatterDiscussion && (
+                            <p className="paper-p">{renderMathText(sec.scatterDiscussion)}</p>
+                          )}
+                          <div className="paper-scatter-grid">
+                            {sec.scatterFigures.map((sFig, sfIdx) => (
+                              <figure
+                                key={sfIdx}
+                                className="scatter-figure-card"
+                                onClick={() => setModalFigure(sFig)}
+                              >
+                                <div className="figure-canvas">
+                                  <img src={sFig.src} alt={sFig.caption} loading="lazy" />
+                                </div>
+                                <figcaption className="scatter-caption">
+                                  <div className="fig-meta-bar">
+                                    <span className="fig-tag">{sFig.label}</span>
+                                    <strong className="fig-heading">{sFig.title}</strong>
+                                  </div>
+                                  <p className="fig-text">{renderMathText(sFig.caption)}</p>
+                                </figcaption>
+                              </figure>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Qualitative Case Studies (Sec 6) */}
+                  {sec.cases && (
+                    <div className="paper-case-studies-stream">
+                      {sec.cases.map((cItem, cIdx) => (
+                        <div key={cItem.id || cIdx} className="paper-case-card">
+                          <header className="case-card-header">
+                            <span className="case-tag-badge">{cItem.tag}</span>
+                            <span className="case-dataset-label">{cItem.dataset}</span>
+                          </header>
+                          <figure
+                            className="paper-inline-figure is-wide"
+                            onClick={() => setModalFigure(cItem.figure)}
+                          >
+                            <div className="figure-canvas">
+                              <img src={cItem.figure.src} alt={cItem.figure.caption} loading="lazy" />
+                            </div>
+                            <figcaption className="paper-figure-caption">
+                              <div className="fig-meta-bar">
+                                <span className="fig-tag">{cItem.figure.label}</span>
+                                <strong className="fig-heading">{cItem.figure.title}</strong>
+                              </div>
+                              <p className="fig-text">{renderMathText(cItem.figure.caption)}</p>
+                              {cItem.analysis && (
+                                <div className="fig-analysis-box">
+                                  <span className="analysis-pill">实验机理与场景解析</span>
+                                  <p className="analysis-body">{renderMathText(cItem.analysis)}</p>
+                                </div>
+                              )}
+                            </figcaption>
+                          </figure>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Reflection & Future Work (Sec 7) */}
+                  {sec.reflection && (
+                    <div className="paper-reflection-block" style={{ marginTop: '2rem' }}>
+                      <blockquote className="paper-pullquote">
+                        <p>{renderMathText(sec.reflection)}</p>
+                        <cite>— 作者反思与后续迭代演进方向</cite>
+                      </blockquote>
+                      {sec.futurePillars && (
+                        <div className="paper-future-grid" style={{ marginTop: '2rem' }}>
+                          {sec.futurePillars.map((fp, fpIdx) => (
+                            <div key={fpIdx} className="future-pillar-card">
+                              <div className="pillar-top">
+                                <span className="future-idx">0{fpIdx + 1}</span>
+                                <h4>{fp.title}</h4>
+                              </div>
+                              <p>{renderMathText(fp.desc)}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </section>
+            ))}
+          </div>
+
+          {/* Section 08: BibTeX Citation Block */}
+          {project.bibtex && (
+            <section id="sec-citation" className="paper-bibtex-section" style={{ padding: '4rem 0 2rem', borderTop: '1px solid var(--rule)' }}>
+              <div className="paper-section-kicker">
+                <span className="sec-num">08</span>
+                <span className="sec-divider">/</span>
+                <span className="sec-kicker-text">Academic Citation & Code Archive</span>
+              </div>
+              <h2 className="paper-section-title" style={{ fontSize: '2.2rem', marginTop: '0.5rem', marginBottom: '1.25rem' }}>
+                论文引用与代码归档 / <em>BibTeX & Code Repository</em>
+              </h2>
+
+              <div className="bibtex-box">
+                <div className="bibtex-header">
+                  <span className="bibtex-label"><FileCode size={14} style={{ marginRight: 6 }} /> BibTeX Citation Entry</span>
+                  <button type="button" className="btn-copy-bibtex" onClick={handleCopyBibtex}>
+                    {copiedBibtex ? (
+                      <><CheckCircle2 size={14} style={{ color: 'var(--color-primary)' }} /> 已复制到剪贴板</>
+                    ) : (
+                      <><Copy size={14} /> 复制 BibTeX</>
+                    )}
+                  </button>
+                </div>
+                <pre className="bibtex-code">
+                  <code>{project.bibtex}</code>
+                </pre>
               </div>
 
-              <div className="download-buttons">
-                <a
-                  href={links.download}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary btn-download"
-                  download={links.downloadLabel || 'liucixin_train.zip'}
-                >
-                  <Download size={16} /> 立即下载训练结果 ({links.downloadLabel || 'ZIP'})
-                </a>
+              {project.links && (
+                <div className="project-reflection-links" style={{ marginTop: '2rem' }}>
+                  {links.github && (
+                    <a className="btn btn-primary" href={links.github} target="_blank" rel="noopener noreferrer">
+                      <Github size={16} /> 访问 GitHub 开源仓库
+                    </a>
+                  )}
+                  {links.download && (
+                    <a
+                      className="btn btn-outline"
+                      href={links.download}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download={links.downloadLabel || 'weights.zip'}
+                    >
+                      <Download size={16} /> 下载模型权重归档
+                    </a>
+                  )}
+                </div>
+              )}
+            </section>
+          )}
+        </div>
+      ) : (
+        /* ========================================================================= */
+        /* MODE B: Default Project Spread & Gallery Flow for Standard Projects       */
+        /* ========================================================================= */
+        <>
+          {/* 01 · Background & Motivation */}
+          <ProjectSpread
+            index="01"
+            kicker="Background & Motivation"
+            title={<>问题<span style={{ fontStyle: 'italic', color: 'var(--color-vermilion)' }}>与动机</span></>}
+            lead={project.background}
+            figure={project.caseFigures?.background || { src: project.cover, caption: `${project.id} · cover · 1600×900` }}
+          />
+
+          {/* 02 · Method & Architecture */}
+          <ProjectSpread
+            index="02"
+            kicker="Method & Architecture"
+            title={<>方法与<em>实现</em></>}
+            lead={project.method}
+            figure={project.caseFigures?.method || { src: typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src || project.cover, caption: `${project.id} · pipeline schematic`, wide: true }}
+            bullets={project.highlights}
+          />
+
+          {/* 03 · Results & Metrics */}
+          <ProjectSpread
+            index="03"
+            kicker="Results & Metrics"
+            title={<>成果与<em>指标</em></>}
+            lead={project.results}
+            figure={project.caseFigures?.results || { src: typeof project.gallery?.[1] === 'string' ? project.gallery[1] : project.gallery?.[1]?.src || (typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src) || project.cover, caption: `${project.id} · evaluation table` }}
+            stats={project.stats}
+          >
+            {/* Table 1: All Dataset Breakdown (When present) */}
+            {project.benchmarkTable && (
+              <div className="academic-table-wrapper" style={{ marginTop: '3.5rem' }}>
+                <div className="academic-table-caption">
+                  <strong>{project.benchmarkTable.caption}</strong>
+                </div>
+                <div className="academic-table-container">
+                  <table className="academic-booktabs-table">
+                    <thead>
+                      <tr>
+                        {project.benchmarkTable.columns.map((col, idx) => (
+                          <th key={idx} className={idx >= 1 && idx <= 4 ? 'col-num' : ''}>{col}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {project.benchmarkTable.rows.map((row, idx) => (
+                        <tr key={idx} className={`${row.highlight ? 'row-highlight' : ''} ${row.isSummary ? 'row-summary' : ''}`}>
+                          <td className="cell-dataset">
+                            <strong>{row.dataset}</strong>
+                            {row.highlight && <span className="highlight-tag">BEST</span>}
+                          </td>
+                          <td className="col-num">{row.testN}</td>
+                          <td className="col-num val-mae"><strong>{row.mae}</strong></td>
+                          <td className="col-num val-rmse"><strong>{row.rmse}</strong></td>
+                          <td className="col-num">{row.nae}</td>
+                          <td className="cell-comment">{row.comment}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="table-footnote">
+                  注：↓ 表示数值越小越优；ShanghaiTech Part A 为当前模型最显著突破项；Macro Average 仅作多域均值参考。
+                </div>
+              </div>
+            )}
+
+            {/* Table 2: SOTA Comparison Across Venues (When present) */}
+            {project.sotaTable && (
+              <div className="academic-table-wrapper" style={{ marginTop: '3.5rem' }}>
+                <div className="academic-table-caption">
+                  <strong>{project.sotaTable.caption}</strong>
+                </div>
+                <div className="academic-table-container">
+                  <table className="academic-booktabs-table">
+                    <thead>
+                      <tr>
+                        {project.sotaTable.columns.map((col, idx) => (
+                          <th key={idx} className={idx >= 1 && idx <= 5 ? 'col-num' : ''}>{col}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {project.sotaTable.rows.map((row, idx) => (
+                        <tr key={idx} className={row.isOurs ? 'row-ours' : ''}>
+                          <td className="cell-model">
+                            <strong>{row.model}</strong>
+                            {row.isOurs && <span className="highlight-tag ours-tag">OURS</span>}
+                          </td>
+                          <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.shaA}</td>
+                          <td className="col-num">{row.shaB}</td>
+                          <td className="col-num">{row.ucfQnrf}</td>
+                          <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.jhu}</td>
+                          <td className="col-num">{row.ucfCc50}</td>
+                          <td className="cell-venue"><span className="venue-badge">{row.venue}</span></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="table-footnote">
+                  对比基准包含 CVPR'18 (CSRNet)、ICCV'19 (Bayesian Loss)、NeurIPS'20 (DM-Count)、CVPR'22 (MAN) 及 arXiv'24 (CLIP-EBC) 等权威公开模型。
+                </div>
+              </div>
+            )}
+          </ProjectSpread>
+
+          {/* BibTeX Citation Block (When available) */}
+          {project.bibtex && (
+            <section className="paper-bibtex-section" style={{ padding: '3.5rem 0 1rem', borderTop: '1px solid var(--rule)' }}>
+              <div className="kicker">03.5 · Academic Citation</div>
+              <h2 className="section-title" style={{ fontSize: '2.2rem', marginTop: '0.5rem', marginBottom: '1.25rem' }}>
+                论文引用 / <em>BibTeX Citation</em>
+              </h2>
+
+              <div className="bibtex-box">
+                <div className="bibtex-header">
+                  <span className="bibtex-label"><FileCode size={14} style={{ marginRight: 6 }} /> BibTeX Entry</span>
+                  <button type="button" className="btn-copy-bibtex" onClick={handleCopyBibtex}>
+                    {copiedBibtex ? (
+                      <><CheckCircle2 size={14} style={{ color: 'var(--color-primary)' }} /> 已复制到剪贴板</>
+                    ) : (
+                      <><Copy size={14} /> 复制 BibTeX</>
+                    )}
+                  </button>
+                </div>
+                <pre className="bibtex-code">
+                  <code>{project.bibtex}</code>
+                </pre>
+              </div>
+            </section>
+          )}
+
+          {/* Download artifacts card */}
+          {links.download && (
+            <section className="project-download-section" style={{ padding: '4rem 0 2rem', borderTop: '1px solid var(--rule)' }}>
+              <div className="kicker">03.5 · Artifacts & Checkpoints</div>
+              <h2 className="section-title" style={{ fontSize: '2.4rem', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
+                训练成果与<em>权重交付</em>
+              </h2>
+
+              <div className="project-download-box">
+                <div className="project-download-header">
+                  <div className="download-meta">
+                    <span className="file-badge"><Package size={14} /> 权重归档包</span>
+                    <h3 className="file-name">{links.downloadLabel || 'checkpoint.zip'}</h3>
+                    <p className="file-desc">
+                      内含模型适配器权重、评估日志与推理示例代码。
+                    </p>
+                  </div>
+
+                  <div className="download-buttons">
+                    <a
+                      href={links.download}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary btn-download"
+                      download={links.downloadLabel || 'checkpoint.zip'}
+                    >
+                      <Download size={16} /> 立即下载训练结果 ({links.downloadLabel || 'ZIP'})
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Reflection */}
+          <section style={{ padding: '4rem 0', borderTop: '1px solid var(--rule)' }}>
+            <div className="kicker">04 · Reflection</div>
+            <div className="project-pullquote" style={{ marginTop: '1.5rem' }}>
+              {project.reflection}
+              <span className="project-pullquote-cite">— If I were to rebuild it today</span>
+            </div>
+
+            {project.links && (
+              <div className="project-reflection-links">
                 {links.gitee && (
-                  <a
-                    href={links.gitee}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-outline"
-                  >
-                    <ExternalLink size={15} /> 访问 Gitee 开源仓库
+                  <a className="btn btn-primary" href={links.gitee} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink size={16} /> 查看 Gitee 仓库
+                  </a>
+                )}
+                {links.github && (
+                  <a className="btn btn-primary" href={links.github} target="_blank" rel="noopener noreferrer">
+                    <Github size={16} /> 查看 GitHub
                   </a>
                 )}
               </div>
-            </div>
+            )}
+          </section>
 
-            <div className="project-download-grid">
-              <div className="download-spec-item">
-                <div className="spec-label">LoRA 适配器</div>
-                <div className="spec-value">3 Checkpoints (1.0 / 1.5 / 2.0 ep)</div>
-              </div>
-              <div className="download-spec-item">
-                <div className="spec-label">基座大模型</div>
-                <div className="spec-value">Qwen3.6-27B (4bit NF4)</div>
-              </div>
-              <div className="download-spec-item">
-                <div className="spec-label">微调参数量</div>
-                <div className="spec-value">10.5M Params (0.039%)</div>
-              </div>
-              <div className="download-spec-item">
-                <div className="spec-label">单文件体积</div>
-                <div className="spec-value">~20 MB / 适配器</div>
-              </div>
-            </div>
-
-            <div className="download-code-block">
-              <div className="code-title">
-                <FileCode size={14} /> 快速加载权重推理示例 (Python / PEFT)
-              </div>
-              <pre className="code-content">
-{`from peft import PeftModel
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
-
-model_id = "Qwen/Qwen3.6-27B"
-lora_path = "./checkpoint-epoch-2.0"
-
-tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
-base_model = AutoModelForCausalLM.from_pretrained(
-    model_id,
-    device_map="auto",
-    torch_dtype=torch.bfloat16,
-    load_in_4bit=True,
-    trust_remote_code=True
-)
-model = PeftModel.from_pretrained(base_model, lora_path)`}
-              </pre>
-            </div>
-          </div>
-        </section>
+          {/* Gallery */}
+          <ProjectGallery project={project} />
+        </>
       )}
 
-      {/* Reflection · full-width pullquote */}
-      <section style={{ padding: '4rem 0', borderTop: '1px solid var(--rule)' }}>
-        <div className="kicker">04 · Reflection</div>
-        <div className="project-pullquote" style={{ marginTop: '1.5rem' }}>
-          {project.reflection}
-          <span className="project-pullquote-cite">— If I were to rebuild it today</span>
-        </div>
-
-        {project.links && (
-          <div className="project-reflection-links">
-            {links.gitee && (
-              <a className="btn btn-primary" href={links.gitee} target="_blank" rel="noopener noreferrer">
-                <ExternalLink size={16} /> 查看 Gitee 仓库
-              </a>
-            )}
-            {links.github && (
-              <a className="btn btn-primary" href={links.github} target="_blank" rel="noopener noreferrer">
-                <Github size={16} /> 查看 GitHub
-              </a>
-            )}
-            {links.download && (
-              <a
-                className="btn btn-outline"
-                href={links.download}
-                target="_blank"
-                rel="noopener noreferrer"
-                download={links.downloadLabel || 'liucixin_train.zip'}
+      {/* Lightbox Modal for Any Zoomed Figure */}
+      {modalFigure && (
+        <div className="project-modal-backdrop" onClick={() => setModalFigure(null)}>
+          <div className="project-modal-shell" onClick={(e) => e.stopPropagation()}>
+            <header className="project-modal-header">
+              <div className="modal-header-meta">
+                <span className="modal-fig-label">{modalFigure.label || 'FIG'}</span>
+                <span className="project-modal-title">
+                  <strong>{modalFigure.title || modalFigure.caption}</strong>
+                </span>
+              </div>
+              <button
+                type="button"
+                className="project-modal-close"
+                onClick={() => setModalFigure(null)}
+                aria-label="Close modal"
               >
-                <Download size={16} /> 下载训练结果 ({links.downloadLabel || 'ZIP'})
-              </a>
+                ✕ 关闭
+              </button>
+            </header>
+            <div className="project-modal-image-wrap">
+              <img src={modalFigure.src} alt={modalFigure.caption || ''} />
+            </div>
+            {(modalFigure.caption || modalFigure.analysis) && (
+              <footer className="project-modal-footer">
+                <p className="modal-caption-text"><strong>图释说明：</strong>{renderMathText(modalFigure.caption)}</p>
+                {modalFigure.analysis && (
+                  <p className="modal-analysis-text"><strong>实验机理分析：</strong>{renderMathText(modalFigure.analysis)}</p>
+                )}
+              </footer>
             )}
           </div>
-        )}
-      </section>
-
-      {/* Gallery */}
-      <ProjectGallery project={project} />
+        </div>
+      )}
 
       {/* Related · next project */}
       {related.length > 0 && (
@@ -254,3 +895,4 @@ model = PeftModel.from_pretrained(base_model, lora_path)`}
     </article>
   );
 }
+
