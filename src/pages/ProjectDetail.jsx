@@ -276,21 +276,32 @@ export default function ProjectDetail() {
   const links = project.links || {};
   const paperArticle = project.paperArticle;
 
-  const [activeSecId, setActiveSecId] = useState(paperArticle?.sections?.[0]?.id || '');
+  const [activeSecId, setActiveSecId] = useState(paperArticle?.sections?.[0]?.id || 'sec-intro');
 
   React.useEffect(() => {
     if (!paperArticle) return;
     const sectionIds = [...paperArticle.sections.map((s) => s.id), 'sec-citation'];
 
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 200;
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sectionIds[i]);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSecId(sectionIds[i]);
-          break;
+      // If near bottom of the page, activate the last section
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120) {
+        setActiveSecId('sec-citation');
+        return;
+      }
+
+      const focusOffset = 180;
+      let currentActive = sectionIds[0];
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= focusOffset) {
+            currentActive = id;
+          }
         }
       }
+      setActiveSecId(currentActive);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -309,12 +320,9 @@ export default function ProjectDetail() {
   const scrollToSection = (secId) => {
     const el = document.getElementById(secId);
     if (el) {
-      const topOffset = 84;
-      const elPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elPosition + window.pageYOffset - topOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
+      el.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
       });
       setActiveSecId(secId);
     }

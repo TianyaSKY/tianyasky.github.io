@@ -4512,6 +4512,11 @@ body::before {
   gap: 4.5rem;
 }
 
+.paper-section-block,
+.paper-bibtex-section {
+  scroll-margin-top: 96px;
+}
+
 .paper-section-block {
   padding-top: 3rem;
   border-top: 1px solid var(--rule);
