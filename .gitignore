@@ -23,3 +23,4 @@ dist-ssr
 # Local scratch / legacy backups
 src/_legacy/
 image.png
+/.agents    
