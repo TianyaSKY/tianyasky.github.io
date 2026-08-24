@@ -30,9 +30,16 @@ export default function Navbar({ onOpenCmdPalette }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [isMac, setIsMac] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
+
+  useEffect(() => {
+    if (typeof navigator !== 'undefined') {
+      setIsMac(/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform || navigator.userAgent));
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +68,11 @@ export default function Navbar({ onOpenCmdPalette }) {
       return;
     }
     scrollToAnchor(item.id, navigate);
+  };
+
+  const handleMobileSearch = () => {
+    setMobileOpen(false);
+    onOpenCmdPalette();
   };
 
   return (
@@ -93,11 +105,11 @@ export default function Navbar({ onOpenCmdPalette }) {
           <button
             onClick={onOpenCmdPalette}
             className="nav-cmd-btn"
-            title="快捷搜索 (Ctrl+K)"
+            title={`快捷搜索 (${isMac ? '⌘K' : 'Ctrl+K'})`}
           >
             <Search size={14} />
             <span>搜索</span>
-            <span className="nav-cmd-shortcut">⌘K</span>
+            <span className="nav-cmd-shortcut">{isMac ? '⌘K' : 'Ctrl+K'}</span>
           </button>
 
           <button
@@ -112,6 +124,28 @@ export default function Navbar({ onOpenCmdPalette }) {
 
       {mobileOpen && (
         <div className="mobile-drawer">
+          <button
+            type="button"
+            className="mobile-drawer-link"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              width: '100%',
+              background: 'none',
+              border: 'none',
+              font: 'inherit',
+              textAlign: 'left',
+              color: 'var(--color-vermilion)'
+            }}
+            onClick={handleMobileSearch}
+          >
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Search size={16} /> 全站检索
+            </span>
+            <span style={{ fontSize: '0.75rem', opacity: 0.8 }}>{isMac ? '⌘K' : 'Ctrl+K'}</span>
+          </button>
+
           {NAV_ITEMS.map((item) => (
             <a
               key={item.id}
