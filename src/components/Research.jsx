@@ -1,5 +1,5 @@
 import React from 'react';
-import { researchProjects } from '../data/personalData';
+import { researchProjects } from '../data/projectDetails';
 import VisionSimulator from './VisionSimulator';
 import SciFiTerminal from './SciFiTerminal';
 import { Microscope, ExternalLink, Sparkles } from 'lucide-react';

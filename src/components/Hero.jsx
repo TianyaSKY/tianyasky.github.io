@@ -7,8 +7,19 @@ export default function Hero({ onOpenCmdPalette }) {
   const [taglineIndex, setTaglineIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
 
   useEffect(() => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleChange = (e) => setReducedMotion(e.matches);
+    motionQuery.addEventListener('change', handleChange);
+    return () => motionQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) return;
     const fullText = personalInfo.taglines[taglineIndex];
     let speed = isDeleting ? 35 : 75;
 
@@ -30,7 +41,7 @@ export default function Hero({ onOpenCmdPalette }) {
     }, speed);
 
     return () => clearTimeout(timer);
-  }, [currentText, isDeleting, taglineIndex]);
+  }, [currentText, isDeleting, taglineIndex, reducedMotion]);
 
   const now = new Date();
   const dateStr = `${now.getFullYear()} · vol.${(now.getMonth() + 1).toString().padStart(2, '0')}`;
@@ -57,10 +68,10 @@ export default function Hero({ onOpenCmdPalette }) {
             从近海单目定位出发，把“感知—决策—执行—反馈”的方法延伸到 AI Workspace、多智能体世界、在线评测与推荐系统；这里收录能运行、可复现、也经得起复盘的研究与工程。
           </p>
 
-          <div className="hero-typing-box" aria-live="polite">
+          <div className="hero-typing-box" aria-live={reducedMotion ? 'off' : 'polite'}>
             <span className="hero-typing-prefix">&gt;</span>
-            <span>{currentText}</span>
-            <span className="typing-cursor" />
+            <span>{reducedMotion ? personalInfo.taglines[0] : currentText}</span>
+            {!reducedMotion && <span className="typing-cursor" />}
           </div>
 
           <div className="hero-cta-group">

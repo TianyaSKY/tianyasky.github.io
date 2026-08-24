@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { projects } from '../data/personalData';
+import { projects } from '../data/projectDetails';
 import NotFound from './NotFound';
 import {
   ArrowLeft,
@@ -33,6 +33,7 @@ import ProjectSpread from '../components/ProjectSections/ProjectSpread';
 import ProjectGallery from '../components/ProjectSections/ProjectGallery';
 import SciFiTerminal from '../components/SciFiTerminal';
 import VisionSimulator from '../components/VisionSimulator';
+import AccessibleDialog from '../components/AccessibleDialog';
 
 function renderMathText(text) {
   if (typeof text !== 'string') return text;
@@ -85,7 +86,6 @@ function FigureLightboxModal({ figure, onClose }) {
 
   React.useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
       if (e.key === '+' || e.key === '=') setScale((s) => Math.min(Number((s + 0.25).toFixed(2)), 4.0));
       if (e.key === '-' || e.key === '_') setScale((s) => Math.max(Number((s - 0.25).toFixed(2)), 0.5));
       if (e.key === '0') {
@@ -143,8 +143,12 @@ function FigureLightboxModal({ figure, onClose }) {
   };
 
   return (
-    <div className="project-modal-backdrop" onClick={onClose}>
-      <div className="project-modal-shell" onClick={(e) => e.stopPropagation()}>
+    <AccessibleDialog
+      overlayClassName="project-modal-backdrop"
+      dialogClassName="project-modal-shell"
+      label={figure.title || figure.caption}
+      onClose={onClose}
+    >
         {/* Header with full inspection tools */}
         <header className="project-modal-header">
           <div className="modal-header-meta">
@@ -204,6 +208,7 @@ function FigureLightboxModal({ figure, onClose }) {
             <button
               type="button"
               className="project-modal-close"
+              data-dialog-initial-focus
               onClick={onClose}
               aria-label="Close modal"
               title="按 ESC 键或点击关闭"
@@ -250,8 +255,7 @@ function FigureLightboxModal({ figure, onClose }) {
             )}
           </footer>
         )}
-      </div>
-    </div>
+    </AccessibleDialog>
   );
 }
 
@@ -267,16 +271,16 @@ export default function ProjectDetail() {
   const [copiedBibtex, setCopiedBibtex] = useState(false);
   const [modalFigure, setModalFigure] = useState(null);
 
+  const paperArticle = project?.paperArticle;
+  const [activeSecId, setActiveSecId] = useState(paperArticle?.sections?.[0]?.id || 'sec-intro');
+
+  const links = project?.links || {};
+
   if (!project) return <NotFound />;
 
   const num = String(projects.findIndex((p) => p.id === project.id) + 1).padStart(2, '0');
   const relatedNumeric = (rid) =>
     String(projects.findIndex((p) => p.id === rid) + 1).padStart(2, '0');
-
-  const links = project.links || {};
-  const paperArticle = project.paperArticle;
-
-  const [activeSecId, setActiveSecId] = useState(paperArticle?.sections?.[0]?.id || 'sec-intro');
 
   React.useEffect(() => {
     if (!paperArticle) return;
@@ -512,11 +516,17 @@ export default function ProjectDetail() {
                   {sec.figure && (
                     <figure
                       className={`paper-inline-figure ${sec.figure.wide ? 'is-wide' : ''}`}
-                      onClick={() => setModalFigure(sec.figure)}
                     >
-                      <div className="figure-canvas">
-                        <img src={sec.figure.src} alt={sec.figure.caption} loading="lazy" />
-                      </div>
+                      <button
+                        type="button"
+                        className="figure-zoom-trigger"
+                        aria-label={`放大查看：${sec.figure.title || sec.figure.caption}`}
+                        onClick={() => setModalFigure(sec.figure)}
+                      >
+                        <span className="figure-canvas">
+                          <img src={sec.figure.src} alt={sec.figure.caption} loading="lazy" />
+                        </span>
+                      </button>
                       <figcaption className="paper-figure-caption">
                         <div className="fig-meta-bar">
                           <span className="fig-tag">{sec.figure.label}</span>
@@ -567,11 +577,17 @@ export default function ProjectDetail() {
                       {sec.datasetFigure && (
                         <figure
                           className="paper-inline-figure"
-                          onClick={() => setModalFigure(sec.datasetFigure)}
                         >
-                          <div className="figure-canvas">
-                            <img src={sec.datasetFigure.src} alt={sec.datasetFigure.caption} loading="lazy" />
-                          </div>
+                          <button
+                            type="button"
+                            className="figure-zoom-trigger"
+                            aria-label={`放大查看：${sec.datasetFigure.title || sec.datasetFigure.caption}`}
+                            onClick={() => setModalFigure(sec.datasetFigure)}
+                          >
+                            <span className="figure-canvas">
+                              <img src={sec.datasetFigure.src} alt={sec.datasetFigure.caption} loading="lazy" />
+                            </span>
+                          </button>
                           <figcaption className="paper-figure-caption">
                             <div className="fig-meta-bar">
                               <span className="fig-tag">{sec.datasetFigure.label}</span>
@@ -673,11 +689,17 @@ export default function ProjectDetail() {
                           <figure
                             className="paper-inline-figure"
                             style={{ marginTop: '2.5rem' }}
-                            onClick={() => setModalFigure(sec.sotaFigure)}
                           >
-                            <div className="figure-canvas">
-                              <img src={sec.sotaFigure.src} alt={sec.sotaFigure.caption} loading="lazy" />
-                            </div>
+                            <button
+                              type="button"
+                              className="figure-zoom-trigger"
+                              aria-label={`放大查看：${sec.sotaFigure.title || sec.sotaFigure.caption}`}
+                              onClick={() => setModalFigure(sec.sotaFigure)}
+                            >
+                              <span className="figure-canvas">
+                                <img src={sec.sotaFigure.src} alt={sec.sotaFigure.caption} loading="lazy" />
+                              </span>
+                            </button>
                             <figcaption className="paper-figure-caption">
                               <div className="fig-meta-bar">
                                 <span className="fig-tag">{sec.sotaFigure.label}</span>
@@ -703,11 +725,17 @@ export default function ProjectDetail() {
                               <figure
                                 key={sfIdx}
                                 className="scatter-figure-card"
-                                onClick={() => setModalFigure(sFig)}
                               >
-                                <div className="figure-canvas">
-                                  <img src={sFig.src} alt={sFig.caption} loading="lazy" />
-                                </div>
+                                <button
+                                  type="button"
+                                  className="figure-zoom-trigger"
+                                  aria-label={`放大查看：${sFig.title || sFig.caption}`}
+                                  onClick={() => setModalFigure(sFig)}
+                                >
+                                  <span className="figure-canvas">
+                                    <img src={sFig.src} alt={sFig.caption} loading="lazy" />
+                                  </span>
+                                </button>
                                 <figcaption className="scatter-caption">
                                   <div className="fig-meta-bar">
                                     <span className="fig-tag">{sFig.label}</span>
@@ -734,11 +762,17 @@ export default function ProjectDetail() {
                           </header>
                           <figure
                             className="paper-inline-figure is-wide"
-                            onClick={() => setModalFigure(cItem.figure)}
                           >
-                            <div className="figure-canvas">
-                              <img src={cItem.figure.src} alt={cItem.figure.caption} loading="lazy" />
-                            </div>
+                            <button
+                              type="button"
+                              className="figure-zoom-trigger"
+                              aria-label={`放大查看：${cItem.figure.title || cItem.figure.caption}`}
+                              onClick={() => setModalFigure(cItem.figure)}
+                            >
+                              <span className="figure-canvas">
+                                <img src={cItem.figure.src} alt={cItem.figure.caption} loading="lazy" />
+                              </span>
+                            </button>
                             <figcaption className="paper-figure-caption">
                               <div className="fig-meta-bar">
                                 <span className="fig-tag">{cItem.figure.label}</span>

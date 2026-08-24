@@ -7,26 +7,17 @@ export default function BackgroundCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let animationFrameId;
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let animationFrameId = null;
+    let particles = [];
+    let width = 0;
+    let height = 0;
 
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
-    window.addEventListener('resize', handleResize);
-
-    // Particle pool
-    const particleCount = Math.min(Math.floor(width / 25), 45);
-    const particles = Array.from({ length: particleCount }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      radius: Math.random() * 2 + 1.5,
-    }));
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
@@ -66,11 +57,50 @@ export default function BackgroundCanvas() {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    const start = () => {
+      if (animationFrameId !== null) return;
+      handleResize();
+      // Particle pool
+      const particleCount = Math.min(Math.floor(width / 25), 45);
+      particles = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2 + 1.5,
+      }));
+      render();
+    };
+
+    const stop = () => {
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    };
+
+    // 仅在「允许动画 + 页面可见」时运行粒子循环
+    const update = () => {
+      if (motionQuery.matches) {
+        stop();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      } else if (document.hidden) {
+        stop();
+      } else {
+        start();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    document.addEventListener('visibilitychange', update);
+    motionQuery.addEventListener('change', update);
+    update();
 
     return () => {
+      stop();
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener('visibilitychange', update);
+      motionQuery.removeEventListener('change', update);
     };
   }, []);
 

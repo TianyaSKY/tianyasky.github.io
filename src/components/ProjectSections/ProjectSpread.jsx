@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ZoomIn, ExternalLink, Sparkles, CheckCircle } from 'lucide-react';
+import AccessibleDialog from '../AccessibleDialog';
 
 export default function ProjectSpread({
   index,
@@ -41,12 +42,18 @@ export default function ProjectSpread({
         {figure && (
           <figure
             className={`spread-figure-showcase ${figure.wide ? 'is-wide' : ''}`}
-            onClick={() => setModalOpen(true)}
             title="点击放大查看高清图表"
           >
-            <div className="figure-canvas">
-              <img src={figure.src} alt={figure.caption || ''} loading="lazy" />
-            </div>
+            <button
+              type="button"
+              className="figure-zoom-trigger"
+              aria-label={`放大查看：${figure.caption || '章节配图'}`}
+              onClick={() => setModalOpen(true)}
+            >
+              <span className="figure-canvas">
+                <img src={figure.src} alt={figure.caption || ''} loading="lazy" />
+              </span>
+            </button>
             <figcaption className="figure-caption">
               <span className="fig-label">FIG · {index}</span>
               <span className="fig-desc">{figure.caption}</span>
@@ -95,9 +102,13 @@ export default function ProjectSpread({
 
       {/* Lightbox Zoom Modal */}
       {modalOpen && figure && (
-        <div className="inline-demo-modal" onClick={() => setModalOpen(false)} role="dialog" aria-label={figure.caption}>
-          <div className="inline-demo-image" onClick={(e) => e.stopPropagation()}>
-            <button className="inline-demo-close" onClick={() => setModalOpen(false)}>✕ 关闭</button>
+        <AccessibleDialog
+          overlayClassName="inline-demo-modal"
+          dialogClassName="inline-demo-image"
+          label={figure.caption}
+          onClose={() => setModalOpen(false)}
+        >
+            <button className="inline-demo-close" data-dialog-initial-focus onClick={() => setModalOpen(false)}>✕ 关闭</button>
             <div className="inline-demo-image-viewport">
               <img src={figure.src} alt={figure.caption || ''} />
             </div>
@@ -107,8 +118,7 @@ export default function ProjectSpread({
                 <ExternalLink size={14} /> 原图直达
               </a>
             </div>
-          </div>
-        </div>
+        </AccessibleDialog>
       )}
     </section>
   );

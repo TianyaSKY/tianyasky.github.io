@@ -69,6 +69,12 @@ html {
   line-height: 1.6;
 }
 
+/* Shared visible keyboard focus indicator */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 body {
   overflow-x: hidden;
   background: radial-gradient(circle at 15% 15%, rgba(219, 234, 254, 0.5) 0%, transparent 45%),
@@ -1953,8 +1959,14 @@ body::before {
 }
 
 .skill-item {
+  width: 100%;
   padding: 0.6rem 0;
+  background: none;
+  border: 0;
   border-top: 1px solid var(--rule-thin);
+  font: inherit;
+  color: inherit;
+  text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -2753,6 +2765,20 @@ body::before {
   object-fit: contain;
   display: block;
   transition: transform 0.4s ease;
+}
+
+/* Keyboard-accessible figure zoom trigger (opens lightbox) */
+.figure-zoom-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: zoom-in;
 }
 
 .spread-figure-showcase.is-wide .figure-canvas img {
@@ -5067,4 +5093,47 @@ body::before {
   line-height: 1.7;
   color: var(--color-text-muted);
   margin: 0;
+}
+
+/* Lazy-route and palette loading fallbacks */
+.route-loading {
+  padding: 10rem 1.5rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.palette-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  padding-top: 8.5rem;
+  background: rgba(12, 17, 29, 0.38);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: #f5f1ea;
+}
+
+/* Honor prefers-reduced-motion: no smooth scroll, animations, transitions, or decorative canvas */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  #bg-canvas {
+    display: none !important;
+  }
 }
