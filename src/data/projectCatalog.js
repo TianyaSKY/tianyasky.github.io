@@ -4,10 +4,10 @@ export const projectCatalog = [
   {
     id: "vision-positioning",
     type: "research",
-    title: "单目视觉定位系统",
-    subtitle: "近海 10–15cm 厘米级单目姿态估计与解算",
-    badge: "国家级大创 · 第一负责人",
-    category: "Computer Vision & Pose Estimation",
+    title: "单目视觉三维坐标重建系统",
+    subtitle: "级联神经网络 · 射线夹角几何约束 · 近海 10–15cm 厘米级定位",
+    badge: "国家级大创 · 论文与软著",
+    category: "Computer Vision & Geometric Pose Reconstruction",
     cover: "/projects/vision-positioning/cover.png",
     accent: "blue",
     bento: {
@@ -20,27 +20,28 @@ export const projectCatalog = [
       "PyTorch",
       "YOLO11",
       "OpenCV",
+      "Nonlinear Least Squares",
       "Jetson Orin"
     ],
     stats: [
       {
-        label: "RMSE 定位精度",
+        label: "仿真解算精度",
+        value: "1.1×10⁻⁵ m"
+      },
+      {
+        label: "海试 RMSE 精度",
         value: "10–15 cm"
       },
       {
-        label: "实时帧率",
+        label: "角点分类 F1-Score",
+        value: "100.0 %"
+      },
+      {
+        label: "实时解算帧率",
         value: "26 FPS"
-      },
-      {
-        label: "角点识别准确率",
-        value: "96.8 %"
-      },
-      {
-        label: "硬件平台",
-        value: "Jetson Orin"
       }
     ],
-    description: "针对近海环境 GPS 信号易受干扰、传统 PnP 在共线杆状结构上几何退化的致命痛点，自主设计低成本单目视觉定位系统。海上实测 10–15cm RMSE 精度，26 FPS 实时解算。"
+    description: "针对近海与无 GPS 复杂环境下传统 PnP 在共线标志物上的几何退化难题，提出 YOLO 掩膜 + Harris 提取 + 9 分类 Patch CNN 的五级级联感知流水线，结合基于反投影射线夹角守恒的多初值非线性最小二乘位姿优化算法。仿真基准达亚毫米级重构，实测 10–15cm RMSE 精度，获辽宁省大学生创新年会推荐及软件著作权。"
   },
   {
     id: "crowd-sigmod",
