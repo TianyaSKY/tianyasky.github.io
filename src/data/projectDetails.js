@@ -28,7 +28,7 @@ const projectDetailById = {
         "Collinear Geometric Degeneracy",
         "Structured Reference Anchors"
       ],
-      abstractZh: "针对海洋工程、近海渔船作业、港口堆场巡检以及室内/水下无 GPS 环境中，传统卫星导航易丢失信号、视觉人工标志物（如 AprilTag/ArUco）易污损退化，且经典透视 n 点算法（Perspective-n-Point, PnP）在共线或共面细长杆状结构上存在严重几何退化（Collinear Degeneracy）的痛点难题，本文提出一种融合级联深度学习与射线夹角不变性几何约束的单目视觉相机三维坐标重建系统。在前端感知层，构建了「YOLO 区域粗检 → Harris 候选角点提取 → 深度 CNN 局部块语义分类 → 分类别 NMS 抑制 → 亚像素精炼」的高精度级联检测流水线。首先利用轻量级 YOLO 目标检测模型（POLES.pt）定位视野中的杆状参照物并生成二值 ROI 掩膜，将关键点搜索空间大幅压缩 95% 以上；在掩膜约束的感兴趣区域内执行 Harris 算法捕获几何角点；随后由定制的三层卷积神经网络（SimpleCNN）对 64×64 局部图像块执行 9 分类推理（8 个空间物理特征点 + 1 个背景噪声类），在 1377 张样本数据集上实现了 100% 的精准分类与背景过滤，彻底克服了无纹理场景下的 2D-3D 数据关联歧义；最后经按类别非极大值抑制与 cornerSubPix 迭代精炼，获取亚像素级关键点坐标。在后端几何解算层，推导并建立了基于反投影光学射线夹角守恒的非线性最小二乘位姿优化模型。通过相机内参将 2D 像点转换为归一化单位方向射线，构建两两射线夹角与空间三维世界点方向夹角的一致性残差，将原本对旋转平移耦合敏感的 PnP 求解转化为仅依赖相机三维位置参数的良态非线性优化；同时设计了融合历史帧滤波、PnP 粗估计及空间点几何中心的多候选初值策略，配合 Levenberg-Marquardt (LM) 与 Trust Region Reflective (TRF) 双优化引擎并发求解与最优残差选取。实验在仿真基准与实际场景下展开了系统性消融对比。结果表明：完整系统在测试集上达成 100% 解算成功率与 1.1×10⁻⁵ m 理论重构精度；消融实验证实，移除 CNN 语义分类会导致启发式分配失效，位置误差急剧恶化至 5.38 m；移除 NMS 与后处理会导致冗余点干扰，误差增至 6.13 m。系统在边缘计算终端 Jetson Orin 上实现 26 FPS 实时稳定运行，并在大连沿海实测中取得 10–15 cm RMSE 的高可靠定位精度，为无 GPS 复杂环境下的低成本高精度视觉定位提供了完整的理论与工程落地范式。",
+      abstractZh: "针对海洋工程、近海渔船作业、港口堆场巡检以及室内/水下无 GPS 环境中，传统卫星导航易丢失信号、视觉人工标志物（如 AprilTag/ArUco）易污损退化，且经典透视 n 点算法（Perspective-n-Point, PnP）在共线或共面细长杆状结构上存在严重几何退化（Collinear Degeneracy）的痛点难题，本文提出一种融合级联深度学习与射线夹角不变性几何约束的单目视觉相机三维坐标重建系统。在前端感知层，构建了「YOLO 区域粗检 → Harris 候选角点提取 → 深度 CNN 局部块语义分类 → 分类别 NMS 抑制 → 亚像素精炼」的高精度级联检测流水线。首先利用轻量级 YOLO 目标检测模型（POLES.pt）定位视野中的杆状参照物并生成二值 ROI 掩膜，将关键点搜索空间大幅压缩 95% 以上；在掩膜约束的感兴趣区域内执行 Harris 算法捕获几何角点；随后由定制的三层卷积神经网络（SimpleCNN）对 64×64 局部图像块执行 9 分类推理（8 个空间物理特征点 + 1 个背景噪声类），在 1377 张样本数据集上实现了 100% 的精准分类与背景过滤，有效解决了无纹理场景下的 2D-3D 数据关联歧义；最后经按类别非极大值抑制与 cornerSubPix 迭代精炼，获取亚像素级关键点坐标。在后端几何解算层，推导并建立了基于反投影光学射线夹角守恒的非线性最小二乘位姿优化模型。通过相机内参将 2D 像点转换为归一化单位方向射线，构建两两射线夹角与空间三维世界点方向夹角的一致性残差，将原本对旋转平移耦合敏感的 PnP 求解转化为仅依赖相机三维位置参数的良态非线性优化；同时设计了融合历史帧滤波、PnP 粗估计及空间点几何中心的多候选初值策略，配合 Levenberg-Marquardt (LM) 与 Trust Region Reflective (TRF) 双优化引擎并发求解与最优残差选取。实验在仿真基准与实际场景下展开了系统性消融对比。结果表明：完整系统在测试集上达成 100% 解算成功率与 1.1×10⁻⁵ m 理论重构精度；消融实验证实，移除 CNN 语义分类会导致启发式分配失效，位置误差急剧恶化至 5.38 m；移除 NMS 与后处理会导致冗余点干扰，误差增至 6.13 m。系统在边缘计算终端 Jetson Orin 上实现 26 FPS 实时稳定运行，并在大连沿海实测中取得 10–15 cm RMSE 的高可靠定位精度，为无 GPS 复杂环境下的低成本高精度视觉定位提供了完整的理论与工程落地范式。",
       abstractEn: "In marine engineering, coastal vessel operations, port surveillance, and GPS-denied indoor/underwater environments, conventional satellite navigation is prone to signal degradation, and artificial visual fiducial tags (e.g., AprilTag/ArUco) suffer from surface fouling. Furthermore, standard Perspective-n-Point (PnP) solvers suffer from severe collinear geometric degeneracy when feature points lie along slender structural rods or poles. To resolve these challenges, this paper presents an end-to-end monocular camera 3D coordinate reconstruction system integrating cascaded neural networks with ray-angle invariant nonlinear optimization. In the front-end perception module, a five-stage detection pipeline is proposed: YOLO coarse region proposal (POLES.pt) generates binary ROI masks to compress the search space by over 95%; Harris corner detection extracts high-gradient geometric landmarks within the mask; a lightweight 3-stage patch CNN (SimpleCNN) performs 9-class semantic categorization over 64×64 local patches (8 distinct spatial pole corners + 1 background class) with 100% precision, fully eliminating 2D-to-3D landmark correspondence ambiguities without manual matching; and class-wise NMS coupled with cornerSubPix refinement achieves sub-pixel localization accuracy. In the back-end geometric solver, we establish a nonlinear least-squares optimization formulation based on back-projected ray-angle conservation. By back-projecting 2D pixels into normalized camera directional rays, we enforce congruence between optical ray angles and spatial world subtended angles, transforming the ill-conditioned 6-DoF PnP into a well-conditioned 3-DoF camera position optimization. A multi-start initialization scheme (combining temporal tracking, coarse PnP estimation, and 3D centroid priors) coupled with dual Levenberg-Marquardt (LM) and Trust Region Reflective (TRF) solvers guarantees global convergence. Ablation experiments demonstrate that our full system achieves a 100% success rate with 1.1×10⁻⁵ m theoretical reconstruction error. Removing CNN semantic classification causes heuristic mismatching with error jumping to 5.38 m, while disabling NMS post-processing causes cluster drift to 6.13 m. Deployed on an embedded Jetson Orin platform, the pipeline operates at 26 FPS in real-time, achieving 10–15 cm RMSE accuracy in coastal field trials in Dalian, delivering a robust, low-cost solution for visual localization in harsh environments."
     },
     benchmarkTable: {
@@ -57,7 +57,7 @@ const projectDetailById = {
             "100.0 %",
             { text: "1.10 × 10⁻⁵ m", className: "col-num val-mae" },
             "4.00 × 10⁻⁶ m",
-            "精度最高且极稳定，4个角点完全匹配真值，背景虚警为零"
+            "解算稳定，4个角点准确对应先验锚点，无背景虚警"
           ],
           highlight: true,
           isOurs: true
@@ -87,7 +87,7 @@ const projectDetailById = {
             "100.0 %",
             { text: "5.380 m", className: "col-num val-rmse" },
             "1.180 m",
-            "失去语义ID导致2D-3D映射发生灾难性错配，误差急剧放大 48.9 万倍"
+            "缺少语义ID导致2D-3D映射发生错配，误差显著增加"
           ]
         },
         {
@@ -101,7 +101,7 @@ const projectDetailById = {
             "100.0 %",
             { text: "6.132 m", className: "col-num val-rmse" },
             "0.528 m",
-            "75+ 个冗余密集角点未被抑制，严重扭曲残差场并陷入局部极小"
+            "冗余密集角点未被抑制，干扰残差场并影响优化收敛"
           ]
         },
         {
@@ -115,7 +115,7 @@ const projectDetailById = {
             "100.0 %",
             { text: "5.655 m", className: "col-num val-rmse" },
             "1.919 m",
-            "无掩膜且无分类过滤，217 个杂乱角点导致几何优化完全失真"
+            "无掩膜与分类过滤时杂乱角点较多，导致几何解算偏差较大"
           ]
         },
         {
@@ -129,11 +129,11 @@ const projectDetailById = {
             "100.0 %",
             { text: "3.21 × 10⁻⁴ m", className: "col-num" },
             "2.34 × 10⁻⁴ m",
-            "具备可行性，但对共线点与图像噪声敏感，误差比射线夹角法大一个数量级"
+            "具备可行性，但对共线点与图像噪声敏感，误差略大于射线夹角法"
           ]
         }
       ],
-      footnote: "注：↓ 表示数值越小越优；仿真基准中世界真值已知，Ours-Full 重构误差达 0.011 mm；Ablation-2 与 Ablation-3 说明了 CNN 语义标注与 NMS 抑制对非线性优化的决定性作用。"
+      footnote: "注：↓ 表示数值越小越优；仿真基准中世界真值已知，Ablation-2 与 Ablation-3 说明了 CNN 语义分类与 NMS 抑制对几何优化收敛的重要作用。"
     },
     sotaTable: {
       caption: "表 2：单目视觉位姿求解算法在共线/结构化参照物场景下的横向特性对比",
@@ -186,7 +186,7 @@ const projectDetailById = {
             "低 (平面退化+污损易丢)",
             "自带二维码编码",
             "O(1) 快速",
-            "抗污损能力极差",
+            "较弱 (易受环境污损)",
             "否 (依赖平面对角)",
             "ICRA / IROS"
           ]
@@ -194,10 +194,10 @@ const projectDetailById = {
         {
           cells: [
             { text: "PoseNet 端到端回归" },
-            "极低 (黑盒泛化差)",
+            "较低 (泛化性受限)",
             "隐式端到端",
             "神经网络推理",
-            "极差 (跨域剧烈抖动)",
+            "较弱 (跨域易产生抖动)",
             "否 (直接回归 7-DoF)",
             "ICCV 2015"
           ]
@@ -205,10 +205,10 @@ const projectDetailById = {
         {
           cells: [
             { text: "Ours (级联CNN + 射线夹角 NLLS)", isOurs: true },
-            "极强 (夹角不变性克服共线退化)",
+            "良好 (夹角不变性缓解退化)",
             "9分类 CNN 自动关联",
             "O(n²) 极小规模残差优化",
-            "极高 (LM+TRF 多初值保障)",
+            "良好 (LM+TRF 多初值保障)",
             "是 (位置与旋转显式解耦)",
             "Ours (本系统)"
           ],
@@ -233,8 +233,8 @@ const projectDetailById = {
           contributions: [
             "提出五级级联式结构化关键点感知流水线：融合 YOLO 目标检测（ROI 掩膜生成，搜索空间缩小 95%+）、Harris 几何角点提取与轻量 9 分类 Patch CNN（SimpleCNN），在 1377 张样本数据集上实现 100% 的角点语义识别率，全自动完成 2D 像素与 3D 世界点的映射关联，无需任何手工匹配或人工标志码。",
             "创立基于反投影射线夹角不变性的位置解算理论：将 2D 像点反投影为归一化单位方向向量，推导了两两光线夹角与三维世界点方向夹角的守恒约束，将极易发生共线奇异退化的 6-DoF PnP 估计解耦为仅关于相机三维坐标 $C$ 的 3-DoF 非线性最小二乘优化，从数学机理上根除了共线退化问题。",
-            "设计多候选初值生成与 LM/TRF 双优化求解机制：融合历史时序滤波先验 $C_{t-1}$、PnP 粗估计与空间点几何中心构建候选初值池，并发调用 Levenberg-Marquardt 与 Trust Region Reflective 双求解器进行最优残差收敛选取，保证了 100% 的求解成功率与亚毫米级解算精度。",
-            "完成全栈工业级桌面系统研发与海上实测验证：开发了基于 PyQt5 与 SQLite 的工业级视觉定位工作站软件，支持相机标定、多场景世界点云管理、实时 26 FPS 流水线阶段质检与轨迹绘制；大连沿海实测试验达成 10–15 cm RMSE 综合定位精度，获辽宁省创新创业年会推荐与国家计算机软件著作权登记。"
+            "设计多候选初值生成与 LM/TRF 双优化求解机制：融合历史时序滤波先验 $C_{t-1}$、PnP 粗估计与空间点几何中心构建候选初值池，并发调用 Levenberg-Marquardt 与 Trust Region Reflective 双求解器进行最优残差收敛选取，保证了 100% 的求解成功率与高精度几何解算。",
+            "完成系统原型研发与海上实测验证：开发了基于 PyQt5 与 SQLite 的视觉定位分析桌面软件，支持相机标定、多场景世界点云管理、实时 26 FPS 流水线阶段质检与轨迹绘制；大连沿海实测试验达成 10–15 cm RMSE 综合定位精度，获辽宁省创新创业年会推荐与国家计算机软件著作权登记。"
           ]
         },
         {
@@ -250,7 +250,7 @@ const projectDetailById = {
           math: {
             title: "射线夹角不变性与非线性最小二乘残差优化模型 (Ray-Angle NLLS Model)",
             formula: "\\min_{C \\in \\mathbb{R}^3} \\mathcal{F}(C) = \\frac{1}{2} \\sum_{1 \\le i < j \\le N} \\left[ \\arccos\\left( \\frac{(P_i - C) \\cdot (P_j - C)}{\\|P_i - C\\| \\|P_j - C\\|} \\right) - \\arccos\\left( \\frac{K^{-1} \\tilde{u}_i \\cdot K^{-1} \\tilde{u}_j}{\\|K^{-1} \\tilde{u}_i\\| \\|K^{-1} \\tilde{u}_j\\|} \\right) \\right]^2",
-            explanation: "其中 $\\tilde{u}_i = [u_i^*, v_i^*, 1]^T$ 为第 $i$ 个角点的齐次像素坐标，$K$ 为相机内参矩阵，$P_i \\in \\mathbb{R}^3$ 为第 $i$ 个关键点在世界坐标系下的已知三维位置，$C = (X_c, Y_c, Z_c)^T$ 为待求解的相机光学中心三维世界坐标。该模型将复杂的 6-DoF 旋转/平移耦合估计解耦为仅关于位置 $C$ 的 3-DoF 几何残差优化，彻底消除了共线点在旋转参数估计上的病态矩阵奇异退化。"
+            explanation: "其中 $\\tilde{u}_i = [u_i^*, v_i^*, 1]^T$ 为第 $i$ 个角点的齐次像素坐标，$K$ 为相机内参矩阵，$P_i \\in \\mathbb{R}^3$ 为第 $i$ 个关键点在世界坐标系下的已知三维位置，$C = (X_c, Y_c, Z_c)^T$ 为待求解的相机光学中心三维世界坐标。该模型将复杂的 6-DoF 旋转/平移耦合估计解耦为仅关于位置 $C$ 的 3-DoF 几何残差优化，有效缓解了共线点在旋转参数估计上的病态矩阵奇异退化。"
           },
           figure: {
             src: "/projects/vision-positioning/figure_geometric_model.png",
@@ -290,7 +290,7 @@ const projectDetailById = {
             },
             {
               title: "3.4 分类别非极大值抑制 (Class-wise NMS)",
-              content: "移除所有被预测为背景类（class=8）以及最大类别置信度低于阈值（τ_conf=0.85）的候选点。随后对保留的角点按类别分组，在每一个类别分组内部，按照 Harris 响应值从高到低排序，贪心地选取响应最强的角点，并抑制其空间邻域半径（r_nms=25 px）内的其他同类别候选点，彻底消除局部多重密集响应。"
+              content: "移除所有被预测为背景类（class=8）以及最大类别置信度低于阈值（τ_conf=0.85）的候选点。随后对保留的角点按类别分组，在每一个类别分组内部，按照 Harris 响应值从高到低排序，贪心地选取响应最强的角点，并抑制其空间邻域半径（r_nms=25 px）内的其他同类别候选点，有效消除局部多重密集响应。"
             },
             {
               title: "3.5 亚像素角点梯度正交精炼 (Sub-pixel Corner Refinement)",
@@ -304,7 +304,7 @@ const projectDetailById = {
           kicker: "Multi-Start Optimization & Industrial Desktop Suite",
           title: "优化求解：多初值并发策略、双求解器保障与工业级桌面系统",
           paragraphs: [
-            "射线夹角残差目标函数 $\\mathcal{F}(C)$ 属于非线性、非凸优化问题，在复杂空间几何布局下可能存在局部极小值甚至鞍点。为了确保优化求解过程具备 100% 的全局收敛可靠性与毫秒级求解效率，本文提出了多候选初值生成策略与 Levenberg-Marquardt (LM) / Trust Region Reflective (TRF) 双求解器协同机制。"
+            "射线夹角残差目标函数 $\\mathcal{F}(C)$ 属于非线性、非凸优化问题，在复杂空间几何布局下可能存在局部极小值甚至鞍点。为了确保优化求解过程具备 100% 的全局收敛可靠性与快速高效求解，本文提出了多候选初值生成策略与 Levenberg-Marquardt (LM) / Trust Region Reflective (TRF) 双求解器协同机制。"
           ],
           math: {
             title: "多初值生成与双求解器联合优化准则",
@@ -318,11 +318,11 @@ const projectDetailById = {
             },
             {
               title: "LM / TRF 双求解器自适应容错 (Dual-Solver Optimization & Fallback)",
-              detail: "针对不同初值分别调用 LM（擅长无约束非线性最小二乘二次收敛）与 TRF（擅长具有空间包围盒边界的信赖域反射优化）两种求解器。若优化收敛且残差低于容差阈值，则选取最优残差解；若发生罕见极值退化，系统自动平滑回退至 PnP 粗估计或卡尔曼滤波预测值，构建了绝对不会崩溃的工业级高可用闭环。"
+              detail: "针对不同初值分别调用 LM（擅长无约束非线性最小二乘二次收敛）与 TRF（擅长具有空间包围盒边界的信赖域反射优化）两种求解器。若优化收敛且残差低于容差阈值，则选取最优残差解；若发生罕见极值退化，系统自动平滑回退至 PnP 粗估计或卡尔曼滤波预测值，构建了具备平滑容错机制的高可用容错闭环。"
             },
             {
               title: "工业级 PyQt5 桌面定位系统 (Industrial Desktop Application)",
-              detail: "开发了基于 PyQt5 的全功能桌面应用程序，集成 RTSP 网络流/本地视频采集、相机内参/畸变矩阵数据库管理（SQLite）、3D 世界点云交互式编辑预览、实时 X/Y/Z 坐标曲线绘制（pyqtgraph）以及 6 阶段流水线中间质检窗口（Stage Previewer），实现了科研算法向生产力工具的完整转化。"
+              detail: "开发了基于 PyQt5 的全功能桌面应用程序，集成 RTSP 网络流/本地视频采集、相机内参/畸变矩阵数据库管理（SQLite）、3D 世界点云交互式编辑预览、实时 X/Y/Z 坐标曲线绘制（pyqtgraph）以及 6 阶段流水线中间质检窗口（Stage Previewer），为算法验证与现场调试提供了交互式工具支持。"
             }
           ]
         },
@@ -347,8 +347,8 @@ const projectDetailById = {
             caption: "统计柱状图清晰揭示了掩膜与 NMS 在过滤背景噪点（从 235.5 压缩至 4.0）中的核心作用，以及无后处理时冗余角点剧增（75.0 个）对解算造成的严重干扰。"
           },
           sotaTitle: "关键点检测各阶段对定位精度的决定性影响分析",
-          sotaNarrative: "消融实验结果（见表 1）揭示了感知流水线与几何求解器各组件之间的紧密协同关系：(1) Ours-Full 取得了 1.10×10⁻⁵ m 的极高几何解算精度，成功率达 100%；(2) 当移除 CNN 语义分类时（Ablation-2），由于缺乏角点语义 ID，启发式匹配发生严重错配，导致平均位置误差暴增至 5.380 m（放大 48.9 万倍），直接证实了语义识别是 2D-3D 几何映射的生命线；(3) 当移除 NMS 与亚像素精炼时（Ablation-3），由于同一角点周围存在 75+ 个冗余候选点，残差场被密集聚类的非正交梯度严重扭曲，平均误差达 6.132 m；(4) 纯 Harris 基线（Ablation-4）产生 217 个杂乱无序角点，定位误差达 5.655 m；(5) 相比传统 PnP 算法（3.21×10⁻⁴ m），射线夹角法将平均误差降低了一个数量级，展现出卓越的抗几何退化与抗噪能力。",
-          scatterDiscussion: "在数据集构建与训练评测方面，Patch CNN 分类器在 1377 张样本（验证集 276 张）上实现了全部 8 个空间角点类别与 1 个背景类的 100% Precision、100% Recall 与 100% F1-Score，混淆矩阵呈现完美的对角线分布，完全杜绝了关键点物理身份错判；YOLO 检测模型在 640×640 分辨率下训练收敛平稳，验证集 mAP@0.5 超过 99.2%（见下方 Figure 5 训练全景面板）。",
+          sotaNarrative: "消融实验结果（见表 1）揭示了感知流水线与几何求解器各组件之间的紧密协同关系：(1) Ours-Full 取得了 1.10×10⁻⁵ m 的极高几何解算精度，成功率达 100%；(2) 当移除 CNN 语义分类时（Ablation-2），由于缺乏角点语义 ID，启发式匹配发生严重错配，导致平均位置误差增至 5.380 m，证实了语义识别对 2D-3D 几何关联的关键作用；(3) 当移除 NMS 与亚像素精炼时（Ablation-3），由于同一角点周围存在 75+ 个冗余候选点，残差场被密集聚类的非正交梯度严重扭曲，平均误差达 6.132 m；(4) 纯 Harris 基线（Ablation-4）产生 217 个杂乱无序角点，定位误差达 5.655 m；(5) 相比传统 PnP 算法（3.21×10⁻⁴ m），射线夹角法将平均误差降低了一个数量级，展现出卓越的抗几何退化与抗噪能力。",
+          scatterDiscussion: "在数据集构建与训练评测方面，Patch CNN 分类器在 1377 张样本（验证集 276 张）上实现了全部 8 个空间角点类别与 1 个背景类的 100% Precision、100% Recall 与 100% F1-Score，混淆矩阵呈现完美的对角线分布，有效避免了关键点物理身份错判；YOLO 检测模型在 640×640 分辨率下训练收敛平稳，验证集 mAP@0.5 超过 99.2%（见下方 Figure 5 训练全景面板）。",
           scatterFigures: [
             {
               src: "/projects/vision-positioning/figure_training_panel.png",
@@ -411,7 +411,7 @@ const projectDetailById = {
             },
             {
               id: "case-3",
-              tag: "Case Study 3 · 工业级系统架构与分层设计",
+              tag: "Case Study 3 · 系统软件架构与分层设计",
               dataset: "System Engineering Blueprint",
               figure: {
                 src: "/projects/vision-positioning/system_architecture_blue.png",
@@ -534,7 +534,7 @@ const projectDetailById = {
       },
       {
         src: "/projects/vision-positioning/system_architecture_blue.png",
-        caption: "工业级单目视觉定位系统软硬件分层架构蓝图（学术深蓝版）",
+        caption: "单目视觉定位系统分层软件架构蓝图",
         aspect: "wide"
       },
       {
@@ -580,9 +580,9 @@ const projectDetailById = {
     ],
     highlights: [
       "级联感知网络：YOLO ROI 提取 + Harris 角点检测 + 9分类 Patch CNN（100% 验证准确率）+ NMS 亚像素精炼",
-      "非线性几何优化：推导射线夹角不变性守恒方程，解耦 6-DoF 姿态，彻底消除共线细长标杆退化奇异性",
+      "非线性几何优化：推导射线夹角不变性守恒方程，解耦 6-DoF 姿态，有效消除共线细长标杆退化奇异性",
       "多初值双求解器：融合时序滤波、PnP 粗解与空间重心先验，LM 与 TRF 双引擎并发保证 100% 全局收敛",
-      "全栈工业系统与海试：开发 PyQt5/SQLite 桌面工作站，边缘 Jetson Orin 达 26 FPS，大连沿海实测 10–15cm RMSE",
+      "系统实现与海试验证：开发 PyQt5/SQLite 桌面工作站，边缘 Jetson Orin 达 26 FPS，大连沿海实测 10–15cm RMSE",
       "学术与知识产权：辽宁省大学生创新年会推荐成果 · iCAN/金砖大赛国家三等奖 · 国家计算机软件著作权登记"
     ],
     background: "在近海渔业捕捞、养殖网箱巡检、港口堆场以及室内/水下无 GPS 环境中，传统卫星导航易受遮挡、多径干扰而失效；而传统视觉定位（如 AprilTag/ArUco）易受海洋腐蚀与污损。利用场景中天然或预设的结构化杆状物作为几何锚点是一种低成本高可行性方案，但细长共线杆体在传统 PnP 算法中极易诱发共线退化奇异性，导致旋转多义性与数米级位置漂移。因此亟需一套兼具强抗退化性、高精度与抗复杂光照噪声的实时单目视觉定位系统。",
@@ -791,7 +791,7 @@ const projectDetailById = {
             "更为严重但常被忽视的问题是「高斯积分质量漂移」：传统连续高斯核在图像边界或切片边缘被硬截断时，截断区域的积分质量会直接丢失，导致真实标注人数与标签密度图积分不一致（ΣD < N）。为此，本文提出了 YOLO-PGMD 架构：融合 YOLO 浅层与中层多尺度表征，全程维持 Stride-4（160×160）稠密特征流，通过解耦的前景概率学习引导空间注意力，并引入数学上严格质量守恒的高斯标签生成算法，实现高精度的稠密人群密度估计与计数。"
           ],
           contributions: [
-            "提出严格积分守恒高斯标签生成算法（Mass-Conserved Gaussian Generation）：通过局部重归一化彻底消除边界截断与多头重叠带来的质量漂移，在数据生成层强制实现连续密度积分与真值人数绝对相等（ΣD = N）。",
+            "提出严格积分守恒高斯标签生成算法（Mass-Conserved Gaussian Generation）：通过局部重归一化有效消除边界截断与多头重叠带来的质量漂移，在数据生成层强制实现连续密度积分与真值人数绝对相等（ΣD = N）。",
             "设计概率解耦与空间注意力机制（PG-Attention）：将二分类前景似然学习与密度图回归解耦，由 BCE+Dice 联合训练的概率先验引导 ECA 通道加权特征聚焦真实人群区域，显著抑制复杂背景虚警。",
             "构建全程 Stride-4 高分辨率特征流水线与 MSR 膨胀细化网络：融合 P2/P3/P4 多尺度特征，配合膨胀率为 1/2/3 的三级多尺度残差卷积，在不降低空间分辨率的前提下极大拓展有效感受野。",
             "四项任务分层复合损失与 2D 余弦平滑推理：结合像素级概率似然、Smooth L1 密度、全图相对计数（NAE）及 4×4 局部网格约束，在四大国际公开基准（ShanghaiTech A/B, UCF-QNRF, JHU-Crowd, UCF-CC-50）上取得卓越表现（ShanghaiTech Part A 达 48.13 MAE / 74.17 RMSE）。"
@@ -870,7 +870,7 @@ const projectDetailById = {
             },
             {
               title: "重叠瓦片滑窗与 2D 余弦平滑拼接 (Tiled Cosine Inference)",
-              detail: "针对测试集中数百万乃至千万像素的超高分辨率图像，推理阶段采用 640×640 滑动窗口，设置 128px 空间重叠（步长 512）。重叠区域使用二维余弦衰减窗口权重 $w(u,v) = \\frac{1}{4}[1+\\cos(2\\pi u/W)][1+\\cos(2\\pi v/H)]$ 进行加权融合：$D_{\\text{final}} = \\frac{\\sum w_k D_k}{\\sum w_k + \\epsilon}$，彻底消除了边缘硬拼接产生的十字网格伪影。"
+              detail: "针对测试集中数百万乃至千万像素的超高分辨率图像，推理阶段采用 640×640 滑动窗口，设置 128px 空间重叠（步长 512）。重叠区域使用二维余弦衰减窗口权重 $w(u,v) = \\frac{1}{4}[1+\\cos(2\\pi u/W)][1+\\cos(2\\pi v/H)]$ 进行加权融合：$D_{\\text{final}} = \\frac{\\sum w_k D_k}{\\sum w_k + \\epsilon}$，有效缓解了边缘硬拼接产生的十字网格伪影。"
             }
           ]
         },
