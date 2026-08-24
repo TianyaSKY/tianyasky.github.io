@@ -1,5 +1,5 @@
 import React from 'react';
-import { engineeringProjects } from '../data/personalData';
+import { engineeringProjects } from '../data/projectDetails';
 import { Cpu, ExternalLink } from 'lucide-react';
 
 export default function Engineering() {

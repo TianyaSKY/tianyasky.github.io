@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ZoomIn, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import AccessibleDialog from '../AccessibleDialog';
 
 export default function ProjectGallery({ project }) {
   const items = project.gallery || [];
@@ -37,12 +38,18 @@ export default function ProjectGallery({ project }) {
             <figure
               key={src + i}
               className={`gallery-figure ${isWide ? 'gallery-figure-wide' : ''}`}
-              onClick={() => setOpen({ src, caption })}
               title="点击查看大图"
             >
-              <div className="gallery-figure-inner">
-                <img src={src} alt={caption || `${project.title} ${i + 1}`} loading="lazy" />
-              </div>
+              <button
+                type="button"
+                className="figure-zoom-trigger"
+                aria-label={`放大查看：${caption || `${project.title} ${i + 1}`}`}
+                onClick={() => setOpen({ src, caption })}
+              >
+                <span className="gallery-figure-inner">
+                  <img src={src} alt={caption || `${project.title} ${i + 1}`} loading="lazy" />
+                </span>
+              </button>
               <figcaption>
                 <span className="fig-tag">FIG · 0{i + 1}</span>
                 <span className="fig-caption">{caption || `${project.id} · fig ${i + 1}`}</span>
@@ -53,9 +60,13 @@ export default function ProjectGallery({ project }) {
       </div>
 
       {open && (
-        <div className="inline-demo-modal" onClick={() => setOpen(null)} role="dialog" aria-label={open.caption}>
-          <div className="inline-demo-image" onClick={(e) => e.stopPropagation()}>
-            <button className="inline-demo-close" onClick={() => setOpen(null)}>✕ 关闭</button>
+        <AccessibleDialog
+          overlayClassName="inline-demo-modal"
+          dialogClassName="inline-demo-image"
+          label={open.caption}
+          onClose={() => setOpen(null)}
+        >
+            <button className="inline-demo-close" data-dialog-initial-focus onClick={() => setOpen(null)}>✕ 关闭</button>
             <div className="inline-demo-image-viewport">
               <img src={open.src} alt={open.caption || ''} />
             </div>
@@ -65,8 +76,7 @@ export default function ProjectGallery({ project }) {
                 <ExternalLink size={14} /> 原图直达
               </a>
             </div>
-          </div>
-        </div>
+        </AccessibleDialog>
       )}
     </section>
   );

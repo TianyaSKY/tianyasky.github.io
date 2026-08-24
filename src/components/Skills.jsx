@@ -27,24 +27,27 @@ export default function Skills() {
               const id = `${cat.id}-${sk.name}`;
               const open = openId === id;
               return (
-                <div
+                <button
                   key={sk.name}
+                  type="button"
                   className="skill-item"
                   onClick={() => setOpenId(open ? null : id)}
+                  aria-expanded={open}
+                  aria-controls={`${id}-details`}
                   style={{ flexDirection: 'column', alignItems: 'flex-start', cursor: 'pointer', gap: 4 }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                  <span style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                     <span className="skill-name">{sk.name}</span>
                     <span className="skill-detail">{sk.level || 'PROFICIENT'}</span>
-                  </div>
+                  </span>
                   {open && sk.projects && (
-                    <div style={{ marginTop: 6, fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
+                    <span id={`${id}-details`} style={{ marginTop: 6, fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
                       {sk.projects.split('|').map((p, i) => (
-                        <div key={i}>· {p.trim()}</div>
+                        <span key={i} style={{ display: 'block' }}>· {p.trim()}</span>
                       ))}
-                    </div>
+                    </span>
                   )}
-                </div>
+                </button>
               );
             })}
           </div>

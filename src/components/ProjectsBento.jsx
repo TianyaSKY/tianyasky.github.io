@@ -1,20 +1,19 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { projects } from '../data/personalData';
-import { ArrowUpRight, Github, PlayCircle } from 'lucide-react';
+import { projectCatalog } from '../data/projectCatalog';
 
-export default function ProjectsBento({ standalone = false }) {
+export default function ProjectsBento() {
   const [filter, setFilter] = useState('all');
 
   const filterTabs = useMemo(() => [
-    { id: 'all', label: 'All', count: projects.length },
-    { id: 'research', label: 'Research', count: projects.filter((p) => p.type === 'research').length },
-    { id: 'engineering', label: 'Engineering', count: projects.filter((p) => p.type === 'engineering').length }
+    { id: 'all', label: 'All', count: projectCatalog.length },
+    { id: 'research', label: 'Research', count: projectCatalog.filter((p) => p.type === 'research').length },
+    { id: 'engineering', label: 'Engineering', count: projectCatalog.filter((p) => p.type === 'engineering').length }
   ], []);
 
   const list = useMemo(() => {
-    if (filter === 'all') return projects;
-    return projects.filter((p) => p.type === filter);
+    if (filter === 'all') return projectCatalog;
+    return projectCatalog.filter((p) => p.type === filter);
   }, [filter]);
 
   return (
@@ -23,7 +22,7 @@ export default function ProjectsBento({ standalone = false }) {
         <div className="bento-header-text">
           <div className="kicker">Featured · Index</div>
           <h2 className="section-title">
-            精选项目 / <em>{projects.length} case studies</em>
+            精选项目 / <em>{projectCatalog.length} case studies</em>
           </h2>
           <p className="section-desc">
             精选四项前沿科研（单目几何解算、YOLO-PGMD 概率引导人群计数、Qwen-27B 风格微调、PPO 自动驾驶）与三项系统工程（AI Workspace、推荐系统链路、Docker 安全沙箱），不只展示结果，也拆解问题定义、关键数据流、技术边界与下一步。
@@ -56,14 +55,14 @@ export default function ProjectsBento({ standalone = false }) {
 
       <div className={`bento-grid ${list.length <= 4 ? 'cols-auto' : ''}`}>
         {list.map((p, idx) => (
-          <ProjectCard key={p.id} project={p} indexInList={idx} totalCount={list.length} />
+          <ProjectCard key={p.id} project={p} indexInList={idx} />
         ))}
       </div>
     </div>
   );
 }
 
-function ProjectCard({ project, indexInList, totalCount }) {
+function ProjectCard({ project, indexInList }) {
   const layout =
     project.id === 'vision-positioning' ? 'feature'
     : project.id === 'crowd-sigmod' ? 'wide'
