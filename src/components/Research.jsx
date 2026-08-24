@@ -1,6 +1,5 @@
 import React from 'react';
 import { researchProjects } from '../data/projectDetails';
-import VisionSimulator from './VisionSimulator';
 import SciFiTerminal from './SciFiTerminal';
 import { Microscope, ExternalLink, Sparkles } from 'lucide-react';
 
@@ -80,7 +79,7 @@ export default function Research() {
               </div>
             )}
 
-            {proj.hasVisionDemo && <VisionSimulator />}
+
 
             {proj.hasTerminalSim && <SciFiTerminal />}
           </div>

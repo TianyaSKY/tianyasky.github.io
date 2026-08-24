@@ -1,6 +1,6 @@
 // Search dataset for Quick Search Command Palette (⌘K)
 export const searchDataset = [
-  { type: "Research", title: "单目视觉定位系统", subtitle: "国家级大创 · 共线标志物几何解算", href: "/projects/vision-positioning" },
+  { type: "Research", title: "单目视觉三维坐标重建系统", subtitle: "级联神经网络 · 射线夹角几何约束 · 国家级大创论文", href: "/projects/vision-positioning" },
   { type: "Research", title: "YOLO-PGMD 人群计数系统", subtitle: "概率引导注意力 · 积分守恒密度图 · 4 大 Benchmark", href: "/projects/crowd-sigmod" },
   { type: "Research", title: "科幻奇点 — 慈欣体生成", subtitle: "Qwen3.6-27B · 4bit QLoRA 微调", href: "/projects/cixin-singularity" },
   { type: "Research", title: "3D 赛车自动驾驶系统", subtitle: "Gymnasium · PPO · 9 向雷达", href: "/projects/rl-racing" },

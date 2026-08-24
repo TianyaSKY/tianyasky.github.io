@@ -1,0 +1,387 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 960" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;">
+  <defs>
+    <filter id="shadow-card" x="-4%" y="-4%" width="108%" height="112%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <filter id="shadow-hero" x="-3%" y="-4%" width="106%" height="112%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.09"/>
+    </filter>
+
+    <linearGradient id="blue-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E40AF" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+    <linearGradient id="teal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F766E" />
+      <stop offset="100%" stop-color="#14B8A6" />
+    </linearGradient>
+    <linearGradient id="amber-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B45309" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+    <linearGradient id="emerald-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2563EB" />
+    </marker>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0D9488" />
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#D97706" />
+    </marker>
+    <marker id="arr-emerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#059669" />
+    </marker>
+  </defs>
+
+  <!-- Title Banner -->
+  <g transform="translate(30, 20)">
+    <rect width="1440" height="64" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow-hero)"/>
+    <text x="720" y="29" font-size="18" font-weight="700" fill="#0F172A" text-anchor="middle" letter-spacing="0.5">Figure 2 · 前端五级级联视觉感知与后端射线夹角几何解算整体系统流水线</text>
+    <text x="720" y="50" font-size="11.5" font-weight="500" fill="#64748B" text-anchor="middle">End-to-End Monocular Pipeline: Five-Stage Cascaded Visual Perception &amp; Ray-Angle Invariant Nonlinear Optimization</text>
+  </g>
+
+  <!-- ==================== PART A: 前端五级级联视觉感知流水线 ==================== -->
+  <g transform="translate(30, 100)">
+    <rect width="1440" height="385" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="0" y="0" width="1440" height="38" rx="12" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="700" fill="#1E40AF">PART A · 前端五级级联视觉感知流水线 (Five-Stage Cascaded Visual Perception Pipeline)</text>
+    <text x="1420" y="24" font-size="11" font-weight="600" fill="#2563EB" text-anchor="end">目标：从高分辨原图中提取纯净 2D 亚像素关键点与语义 ID，消除 2D-3D 关联歧义</text>
+
+    <!-- Stage 0: Raw Input -->
+    <g transform="translate(20, 55)">
+      <rect width="180" height="290" rx="10" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5" filter="url(#shadow-card)"/>
+      <rect x="0" y="0" width="180" height="32" rx="10" fill="#DBEAFE"/>
+      <text x="12" y="21" font-size="11.5" font-weight="700" fill="#1E3A8A">00 · 原始图像输入</text>
+      <text x="12" y="55" font-size="10.5" font-weight="700" fill="#0F172A">图像尺寸 / 采样</text>
+      <text x="12" y="73" font-size="9.5" fill="#475569">• Sony α6400 实拍原图</text>
+      <text x="12" y="89" font-size="9.5" fill="#475569">• 分辨率: 6000 × 4000</text>
+      <text x="12" y="105" font-size="9.5" fill="#475569">• RTSP 26 FPS 实时视频流</text>
+      
+      <!-- Visual Illustration of Camera Image -->
+      <rect x="15" y="125" width="150" height="110" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+      <line x1="90" y1="135" x2="90" y2="225" stroke="#3B82F6" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="90" cy="145" r="4" fill="#EF4444"/>
+      <circle cx="90" cy="165" r="4" fill="#F59E0B"/>
+      <circle cx="90" cy="195" r="4" fill="#10B981"/>
+      <circle cx="90" cy="215" r="4" fill="#6366F1"/>
+      <text x="90" y="248" font-size="9" fill="#64748B" text-anchor="middle">视野内含杆状参照物</text>
+      <rect x="15" y="262" width="150" height="20" rx="4" fill="#EFF6FF"/>
+      <text x="90" y="276" font-size="9" font-weight="600" fill="#2563EB" text-anchor="middle">背景含海水/强光杂波</text>
+    </g>
+
+    <!-- Connector 0 -> 1 -->
+    <path d="M 200 200 L 225 200" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+
+    <!-- Stage 1: YOLO ROI Mask -->
+    <g transform="translate(230, 55)">
+      <rect width="210" height="290" rx="10" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" filter="url(#shadow-card)"/>
+      <rect x="0" y="0" width="210" height="32" rx="10" fill="#EFF6FF"/>
+      <text x="12" y="21" font-size="11.5" font-weight="700" fill="#1E3A8A">Stage 1 · YOLO 区域粗检</text>
+      <text x="12" y="55" font-size="10.5" font-weight="700" fill="#0F172A">标杆 ROI 提取与掩膜生成</text>
+      <text x="12" y="73" font-size="9.5" fill="#475569">• 微调轻量级 POLES.pt</text>
+      <text x="12" y="89" font-size="9.5" fill="#475569">• 推理尺度: 640 × 640</text>
+      <text x="12" y="105" font-size="9.5" fill="#475569">• 快速生成二值化 ROI Mask</text>
+
+      <!-- Mask Graphic -->
+      <rect x="15" y="125" width="180" height="110" rx="6" fill="#1E293B"/>
+      <rect x="70" y="130" width="40" height="100" fill="#FFFFFF" opacity="0.9"/>
+      <text x="90" y="185" font-size="10" font-weight="700" fill="#0F172A" text-anchor="middle">ROI</text>
+      <text x="105" y="248" font-size="9" fill="#64748B" text-anchor="middle">二值化感兴趣区域</text>
+      
+      <rect x="15" y="262" width="180" height="20" rx="4" fill="#EFF6FF"/>
+      <text x="105" y="276" font-size="9" font-weight="700" fill="#2563EB" text-anchor="middle">压缩搜索空间 &gt; 95%</text>
+    </g>
+
+    <!-- Connector 1 -> 2 -->
+    <path d="M 440 200 L 465 200" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+
+    <!-- Stage 2: Harris Corners -->
+    <g transform="translate(470, 55)">
+      <rect width="210" height="290" rx="10" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" filter="url(#shadow-card)"/>
+      <rect x="0" y="0" width="210" height="32" rx="10" fill="#EFF6FF"/>
+      <text x="12" y="21" font-size="11.5" font-weight="700" fill="#1E3A8A">Stage 2 · Harris 候选角点</text>
+      <text x="12" y="55" font-size="10.5" font-weight="700" fill="#0F172A">掩膜约束几何角点提取</text>
+      <text x="12" y="73" font-size="9.5" fill="#475569">• 自相关矩阵 M_H 计算</text>
+      <text x="12" y="89" font-size="9.5" fill="#475569">• R = det - 0.10·tr² ≥ 0.03</text>
+      <text x="12" y="105" font-size="9.5" fill="#475569">• 仅在 ROI 内部高灵敏扫描</text>
+
+      <!-- Corner Graphic -->
+      <rect x="15" y="125" width="180" height="110" rx="6" fill="#F8FAFC" stroke="#CBD5E1"/>
+      <rect x="70" y="130" width="40" height="100" fill="#E2E8F0"/>
+      <!-- Detected corner dots -->
+      <circle cx="70" cy="140" r="3.5" fill="#EF4444"/>
+      <circle cx="110" cy="140" r="3.5" fill="#EF4444"/>
+      <circle cx="70" cy="160" r="3.5" fill="#EF4444"/>
+      <circle cx="110" cy="160" r="3.5" fill="#EF4444"/>
+      <circle cx="70" cy="200" r="3.5" fill="#EF4444"/>
+      <circle cx="110" cy="200" r="3.5" fill="#EF4444"/>
+      <circle cx="70" cy="220" r="3.5" fill="#EF4444"/>
+      <circle cx="110" cy="220" r="3.5" fill="#EF4444"/>
+      <text x="105" y="248" font-size="9" fill="#64748B" text-anchor="middle">高灵敏捕获 235.5 候选点</text>
+      
+      <rect x="15" y="262" width="180" height="20" rx="4" fill="#EFF6FF"/>
+      <text x="105" y="276" font-size="9" font-weight="700" fill="#2563EB" text-anchor="middle">高召回保证不漏检特征点</text>
+    </g>
+
+    <!-- Connector 2 -> 3 -->
+    <path d="M 680 200 L 705 200" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+
+    <!-- Stage 3: Patch CNN (Hero) -->
+    <g transform="translate(710, 55)">
+      <rect width="250" height="290" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#shadow-hero)"/>
+      <rect x="0" y="0" width="250" height="32" rx="10" fill="#DBEAFE"/>
+      <text x="12" y="21" font-size="11.5" font-weight="700" fill="#1E40AF">Stage 3 · 9 分类 Patch CNN</text>
+      <text x="12" y="55" font-size="10.5" font-weight="700" fill="#1E3A8A">64×64 局部块语义判别</text>
+      <text x="12" y="73" font-size="9.5" fill="#334155">• SimpleCNN 3阶 Conv+Pool+FC</text>
+      <text x="12" y="89" font-size="9.5" fill="#334155">• 通道数: 16 → 32 → 64 → 4096 → 9</text>
+      <text x="12" y="105" font-size="9.5" font-weight="700" fill="#059669">• 8 类物理角点 + 1 类背景 (100%)</text>
+
+      <!-- CNN Architecture Schematic -->
+      <rect x="15" y="120" width="220" height="115" rx="6" fill="#FFFFFF" stroke="#93C5FD"/>
+      <!-- Patch Box -->
+      <rect x="25" y="132" width="28" height="28" fill="#FDE68A" stroke="#D97706" stroke-width="1"/>
+      <text x="39" y="172" font-size="8" fill="#78350F" text-anchor="middle">64×64</text>
+      <!-- Arrow -->
+      <path d="M 57 146 L 70 146" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+      <!-- Conv Blocks -->
+      <rect x="73" y="128" width="18" height="36" fill="#93C5FD" stroke="#2563EB" stroke-width="1"/>
+      <rect x="95" y="133" width="18" height="26" fill="#60A5FA" stroke="#2563EB" stroke-width="1"/>
+      <rect x="117" y="138" width="18" height="16" fill="#3B82F6" stroke="#1D4ED8" stroke-width="1"/>
+      <!-- FC + Softmax -->
+      <path d="M 139 146 L 152 146" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+      <rect x="155" y="128" width="14" height="36" fill="#C7D2FE" stroke="#6366F1" stroke-width="1"/>
+      <rect x="175" y="128" width="50" height="98" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <text x="200" y="142" font-size="8" font-weight="700" fill="#047857" text-anchor="middle">0~3: 上层</text>
+      <text x="200" y="156" font-size="8" font-weight="700" fill="#0F766E" text-anchor="middle">4~7: 下层</text>
+      <text x="200" y="170" font-size="8" font-weight="700" fill="#E11D48" text-anchor="middle">8: 背景噪点</text>
+      <text x="200" y="195" font-size="8.5" font-weight="700" fill="#2563EB" text-anchor="middle">Softmax</text>
+      <text x="200" y="212" font-size="8" font-weight="700" fill="#059669" text-anchor="middle">F1: 100%</text>
+
+      <rect x="15" y="262" width="220" height="20" rx="4" fill="#DCFCE7"/>
+      <text x="125" y="276" font-size="9" font-weight="700" fill="#059669" text-anchor="middle">彻底根除 2D-3D 数据映射歧义</text>
+    </g>
+
+    <!-- Connector 3 -> 4 -->
+    <path d="M 960 200 L 985 200" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+
+    <!-- Stage 4: Class-wise NMS -->
+    <g transform="translate(990, 55)">
+      <rect width="210" height="290" rx="10" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" filter="url(#shadow-card)"/>
+      <rect x="0" y="0" width="210" height="32" rx="10" fill="#EFF6FF"/>
+      <text x="12" y="21" font-size="11.5" font-weight="700" fill="#1E3A8A">Stage 4 · 类别 NMS 抑制</text>
+      <text x="12" y="55" font-size="10.5" font-weight="700" fill="#0F172A">去重过滤与空间抑制</text>
+      <text x="12" y="73" font-size="9.5" fill="#475569">• 剔除背景类 8 与低置信点</text>
+      <text x="12" y="89" font-size="9.5" fill="#475569">• 置信度阈值 τ_conf ≥ 0.85</text>
+      <text x="12" y="105" font-size="9.5" fill="#475569">• 同类空间半径 r_nms = 25px</text>
+
+      <!-- NMS Graphic -->
+      <rect x="15" y="125" width="180" height="110" rx="6" fill="#F8FAFC" stroke="#CBD5E1"/>
+      <circle cx="70" cy="180" r="18" fill="#FEE2E2" stroke="#EF4444" stroke-width="1" stroke-dasharray="3 2"/>
+      <circle cx="65" cy="176" r="3" fill="#94A3B8"/>
+      <circle cx="76" cy="184" r="3" fill="#94A3B8"/>
+      <circle cx="70" cy="180" r="4.5" fill="#10B981"/>
+      
+      <circle cx="130" cy="180" r="18" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1" stroke-dasharray="3 2"/>
+      <circle cx="126" cy="176" r="3" fill="#94A3B8"/>
+      <circle cx="134" cy="183" r="3" fill="#94A3B8"/>
+      <circle cx="130" cy="180" r="4.5" fill="#3B82F6"/>
+      <text x="105" y="248" font-size="9" fill="#64748B" text-anchor="middle">每类仅保留响应最高单点</text>
+
+      <rect x="15" y="262" width="180" height="20" rx="4" fill="#EFF6FF"/>
+      <text x="105" y="276" font-size="9" font-weight="700" fill="#2563EB" text-anchor="middle">点数精炼: 235.5 → 4.0 个</text>
+    </g>
+
+    <!-- Connector 4 -> 5 -->
+    <path d="M 1200 200 L 1225 200" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+
+    <!-- Stage 5: Subpixel Refinement -->
+    <g transform="translate(1230, 55)">
+      <rect width="190" height="290" rx="10" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" filter="url(#shadow-card)"/>
+      <rect x="0" y="0" width="190" height="32" rx="10" fill="#EFF6FF"/>
+      <text x="12" y="21" font-size="11.5" font-weight="700" fill="#1E3A8A">Stage 5 · 亚像素梯度精炼</text>
+      <text x="12" y="55" font-size="10.5" font-weight="700" fill="#0F172A">cornerSubPix 极值精确定位</text>
+      <text x="12" y="73" font-size="9.5" fill="#475569">• 邻域梯度正交方程组</text>
+      <text x="12" y="89" font-size="9.5" fill="#475569">• ∇I(q) · (q - p*) = 0</text>
+      <text x="12" y="105" font-size="9.5" fill="#475569">• 最小二乘正交迭代求解</text>
+
+      <!-- Subpixel Graphic -->
+      <rect x="15" y="125" width="160" height="110" rx="6" fill="#F8FAFC" stroke="#CBD5E1"/>
+      <!-- Grid -->
+      <line x1="55" y1="140" x2="55" y2="220" stroke="#E2E8F0" stroke-width="1"/>
+      <line x1="95" y1="140" x2="95" y2="220" stroke="#E2E8F0" stroke-width="1"/>
+      <line x1="135" y1="140" x2="135" y2="220" stroke="#E2E8F0" stroke-width="1"/>
+      <line x1="25" y1="160" x2="165" y2="160" stroke="#E2E8F0" stroke-width="1"/>
+      <line x1="25" y1="180" x2="165" y2="180" stroke="#E2E8F0" stroke-width="1"/>
+      <line x1="25" y1="200" x2="165" y2="200" stroke="#E2E8F0" stroke-width="1"/>
+      <!-- Integer Pixel Center vs Subpixel Center -->
+      <circle cx="95" cy="180" r="4" fill="#94A3B8"/>
+      <circle cx="91.5" cy="177.2" r="4.5" fill="#059669"/>
+      <line x1="95" y1="180" x2="91.5" y2="177.2" stroke="#059669" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <text x="95" y="248" font-size="9" fill="#059669" font-weight="700" text-anchor="middle">亚像素中心 p* (0.01 px)</text>
+
+      <rect x="15" y="262" width="160" height="20" rx="4" fill="#DCFCE7"/>
+      <text x="95" y="276" font-size="9" font-weight="700" fill="#047857" text-anchor="middle">交付超高精度 2D 像点</text>
+    </g>
+  </g>
+
+  <!-- ==================== MIDDLE BRIDGE: 2D-3D 关联与反投影射线转换 ==================== -->
+  <g transform="translate(30, 495)">
+    <rect width="1440" height="110" rx="12" fill="#F0FDFA" stroke="#99F6E4" stroke-width="1.5" filter="url(#shadow-hero)"/>
+    
+    <!-- Step A -> Bridge Arrow -->
+    <text x="25" y="32" font-size="12.5" font-weight="700" fill="#0F766E">数据交换与反投影中继接口 (Landmark Binding &amp; Ray Inversion Interface)</text>
+    
+    <g transform="translate(20, 45)">
+      <!-- Box 1 -->
+      <rect width="320" height="52" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5"/>
+      <text x="14" y="22" font-size="11" font-weight="700" fill="#0F172A">2D 亚像素点 ↔ 3D 锚点语义绑定</text>
+      <text x="14" y="40" font-size="9.5" font-family="monospace" fill="#0D9488">(u_i*, v_i*) ⟷ P_i = [X_i, Y_i, Z_i]ᵀ (Class i)</text>
+
+      <!-- Arrow -->
+      <path d="M 335 26 L 360 26" stroke="#0D9488" stroke-width="2" marker-end="url(#arr-teal)"/>
+
+      <!-- Box 2 -->
+      <rect x="375" y="0" width="330" height="52" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5"/>
+      <text x="389" y="22" font-size="11" font-weight="700" fill="#0F172A">针孔反投影：单位方向射线提取</text>
+      <text x="389" y="40" font-size="9.5" font-family="monospace" fill="#0D9488">r_i = K⁻¹[u_i*, v_i*, 1]ᵀ / ‖K⁻¹[u_i*, v_i*, 1]ᵀ‖</text>
+
+      <!-- Arrow -->
+      <path d="M 720 26 L 745 26" stroke="#0D9488" stroke-width="2" marker-end="url(#arr-teal)"/>
+
+      <!-- Box 3 -->
+      <rect x="760" y="0" width="310" height="52" rx="8" fill="#CCFBF1" stroke="#0D9488" stroke-width="2"/>
+      <text x="774" y="22" font-size="11" font-weight="700" fill="#134E4A">射线夹角不变性：解耦 3-DoF 旋转 R</text>
+      <text x="774" y="40" font-size="9.5" font-family="monospace" fill="#065F46">θ_ij = arccos(r_i · r_j) ≡ φ_ij(C)</text>
+
+      <!-- Arrow -->
+      <path d="M 1085 26 L 1110 26" stroke="#0D9488" stroke-width="2" marker-end="url(#arr-teal)"/>
+
+      <!-- Box 4 -->
+      <rect x="1125" y="0" width="275" height="52" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+      <text x="1139" y="22" font-size="11" font-weight="700" fill="#065F46">输出: 射线夹角约束方程组</text>
+      <text x="1139" y="40" font-size="9.5" fill="#047857">降维至仅依赖相机世界光心 C=(X,Y,Z)</text>
+    </g>
+  </g>
+
+  <!-- ==================== PART B: 后端射线夹角几何优化与位姿解算 ==================== -->
+  <g transform="translate(30, 615)">
+    <rect width="1440" height="260" rx="12" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5" />
+    <rect x="0" y="0" width="1440" height="38" rx="12" fill="#FEF3C7" stroke="#FDE68A" stroke-width="1.5"/>
+    <text x="20" y="24" font-size="13" font-weight="700" fill="#B45309">PART B · 后端射线夹角非线性优化求解 (Backend Ray-Angle NLLS Localization)</text>
+    <text x="1420" y="24" font-size="11" font-weight="600" fill="#D97706" text-anchor="end">目标：以多初值并发 + LM/TRF 双优化求解，保证 100% 全局收敛与高精度三维定位</text>
+
+    <!-- Stage 6: Multi-start pool -->
+    <g transform="translate(20, 50)">
+      <rect width="260" height="190" rx="10" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5" filter="url(#shadow-card)"/>
+      <rect x="0" y="0" width="260" height="30" rx="10" fill="#FEF3C7"/>
+      <text x="12" y="20" font-size="11" font-weight="700" fill="#78350F">01 · 多候选初值生成池 S</text>
+      <text x="12" y="48" font-size="10" font-weight="700" fill="#0F172A">三源初始先验构建：</text>
+      <text x="12" y="68" font-size="9.5" fill="#334155">1. 时序连续性初值 C_{t-1}</text>
+      <text x="12" y="86" font-size="9.5" fill="#334155">2. 传统代数 PnP 粗解 -Rᵀt</text>
+      <text x="12" y="104" font-size="9.5" fill="#334155">3. 空间已知特征点重心 P̄</text>
+      <rect x="12" y="125" width="236" height="50" rx="6" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="130" y="145" font-size="9.5" font-weight="700" fill="#B45309" text-anchor="middle">S = { C_{t-1}, -Rᵀt, P̄ }</text>
+      <text x="130" y="163" font-size="9" fill="#92400E" text-anchor="middle">杜绝单一初值陷入局部极小陷阱</text>
+    </g>
+
+    <!-- Connector 6 -> 7 -->
+    <path d="M 285 145 L 315 145" fill="none" stroke="#D97706" stroke-width="2.5" marker-end="url(#arr-amber)"/>
+
+    <!-- Stage 7: NLLS Objective Formulation -->
+    <g transform="translate(325, 50)">
+      <rect width="320" height="190" rx="10" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5" filter="url(#shadow-card)"/>
+      <rect x="0" y="0" width="320" height="30" rx="10" fill="#FEF3C7"/>
+      <text x="12" y="20" font-size="11" font-weight="700" fill="#78350F">02 · 射线夹角守恒残差建模</text>
+      <text x="12" y="48" font-size="10" font-weight="700" fill="#0F172A">非线性最小二乘目标函数：</text>
+      <rect x="12" y="60" width="296" height="42" rx="6" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="160" y="78" font-size="10" font-family="monospace" font-weight="700" fill="#B45309" text-anchor="middle">min_C F(C) = ½ ∑ (φ_ij(C) - θ_ij)²</text>
+      <text x="160" y="94" font-size="8.5" fill="#78350F" text-anchor="middle">1 ≤ i &lt; j ≤ N (N ≥ 4 观测特征角点)</text>
+      <text x="12" y="122" font-size="9.5" fill="#334155">• 视线向量: v_i(C) = P_i - C</text>
+      <text x="12" y="140" font-size="9.5" fill="#334155">• 空间夹角: φ_ij(C) = arccos(v_i·v_j / ‖v_i‖‖v_j‖)</text>
+      <text x="12" y="162" font-size="9" font-weight="700" fill="#059669">✓ 3-DoF 良态参数曲面，凸性显著提升</text>
+    </g>
+
+    <!-- Connector 7 -> 8 -->
+    <path d="M 650 145 L 680 145" fill="none" stroke="#D97706" stroke-width="2.5" marker-end="url(#arr-amber)"/>
+
+    <!-- Stage 8: Dual-Solver Concurrent Engine (Hero) -->
+    <g transform="translate(690, 50)">
+      <rect width="290" height="190" rx="10" fill="#FEF3C7" stroke="#D97706" stroke-width="2" filter="url(#shadow-hero)"/>
+      <rect x="0" y="0" width="290" height="30" rx="10" fill="#FDE68A"/>
+      <text x="12" y="20" font-size="11" font-weight="700" fill="#78350F">03 · LM / TRF 双优化引擎并发</text>
+      
+      <!-- Sub-Engine 1: LM -->
+      <g transform="translate(12, 40)">
+        <rect width="266" height="56" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2"/>
+        <text x="10" y="18" font-size="10" font-weight="700" fill="#B45309">Engine 1: Levenberg-Marquardt (LM)</text>
+        <text x="10" y="34" font-size="9" fill="#475569">自适应阻尼因子调节，擅长无约束二次快速收敛</text>
+        <text x="10" y="48" font-size="8.5" fill="#059669">典型收敛步数: 8~15 次迭代</text>
+      </g>
+
+      <!-- Sub-Engine 2: TRF -->
+      <g transform="translate(12, 102)">
+        <rect width="266" height="56" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2"/>
+        <text x="10" y="18" font-size="10" font-weight="700" fill="#B45309">Engine 2: Trust Region Reflective (TRF)</text>
+        <text x="10" y="34" font-size="9" fill="#475569">空间包围盒边界信赖域反射，擅长大位移搜索</text>
+        <text x="10" y="48" font-size="8.5" fill="#059669">具有极强抗初始扰动鲁棒性</text>
+      </g>
+
+      <rect x="12" y="163" width="266" height="18" rx="4" fill="#DCFCE7"/>
+      <text x="145" y="176" font-size="9" font-weight="700" fill="#065F46" text-anchor="middle">多初值 × 双算法并发，达 100% 收敛率</text>
+    </g>
+
+    <!-- Connector 8 -> 9 -->
+    <path d="M 985 145 L 1015 145" fill="none" stroke="#D97706" stroke-width="2.5" marker-end="url(#arr-amber)"/>
+
+    <!-- Stage 9: Global Residual Evaluation -->
+    <g transform="translate(1025, 50)">
+      <rect width="210" height="190" rx="10" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5" filter="url(#shadow-card)"/>
+      <rect x="0" y="0" width="210" height="30" rx="10" fill="#FEF3C7"/>
+      <text x="12" y="20" font-size="11" font-weight="700" fill="#78350F">04 · 最优残差评判与容错</text>
+      <text x="12" y="48" font-size="10" font-weight="700" fill="#0F172A">全局最优光心解选取：</text>
+      <rect x="12" y="60" width="186" height="36" rx="6" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="105" y="82" font-size="9.5" font-family="monospace" font-weight="700" fill="#B45309" text-anchor="middle">C* = argmin ‖r(C)‖²</text>
+      <text x="12" y="115" font-size="9.5" fill="#334155">• 自动过滤高残差局部极小</text>
+      <text x="12" y="133" font-size="9.5" fill="#334155">• 残差越界自动平滑回退</text>
+      <rect x="12" y="148" width="186" height="32" rx="4" fill="#DCFCE7"/>
+      <text x="105" y="162" font-size="8.5" font-weight="700" fill="#065F46" text-anchor="middle">仿真重构误差: 0.011 mm</text>
+      <text x="105" y="174" font-size="8.5" font-weight="700" fill="#065F46" text-anchor="middle">海试 RMSE: 10~15 cm</text>
+    </g>
+
+    <!-- Connector 9 -> 10 -->
+    <path d="M 1240 145 L 1270 145" fill="none" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-emerald)"/>
+
+    <!-- Stage 10: Final 3D Output -->
+    <g transform="translate(1280, 50)">
+      <rect width="140" height="190" rx="10" fill="#ECFDF5" stroke="#10B981" stroke-width="2" filter="url(#shadow-hero)"/>
+      <rect x="0" y="0" width="140" height="30" rx="10" fill="#D1FAE5"/>
+      <text x="12" y="20" font-size="11" font-weight="700" fill="#065F46">05 · 终值输出</text>
+      
+      <text x="70" y="55" font-size="10.5" font-weight="700" fill="#047857" text-anchor="middle">绝对三维世界坐标</text>
+      <text x="70" y="75" font-size="12" font-family="monospace" font-weight="700" fill="#064E3B" text-anchor="middle">C = (X, Y, Z)ᵀ</text>
+
+      <line x1="15" y1="88" x2="125" y2="88" stroke="#A7F3D0" stroke-width="1"/>
+
+      <text x="70" y="105" font-size="10" font-weight="700" fill="#047857" text-anchor="middle">航向姿态估计</text>
+      <text x="70" y="122" font-size="9" fill="#065F46" text-anchor="middle">Yaw, Pitch, Roll</text>
+      <text x="70" y="136" font-size="8.5" font-weight="700" fill="#059669" text-anchor="middle">误差 &lt; 0.6°</text>
+
+      <line x1="15" y1="146" x2="125" y2="146" stroke="#A7F3D0" stroke-width="1"/>
+
+      <text x="70" y="163" font-size="9.5" font-weight="700" fill="#065F46" text-anchor="middle">Jetson Orin: 26 FPS</text>
+      <text x="70" y="177" font-size="8.5" fill="#047857" text-anchor="middle">实时闭环定位</text>
+    </g>
+  </g>
+
+  <!-- Bottom Key Insights Banner -->
+  <g transform="translate(30, 885)">
+    <rect width="1440" height="55" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow-card)"/>
+    <text x="20" y="24" font-size="11.5" font-weight="700" fill="#0F172A">流水线双层解耦与理论创新总结：</text>
+    <text x="20" y="42" font-size="10.5" fill="#334155">1. <tspan font-weight="700" fill="#1E40AF">感知层 (Part A)：</tspan>「YOLO 掩膜粗检 → Harris 候选捕获 → 9分类 CNN 语义判别 → NMS 去重 → 亚像素精炼」确保输入几何层的关键点 100% 无虚警且精度达 0.01 px； 2. <tspan font-weight="700" fill="#B45309">几何层 (Part B)：</tspan>射线夹角守恒将 6-DoF 姿态估计降维为 3-DoF 位置优化，结合三源初值池与 LM/TRF 双优化引擎并发，彻底消除传统 PnP 共线奇异退化。</text>
+  </g>
+</svg>

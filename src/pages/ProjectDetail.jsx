@@ -32,7 +32,6 @@ import ProjectHero from '../components/ProjectSections/ProjectHero';
 import ProjectSpread from '../components/ProjectSections/ProjectSpread';
 import ProjectGallery from '../components/ProjectSections/ProjectGallery';
 import SciFiTerminal from '../components/SciFiTerminal';
-import VisionSimulator from '../components/VisionSimulator';
 import AccessibleDialog from '../components/AccessibleDialog';
 
 function renderMathText(text) {
@@ -423,15 +422,7 @@ export default function ProjectDetail() {
         </section>
       )}
 
-      {project.hasVisionDemo && (
-        <section className="project-interactive-demo" style={{ padding: '4rem 0 0', borderTop: '1px solid var(--rule)' }}>
-          <div className="kicker">00 · Vision Simulator</div>
-          <h2 className="section-title" style={{ fontSize: '2.4rem', marginTop: '0.5rem', marginBottom: '1.25rem' }}>
-            单目视觉解算模拟器 / <em>vision simulator</em>
-          </h2>
-          <VisionSimulator />
-        </section>
-      )}
+
 
       {/* Demo · embedded video when recorded */}
       {project.video && (
@@ -598,7 +589,7 @@ export default function ProjectDetail() {
                         </figure>
                       )}
 
-                      {/* Table 1: All Datasets */}
+                      {/* Table 1: All Datasets / Ablation Benchmark Table */}
                       {project.benchmarkTable && (
                         <div className="academic-table-wrapper" style={{ marginTop: '2.5rem' }}>
                           <div className="academic-table-caption">
@@ -609,107 +600,178 @@ export default function ProjectDetail() {
                               <thead>
                                 <tr>
                                   {project.benchmarkTable.columns.map((col, idx) => (
-                                    <th key={idx} className={idx >= 1 && idx <= 4 ? 'col-num' : ''}>{col}</th>
+                                    <th key={idx} className={idx >= 1 && idx <= (project.benchmarkTable.columns.length - 2) ? 'col-num' : ''}>{col}</th>
                                   ))}
                                 </tr>
                               </thead>
                               <tbody>
-                                {project.benchmarkTable.rows.map((row, idx) => (
-                                  <tr key={idx} className={`${row.highlight ? 'row-highlight' : ''} ${row.isSummary ? 'row-summary' : ''}`}>
-                                    <td className="cell-dataset">
-                                      <strong>{row.dataset}</strong>
-                                      {row.highlight && <span className="highlight-tag">BEST</span>}
-                                    </td>
-                                    <td className="col-num">{row.testN}</td>
-                                    <td className="col-num val-mae"><strong>{row.mae}</strong></td>
-                                    <td className="col-num val-rmse"><strong>{row.rmse}</strong></td>
-                                    <td className="col-num">{row.nae}</td>
-                                    <td className="cell-comment">{row.comment}</td>
-                                  </tr>
-                                ))}
+                                {project.benchmarkTable.rows.map((row, idx) => {
+                                  if (row.cells) {
+                                    return (
+                                      <tr key={idx} className={`${row.highlight ? 'row-highlight' : ''} ${row.isSummary ? 'row-summary' : ''} ${row.isOurs ? 'row-ours' : ''}`}>
+                                        {row.cells.map((cell, cIdx) => (
+                                          <td
+                                            key={cIdx}
+                                            className={
+                                              typeof cell === 'object' && cell.className
+                                                ? cell.className
+                                                : cIdx === 0
+                                                ? 'cell-dataset'
+                                                : cIdx >= 1 && cIdx <= (row.cells.length - 2)
+                                                ? 'col-num'
+                                                : 'cell-comment'
+                                            }
+                                          >
+                                            {typeof cell === 'object' ? (
+                                              <>
+                                                {cell.strong !== false ? <strong>{renderMathText(cell.text)}</strong> : renderMathText(cell.text)}
+                                                {cell.badge && <span className="highlight-tag">{cell.badge}</span>}
+                                                {cell.ours && <span className="highlight-tag ours-tag">OURS</span>}
+                                              </>
+                                            ) : (
+                                              renderMathText(cell)
+                                            )}
+                                          </td>
+                                        ))}
+                                      </tr>
+                                    );
+                                  }
+                                  return (
+                                    <tr key={idx} className={`${row.highlight ? 'row-highlight' : ''} ${row.isSummary ? 'row-summary' : ''}`}>
+                                      <td className="cell-dataset">
+                                        <strong>{row.dataset}</strong>
+                                        {row.highlight && <span className="highlight-tag">BEST</span>}
+                                      </td>
+                                      <td className="col-num">{row.testN}</td>
+                                      <td className="col-num val-mae"><strong>{row.mae}</strong></td>
+                                      <td className="col-num val-rmse"><strong>{row.rmse}</strong></td>
+                                      <td className="col-num">{row.nae}</td>
+                                      <td className="cell-comment">{row.comment}</td>
+                                    </tr>
+                                  );
+                                })}
                               </tbody>
                             </table>
                           </div>
                           <div className="table-footnote">
-                            注：↓ 表示数值越小越优；ShanghaiTech Part A 为模型最显著突破项；Macro Average 仅作多域均值参考。
+                            {project.benchmarkTable.footnote || '注：↓ 表示数值越小越优；ShanghaiTech Part A 为模型最显著突破项；Macro Average 仅作多域均值参考。'}
                           </div>
                         </div>
                       )}
 
                       {/* SOTA Comparison Narrative & Table 2 */}
-                      <div className="paper-sota-narrative" style={{ marginTop: '3.5rem' }}>
-                        <h3 className="paper-subsection-title">
-                          与国际主流顶会 SOTA 模型纵横对比 (SOTA Cross-Benchmark Comparison)
-                        </h3>
-                        <p className="paper-p">
-                          我们将 YOLO-PGMD 与近年来在 CVPR、ICCV、NeurIPS 等顶级会议发表的 6 种代表性 SOTA 模型进行了同基准定量对比。在密集度最高的 ShanghaiTech Part A 上，YOLO-PGMD 取得了 <strong>48.13 MAE / 74.17 RMSE</strong>，超越了包括 CVPR'22 MAN (56.8) 及 NeurIPS'20 DM-Count (59.7) 在内的全部主流基准；在复杂恶劣场景的 JHU-Crowd 上取得 <strong>39.73 MAE</strong>，验证了显著的跨域泛化优势。
-                        </p>
+                      {(project.sotaTable || sec.sotaNarrative) && (
+                        <div className="paper-sota-narrative" style={{ marginTop: '3.5rem' }}>
+                          <h3 className="paper-subsection-title">
+                            {sec.sotaTitle || "与国际主流顶会 SOTA 模型纵横对比 (SOTA Cross-Benchmark Comparison)"}
+                          </h3>
+                          <p className="paper-p">
+                            {renderMathText(
+                              sec.sotaNarrative ||
+                              "我们将 YOLO-PGMD 与近年来在 CVPR、ICCV、NeurIPS 等顶级会议发表的 6 种代表性 SOTA 模型进行了同基准定量对比。在密集度最高的 ShanghaiTech Part A 上，YOLO-PGMD 取得了 48.13 MAE / 74.17 RMSE，超越了包括 CVPR'22 MAN (56.8) 及 NeurIPS'20 DM-Count (59.7) 在内的全部主流基准；在复杂恶劣场景的 JHU-Crowd 上取得 39.73 MAE，验证了显著的跨域泛化优势。"
+                            )}
+                          </p>
 
-                        {/* Table 2: SOTA Comparison */}
-                        {project.sotaTable && (
-                          <div className="academic-table-wrapper" style={{ marginTop: '1.5rem' }}>
-                            <div className="academic-table-caption">
-                              <strong>{project.sotaTable.caption}</strong>
-                            </div>
-                            <div className="academic-table-container">
-                              <table className="academic-booktabs-table">
-                                <thead>
-                                  <tr>
-                                    {project.sotaTable.columns.map((col, idx) => (
-                                      <th key={idx} className={idx >= 1 && idx <= 5 ? 'col-num' : ''}>{col}</th>
-                                    ))}
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {project.sotaTable.rows.map((row, idx) => (
-                                    <tr key={idx} className={row.isOurs ? 'row-ours' : ''}>
-                                      <td className="cell-model">
-                                        <strong>{row.model}</strong>
-                                        {row.isOurs && <span className="highlight-tag ours-tag">OURS</span>}
-                                      </td>
-                                      <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.shaA}</td>
-                                      <td className="col-num">{row.shaB}</td>
-                                      <td className="col-num">{row.ucfQnrf}</td>
-                                      <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.jhu}</td>
-                                      <td className="col-num">{row.ucfCc50}</td>
-                                      <td className="cell-venue"><span className="venue-badge">{row.venue}</span></td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                            <div className="table-footnote">
-                              对比基准涵盖 CVPR'18 (CSRNet)、ICCV'19 (Bayesian Loss)、NeurIPS'20 (DM-Count)、CVPR'22 (MAN) 及 arXiv'24 (CLIP-EBC) 等权威公开工作。
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Figure 4: SOTA Comparison Bar Chart */}
-                        {sec.sotaFigure && (
-                          <figure
-                            className="paper-inline-figure"
-                            style={{ marginTop: '2.5rem' }}
-                          >
-                            <button
-                              type="button"
-                              className="figure-zoom-trigger"
-                              aria-label={`放大查看：${sec.sotaFigure.title || sec.sotaFigure.caption}`}
-                              onClick={() => setModalFigure(sec.sotaFigure)}
-                            >
-                              <span className="figure-canvas">
-                                <img src={sec.sotaFigure.src} alt={sec.sotaFigure.caption} loading="lazy" />
-                              </span>
-                            </button>
-                            <figcaption className="paper-figure-caption">
-                              <div className="fig-meta-bar">
-                                <span className="fig-tag">{sec.sotaFigure.label}</span>
-                                <strong className="fig-heading">{sec.sotaFigure.title}</strong>
+                          {/* Table 2: SOTA Comparison */}
+                          {project.sotaTable && (
+                            <div className="academic-table-wrapper" style={{ marginTop: '1.5rem' }}>
+                              <div className="academic-table-caption">
+                                <strong>{project.sotaTable.caption}</strong>
                               </div>
-                              <p className="fig-text">{renderMathText(sec.sotaFigure.caption)}</p>
-                            </figcaption>
-                          </figure>
-                        )}
-                      </div>
+                              <div className="academic-table-container">
+                                <table className="academic-booktabs-table">
+                                  <thead>
+                                    <tr>
+                                      {project.sotaTable.columns.map((col, idx) => (
+                                        <th key={idx} className={idx >= 1 && idx <= (project.sotaTable.columns.length - 2) ? 'col-num' : ''}>{col}</th>
+                                      ))}
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {project.sotaTable.rows.map((row, idx) => {
+                                      if (row.cells) {
+                                        return (
+                                          <tr key={idx} className={row.isOurs ? 'row-ours' : ''}>
+                                            {row.cells.map((cell, cIdx) => (
+                                              <td
+                                                key={cIdx}
+                                                className={
+                                                  typeof cell === 'object' && cell.className
+                                                    ? cell.className
+                                                    : cIdx === 0
+                                                    ? 'cell-model'
+                                                    : cIdx >= 1 && cIdx <= (row.cells.length - 2)
+                                                    ? `col-num ${row.isOurs ? 'highlight-cell' : ''}`
+                                                    : 'cell-venue'
+                                                }
+                                              >
+                                                {typeof cell === 'object' ? (
+                                                  <>
+                                                    {cell.strong !== false ? <strong>{renderMathText(cell.text)}</strong> : renderMathText(cell.text)}
+                                                    {cell.isOurs && <span className="highlight-tag ours-tag">OURS</span>}
+                                                    {cell.venue && <span className="venue-badge">{cell.venue}</span>}
+                                                  </>
+                                                ) : cIdx === row.cells.length - 1 ? (
+                                                  <span className="venue-badge">{cell}</span>
+                                                ) : (
+                                                  renderMathText(cell)
+                                                )}
+                                              </td>
+                                            ))}
+                                          </tr>
+                                        );
+                                      }
+                                      return (
+                                        <tr key={idx} className={row.isOurs ? 'row-ours' : ''}>
+                                          <td className="cell-model">
+                                            <strong>{row.model}</strong>
+                                            {row.isOurs && <span className="highlight-tag ours-tag">OURS</span>}
+                                          </td>
+                                          <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.shaA}</td>
+                                          <td className="col-num">{row.shaB}</td>
+                                          <td className="col-num">{row.ucfQnrf}</td>
+                                          <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.jhu}</td>
+                                          <td className="col-num">{row.ucfCc50}</td>
+                                          <td className="cell-venue"><span className="venue-badge">{row.venue}</span></td>
+                                        </tr>
+                                      );
+                                    })}
+                                  </tbody>
+                                </table>
+                              </div>
+                              <div className="table-footnote">
+                                {project.sotaTable.footnote || '对比基准涵盖 CVPR\'18 (CSRNet)、ICCV\'19 (Bayesian Loss)、NeurIPS\'20 (DM-Count)、CVPR\'22 (MAN) 及 arXiv\'24 (CLIP-EBC) 等权威公开工作。'}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Figure 4: SOTA Comparison Bar Chart */}
+                          {sec.sotaFigure && (
+                            <figure
+                              className="paper-inline-figure"
+                              style={{ marginTop: '2.5rem' }}
+                            >
+                              <button
+                                type="button"
+                                className="figure-zoom-trigger"
+                                aria-label={`放大查看：${sec.sotaFigure.title || sec.sotaFigure.caption}`}
+                                onClick={() => setModalFigure(sec.sotaFigure)}
+                              >
+                                <span className="figure-canvas">
+                                  <img src={sec.sotaFigure.src} alt={sec.sotaFigure.caption} loading="lazy" />
+                                </span>
+                              </button>
+                              <figcaption className="paper-figure-caption">
+                                <div className="fig-meta-bar">
+                                  <span className="fig-tag">{sec.sotaFigure.label}</span>
+                                  <strong className="fig-heading">{sec.sotaFigure.title}</strong>
+                                </div>
+                                <p className="fig-text">{renderMathText(sec.sotaFigure.caption)}</p>
+                              </figcaption>
+                            </figure>
+                          )}
+                        </div>
+                      )}
 
                       {/* Scatter Regression Analysis (Figures 5 & 6) */}
                       {sec.scatterFigures && (
