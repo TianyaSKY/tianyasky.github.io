@@ -303,6 +303,41 @@ export default function CommandPalette({ onClose }) {
       {/* 空搜索时的推荐标签与历史探索 */}
       {!query && (
         <div className="search-suggestions-box">
+          {/* 核心板块快速直达 Quick Navigation */}
+          <div className="search-suggestion-section">
+            <div className="search-suggestion-header">
+              <span className="section-title-with-icon">
+                <Compass size={12} /> 核心板块直达
+              </span>
+            </div>
+            <div className="search-nav-grid">
+              {[
+                { label: '首页顶部', icon: '🏠', desc: '编辑寄语与排名', href: '#hero' },
+                { label: '关于作者', icon: '👤', desc: '科研方向与经历', href: '#about' },
+                { label: '教育背景', icon: '🎓', desc: '大连海洋大学 9/117', href: '#education' },
+                { label: '精选项目', icon: '💼', desc: '7 大科研工程案例', href: '/projects' },
+                { label: '竞赛荣誉', icon: '🏆', desc: '蓝桥杯国一 / 卓越杯', href: '#awards' },
+                { label: '技术栈', icon: '⚡', desc: 'CV · AI · 后端', href: '#skills' },
+                { label: '联系交流', icon: '📬', desc: 'Email / 微信渠道', href: '#contact' },
+                { label: 'GitHub', icon: '💻', desc: '全部开源代码库', href: 'https://github.com/TianyaSKY' }
+              ].map((navItem) => (
+                <button
+                  key={navItem.label}
+                  type="button"
+                  className="search-nav-card"
+                  onClick={() => handleSelect(navItem)}
+                >
+                  <span className="search-nav-icon">{navItem.icon}</span>
+                  <div className="search-nav-text">
+                    <span className="search-nav-label">{navItem.label}</span>
+                    <span className="search-nav-desc">{navItem.desc}</span>
+                  </div>
+                  <ArrowRight size={12} className="search-nav-arrow" />
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* 最近搜索 */}
           {recentSearches.length > 0 && (
             <div className="search-suggestion-section">
