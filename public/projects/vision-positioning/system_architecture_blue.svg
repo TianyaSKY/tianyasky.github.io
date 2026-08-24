@@ -172,7 +172,7 @@
       <text x="16" y="50" font-size="10" fill="#047857">• 纯净无虚警 2D 亚像素关键点集 {(u_i*, v_i*)}</text>
       <text x="16" y="72" font-size="10" fill="#047857">• 对应 8 类先验空间物理 ID (Class_ID: 0~7)</text>
       <text x="16" y="94" font-size="10" fill="#047857">• 候选角点数由 235.5 个精炼为 4.0 个</text>
-      <text x="16" y="116" font-size="10" fill="#047857">• 彻底消除无纹理场景下的数据关联歧义</text>
+      <text x="16" y="116" font-size="10" fill="#047857">• 有效抑制无纹理场景下的数据关联歧义</text>
       <text x="16" y="136" font-size="9.5" font-weight="700" fill="#059669">✓ 完美交付后端几何优化求解器</text>
     </g>
   </g>
@@ -189,7 +189,7 @@
       <text x="14" y="24" font-size="12" font-weight="700" fill="#0F172A">2D-3D 语义无歧义映射</text>
       <text x="14" y="44" font-size="10" fill="#64748B">由 Class_ID 直接绑定空间物理点 P_i</text>
       <text x="14" y="60" font-size="9.5" fill="#0D9488">P_i = [X_i, Y_i, Z_i]ᵀ (世界坐标已知)</text>
-      <text x="14" y="75" font-size="9.5" fill="#64748B">彻底取代传统 SIFT/ORB 匹配</text>
+      <text x="14" y="75" font-size="9.5" fill="#64748B">有效取代传统 SIFT/ORB 匹配</text>
     </g>
 
     <!-- Flow Arrow 3.1-3.2 -->
@@ -228,7 +228,7 @@
       <text x="14" y="165" font-size="10" font-weight="700" fill="#0F172A">数学模型维数对比：</text>
       <text x="14" y="185" font-size="9.5" fill="#64748B">• PnP 参数空间: 6 维 (病态求逆)</text>
       <text x="14" y="205" font-size="9.5" fill="#0D9488">• 射线夹角空间: 3 维 (良态残差)</text>
-      <text x="14" y="225" font-size="9.5" font-weight="700" fill="#059669">✓ 根除共线退化病态问题</text>
+      <text x="14" y="225" font-size="9.5" font-weight="700" fill="#059669">✓ 有效克服共线退化病态问题</text>
     </g>
   </g>
 
@@ -245,7 +245,7 @@
       <text x="14" y="44" font-size="10" fill="#475569">1. 时序滤波连续性先验 C_{t-1}</text>
       <text x="14" y="60" font-size="10" fill="#475569">2. 传统 PnP 代数粗估计 -Rᵀt</text>
       <text x="14" y="76" font-size="10" fill="#475569">3. 空间已知特征点几何中心 P̄</text>
-      <text x="14" y="90" font-size="9.5" fill="#D97706">三源先验互补，彻底避免初始盲搜</text>
+      <text x="14" y="90" font-size="9.5" fill="#D97706">三源先验互补，有效避免初始盲搜</text>
     </g>
 
     <!-- Flow Arrow 4.1-4.2 -->
@@ -258,7 +258,7 @@
       <text x="14" y="44" font-size="9.5" font-family="monospace" fill="#B45309">min_C F(C) = ½ ∑ (φ_ij(C) - θ_ij)²</text>
       <text x="14" y="64" font-size="10" fill="#475569">• Levenberg-Marquardt (自适应阻尼)</text>
       <text x="14" y="80" font-size="10" fill="#475569">• Trust-Region-Reflective (空间信赖域)</text>
-      <text x="14" y="98" font-size="9.5" font-weight="700" fill="#059669">多初值 × 双算法并发，毫秒级收敛</text>
+      <text x="14" y="98" font-size="9.5" font-weight="700" fill="#059669">多初值 × 双算法并发，实时收敛</text>
     </g>
 
     <!-- Flow Arrow 4.2-4.3 -->
@@ -282,7 +282,7 @@
       <text x="14" y="24" font-size="12" font-weight="700" fill="#78350F">鲁棒平滑与异常容错保底</text>
       <text x="14" y="44" font-size="10" fill="#64748B">若优化残差超过阈值，系统自动平滑回退至</text>
       <text x="14" y="60" font-size="10" fill="#64748B">PnP 粗解或卡尔曼时序预测</text>
-      <text x="14" y="74" font-size="9.5" font-weight="700" fill="#059669">✓ 工业级高可用闭环，永不崩溃</text>
+      <text x="14" y="74" font-size="9.5" font-weight="700" fill="#059669">✓ 系统软件高可用闭环，平滑容错</text>
     </g>
 
     <!-- Quantitative Error Breakdown Box -->
@@ -364,6 +364,6 @@
   <g transform="translate(30, 775)">
     <rect width="1340" height="60" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" filter="url(#hero-shadow)"/>
     <text x="24" y="26" font-size="12" font-weight="700" fill="#0F172A">系统架构核心创新与工程价值总结：</text>
-    <text x="24" y="46" font-size="10.5" fill="#334155">1. <tspan font-weight="700" fill="#1E40AF">前后端解耦：</tspan>前端五级级联提取绝对纯净 2D 亚像素关键点与语义 ID，后端专职几何优化； 2. <tspan font-weight="700" fill="#0D9488">射线夹角不变性：</tspan>从物理机理根除细长共线杆体 6-DoF PnP 奇异退化； 3. <tspan font-weight="700" fill="#B45309">多初值双求解器：</tspan>三源初值 + LM/TRF 并发确保 100% 全局收敛，大连沿海实测稳定达成 10~15cm RMSE。</text>
+    <text x="24" y="46" font-size="10.5" fill="#334155">1. <tspan font-weight="700" fill="#1E40AF">前后端解耦：</tspan>前端五级级联提取绝对纯净 2D 亚像素关键点与语义 ID，后端专职几何优化； 2. <tspan font-weight="700" fill="#0D9488">射线夹角不变性：</tspan>从物理机理克服细长共线杆体 6-DoF PnP 奇异退化； 3. <tspan font-weight="700" fill="#B45309">多初值双求解器：</tspan>三源初值 + LM/TRF 并发确保 100% 全局收敛，大连沿海实测稳定达成 10~15cm RMSE。</text>
   </g>
 </svg>

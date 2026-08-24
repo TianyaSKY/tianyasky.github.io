@@ -5,7 +5,7 @@ export const projectCatalog = [
     id: "vision-positioning",
     type: "research",
     title: "单目视觉三维坐标重建系统",
-    subtitle: "级联神经网络 · 射线夹角几何约束 · 近海 10–15cm 厘米级定位",
+    subtitle: "级联神经网络 · 射线夹角几何约束 · 现场 10–15cm 实测精度",
     badge: "国家级大创 · 论文与软著",
     category: "Computer Vision & Geometric Pose Reconstruction",
     cover: "/projects/vision-positioning/cover.png",
@@ -41,7 +41,7 @@ export const projectCatalog = [
         value: "26 FPS"
       }
     ],
-    description: "针对近海与无 GPS 复杂环境下传统 PnP 在共线标志物上的几何退化难题，提出 YOLO 掩膜 + Harris 提取 + 9 分类 Patch CNN 的五级级联感知流水线，结合基于反投影射线夹角守恒的多初值非线性最小二乘位姿优化算法。仿真基准达亚毫米级重构，实测 10–15cm RMSE 精度，获辽宁省大学生创新年会推荐及软件著作权。"
+    description: "针对近海与弱 GPS 环境下传统 PnP 在共线标志物上的几何退化问题，提出 YOLO 掩膜 + Harris 提取 + 9 分类 Patch CNN 的五级级联感知流水线，结合基于反投影射线夹角守恒的多初值非线性最小二乘位姿优化算法。经仿真与大连沿海实测试验验证（10–15cm RMSE），获辽宁省大学生创新年会推荐及软件著作权。"
   },
   {
     id: "crowd-sigmod",

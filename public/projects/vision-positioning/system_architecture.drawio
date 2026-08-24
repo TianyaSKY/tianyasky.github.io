@@ -86,7 +86,7 @@
           <mxGeometry x="15" y="260" width="220" height="75" as="geometry" />
         </mxCell>
 
-        <mxCell id="node_binding_note" value="&lt;b style=&quot;font-size:11px; color:#0D9488;&quot;&gt;几何解耦核心机理&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#475569;&quot;&gt;两两射线内积具备保角不变性，将 6-DoF 耦合问题降维为仅关于相机坐标 C 的 3-DoF 良态优化，根除共线退化。&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CCFBF1;strokeColor=#5EEAD4;strokeWidth=1;fontFamily=Microsoft YaHei;fontColor=#115E59;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="group_binding">
+        <mxCell id="node_binding_note" value="&lt;b style=&quot;font-size:11px; color:#0D9488;&quot;&gt;几何解耦核心机理&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#475569;&quot;&gt;两两射线内积具备保角不变性，将 6-DoF 耦合问题降维为仅关于相机坐标 C 的 3-DoF 良态优化，有效克服共线退化。&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CCFBF1;strokeColor=#5EEAD4;strokeWidth=1;fontFamily=Microsoft YaHei;fontColor=#115E59;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="group_binding">
           <mxGeometry x="15" y="375" width="220" height="95" as="geometry" />
         </mxCell>
 
@@ -170,7 +170,7 @@
         </mxCell>
 
         <!-- ==================== 底部技术栈与架构价值说明 ==================== -->
-        <mxCell id="footer_bar" value="&lt;b style=&quot;font-size:11px; color:#0F172A;&quot;&gt;架构核心优势：&lt;/b&gt;&lt;span style=&quot;font-size:11px; color:#475569;&quot;&gt; 1. 前后端数据接口严格分离，前端输出纯净 2D 亚像素点与语义 ID，后端专职几何良态优化；2. 射线夹角守恒约束从根本上消除细长标杆 6-DoF PnP 共线退化；3. 多初值并发与双求解器协同保障 100% 全局收敛，实现工业级高可用闭环。&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#CBD5E1;strokeWidth=1.5;fontFamily=Microsoft YaHei, sans-serif;fontColor=#334155;align=left;spacingLeft=16;spacingRight=16;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="footer_bar" value="&lt;b style=&quot;font-size:11px; color:#0F172A;&quot;&gt;架构核心优势：&lt;/b&gt;&lt;span style=&quot;font-size:11px; color:#475569;&quot;&gt; 1. 前后端数据接口严格分离，前端输出纯净 2D 亚像素点与语义 ID，后端专职几何良态优化；2. 射线夹角守恒约束从根本上消除细长标杆 6-DoF PnP 共线退化；3. 多初值并发与双求解器协同保障 100% 全局收敛，实现系统软件高可用闭环。&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#CBD5E1;strokeWidth=1.5;fontFamily=Microsoft YaHei, sans-serif;fontColor=#334155;align=left;spacingLeft=16;spacingRight=16;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="40" y="775" width="1320" height="50" as="geometry" />
         </mxCell>
 
