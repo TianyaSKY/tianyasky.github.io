@@ -101,15 +101,16 @@ export default function Navbar({ onOpenCmdPalette }) {
           ))}
         </ul>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
           <button
             onClick={onOpenCmdPalette}
-            className="nav-cmd-btn"
-            title={`快捷搜索 (${isMac ? '⌘K' : 'Ctrl+K'})`}
+            className="nav-search-bar-trigger"
+            title={`全站快捷搜索 (${isMac ? '⌘K' : 'Ctrl+K'})`}
+            aria-label="打开全局搜索"
           >
-            <Search size={14} />
-            <span>搜索</span>
-            <span className="nav-cmd-shortcut">{isMac ? '⌘K' : 'Ctrl+K'}</span>
+            <Search size={14} className="nav-search-icon" />
+            <span className="nav-search-text">搜索项目、技能、荣誉...</span>
+            <span className="nav-search-kbd">{isMac ? '⌘K' : 'Ctrl+K'}</span>
           </button>
 
           <button
