@@ -1,0 +1,369 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 860" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;">
+  <defs>
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <filter id="hero-shadow" x="-3%" y="-5%" width="106%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    
+    <linearGradient id="primary-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E40AF" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+    
+    <linearGradient id="teal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F766E" />
+      <stop offset="100%" stop-color="#14B8A6" />
+    </linearGradient>
+    
+    <linearGradient id="amber-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B45309" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+    
+    <linearGradient id="indigo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3730A3" />
+      <stop offset="100%" stop-color="#6366F1" />
+    </linearGradient>
+    
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB" />
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0D9488" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#D97706" />
+    </marker>
+    <marker id="arrow-indigo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#4F46E5" />
+    </marker>
+  </defs>
+
+  <!-- Top Title Banner -->
+  <g transform="translate(30, 20)">
+    <rect width="1340" height="60" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" filter="url(#hero-shadow)"/>
+    <text x="670" y="28" font-size="17" font-weight="700" fill="#0F172A" text-anchor="middle" letter-spacing="0.5">基于射线夹角几何约束与级联深度学习的单目视觉位姿重建系统总体架构</text>
+    <text x="670" y="48" font-size="11" font-weight="500" fill="#64748B" text-anchor="middle">System Architecture: Monocular Vision Cascaded Perception &amp; Ray-Angle Invariant Nonlinear Optimization</text>
+  </g>
+
+  <!-- Phase 1: Input & Data Acquisition -->
+  <g transform="translate(30, 95)">
+    <rect width="210" height="660" rx="10" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5" />
+    <rect x="0" y="0" width="210" height="34" rx="10" fill="#DBEAFE" stroke="#BFDBFE" stroke-width="1.5"/>
+    <text x="15" y="22" font-size="12" font-weight="700" fill="#1E3A8A">01 · 感知采集与数据输入</text>
+
+    <!-- Node 1.1 -->
+    <g transform="translate(12, 45)">
+      <rect width="186" height="60" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="12" y="23" font-size="12" font-weight="700" fill="#0F172A">RTSP / USB 视频流</text>
+      <text x="12" y="42" font-size="10" fill="#64748B">网络监控 / 工业微单实时流</text>
+    </g>
+
+    <!-- Node 1.2 -->
+    <g transform="translate(12, 118)">
+      <rect width="186" height="60" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="12" y="23" font-size="12" font-weight="700" fill="#0F172A">离线单帧 / 序列图库</text>
+      <text x="12" y="42" font-size="10" fill="#64748B">Sony α6400 6000×4000 原图</text>
+    </g>
+
+    <!-- Node 1.3 -->
+    <g transform="translate(12, 191)">
+      <rect width="186" height="60" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="12" y="23" font-size="12" font-weight="700" fill="#0F172A">相机标定参数矩阵</text>
+      <text x="12" y="42" font-size="10" fill="#64748B">内参 K 与畸变系数 D</text>
+    </g>
+
+    <!-- Node 1.4 -->
+    <g transform="translate(12, 264)">
+      <rect width="186" height="60" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="12" y="23" font-size="12" font-weight="700" fill="#0F172A">3D 先验标杆世界模型</text>
+      <text x="12" y="42" font-size="10" fill="#64748B">8 类空间物理角点坐标 P_i</text>
+    </g>
+
+    <!-- Input Feature Card -->
+    <g transform="translate(12, 345)">
+      <rect width="186" height="295" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="14" y="26" font-size="11" font-weight="700" fill="#2563EB">输入适配特性</text>
+      <text x="14" y="52" font-size="10" fill="#475569">• 动态视频流实时解码</text>
+      <text x="14" y="74" font-size="10" fill="#475569">• 自动适配镜头畸变矫正</text>
+      <text x="14" y="96" font-size="10" fill="#475569">• 多场景先验点云快速换算</text>
+      <text x="14" y="118" font-size="10" fill="#475569">• 2400万像素级高分辨率</text>
+      <rect x="14" y="145" width="158" height="130" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="24" y="172" font-size="10" font-weight="700" fill="#0F172A">硬件采集适配：</text>
+      <text x="24" y="194" font-size="9.5" fill="#64748B">Sony α6400 (ILCE-6400)</text>
+      <text x="24" y="214" font-size="9.5" fill="#64748B">Jetson Orin 边缘端</text>
+      <text x="24" y="234" font-size="9.5" fill="#64748B">USB 3.0 / RTSP 工业相机</text>
+      <text x="24" y="254" font-size="9.5" fill="#059669">22 张棋盘格高精标定</text>
+    </g>
+  </g>
+
+  <!-- Phase 2: Frontend Cascaded Perception Pipeline -->
+  <g transform="translate(265, 95)">
+    <rect width="320" height="660" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="0" y="0" width="320" height="34" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="15" y="22" font-size="12" font-weight="700" fill="#1E40AF">02 · 前端级联视觉感知流水线 (Cascaded Perception)</text>
+
+    <!-- Stage 1 -->
+    <g transform="translate(15, 45)">
+      <rect width="290" height="68" rx="8" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="6" height="68" rx="3" fill="#3B82F6" />
+      <text x="16" y="24" font-size="12" font-weight="700" fill="#1E3A8A">Stage 1 · YOLO 目标检测与 ROI 掩膜</text>
+      <text x="16" y="44" font-size="10" fill="#64748B">微调 POLES.pt 模型，精准分割标杆区域</text>
+      <text x="16" y="58" font-size="9.5" fill="#2563EB">压缩搜索空间 &gt;95%，过滤背景反光杂波</text>
+    </g>
+
+    <!-- Flow Arrow 1-2 -->
+    <line x1="160" y1="113" x2="160" y2="131" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)" />
+
+    <!-- Stage 2 -->
+    <g transform="translate(15, 133)">
+      <rect width="290" height="68" rx="8" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="6" height="68" rx="3" fill="#3B82F6" />
+      <text x="16" y="24" font-size="12" font-weight="700" fill="#1E3A8A">Stage 2 · 掩膜约束 Harris 候选角点提取</text>
+      <text x="16" y="44" font-size="10" fill="#64748B">梯度张量 M_H，响应 R = det - 0.10·tr² ≥ 0.03</text>
+      <text x="16" y="58" font-size="9.5" fill="#64748B">高灵敏度捕获全部几何边缘物理转折点</text>
+    </g>
+
+    <!-- Flow Arrow 2-3 -->
+    <line x1="160" y1="201" x2="160" y2="219" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)" />
+
+    <!-- Stage 3 (Highlighted CNN) -->
+    <g transform="translate(15, 221)">
+      <rect width="290" height="74" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#hero-shadow)"/>
+      <rect x="0" y="0" width="6" height="74" rx="3" fill="#2563EB" />
+      <text x="16" y="23" font-size="12" font-weight="700" fill="#1E40AF">Stage 3 · 64×64 Patch 与 9 分类 SimpleCNN</text>
+      <text x="16" y="43" font-size="10" fill="#334155">3阶段 Conv+Pool+FC (16→32→64→4096→512→9)</text>
+      <text x="16" y="60" font-size="10" font-weight="700" fill="#059669">8 类空间物理点 + 1 类背景 (测试集 100% 准确率)</text>
+    </g>
+
+    <!-- Flow Arrow 3-4 -->
+    <line x1="160" y1="295" x2="160" y2="313" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)" />
+
+    <!-- Stage 4 -->
+    <g transform="translate(15, 315)">
+      <rect width="290" height="68" rx="8" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="6" height="68" rx="3" fill="#3B82F6" />
+      <text x="16" y="24" font-size="12" font-weight="700" fill="#1E3A8A">Stage 4 · 分类别非极大值抑制 (NMS)</text>
+      <text x="16" y="44" font-size="10" fill="#64748B">剔除背景类与置信度 &lt;0.85 候选</text>
+      <text x="16" y="58" font-size="9.5" fill="#64748B">同类别半径 r=25px 贪心抑制密集簇，消除干扰</text>
+    </g>
+
+    <!-- Flow Arrow 4-5 -->
+    <line x1="160" y1="383" x2="160" y2="401" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)" />
+
+    <!-- Stage 5 -->
+    <g transform="translate(15, 403)">
+      <rect width="290" height="68" rx="8" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="6" height="68" rx="3" fill="#3B82F6" />
+      <text x="16" y="24" font-size="12" font-weight="700" fill="#1E3A8A">Stage 5 · cornerSubPix 亚像素正交精炼</text>
+      <text x="16" y="44" font-size="10" fill="#64748B">基于局部灰度梯度正交性最小二乘迭代求解</text>
+      <text x="16" y="58" font-size="9.5" fill="#0D9488">精度从整数像素跃升至 0.01~0.05 亚像素级</text>
+    </g>
+
+    <!-- Flow Arrow 5-Out -->
+    <line x1="160" y1="471" x2="160" y2="489" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)" />
+
+    <!-- Frontend Final Output Badge -->
+    <g transform="translate(15, 492)">
+      <rect width="290" height="150" rx="8" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5"/>
+      <text x="16" y="26" font-size="11" font-weight="700" fill="#065F46">前端输出交付物：</text>
+      <text x="16" y="50" font-size="10" fill="#047857">• 纯净无虚警 2D 亚像素关键点集 {(u_i*, v_i*)}</text>
+      <text x="16" y="72" font-size="10" fill="#047857">• 对应 8 类先验空间物理 ID (Class_ID: 0~7)</text>
+      <text x="16" y="94" font-size="10" fill="#047857">• 候选角点数由 235.5 个精炼为 4.0 个</text>
+      <text x="16" y="116" font-size="10" fill="#047857">• 有效抑制无纹理场景下的数据关联歧义</text>
+      <text x="16" y="136" font-size="9.5" font-weight="700" fill="#059669">✓ 完美交付后端几何优化求解器</text>
+    </g>
+  </g>
+
+  <!-- Phase 3: Landmark Association & Ray-Angle Invariance -->
+  <g transform="translate(610, 95)">
+    <rect width="265" height="660" rx="10" fill="#F0FDFA" stroke="#99F6E4" stroke-width="1.5" />
+    <rect x="0" y="0" width="265" height="34" rx="10" fill="#CCFBF1" stroke="#99F6E4" stroke-width="1.5"/>
+    <text x="15" y="22" font-size="12" font-weight="700" fill="#0F766E">03 · 几何关联与反投影射线接口</text>
+
+    <!-- Node 3.1 -->
+    <g transform="translate(15, 45)">
+      <rect width="235" height="85" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#0F172A">2D-3D 语义无歧义映射</text>
+      <text x="14" y="44" font-size="10" fill="#64748B">由 Class_ID 直接绑定空间物理点 P_i</text>
+      <text x="14" y="60" font-size="9.5" fill="#0D9488">P_i = [X_i, Y_i, Z_i]ᵀ (世界坐标已知)</text>
+      <text x="14" y="75" font-size="9.5" fill="#64748B">有效取代传统 SIFT/ORB 匹配</text>
+    </g>
+
+    <!-- Flow Arrow 3.1-3.2 -->
+    <line x1="132" y1="130" x2="132" y2="150" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)" />
+
+    <!-- Node 3.2 -->
+    <g transform="translate(15, 153)">
+      <rect width="235" height="95" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#0F172A">单位反投影方向射线提取</text>
+      <text x="14" y="44" font-size="10.5" font-family="monospace" fill="#0F766E">r_i = K⁻¹[u_i*, v_i*, 1]ᵀ / ‖·‖</text>
+      <text x="14" y="64" font-size="9.5" fill="#64748B">将 2D 像点反投影为归一化单位射线</text>
+      <text x="14" y="82" font-size="9.5" fill="#0D9488">消除像素尺度偏差与主点平移影响</text>
+    </g>
+
+    <!-- Flow Arrow 3.2-3.3 -->
+    <line x1="132" y1="248" x2="132" y2="268" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)" />
+
+    <!-- Node 3.3 (Core Principle) -->
+    <g transform="translate(15, 271)">
+      <rect width="235" height="110" rx="8" fill="#CCFBF1" stroke="#0D9488" stroke-width="2" filter="url(#hero-shadow)"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#134E4A">射线夹角不变性守恒建立</text>
+      <text x="14" y="46" font-size="10.5" font-family="monospace" fill="#0F766E">θ_ij = arccos(r_i · r_j)</text>
+      <text x="14" y="66" font-size="10.5" font-family="monospace" fill="#0F766E">φ_ij(C) = arccos((P_i-C)·(P_j-C)/‖·‖)</text>
+      <text x="14" y="88" font-size="9.5" font-weight="700" fill="#065F46">约束条件：φ_ij(C) ≡ θ_ij (∀ i&lt;j)</text>
+      <text x="14" y="102" font-size="9" fill="#115E59">射线内积等距保角，天然解耦 3D 旋转 R</text>
+    </g>
+
+    <!-- Geometric Mechanism Explanation Box -->
+    <g transform="translate(15, 400)">
+      <rect width="235" height="240" rx="8" fill="#FFFFFF" stroke="#99F6E4" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="14" y="26" font-size="11" font-weight="700" fill="#0D9488">几何抗退化核心机理：</text>
+      <text x="14" y="50" font-size="10" fill="#334155">1. 传统 6-DoF PnP (R, t 耦合)：</text>
+      <text x="14" y="68" font-size="9.5" fill="#E11D48">细长共线杆体诱发临界曲面奇异退化，导致旋转多义性与数米级漂移。</text>
+      <text x="14" y="100" font-size="10" fill="#334155">2. 射线夹角不变性 (3-DoF C)：</text>
+      <text x="14" y="118" font-size="9.5" fill="#059669">完全不受姿态角 R 干扰，仅关于相机光心 C=(X_c,Y_c,Z_c) 求解，优化曲面凸性极佳。</text>
+      <text x="14" y="165" font-size="10" font-weight="700" fill="#0F172A">数学模型维数对比：</text>
+      <text x="14" y="185" font-size="9.5" fill="#64748B">• PnP 参数空间: 6 维 (病态求逆)</text>
+      <text x="14" y="205" font-size="9.5" fill="#0D9488">• 射线夹角空间: 3 维 (良态残差)</text>
+      <text x="14" y="225" font-size="9.5" font-weight="700" fill="#059669">✓ 有效克服共线退化病态问题</text>
+    </g>
+  </g>
+
+  <!-- Phase 4: Backend Ray-Angle Optimization Solver -->
+  <g transform="translate(895, 95)">
+    <rect width="285" height="660" rx="10" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5" />
+    <rect x="0" y="0" width="285" height="34" rx="10" fill="#FEF3C7" stroke="#FDE68A" stroke-width="1.5"/>
+    <text x="15" y="22" font-size="12" font-weight="700" fill="#B45309">04 · 后端射线夹角非线性优化 (NLLS)</text>
+
+    <!-- Node 4.1 Multi-start Pool -->
+    <g transform="translate(15, 45)">
+      <rect width="255" height="95" rx="8" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#78350F">多候选初值生成池 S</text>
+      <text x="14" y="44" font-size="10" fill="#475569">1. 时序滤波连续性先验 C_{t-1}</text>
+      <text x="14" y="60" font-size="10" fill="#475569">2. 传统 PnP 代数粗估计 -Rᵀt</text>
+      <text x="14" y="76" font-size="10" fill="#475569">3. 空间已知特征点几何中心 P̄</text>
+      <text x="14" y="90" font-size="9.5" fill="#D97706">三源先验互补，有效避免初始盲搜</text>
+    </g>
+
+    <!-- Flow Arrow 4.1-4.2 -->
+    <line x1="142" y1="140" x2="142" y2="158" stroke="#D97706" stroke-width="2" marker-end="url(#arrow-amber)" />
+
+    <!-- Node 4.2 Dual Solvers -->
+    <g transform="translate(15, 160)">
+      <rect width="255" height="110" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="2" filter="url(#hero-shadow)"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#78350F">LM / TRF 双优化引擎并发求解</text>
+      <text x="14" y="44" font-size="9.5" font-family="monospace" fill="#B45309">min_C F(C) = ½ ∑ (φ_ij(C) - θ_ij)²</text>
+      <text x="14" y="64" font-size="10" fill="#475569">• Levenberg-Marquardt (自适应阻尼)</text>
+      <text x="14" y="80" font-size="10" fill="#475569">• Trust-Region-Reflective (空间信赖域)</text>
+      <text x="14" y="98" font-size="9.5" font-weight="700" fill="#059669">多初值 × 双算法并发，实时收敛</text>
+    </g>
+
+    <!-- Flow Arrow 4.2-4.3 -->
+    <line x1="142" y1="270" x2="142" y2="288" stroke="#D97706" stroke-width="2" marker-end="url(#arrow-amber)" />
+
+    <!-- Node 4.3 Optimal Residual Selection -->
+    <g transform="translate(15, 290)">
+      <rect width="255" height="85" rx="8" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#78350F">全局最优残差评判与选取</text>
+      <text x="14" y="44" font-size="10.5" font-family="monospace" fill="#B45309">C* = argmin_{s, algo} ‖r(C)‖²</text>
+      <text x="14" y="64" font-size="9.5" fill="#64748B">在候选收敛解集中自动判别最优光心</text>
+      <text x="14" y="78" font-size="9.5" font-weight="700" fill="#059669">100% 规避鞍点与局部极小值陷阱</text>
+    </g>
+
+    <!-- Flow Arrow 4.3-4.4 -->
+    <line x1="142" y1="375" x2="142" y2="393" stroke="#D97706" stroke-width="2" marker-end="url(#arrow-amber)" />
+
+    <!-- Node 4.4 Fault-Tolerant Loop -->
+    <g transform="translate(15, 395)">
+      <rect width="255" height="80" rx="8" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#78350F">鲁棒平滑与异常容错保底</text>
+      <text x="14" y="44" font-size="10" fill="#64748B">若优化残差超过阈值，系统自动平滑回退至</text>
+      <text x="14" y="60" font-size="10" fill="#64748B">PnP 粗解或卡尔曼时序预测</text>
+      <text x="14" y="74" font-size="9.5" font-weight="700" fill="#059669">✓ 系统软件高可用闭环，平滑容错</text>
+    </g>
+
+    <!-- Quantitative Error Breakdown Box -->
+    <g transform="translate(15, 492)">
+      <rect width="255" height="150" rx="8" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="14" y="26" font-size="11" font-weight="700" fill="#B45309">消融实验理论精度验证：</text>
+      <text x="14" y="48" font-size="10" fill="#059669">• Ours-Full: 1.10 × 10⁻⁵ m (0.011 mm)</text>
+      <text x="14" y="68" font-size="10" fill="#E11D48">• 无 CNN 语义: 5.380 m (错配放大48万倍)</text>
+      <text x="14" y="88" font-size="10" fill="#E11D48">• 无 NMS 抑制: 6.132 m (密集簇扭曲梯度)</text>
+      <text x="14" y="108" font-size="10" fill="#475569">• 纯 Harris 基线: 5.655 m (217个无序噪点)</text>
+      <text x="14" y="128" font-size="10" fill="#2563EB">• 传统 PnP: 3.21 × 10⁻⁴ m (噪声敏感度高)</text>
+      <text x="14" y="144" font-size="9.5" font-weight="700" fill="#059669">✓ 射线夹角法比传统 PnP 精度高 1 个数量级</text>
+    </g>
+  </g>
+
+  <!-- Phase 5: Output & Industrial Desktop Suite -->
+  <g transform="translate(1200, 95)">
+    <rect width="170" height="660" rx="10" fill="#EEF2FF" stroke="#C7D2FE" stroke-width="1.5" />
+    <rect x="0" y="0" width="170" height="34" rx="10" fill="#E0E7FF" stroke="#C7D2FE" stroke-width="1.5"/>
+    <text x="12" y="22" font-size="12" font-weight="700" fill="#3730A3">05 · 成果输出与终端</text>
+
+    <!-- Node 5.1 3D Coords -->
+    <g transform="translate(12, 45)">
+      <rect width="146" height="85" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="2" filter="url(#hero-shadow)"/>
+      <text x="12" y="24" font-size="12" font-weight="700" fill="#4338CA">3D 绝对空间坐标</text>
+      <text x="12" y="44" font-size="11" font-family="monospace" font-weight="700" fill="#1E1B4B">C = [X_c, Y_c, Z_c]</text>
+      <text x="12" y="62" font-size="9.5" fill="#059669">仿真: 0.011 mm</text>
+      <text x="12" y="78" font-size="9.5" font-weight="700" fill="#059669">海试: 10~15cm RMSE</text>
+    </g>
+
+    <!-- Node 5.2 Heading & Pose -->
+    <g transform="translate(12, 142)">
+      <rect width="146" height="75" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="12" y="24" font-size="12" font-weight="700" fill="#4338CA">航向姿态角估计</text>
+      <text x="12" y="44" font-size="10" fill="#334155">Yaw / Pitch / Roll</text>
+      <text x="12" y="62" font-size="9.5" font-weight="700" fill="#059669">相对姿态误差 &lt; 0.6°</text>
+    </g>
+
+    <!-- Node 5.3 Industrial GUI -->
+    <g transform="translate(12, 229)">
+      <rect width="146" height="110" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="12" y="24" font-size="12" font-weight="700" fill="#4338CA">PyQt5 工业工作站</text>
+      <text x="12" y="44" font-size="10" fill="#475569">• 实时 3D 轨迹图</text>
+      <text x="12" y="62" font-size="10" fill="#475569">• 120帧坐标曲线</text>
+      <text x="12" y="80" font-size="10" fill="#475569">• 6阶段质检视窗</text>
+      <text x="12" y="98" font-size="9.5" fill="#6366F1">pyqtgraph 实时渲染</text>
+    </g>
+
+    <!-- Node 5.4 Database -->
+    <g transform="translate(12, 351)">
+      <rect width="146" height="85" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <text x="12" y="24" font-size="12" font-weight="700" fill="#4338CA">SQLite 数据库</text>
+      <text x="12" y="44" font-size="10" fill="#475569">• 相机内参表</text>
+      <text x="12" y="60" font-size="10" fill="#475569">• 场景锚点坐标库</text>
+      <text x="12" y="76" font-size="10" fill="#475569">• 历史位姿日志审计</text>
+    </g>
+
+    <!-- Node 5.5 Edge Performance -->
+    <g transform="translate(12, 448)">
+      <rect width="146" height="194" rx="8" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.5"/>
+      <text x="12" y="26" font-size="11" font-weight="700" fill="#065F46">边缘部署与产出：</text>
+      <text x="12" y="50" font-size="10" font-weight="700" fill="#047857">Jetson Orin: 26 FPS</text>
+      <text x="12" y="72" font-size="9.5" fill="#047857">TensorRT 量化推理</text>
+      <text x="12" y="94" font-size="9.5" fill="#047857">解算成功率: 100.0%</text>
+      <text x="12" y="116" font-size="9.5" fill="#047857">国家计算机软件著作权</text>
+      <text x="12" y="138" font-size="9.5" fill="#047857">辽宁省创客年会推荐</text>
+      <text x="12" y="160" font-size="9.5" fill="#047857">金砖大赛国家三等奖</text>
+      <text x="12" y="180" font-size="9.5" font-weight="700" fill="#059669">iCAN 全国三等奖</text>
+    </g>
+  </g>
+
+  <!-- Cross-Phase Global Major Dataflow Arrows -->
+  <path d="M 240 170 L 265 170" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrow-blue)" />
+  <path d="M 585 565 L 610 565" fill="none" stroke="#0D9488" stroke-width="2.5" marker-end="url(#arrow-teal)" />
+  <path d="M 875 326 L 895 326" fill="none" stroke="#D97706" stroke-width="2.5" marker-end="url(#arrow-amber)" />
+  <path d="M 1180 332 L 1200 332" fill="none" stroke="#4F46E5" stroke-width="2.5" marker-end="url(#arrow-indigo)" />
+
+  <!-- Bottom Architecture Summary Banner -->
+  <g transform="translate(30, 775)">
+    <rect width="1340" height="60" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" filter="url(#hero-shadow)"/>
+    <text x="24" y="26" font-size="12" font-weight="700" fill="#0F172A">系统架构核心创新与工程价值总结：</text>
+    <text x="24" y="46" font-size="10.5" fill="#334155">1. <tspan font-weight="700" fill="#1E40AF">前后端解耦：</tspan>前端五级级联提取绝对纯净 2D 亚像素关键点与语义 ID，后端专职几何优化； 2. <tspan font-weight="700" fill="#0D9488">射线夹角不变性：</tspan>从物理机理克服细长共线杆体 6-DoF PnP 奇异退化； 3. <tspan font-weight="700" fill="#B45309">多初值双求解器：</tspan>三源初值 + LM/TRF 并发确保 100% 全局收敛，大连沿海实测稳定达成 10~15cm RMSE。</text>
+  </g>
+</svg>

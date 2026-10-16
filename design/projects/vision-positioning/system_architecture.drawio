@@ -1,0 +1,180 @@
+<mxfile host="Electron" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36">
+  <diagram name="系统架构图 · 全景重绘" id="system-architecture-v2">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="880" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- 顶部系统总标题 -->
+        <mxCell id="title_banner" value="&lt;b style=&quot;font-size:18px; letter-spacing: 1px;&quot;&gt;基于射线夹角几何约束与级联深度学习的单目视觉位姿重建系统总体架构&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px; color:#64748B;&quot;&gt;System Architecture: Monocular Vision Cascaded Perception &amp;amp; Ray-Angle Invariant Nonlinear Optimization&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=1.5;fontFamily=Microsoft YaHei, PingFang SC, sans-serif;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== 1. 输入与数据感知层 ==================== -->
+        <mxCell id="group_input" value="&lt;b style=&quot;font-size:13px; color:#1E40AF;&quot;&gt;01 · 输入与感知采集层 (Data Acquisition)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#BFDBFE;strokeWidth=1.5;fontFamily=Microsoft YaHei, sans-serif;fontColor=#1E3A8A;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="95" width="220" height="660" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_rtsp" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;RTSP / USB 视频流&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;网络监控 / 工业微单实时帧流&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#93C5FD;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_input">
+          <mxGeometry x="15" y="45" width="190" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_still" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;离线单帧 / 序列图库&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;Sony α6400 6000×4000 超高清原图&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#93C5FD;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_input">
+          <mxGeometry x="15" y="125" width="190" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_calib" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;相机标定参数输入&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;内参矩阵 K 与畸变系数 D&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#93C5FD;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_input">
+          <mxGeometry x="15" y="205" width="190" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_world_anchors" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;3D 先验标杆世界模型&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;8类空间物理角点坐标 P_i&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#93C5FD;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_input">
+          <mxGeometry x="15" y="285" width="190" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_input_note" value="&lt;b style=&quot;font-size:11px; color:#2563EB;&quot;&gt;输入特性&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#475569;&quot;&gt;• 支持动态流与静态高分图&lt;br&gt;• 自动适配畸变矫正模型&lt;br&gt;• 空间先验坐标一键加载&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#93C5FD;strokeWidth=1;fontFamily=Microsoft YaHei;fontColor=#1E3A8A;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="group_input">
+          <mxGeometry x="15" y="375" width="190" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== 2. 前端级联感知流水线 ==================== -->
+        <mxCell id="group_frontend" value="&lt;b style=&quot;font-size:13px; color:#1E40AF;&quot;&gt;02 · 前端级联视觉感知流水线 (Cascaded Perception Pipeline)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=1.5;fontFamily=Microsoft YaHei, sans-serif;fontColor=#0F172A;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="290" y="95" width="310" height="660" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step1_yolo" value="&lt;b style=&quot;font-size:12px; color:#1E3A8A;&quot;&gt;Stage 1 · YOLO 目标检测与二值 ROI 掩膜&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;微调 POLES.pt 模型，精准提取标杆区域，过滤 95%+ 背景噪点&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_frontend">
+          <mxGeometry x="15" y="40" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step2_harris" value="&lt;b style=&quot;font-size:12px; color:#1E3A8A;&quot;&gt;Stage 2 · 掩膜约束 Harris 几何候选角点提取&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;自相关矩阵 M_H，响应函数 R ≥ 0.03 高灵敏度捕获转折点&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_frontend">
+          <mxGeometry x="15" y="125" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step3_cnn" value="&lt;b style=&quot;font-size:12px; color:#1E3A8A;&quot;&gt;Stage 3 · 64×64 Patch 裁切与 9 分类 SimpleCNN&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;3阶段 Conv+Pool+FC，8 类空间物理点 + 1 类背景 (100% 准确率)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=2;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_frontend">
+          <mxGeometry x="15" y="210" width="280" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step4_nms" value="&lt;b style=&quot;font-size:12px; color:#1E3A8A;&quot;&gt;Stage 4 · 分类别非极大值抑制 (Class-wise NMS)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;置信度过滤 (τ≥0.85)，按类别半径 r=25px 贪心抑制密集簇&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_frontend">
+          <mxGeometry x="15" y="300" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step5_subpix" value="&lt;b style=&quot;font-size:12px; color:#1E3A8A;&quot;&gt;Stage 5 · cornerSubPix 亚像素梯度正交精炼&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;梯度正交最小二乘迭代求解，定位精度跃升至 0.01~0.05 像素&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_frontend">
+          <mxGeometry x="15" y="385" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step_edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" source="step1_yolo" target="step2_harris" parent="group_frontend"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="step_edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" source="step2_harris" target="step3_cnn" parent="group_frontend"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="step_edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" source="step3_cnn" target="step4_nms" parent="group_frontend"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="step_edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" source="step4_nms" target="step5_subpix" parent="group_frontend"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="node_fe_out" value="&lt;b style=&quot;font-size:11px; color:#059669;&quot;&gt;前端输出结果&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#475569;&quot;&gt;高纯净 2D 亚像素关键点集 {(u_i*, v_i*), Class_ID}&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#A7F3D0;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#065F46;align=center;verticalAlign=middle;" vertex="1" parent="group_frontend">
+          <mxGeometry x="15" y="475" width="280" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== 3. 几何绑定与射线反投影接口 ==================== -->
+        <mxCell id="group_binding" value="&lt;b style=&quot;font-size:13px; color:#0D9488;&quot;&gt;03 · 几何关联与射线反投影 (Ray Projection)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDFA;strokeColor=#99F6E4;strokeWidth=1.5;fontFamily=Microsoft YaHei, sans-serif;fontColor=#134E4A;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="630" y="95" width="250" height="660" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_mapping" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;2D-3D 语义无歧义映射&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;根据 Class_ID 自动绑定空间物理锚点 P_i，无需手工特征匹配&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#14B8A6;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_binding">
+          <mxGeometry x="15" y="50" width="220" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_ray_proj" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;相机单位反投影射线提取&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;r_i = K⁻¹[u_i*, v_i*, 1]ᵀ / ‖·‖&lt;br&gt;将像素观测转化为 3D 方向向量&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#14B8A6;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_binding">
+          <mxGeometry x="15" y="150" width="220" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_ray_angles" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;观测射线夹角矩阵计算&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;θ_ij = arccos(r_i · r_j)&lt;br&gt;天然解耦 3D 旋转姿态 R&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0D9488;strokeWidth=2;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_binding">
+          <mxGeometry x="15" y="260" width="220" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_binding_note" value="&lt;b style=&quot;font-size:11px; color:#0D9488;&quot;&gt;几何解耦核心机理&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#475569;&quot;&gt;两两射线内积具备保角不变性，将 6-DoF 耦合问题降维为仅关于相机坐标 C 的 3-DoF 良态优化，有效克服共线退化。&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CCFBF1;strokeColor=#5EEAD4;strokeWidth=1;fontFamily=Microsoft YaHei;fontColor=#115E59;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="group_binding">
+          <mxGeometry x="15" y="375" width="220" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== 4. 后端射线夹角优化求解层 ==================== -->
+        <mxCell id="group_backend" value="&lt;b style=&quot;font-size:13px; color:#B45309;&quot;&gt;04 · 后端射线夹角非线性优化求解 (NLLS Optimization)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#FDE68A;strokeWidth=1.5;fontFamily=Microsoft YaHei, sans-serif;fontColor=#78350F;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="910" y="95" width="260" height="660" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_multistart" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;多候选初值生成池 S&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;1. 历史帧滤波先验 C_{t-1}&lt;br&gt;2. 传统 PnP 粗估计 -Rᵀt&lt;br&gt;3. 空间锚点几何重心 P̄&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F59E0B;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_backend">
+          <mxGeometry x="15" y="45" width="230" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_dual_solver" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;LM / TRF 双优化引擎并发&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;Levenberg-Marquardt + 信赖域反射&lt;br&gt;目标函数: min ½∑(φ_ij(C) - θ_ij)²&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D97706;strokeWidth=2;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_backend">
+          <mxGeometry x="15" y="160" width="230" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_residual_eval" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;全局最优残差评判与选取&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;C* = argmin ‖r(C)‖²&lt;br&gt;跳出局部极小，100% 收敛率保障&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F59E0B;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_backend">
+          <mxGeometry x="15" y="270" width="230" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_fallback" value="&lt;b style=&quot;font-size:12px; color:#0F172A;&quot;&gt;鲁棒平滑与异常容错闭环&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#64748B;&quot;&gt;异常工况自动平滑回退至 PnP / EKF，确保系统永远在线不崩溃&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F59E0B;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_backend">
+          <mxGeometry x="15" y="375" width="230" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== 5. 系统输出与工业终端 ==================== -->
+        <mxCell id="group_output" value="&lt;b style=&quot;font-size:13px; color:#4338CA;&quot;&gt;05 · 工业终端与成果输出 (Desktop &amp;amp; Output)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#C7D2FE;strokeWidth=1.5;fontFamily=Microsoft YaHei, sans-serif;fontColor=#312E81;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="95" width="160" height="660" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_coords" value="&lt;b style=&quot;font-size:12px; color:#4338CA;&quot;&gt;3D 空间坐标&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#0F172A;&quot;&gt;X_c, Y_c, Z_c&lt;br&gt;(10~15cm RMSE)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6366F1;strokeWidth=2;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_output">
+          <mxGeometry x="15" y="45" width="130" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_pose" value="&lt;b style=&quot;font-size:12px; color:#4338CA;&quot;&gt;航向姿态估计&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#0F172A;&quot;&gt;Yaw / Pitch / Roll&lt;br&gt;误差 &amp;lt; 0.6°&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6366F1;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_output">
+          <mxGeometry x="15" y="135" width="130" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_gui" value="&lt;b style=&quot;font-size:12px; color:#4338CA;&quot;&gt;PyQt5 工作站&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#0F172A;&quot;&gt;实时 3D 轨迹绘制&lt;br&gt;6 阶段质检视窗&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6366F1;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_output">
+          <mxGeometry x="15" y="225" width="130" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_db" value="&lt;b style=&quot;font-size:12px; color:#4338CA;&quot;&gt;SQLite 数据库&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#0F172A;&quot;&gt;标定/场景/日志&lt;br&gt;持久化管理&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6366F1;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#0F172A;align=center;verticalAlign=middle;shadow=1;" vertex="1" parent="group_output">
+          <mxGeometry x="15" y="325" width="130" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_perf" value="&lt;b style=&quot;font-size:11px; color:#059669;&quot;&gt;边缘端运行性能&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px; color:#065F46;&quot;&gt;Jetson Orin: 26 FPS&lt;br&gt;100% 解算成功率&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#6EE7B7;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontColor=#065F46;align=center;verticalAlign=middle;" vertex="1" parent="group_output">
+          <mxGeometry x="15" y="415" width="130" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== 跨模块全局数据流连线 ==================== -->
+        <mxCell id="flow_in_to_fe" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2.5;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="node_rtsp" target="step1_yolo" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow_fe_to_mapping" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0D9488;strokeWidth=2.5;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="node_fe_out" target="node_mapping" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow_proj_to_angles" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0D9488;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="node_ray_proj" target="node_ray_angles" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow_mapping_to_proj" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0D9488;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="node_mapping" target="node_ray_proj" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow_angles_to_backend" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D97706;strokeWidth=2.5;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="node_ray_angles" target="node_dual_solver" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow_multistart_to_solver" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D97706;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="node_multistart" target="node_dual_solver" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow_solver_to_eval" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D97706;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="node_dual_solver" target="node_residual_eval" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow_eval_to_output" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4F46E5;strokeWidth=2.5;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="node_residual_eval" target="node_coords" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== 底部技术栈与架构价值说明 ==================== -->
+        <mxCell id="footer_bar" value="&lt;b style=&quot;font-size:11px; color:#0F172A;&quot;&gt;架构核心优势：&lt;/b&gt;&lt;span style=&quot;font-size:11px; color:#475569;&quot;&gt; 1. 前后端数据接口严格分离，前端输出纯净 2D 亚像素点与语义 ID，后端专职几何良态优化；2. 射线夹角守恒约束从根本上消除细长标杆 6-DoF PnP 共线退化；3. 多初值并发与双求解器协同保障 100% 全局收敛，实现系统软件高可用闭环。&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#CBD5E1;strokeWidth=1.5;fontFamily=Microsoft YaHei, sans-serif;fontColor=#334155;align=left;spacingLeft=16;spacingRight=16;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="775" width="1320" height="50" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
