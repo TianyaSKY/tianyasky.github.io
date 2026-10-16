@@ -3,22 +3,15 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-// GitHub Pages SPA 重定向恢复：从 404.html 跳回首页后，把原路径写回 location。
-(() => {
-  try {
-    const saved = sessionStorage.getItem('gh-pages-redirect');
-    if (saved) {
-      sessionStorage.removeItem('gh-pages-redirect');
-      const url = new URL(window.location.href);
-      url.pathname = saved.replace(/(\?|#).*/, '');
-      url.search = saved.includes('?') ? saved.slice(saved.indexOf('?'), saved.includes('#') ? saved.indexOf('#') : undefined) : '';
-      url.hash = saved.includes('#') ? saved.slice(saved.indexOf('#')) : '';
-      window.history.replaceState(null, '', url.pathname + url.search + url.hash);
-    }
-  } catch (e) { /* sessionStorage may be disabled */ }
-})();
+// 构建期预渲染（scripts/prerender.mjs）会在 #root 内写入一份静态外壳：给不执行 JS 的
+// 爬虫/分享预览机器人（QQ、微信、Twitter）以及禁用 JS 的访客看的内容与元信息。
+// React 从这里接管前先清空它，避免出现重复正文。
+const container = document.getElementById('root');
+if (container.firstElementChild) {
+  container.replaceChildren();
+}
 
-createRoot(document.getElementById('root')).render(
+createRoot(container).render(
   <StrictMode>
     <App />
   </StrictMode>,
