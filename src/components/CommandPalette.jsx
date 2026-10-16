@@ -314,7 +314,7 @@ export default function CommandPalette({ onClose }) {
               {[
                 { label: '首页顶部', icon: '🏠', desc: '编辑寄语与排名', href: '#hero' },
                 { label: '关于作者', icon: '👤', desc: '科研方向与经历', href: '#about' },
-                { label: '教育背景', icon: '🎓', desc: '大连海洋大学 9/117', href: '#education' },
+                { label: '教育背景', icon: '🎓', desc: '大连海洋大学 7/117', href: '#education' },
                 { label: '精选项目', icon: '💼', desc: '7 大科研工程案例', href: '/projects' },
                 { label: '竞赛荣誉', icon: '🏆', desc: '蓝桥杯国一 / 卓越杯', href: '#awards' },
                 { label: '技术栈', icon: '⚡', desc: 'CV · AI · 后端', href: '#skills' },
