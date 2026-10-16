@@ -107,11 +107,11 @@ export default function Hero({ onOpenCmdPalette }) {
 
       <div className="hero-stats">
         <div className="hero-stat">
-          <span className="hero-stat-value">9<sup>/117</sup></span>
+          <span className="hero-stat-value">7<sup>/117</sup></span>
           <span className="hero-stat-label">专业排名</span>
         </div>
         <div className="hero-stat">
-          <span className="hero-stat-value">3.74</span>
+          <span className="hero-stat-value">3.72</span>
           <span className="hero-stat-label">GPA · 6 学期</span>
         </div>
         <div className="hero-stat">
