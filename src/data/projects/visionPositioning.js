@@ -331,7 +331,7 @@ export const visionPositioningDetail = {
           "为系统性验证各模块在整套系统中的独立功效与抗退化性能，我们在仿真基准与真实视频数据集上开展了详尽的消融实验。对比方案涵盖：(1) Ours-Full 完整流水线；(2) Ablation-1 (No Mask，关闭 YOLO 掩膜)；(3) Ablation-2 (No CNN，关闭 CNN 语义分类，采用纯几何启发式分配)；(4) Ablation-3 (No Post-processing，关闭 NMS 与亚像素精炼)；(5) Ablation-4 (Pure Harris，无掩膜无分类纯角点基线)；(6) Traditional PnP (完整关键点检测，但后端使用传统 solvePnP 解算)。"
         ],
         datasetFigure: {
-          src: "/projects/vision-positioning/figure_ablation_grid.png",
+          src: "https://media.tianyasky.top/site/projects/vision-positioning/figure_ablation_grid.png",
           label: "Figure 3",
           title: "消融实验各变体关键点检测与分类定性对比 (Ablation Qualitative Grid)",
           caption: "展示了 Ours-Full、Ablation-1 (No Mask)、Ablation-2 (No CNN)、Ablation-3 (No Post-processing)、Ablation-4 (Pure Harris) 以及核心机理总结的 6 面板定性对比图。"
@@ -347,7 +347,7 @@ export const visionPositioningDetail = {
         scatterDiscussion: "在数据集构建与训练评测方面，Patch CNN 分类器在 1377 张样本（验证集 276 张）上实现了全部 8 个空间角点类别与 1 个背景类的 100% Precision、100% Recall 与 100% F1-Score，混淆矩阵呈现完美的对角线分布，有效避免了关键点物理身份错判；YOLO 检测模型在 640×640 分辨率下训练收敛平稳，验证集 mAP@0.5 超过 99.2%（见下方 Figure 5 训练全景面板）。",
         scatterFigures: [
           {
-            src: "/projects/vision-positioning/figure_training_panel.png",
+            src: "https://media.tianyasky.top/site/projects/vision-positioning/figure_training_panel.png",
             label: "Figure 5",
             title: "YOLO 训练收敛曲线、归一化混淆矩阵与 Patch CNN 混淆矩阵三联全景面板",
             caption: "展示了 (a) YOLO 目标检测训练损失与指标收敛曲线；(b) YOLO 杆体检测归一化混淆矩阵；(c) Patch CNN 9 分类混淆矩阵，验证集分类准确率达 100.0%。"
@@ -386,7 +386,7 @@ export const visionPositioningDetail = {
             tag: "Case Study 1 · 多标杆空间全景解算验证",
             dataset: "Ours-Full Benchmark (Render Image #1)",
             figure: {
-              src: "/projects/vision-positioning/ours-full_result.jpg",
+              src: "https://media.tianyasky.top/site/projects/vision-positioning/ours-full_result.jpg",
               label: "Figure 9",
               title: "Ours-Full 完整流水线关键点检测、语义分类与位姿重构全流程定性结果",
               caption: "展示了原始图像上杆体掩膜叠加、Harris 角点提取、CNN 语义标注（绿色/橙色标签）及最终位姿解算输出，无任何背景虚警干扰。"
@@ -398,7 +398,7 @@ export const visionPositioningDetail = {
             tag: "Case Study 2 · 多初值非线性优化收敛态势",
             dataset: "Multi-Start NLLS Schematic",
             figure: {
-              src: "/projects/vision-positioning/multi_start_nlls_schematic.png",
+              src: "https://media.tianyasky.top/site/projects/vision-positioning/multi_start_nlls_schematic.png",
               label: "Figure 10",
               title: "多候选初值生成与 Levenberg-Marquardt / TRF 优化残差收敛流向图",
               caption: "对比了时序初值、PnP 粗解与几何重心初值在非凸残差曲面上的优化轨迹与收敛特性。"
@@ -410,7 +410,7 @@ export const visionPositioningDetail = {
             tag: "Case Study 3 · 系统软件架构与分层设计",
             dataset: "System Engineering Blueprint",
             figure: {
-              src: "/projects/vision-positioning/system_architecture_blue.png",
+              src: "https://media.tianyasky.top/site/projects/vision-positioning/system_architecture_blue.png",
               label: "Figure 11",
               title: "基于单目视觉与射线夹角约束的相机三维坐标重建系统分层软件架构图",
               caption: "涵盖视频采集层、深度学习感知层、几何优化计算层、数据持久化存储层（SQLite）与交互式可视化界面层（PyQt5）。"
@@ -422,7 +422,7 @@ export const visionPositioningDetail = {
             tag: "Case Study 4 · 单图角点提取与精炼质检",
             dataset: "Single Image Keypoint Pipeline",
             figure: {
-              src: "/projects/vision-positioning/single_image_result.png",
+              src: "https://media.tianyasky.top/site/projects/vision-positioning/single_image_result.png",
               label: "Figure 12",
               title: "单张图像关键点提取、CNN 分类、NMS 抑制与亚像素精炼全阶段质检图",
               caption: "详细展示了从原始图像到候选角点云、置信度过滤、NMS 去重以及亚像素坐标精炼的连续演变过程。"
@@ -434,7 +434,7 @@ export const visionPositioningDetail = {
             tag: "Case Study 5 · 省级创新创业年会答辩与成果鉴定",
             dataset: "Liaoning Innovation Summit & IP Registration",
             figure: {
-              src: "/projects/vision-positioning/academic_poster.png",
+              src: "https://media.tianyasky.top/site/projects/vision-positioning/academic_poster.png",
               label: "Figure 13",
               title: "第十三届辽宁省大学生创新年会参展学术海报与项目成果全景展示",
               caption: "全景展示了国家级大创项目编号 202510158006 的学术创新点、实验数据、软著证书与实物系统成果。"
@@ -478,7 +478,7 @@ export const visionPositioningDetail = {
       wide: true
     },
     results: {
-      src: "/projects/vision-positioning/figure_ablation_grid.png",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/figure_ablation_grid.png",
       caption: "六大消融实验变体关键点检测与定位误差综合评测对比"
     }
   },
@@ -514,7 +514,7 @@ export const visionPositioningDetail = {
       aspect: "wide"
     },
     {
-      src: "/projects/vision-positioning/figure_ablation_grid.png",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/figure_ablation_grid.png",
       caption: "消融实验全变体检测效果横向对比：Ours-Full、No Mask、No CNN、No Post 及 Pure Harris",
       aspect: "wide"
     },
@@ -524,47 +524,47 @@ export const visionPositioningDetail = {
       aspect: "chart"
     },
     {
-      src: "/projects/vision-positioning/figure_training_panel.png",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/figure_training_panel.png",
       caption: "YOLO 训练损失与指标曲线、YOLO 混淆矩阵与 Patch CNN 混淆矩阵三联面板",
       aspect: "wide"
     },
     {
-      src: "/projects/vision-positioning/system_architecture_blue.png",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/system_architecture_blue.png",
       caption: "单目视觉定位系统分层软件架构蓝图",
       aspect: "wide"
     },
     {
-      src: "/projects/vision-positioning/multi_start_nlls_schematic.png",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/multi_start_nlls_schematic.png",
       caption: "多初值非线性最小二乘优化（时序初值、PnP粗解、空间重心）收敛拓扑图",
       aspect: "wide"
     },
     {
-      src: "/projects/vision-positioning/ours-full_result.jpg",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/ours-full_result.jpg",
       caption: "Ours-Full 算法在复杂全景视场下的实际特征提取与类别标注定性图",
       aspect: "wide"
     },
     {
-      src: "/projects/vision-positioning/single_image_result.png",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/single_image_result.png",
       caption: "单张图像全流程检测步骤质检：ROI 掩膜、Harris 提取、NMS 抑制与亚像素精炼",
       aspect: "wide"
     },
     {
-      src: "/projects/vision-positioning/academic_poster.png",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/academic_poster.png",
       caption: "第十三届辽宁省大学生创新年会学术海报全景成果展示",
       aspect: "chart"
     },
     {
-      src: "/projects/vision-positioning/real_world/dsc00438.jpg",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/real_world/dsc00438.jpg",
       caption: "Sony α6400 (ILCE-6400) 6000×4000 超高清实拍现场原图 (DSC00438)",
       aspect: "wide"
     },
     {
-      src: "/projects/vision-positioning/real_world/dsc00445.jpg",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/real_world/dsc00445.jpg",
       caption: "大连沿海实测现场多视角标杆拍摄原图 (DSC00445)",
       aspect: "wide"
     },
     {
-      src: "/projects/vision-positioning/real_world/yolo_boxes.jpg",
+      src: "https://media.tianyasky.top/site/projects/vision-positioning/real_world/yolo_boxes.jpg",
       caption: "真实测试样本 YOLO 标杆目标检测与边界框回归预测效果图",
       aspect: "wide"
     },
@@ -589,7 +589,7 @@ export const visionPositioningDetail = {
     github: "https://github.com/TianyaSKY",
     gitee: "https://gitee.com/TianyaSKY"
   },
-  video: "/projects/vision-positioning/demo.mp4",
+  video: "https://media.tianyasky.top/site/projects/vision-positioning/demo.mp4",
   featured: true,
   legacyHasDemo: true
 };

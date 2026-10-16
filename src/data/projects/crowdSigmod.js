@@ -337,7 +337,7 @@ export const crowdSigmodDetail = {
             tag: "Case Study 1 · 极限密集与人头重叠分解",
             dataset: "ShanghaiTech Part A (N = 502)",
             figure: {
-              src: "/projects/crowd-sigmod/vis_shanghaitech_a_502.jpg",
+              src: "https://media.tianyasky.top/site/projects/crowd-sigmod/vis_shanghaitech_a_502.jpg",
               label: "Figure 9",
               title: "ShanghaiTech Part A (N=502) 超密集人群定性预测与密度分解",
               caption: "超密集人头场景下的 4 面板质检对比：(a) 原始稠密图像与密集点标注；(b) 守恒密度图 GT；(c) 概率响应图 GT；(d) 模型输出密度热力叠加图。"
@@ -349,7 +349,7 @@ export const crowdSigmodDetail = {
             tag: "Case Study 2 · 超大分辨率与多尺度无缝拼接",
             dataset: "UCF-QNRF (N = 977)",
             figure: {
-              src: "/projects/crowd-sigmod/vis_ucf_qnrf_977.jpg",
+              src: "https://media.tianyasky.top/site/projects/crowd-sigmod/vis_ucf_qnrf_977.jpg",
               label: "Figure 10",
               title: "UCF-QNRF (N=977) 极端密集超大尺度跨度人头密度图定性预测验证",
               caption: "超大空间分辨率图像下近景特写与远景微小人头的定性预测，平滑无接缝。"
@@ -361,7 +361,7 @@ export const crowdSigmodDetail = {
             tag: "Case Study 3 · 复杂恶劣天气与夜间低光照门控",
             dataset: "JHU-Crowd (N = 463)",
             figure: {
-              src: "/projects/crowd-sigmod/vis_jhu_463.jpg",
+              src: "https://media.tianyasky.top/site/projects/crowd-sigmod/vis_jhu_463.jpg",
               label: "Figure 11",
               title: "JHU-Crowd (N=463) 复杂户外低光照与恶劣天气定性验证",
               caption: "夜间低照度、雨雾遮挡与杂乱背景噪声下的密度估计与前景概率先验响应。"
@@ -430,7 +430,7 @@ export const crowdSigmodDetail = {
       wide: true
     },
     results: {
-      src: "/projects/crowd-sigmod/academic_sota_comparison.png",
+      src: "https://media.tianyasky.top/site/projects/crowd-sigmod/academic_sota_comparison.png",
       caption: "国际顶会 SOTA 基准横向对比与跨数据集评测"
     }
   },
@@ -466,17 +466,17 @@ export const crowdSigmodDetail = {
       aspect: "wide"
     },
     {
-      src: "/projects/crowd-sigmod/vis_shanghaitech_a_502.jpg",
+      src: "https://media.tianyasky.top/site/projects/crowd-sigmod/vis_shanghaitech_a_502.jpg",
       caption: "ShanghaiTech Part A (N=502) 超密集人群高斯密度与概率响应图 4 面板定性验证",
       aspect: "wide"
     },
     {
-      src: "/projects/crowd-sigmod/vis_ucf_qnrf_977.jpg",
+      src: "https://media.tianyasky.top/site/projects/crowd-sigmod/vis_ucf_qnrf_977.jpg",
       caption: "UCF-QNRF (N=977) 极端密集超大尺度跨度人头密度图定性预测验证",
       aspect: "wide"
     },
     {
-      src: "/projects/crowd-sigmod/vis_jhu_463.jpg",
+      src: "https://media.tianyasky.top/site/projects/crowd-sigmod/vis_jhu_463.jpg",
       caption: "JHU-Crowd (N=463) 复杂户外低光照环境人群密度与概率先验定性验证",
       aspect: "wide"
     },

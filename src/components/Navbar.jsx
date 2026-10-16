@@ -83,7 +83,7 @@ export default function Navbar({ onOpenCmdPalette }) {
           className="nav-brand"
           onClick={() => isHome && window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <img className="nav-brand-logo" src="/logo.png" alt="CMX" />
+          <img className="nav-brand-logo" src="https://media.tianyasky.top/site/logo.png" alt="CMX" />
           <span className="nav-brand-version">v2.0</span>
         </Link>
 

@@ -4,7 +4,7 @@ export const personalInfo = {
   title: "计算机视觉 · AI 原生系统 · 智能体工程",
   school: "大连海洋大学 · 信息工程学院",
   major: "计算机科学与技术 · 本科 (2023.09 — 2027.07)",
-  avatar: "./avatar.png",
+  avatar: "https://media.tianyasky.top/site/avatar.png",
   schoolLogo: "./school_logo.png",
   email: "tianyaguest@qq.com",
   github: "https://github.com/TianyaSKY",
