@@ -1,9 +1,10 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import BackgroundCanvas from './components/BackgroundCanvas';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ScrollToTop from './components/ScrollToTop';
+import { routeMetaFor } from './utils/routeMeta';
 
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
@@ -26,6 +27,22 @@ function PaletteFallback() {
   );
 }
 
+// 站内跳转时同步 <title> 与 description：预渲染只覆盖「首次加载」，
+// 之后由 React Router 接管，不处理的话从首页点进任何项目页，标题都会停留在首页那一版。
+function DocumentMeta() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const meta = routeMetaFor(pathname);
+    if (!meta) return; // 未预渲染的路径（404）保持原状
+    document.title = meta.title;
+    const description = document.querySelector('meta[name="description"]');
+    if (description && meta.description) description.setAttribute('content', meta.description);
+  }, [pathname]);
+
+  return null;
+}
+
 function Shell() {
   const [isCmdOpen, setIsCmdOpen] = useState(false);
 
@@ -42,6 +59,7 @@ function Shell() {
 
   return (
     <div className="app-container">
+      <DocumentMeta />
       <ScrollToTop />
       <BackgroundCanvas />
       <Navbar onOpenCmdPalette={() => setIsCmdOpen(true)} />
