@@ -8,7 +8,7 @@ export const projectCatalog = [
     subtitle: "级联神经网络 · 射线夹角几何约束 · 现场 10–15cm 实测精度",
     badge: "国家级大创 · 论文与软著",
     category: "Computer Vision & Geometric Pose Reconstruction",
-    cover: "/projects/vision-positioning/cover.png",
+    cover: "https://media.tianyasky.top/site/projects/vision-positioning/cover.png",
     accent: "blue",
     bento: {
       size: "lg",
@@ -50,7 +50,7 @@ export const projectCatalog = [
     subtitle: "概率引导注意力 · 积分守恒密度图 · 4 大公开基准通用评测",
     badge: "独立研发 · 计算机视觉",
     category: "Computer Vision & Crowd Density Estimation",
-    cover: "/projects/crowd-sigmod/cover.png",
+    cover: "https://media.tianyasky.top/site/projects/crowd-sigmod/cover.png",
     accent: "blue",
     bento: {
       size: "lg",
@@ -92,7 +92,7 @@ export const projectCatalog = [
     subtitle: "Qwen3.6-27B · 4bit QLoRA · 单卡 RTX 5090 文风续写",
     badge: "项目负责人",
     category: "LLM Fine-Tuning & SFT",
-    cover: "/projects/cixin-singularity/cover.png",
+    cover: "https://media.tianyasky.top/site/projects/cixin-singularity/cover.png",
     accent: "indigo",
     bento: {
       size: "md",
@@ -133,7 +133,7 @@ export const projectCatalog = [
     subtitle: "PPO + 9 向雷达的 3D 赛车控制环境",
     badge: "独立开发 · 开源",
     category: "Reinforcement Learning & Environment Design",
-    cover: "/projects/rl-racing/cover.png",
+    cover: "https://media.tianyasky.top/site/projects/rl-racing/cover.png",
     accent: "sky",
     bento: {
       size: "sm",
@@ -175,7 +175,7 @@ export const projectCatalog = [
     subtitle: "把云存储、知识库与受控 Agent 合并为一个 AI Workspace",
     badge: "中软国际 AI 挑战赛省一等奖",
     category: "AI Workspace · RAG · Agent Runtime",
-    cover: "/projects/sky-cloud/cover.png",
+    cover: "https://media.tianyasky.top/site/projects/sky-cloud/cover.png",
     accent: "cyan",
     bento: {
       size: "lg",
@@ -219,7 +219,7 @@ export const projectCatalog = [
     subtitle: "从上传、行为事件到向量召回的短视频推荐闭环",
     badge: "端到端推荐系统 MVP",
     category: "Recommendation System & Event Pipeline",
-    cover: "/projects/sky-douyin/cover.png",
+    cover: "https://media.tianyasky.top/site/projects/sky-douyin/cover.png",
     accent: "indigo",
     bento: {
       size: "md",
@@ -262,7 +262,7 @@ export const projectCatalog = [
     subtitle: "面向高校教学的 ACM / OOP / Kaggle 多模式评测平台",
     badge: "独立开发 · 开源",
     category: "Online Judge & Secure Sandbox",
-    cover: "/projects/sky-oj/cover.png",
+    cover: "https://media.tianyasky.top/site/projects/sky-oj/cover.png",
     accent: "blue",
     bento: {
       size: "tall",

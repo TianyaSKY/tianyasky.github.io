@@ -39,7 +39,7 @@ export const skyCloudDetail = {
       caption: "文件管理与 RAG 智能助手"
     },
     method: {
-      src: "/projects/sky-cloud/architecture.png",
+      src: "https://media.tianyasky.top/site/projects/sky-cloud/architecture.png",
       caption: "Frontend / API / Worker / Data 四层架构"
     },
     results: {
