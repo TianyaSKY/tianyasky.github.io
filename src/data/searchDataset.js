@@ -588,11 +588,11 @@ export const searchDataset = [
     category: "award",
     type: "Course",
     title: "大连海洋大学 · 计算机科学与技术本科",
-    subtitle: "专业排名 9/117 · GPA 3.74 · CET-4 510 · 校二等奖学金",
+    subtitle: "专业排名 7/117 · GPA 3.72 · CET-4 510 · 校二等奖学金",
     description: "主修计算机科学与技术专业，核心课程成绩优异：算法分析 95分、机器学习 95分、概率论 98分、高数 97分、数据库 93分。",
     tags: ["大连海洋大学", "计算机科学与技术", "专业排名", "GPA", "奖学金", "教育", "高分课程"],
     aliases: ["dlmu", "dalian", "jiaoyu", "daxue", "paiming", "gpa", "chengji"],
-    badge: "排名 9/117 · GPA 3.74",
+    badge: "排名 7/117 · GPA 3.72",
     href: "#education"
   },
   {
@@ -713,7 +713,7 @@ export const searchDataset = [
     type: "Navigation",
     title: "教育经历与核心课程",
     subtitle: "大连海洋大学 · 计算机科学与技术 (2023.09 — 2027.07)",
-    description: "查看专业排名 9/117、GPA 3.74、高分专业课程与英语四级 CET-4 510 详情。",
+    description: "查看专业排名 7/117、GPA 3.72、高分专业课程与英语四级 CET-4 510 详情。",
     tags: ["教育", "Education", "大连海洋大学", "课程", "成绩", "排名"],
     aliases: ["jiaoyu", "education", "xuexiao", "chengji"],
     badge: "锚点直达",
