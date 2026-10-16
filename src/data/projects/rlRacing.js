@@ -5,7 +5,7 @@ export const rlRacingDetail = {
       caption: "3D 赛道环境实机画面"
     },
     {
-      src: "/projects/rl-racing/training_curves.png",
+      src: "https://media.tianyasky.top/site/projects/rl-racing/training_curves.png",
       caption: "PPO 训练奖励曲线"
     },
     {
@@ -19,7 +19,7 @@ export const rlRacingDetail = {
       caption: "3D 赛道环境实机画面"
     },
     results: {
-      src: "/projects/rl-racing/training_curves.png",
+      src: "https://media.tianyasky.top/site/projects/rl-racing/training_curves.png",
       caption: "PPO 训练奖励曲线"
     }
   },
