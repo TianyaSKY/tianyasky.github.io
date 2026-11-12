@@ -12,7 +12,7 @@
 
   --surface: rgba(255, 255, 255, 0.72);
   --surface-strong: #ffffff;
-  --text-strong: #0c111d;
+  --text-strong: #000000;
 
   --color-primary: #1c2841;        /* 深海军蓝，对标题 */
   --color-primary-hover: #0c111d;
@@ -34,9 +34,9 @@
 
   --color-navy: #0c111d;
   --color-navy-light: #1e293b;
-  --color-text-main: #0c111d;
-  --color-text-muted: #4f5b6b;
-  --color-text-light: #8995a6;
+  --color-text-main: #000000;
+  --color-text-muted: #000000;
+  --color-text-light: #000000;
 
   --rule: rgba(12, 17, 29, 0.12);
   --rule-strong: rgba(12, 17, 29, 0.4);
