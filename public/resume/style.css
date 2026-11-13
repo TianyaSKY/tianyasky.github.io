@@ -244,6 +244,10 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .entry-details { margin-top: 2px; }
 .entry-details p { margin-top: 4px; line-height: 22px;color: black; }
 .entry-details p:first-child { margin-top: 0; }
+.internships .entry-details p {
+  text-align: justify;
+  word-break: break-all;
+}
 .resume-continue {
   display: flex;
   align-items: baseline;

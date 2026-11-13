@@ -2,6 +2,7 @@
 <!--
   打印：Ctrl/Cmd + P，A4、100% 缩放、无页边距，关闭页眉页脚并开启背景图形。投递用同目录 PDF。
   排版：两页 A4。中英文统一思源宋体 Noto Serif SC，本地子集。
+  实习正文：非末行两端对齐，长英文允许行内断行，数字与单位保持成组。
   证件照、校徽与中文字体均在本地。
 -->
 <html lang="zh-CN">
@@ -81,7 +82,8 @@
           <div class="education-overview">
             <div class="school-info">
               <h3 class="school-name">大连海洋大学 · 信息工程学院</h3>
-              <p class="major">计算机科学与技术 · 本科 <span class="badges">· 综测 <span class="em">1/117</span> · 校级二等奖学金</span>
+              <p class="major">计算机科学与技术 · 本科 <span class="badges">· 综测 <span class="em">1/117</span> · 校级二等奖学金 · CET-4
+                  <span class="em">510</span></span>
               </p>
             </div>
             <p class="education-dates mono"><time datetime="2023-09">2023.09</time> — <time
@@ -92,33 +94,24 @@
         <section class="skills" aria-labelledby="skills-heading">
           <h2 class="section-heading" id="skills-heading">专业技能</h2>
           <div class="entry-details">
-            <p><strong>智能体与 RAG：</strong>熟练使用 LangChain、LangGraph 构建 ReAct Agent 和业务工作流；熟悉 RAG 的各个流程；熟悉 MCP 协议，基于
-              FastMCP 封装 Tool，掌握Agent 的各类记忆机制。了解 Pi Agent 的基本机制。</p>
-            <p><strong>Python 开发：</strong>熟练掌握面向对象编程和常用数据结构，熟悉闭包、装饰器、生成器及匿名函数等语言特性；熟悉多线程与 Asyncio
-              异步编程，能够结合信号量与锁机制控制并发任务和资源访问。</p>
-            <p><strong>后端服务：</strong>熟练使用 FastAPI 开发后端服务，能够根据业务需求设计接口、处理全局异常；使用 Pydantic 校验请求与响应数据，关注接口边界防护、异常反馈及服务稳定性。
-            </p>
-            <p><strong>数据存储：</strong>熟练使用 SQLAlchemy 进行 ORM 开发与查询优化；理解 MySQL
-              事务隔离级别、行锁机制和索引底层原理，能够定位常见索引失效场景，并结合慢查询日志分析和优化
-              SQL。</p>
-            <p><strong>缓存与消息队列：</strong>能够使用 Redis 实现热点数据缓存、分布式锁及轻量级消息解耦；结合 Celery 与消息队列处理后台异步任务，通过任务异步化降低服务间耦合并实现削峰填谷。
-            </p>
-            <p><strong>工程部署：</strong>能够在 Linux 环境下开发，具备独立的云端及内网环境部署能力；使用 Docker Compose 进行多服务容器化部署与编排，通过
-              systemd 管理进程并配置服务自启动。</p>
+            <p><strong>智能体与 RAG：</strong>熟练使用 LangChain、LangGraph 构建 ReAct Agent 与业务工作流；熟悉 RAG 全流程（切片、向量化、Multi-Query
+              改写、多路召回、RRF 融合排序）；熟悉 MCP 协议，基于 FastMCP 封装 Tool；熟悉 Agent 的多种记忆机制；了解 Pi Agent 的基本机制。</p>
+            <p><strong>Python 开发：</strong>熟悉面向对象与常用数据结构，掌握闭包、装饰器、生成器等语言特性；熟悉多线程与 Asyncio 异步编程，能结合信号量、锁控制并发任务与资源访问。</p>
+            <p><strong>后端服务：</strong>熟练使用 FastAPI 开发后端服务，能按业务设计接口并统一处理全局异常；使用 Pydantic 校验请求与响应数据，关注接口边界防护与服务稳定性。</p>
+            <p><strong>数据存储：</strong>熟悉 MySQL 事务隔离级别、行锁机制与索引原理，能定位索引失效场景并结合慢查询日志优化 SQL；熟悉 SQLAlchemy ORM 开发；使用
+              PostgreSQL（pgvector）与 Milvus 完成向量存储与检索。</p>
+            <p><strong>缓存与消息队列：</strong>使用 Redis 实现热点缓存、分布式锁与计数缓冲（定时批量回写）；使用 RabbitMQ、Celery
+              处理后台异步任务，实现服务解耦与削峰填谷；了解布隆过滤器与缓存一致性策略。</p>
+            <p><strong>工程部署：</strong>日常使用 Linux 开发，有云端及内网环境的独立部署经验；使用 Docker Compose 编排多服务，通过 systemd 管理进程并配置开机自启。</p>
           </div>
         </section>
 
         <section class="internships" aria-labelledby="internships-heading">
           <h2 class="section-heading" id="internships-heading">实习经历</h2>
           <article class="project">
-            <div class="entry-heading">
-              <h3>大连恩鸣跨境电子商务有限公司 <span class="role">| 软件开发实习生</span></h3>
-              <p class="education-dates mono"><time datetime="2026-07">2026.07</time> — <time
-                  datetime="2026-10">2026.10</time></p>
-            </div>
             <div class="entry-details">
               <p><strong>技术栈：</strong>FastAPI · aiosqlite · aiohttp · Pydantic · asyncio</p>
-              <p><strong>项目背景：</strong>面向跨境电商多店铺运营场景，对接 Ozon 官方及第三方 ERP API，构建集商品批量上架、库存同步、订单管理、数据分析于一体的自动化运营平台。</p>
+              <p><strong>项目背景：</strong>面向跨境电商多店铺运营场景，对接 Ozon 官方及第三方 ERP API，负责开发构建集商品批量上架、库存同步、订单管理、数据分析于一体的自动化运营平台。</p>
               <p><strong>任务调度：</strong>基于 Queue 与 ThreadPoolExecutor 构建后台任务执行引擎，通过 Semaphore
                 实现并发控制，支持批量提交、任务去重、执行状态追踪与异常处理，降低网关 <span class="em">504 风险</span>。</p>
               <p><strong>批量处理：</strong>针对 Ozon API 请求数量及频率限制，实现分批串行提交、逐条结果校验与部分失败隔离，支持单批 <span class="em">1000+</span>
@@ -131,8 +124,6 @@
               <p><strong>部署交付：</strong>基于 Linux + systemd 完成公司内网服务部署，实现进程管理、服务自启动及运行日志记录，支撑 <span class="em">20+</span>
                 名业务人员日常使用，并持续维护系统稳定运行。</p>
             </div>
-
-
           </article>
         </section>
       </div>
