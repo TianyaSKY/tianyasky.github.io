@@ -95,7 +95,7 @@
             <p><strong>智能体与 RAG：</strong>熟练使用 LangChain、LangGraph 构建 ReAct Agent 和业务工作流；熟悉 RAG 的各个流程；熟悉 MCP 协议，基于
               FastMCP 封装 Tool，掌握Agent 的各类记忆机制。了解 Pi Agent 的基本机制。</p>
             <p><strong>Python 开发：</strong>熟练掌握面向对象编程和常用数据结构，熟悉闭包、装饰器、生成器及匿名函数等语言特性；熟悉多线程与 Asyncio
-              异步编程，能够结合信号量等机制控制并发任务和资源访问。</p>
+              异步编程，能够结合信号量与锁机制控制并发任务和资源访问。</p>
             <p><strong>后端服务：</strong>熟练使用 FastAPI 开发后端服务，能够根据业务需求设计接口、处理全局异常；使用 Pydantic 校验请求与响应数据，关注接口边界防护、异常反馈及服务稳定性。
             </p>
             <p><strong>数据存储：</strong>熟练使用 SQLAlchemy 进行 ORM 开发与查询优化；理解 MySQL
@@ -103,7 +103,7 @@
               SQL。</p>
             <p><strong>缓存与消息队列：</strong>能够使用 Redis 实现热点数据缓存、分布式锁及轻量级消息解耦；结合 Celery 与消息队列处理后台异步任务，通过任务异步化降低服务间耦合并实现削峰填谷。
             </p>
-            <p><strong>工程部署：</strong>能够在 Linux 环境下开发，具备独立的云端及内网环境部署能力；使用 Docker 和 Docker Compose 进行多服务容器化部署与编排，通过
+            <p><strong>工程部署：</strong>能够在 Linux 环境下开发，具备独立的云端及内网环境部署能力；使用 Docker Compose 进行多服务容器化部署与编排，通过
               systemd 管理进程并配置服务自启动。</p>
           </div>
         </section>
@@ -112,20 +112,27 @@
           <h2 class="section-heading" id="internships-heading">实习经历</h2>
           <article class="project">
             <div class="entry-heading">
-              <h3>大连恩鸣跨境电子商务有限公司</h3>
+              <h3>大连恩鸣跨境电子商务有限公司 <span class="role">| 软件开发实习生</span></h3>
               <p class="education-dates mono"><time datetime="2026-07">2026.07</time> — <time
                   datetime="2026-10">2026.10</time></p>
-              <span class="role">软件开发实习生</span>
             </div>
             <div class="entry-details">
-              <p><strong>订单批量处理工具：</strong>业务人员原来要在第三方后台逐单抓取、按条件筛选、再修改状态，一批订单大约要花 5 小时。针对这个痛点，基于 FastAPI
-                独立开发了订单管理工具，把抓取、筛选和状态变更收成一次批量提交，数量不设上限，同一批操作的耗时缩短至 <span class="em">1 分钟内</span>。</p>
-              <p>
-                <strong>并发控制与容错：</strong>第三方接口有并发上限，而且经常只失败其中几条。整批重跑会把已经成功的订单再提交一遍。使用信号量限制同时发出的请求数，失败请求按退避重试；每一条都返回成功或失败原因，失败订单可以单独重试，不必全量重跑。
+              <p><strong>技术栈：</strong>FastAPI · aiosqlite · aiohttp · Pydantic · asyncio</p>
+              <p><strong>项目背景：</strong>面向跨境电商多店铺运营场景，对接 Ozon 官方及第三方 ERP API，构建集商品批量上架、库存同步、订单管理、数据分析于一体的自动化运营平台。</p>
+              <p><strong>任务调度：</strong>基于 Queue 与 ThreadPoolExecutor 构建后台任务执行引擎，通过 Semaphore
+                实现并发控制，支持批量提交、任务去重、执行状态追踪与异常处理，降低网关 <span class="em">504 风险</span>。</p>
+              <p><strong>批量处理：</strong>针对 Ozon API 请求数量及频率限制，实现分批串行提交、逐条结果校验与部分失败隔离，支持单批 <span class="em">1000+</span>
+                商品自动化处理，节省约 <span class="em">30 分钟</span>人工操作。</p>
+              <p><strong>认证复用：</strong>封装第三方平台认证模块，实现 Cookie / Token 本地持久化、登录态复用及失效自动刷新；基于 ScriptCat
+                开发浏览器脚本，实现业务页面与内网服务联动单次操作时长减少<span class="em">30s</span>。</p>
+              <p><strong>缓存优化：</strong>基于 SQLite 设计商品属性字典及类目元数据缓存，结合 TTL 过期策略、游标分页与增量更新机制，减少重复 API 请求，将单次商品属性解析流程等待时间缩短约
+                <span class="em">150 秒</span>。
               </p>
-              <p><strong>全流程独立交付：</strong>完成第三方平台接口对接，并把鉴权放在服务内自动完成，业务人员不用每次手工登录后台。服务部署在公司内网，以 systemd 管理，供 <span
-                  class="em">20+</span> 名同事日常使用，在职期间持续稳定运行。</p>
+              <p><strong>部署交付：</strong>基于 Linux + systemd 完成公司内网服务部署，实现进程管理、服务自启动及运行日志记录，支撑 <span class="em">20+</span>
+                名业务人员日常使用，并持续维护系统稳定运行。</p>
             </div>
+
+
           </article>
         </section>
       </div>
@@ -138,20 +145,22 @@
           <h2 class="section-heading" id="projects-heading">项目经历</h2>
           <article class="project">
             <div class="entry-heading">
-              <h3>SKYNetdisk —— AI 驱动的云盘与智能体协作平台</h3>
-              <span class="role">项目负责人 &amp; 核心开发者</span>
+              <h3>SKYCloud—— AI 驱动的云盘与智能体协作平台</h3>
+              <span class="role">项目负责人</span>
             </div>
             <div class="entry-details">
-              <p><strong>技术栈：</strong>FastAPI · LangGraph · pgvector · Redis · Celery · Docker
-                <a class="ext project-link"
-                  href="https://github.com/TianyaSKY/SKYNetdisk">github.com/TianyaSKY/SKYNetdisk</a>
+              <p><strong>技术栈：</strong>FastAPI · LangGraph · pgvector · Redis · RabbitMQ · Docker
+                <a class="ext project-link" href="https://github.com/TianyaSKY/SKYCloud"><svg class="project-link-icon"
+                    aria-hidden="true">
+                    <use href="#icon-github" />
+                  </svg>github.com/TianyaSKY/SKYCloud</a>
               </p>
-              <p><strong>项目简介：</strong>面向知识治理与自动化协作的 AI 原生云盘，结合多模态检索、智能体执行。</p>
-              <p><strong>双引擎与沙箱隔离：</strong>设计只读检索与智能体执行两种模式，以 PostgresSaver 持久化对话状态；为工作区分配独立 Docker 沙箱，由专用 Celery Worker
-                管理容器并驱动 Pi Coding Agent，产物经用户确认后入库。</p>
-              <p><strong>多模态检索与智能整理：</strong>针对不同文件分别设计读取与切分方案；以独立文本和视觉向量空间结合 RRF融合检索，支持页码及时间段溯源；通过
-                LangGraph 生成文件整理方案，通过 HITL 中间件保证人工确认后执行。</p>
-              <p><strong>存储与异步任务：</strong>分离逻辑目录与物理内容对象，基于 SHA-256 去重，支持分片上传、断点续传；采用事务性行锁与消息发布确认协调异步任务。</p>
+              <p><strong>知识检索：</strong>实现多查询改写与 pgvector 并行向量召回，结合 RRF 融合及可选 Rerank 重排；基于工作空间资料生成回答，并通过 SSE 流式输出。</p>
+              <p><strong>索引异步：</strong>通过事务性 Outbox 同步提交文件记录与索引任务，由 Worker 经 RabbitMQ 确认投递；异步生成向量并写入 pgvector。
+              </p>
+              <p><strong>双模助手：</strong>设计快速与专家两种模式：前者只读检索工作空间资料，后者对接 Pi Agent，支持多步骤工具调用、权限确认与会话恢复。</p>
+              <p><strong>沙箱协作：</strong>为用户工作空间提供独立 Docker 沙箱，通过 MCP 连接智能体与云盘；使用短期可撤销凭证限制访问范围，支持命令执行与文件 Diff。</p>
+              <p><strong>智能整理：</strong>基于 LangGraph ReAct Agent 执行文件分类，支持增量与全量整理；通过空间级锁控制并发任务，并在整理完成后发送收件箱通知。</p>
             </div>
           </article>
           <article class="project">
@@ -161,17 +170,17 @@
             </div>
             <div class="entry-details">
               <p><strong>技术栈：</strong>Spring Boot · FastAPI · PyTorch · Milvus · Redis · MySQL · RabbitMQ
-                <a class="ext project-link"
-                  href="https://github.com/TianyaSKY/SKYDouyin">github.com/TianyaSKY/SKYDouyin</a>
+                <a class="ext project-link" href="https://github.com/TianyaSKY/SKYDouyin"><svg class="project-link-icon"
+                    aria-hidden="true">
+                    <use href="#icon-github" />
+                  </svg>github.com/TianyaSKY/SKYDouyin</a>
               </p>
-              <p><strong>视频召回与融合排序：</strong>Web 与 Android 都会上报播放、停留和点赞。推荐服务根据这些行为生成 1024
-                维向量，再与热门池、长短期偏好一起融合排序，完成个性化推荐。只靠向量召回时，头部内容不一定进得了候选，因此热门池单独保留一路。</p>
-              <p><strong>事件解耦与冷启动推荐：</strong>视频发布后，由 RabbitMQ 把向量生成事件交给 FastAPI 推荐服务，写入
-                Milvus，业务请求不必等待模型算完。新用户还没有行为时，定时把已发布视频的标签向量聚合进 Redis；用户勾选兴趣后取这些向量的均值作为初始画像，避免冷启动阶段出现空推荐。</p>
-              <p><strong>高并发互动与幂等防重：</strong>点赞和收藏以用户与视频的联合唯一键作为真相表，重复点击不会插入第二条关系。计数不随每次点击直接写 MySQL，先在 Redis
-                中累加，再定时批量回写，避免高频互动把数据库写满。Spring Boot 维护用户、视频和关系数据，FastAPI 只负责向量，业务服务、推荐服务和消息消费各自保留边界。</p>
-              <p><strong>分片上传：</strong>上传前先计算文件哈希，再依次完成初始化、分片、合并和元数据创建；相同哈希可以直接秒传。合并完成后再异步生成 Embedding，上传接口本身不等待模型返回。
+              <p><strong>行为建模：</strong>通过 RabbitMQ 收集点击、点赞、完播等行为，结合行为权重与时间衰减聚合视频向量，生成 1024 维实时用户画像并缓存至 Redis。</p>
+              <p><strong>多路召回：</strong>并行执行 Milvus 向量召回与 Redis 热门池召回，过滤已看视频并合并去重；结合召回分与热度粗排，候选不足时从 MySQL 补充。</p>
+              <p><strong>冷启画像：</strong>定时按标签聚合已发布视频的向量并缓存至 Redis；新用户选择兴趣后，对对应标签向量求均值并写入 Milvus，作为初始兴趣画像。</p>
+              <p><strong>异步向量：</strong>视频发布时通过 RabbitMQ 触发向量生成，由 FastAPI 提取 1024 维视频特征并写入 Milvus；使用 Redis 幂等标记避免重复消费。
               </p>
+              <p><strong>互动幂等：</strong>基于用户、视频与行为类型的联合唯一约束维护点赞状态，避免重复操作；分离关系状态与行为事件，供统计聚合和画像更新使用。</p>
             </div>
           </article>
         </section>

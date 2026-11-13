@@ -124,7 +124,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .section-heading {
   position: relative;
   height: 25px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   color: var(--ink);
   font-size: 21px;
   font-weight: 700;
@@ -206,14 +206,15 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 }
 .internships .entry-heading {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 2px 12px;
 }
 .internships .entry-heading .role {
-  grid-column: 3;
-  grid-row: 1;
-  justify-self: end;
+  color: var(--strong);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
 }
 .internships .education-dates {
   grid-column: 2;
@@ -237,6 +238,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 }
 .ext { color: var(--accent); font-size: 12px; line-height: 18px; }
 .project-link { display: block; overflow-wrap: anywhere; }
+.project-link-icon { width: 12px; height: 12px; margin-right: 4px; color: #000; vertical-align: -2px; }
 .em { color: var(--accent); font-weight: 700; white-space: nowrap; }
 .keep { white-space: nowrap; }
 .entry-details { margin-top: 2px; }
@@ -295,12 +297,6 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   .role { margin-top: 2px; font-size: 10px; }
   .entry-details p { margin-top: 3px; line-height: 1.6; }
   .education-achievements { row-gap: 3px; line-height: 1.6; }
-}
-@media screen and (max-width: 520px) {
-  .internships .entry-heading { grid-template-columns: minmax(0, 1fr) auto; }
-  .internships .entry-heading h3 { grid-column: 1 / -1; grid-row: 1; }
-  .internships .education-dates { grid-column: 1; grid-row: 2; }
-  .internships .entry-heading .role { grid-column: 2; grid-row: 2; }
 }
 
 @page { size: A4; margin: 0; }
