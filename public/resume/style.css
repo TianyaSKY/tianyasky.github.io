@@ -141,18 +141,18 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   content: "";
 }
 
+/* 教育背景按内容高度排版，收紧标题下方及两条学历之间的留白。 */
+.education .section-heading { margin-bottom: 6px; }
 .education-overview {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: flex-start;
-  gap: 4px 12px;
-  min-height: 52px;
+  gap: 0 12px;
   margin-top: 0;
   padding-left: 0;
 }
 .education-overview + .education-overview {
-  margin-top: 8px;
-  padding-top: 8px;
+  margin-top: 4px;
 }
 .school-info { display: contents; }
 .school-name {
@@ -236,6 +236,23 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   justify-content: space-between;
   gap: 12px;
 }
+/* 项目头分为标题/链接行和技术栈/负责人行，信息行使用正文 14px / 22px。 */
+.project-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0 12px;
+  margin-top: 4px;
+  color: var(--contact);
+  font-size: 14px;
+  line-height: 22px;
+}
+.project-meta .role {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
 .ext { color: var(--accent); font-size: 12px; line-height: 18px; }
 .project-link { display: block; overflow-wrap: anywhere; }
 .project-link-icon { width: 12px; height: 12px; margin-right: 4px; color: #000; vertical-align: -2px; }
@@ -244,8 +261,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .entry-details { margin-top: 2px; }
 .entry-details p { margin-top: 4px; line-height: 22px;color: black; }
 .entry-details p:first-child { margin-top: 0; }
+.entry-details p, .research-line { text-align: justify; }
 .internships .entry-details p {
-  text-align: justify;
   word-break: break-all;
 }
 .resume-continue {

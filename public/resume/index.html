@@ -2,7 +2,8 @@
 <!--
   打印：Ctrl/Cmd + P，A4、100% 缩放、无页边距，关闭页眉页脚并开启背景图形。投递用同目录 PDF。
   排版：两页 A4。中英文统一思源宋体 Noto Serif SC，本地子集。
-  实习正文：非末行两端对齐，长英文允许行内断行，数字与单位保持成组。
+  正文：非末行两端对齐；实习中的长英文允许行内断行，数字与单位保持成组。
+  实习标题保留公司全称、岗位与起止时间，不随正文排版调整省略。
   证件照、校徽与中文字体均在本地。
 -->
 <html lang="zh-CN">
@@ -72,7 +73,7 @@
 
           <div class="education-overview">
             <div class="school-info">
-              <h3 class="school-name">合肥工业大学 · 计算机与信息学院 (211)</h3>
+              <h3 class="school-name">合肥工业大学 (211)</h3>
               <p class="major">计算机科学与技术 · 硕士研究生 <span class="badges">推免</span></p>
             </div>
             <p class="education-dates mono"><time datetime="2027-09">2027.09</time> — <time
@@ -81,7 +82,7 @@
 
           <div class="education-overview">
             <div class="school-info">
-              <h3 class="school-name">大连海洋大学 · 信息工程学院</h3>
+              <h3 class="school-name">大连海洋大学</h3>
               <p class="major">计算机科学与技术 · 本科 <span class="badges">· 综测 <span class="em">1/117</span> · 校级二等奖学金 · CET-4
                   <span class="em">510</span></span>
               </p>
@@ -109,6 +110,12 @@
         <section class="internships" aria-labelledby="internships-heading">
           <h2 class="section-heading" id="internships-heading">实习经历</h2>
           <article class="project">
+            <div class="entry-heading">
+              <h3>大连恩鸣跨境电子商务有限公司</h3>
+              <p class="education-dates mono"><time datetime="2026-07">2026.07</time> — <time
+                  datetime="2026-10">2026.10</time></p>
+              <span class="role">软件开发实习生</span>
+            </div>
             <div class="entry-details">
               <p><strong>技术栈：</strong>FastAPI · aiosqlite · aiohttp · Pydantic · asyncio</p>
               <p><strong>项目背景：</strong>面向跨境电商多店铺运营场景，对接 Ozon 官方及第三方 ERP API，负责开发构建集商品批量上架、库存同步、订单管理、数据分析于一体的自动化运营平台。</p>
@@ -136,16 +143,17 @@
           <h2 class="section-heading" id="projects-heading">项目经历</h2>
           <article class="project">
             <div class="entry-heading">
-              <h3>SKYCloud—— AI 驱动的云盘与智能体协作平台</h3>
+              <h3>SKYCloud —— AI 驱动的云盘与智能体协作平台</h3>
+              <a class="ext project-link" href="https://github.com/TianyaSKY/SKYCloud"><svg class="project-link-icon"
+                  aria-hidden="true">
+                  <use href="#icon-github" />
+                </svg>github.com/TianyaSKY/SKYCloud</a>
+            </div>
+            <div class="project-meta">
+              <p><strong>技术栈：</strong>FastAPI · LangGraph · pgvector · Redis · RabbitMQ · Docker</p>
               <span class="role">项目负责人</span>
             </div>
             <div class="entry-details">
-              <p><strong>技术栈：</strong>FastAPI · LangGraph · pgvector · Redis · RabbitMQ · Docker
-                <a class="ext project-link" href="https://github.com/TianyaSKY/SKYCloud"><svg class="project-link-icon"
-                    aria-hidden="true">
-                    <use href="#icon-github" />
-                  </svg>github.com/TianyaSKY/SKYCloud</a>
-              </p>
               <p><strong>知识检索：</strong>实现多查询改写与 pgvector 并行向量召回，结合 RRF 融合及可选 Rerank 重排；基于工作空间资料生成回答，并通过 SSE 流式输出。</p>
               <p><strong>索引异步：</strong>通过事务性 Outbox 同步提交文件记录与索引任务，由 Worker 经 RabbitMQ 确认投递；异步生成向量并写入 pgvector。
               </p>
@@ -157,15 +165,16 @@
           <article class="project">
             <div class="entry-heading">
               <h3>SKYDouyin —— 短视频推荐系统</h3>
+              <a class="ext project-link" href="https://github.com/TianyaSKY/SKYDouyin"><svg class="project-link-icon"
+                  aria-hidden="true">
+                  <use href="#icon-github" />
+                </svg>github.com/TianyaSKY/SKYDouyin</a>
+            </div>
+            <div class="project-meta">
+              <p><strong>技术栈：</strong>Spring Boot · FastAPI · PyTorch · Milvus · Redis · MySQL · RabbitMQ</p>
               <span class="role">项目负责人</span>
             </div>
             <div class="entry-details">
-              <p><strong>技术栈：</strong>Spring Boot · FastAPI · PyTorch · Milvus · Redis · MySQL · RabbitMQ
-                <a class="ext project-link" href="https://github.com/TianyaSKY/SKYDouyin"><svg class="project-link-icon"
-                    aria-hidden="true">
-                    <use href="#icon-github" />
-                  </svg>github.com/TianyaSKY/SKYDouyin</a>
-              </p>
               <p><strong>行为建模：</strong>通过 RabbitMQ 收集点击、点赞、完播等行为，结合行为权重与时间衰减聚合视频向量，生成 1024 维实时用户画像并缓存至 Redis。</p>
               <p><strong>多路召回：</strong>并行执行 Milvus 向量召回与 Redis 热门池召回，过滤已看视频并合并去重；结合召回分与热度粗排，候选不足时从 MySQL 补充。</p>
               <p><strong>冷启画像：</strong>定时按标签聚合已发布视频的向量并缓存至 Redis；新用户选择兴趣后，对对应标签向量求均值并写入 Milvus，作为初始兴趣画像。</p>
