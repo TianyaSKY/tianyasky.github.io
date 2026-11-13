@@ -21,18 +21,15 @@
 }
 
 :root {
-  --ink: #111827;
+  --ink: #111;
   --strong: var(--ink);
-  --body: #374151;
-  --contact: #6b7280;
-  --blue: #2563eb;
-  --border: #e5e7eb;
-  --divider: #b8c0cb;
-  --badge-bg: #eff6ff;
-  --badge-text: var(--blue);
-  --badge-border: #bfdbfe;
+  --body: #333;
+  --contact: #666;
+  --accent: #222;
+  --border: #e5e5e5;
+  --divider: #444;
   --paper: #fff;
-  --desk: #f2f4f7;
+  --desk: #f3f3f3;
   --font: "Noto Serif SC", "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
 }
 
@@ -50,6 +47,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 h1, h2, h3, p { margin: 0; }
+h2, h3 { font-family: "KaiTi", "STKaiti", "Kaiti SC", "AR PL UKai CN", serif; font-synthesis: weight; }
 strong { color: var(--strong); font-weight: 700; }
 code {
   font-family: var(--font);
@@ -60,8 +58,8 @@ code {
   color: var(--ink);
 }
 a { color: inherit; text-decoration: none; }
-a:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
-a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: 2px; }
+a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
 .icon-definitions { position: absolute; overflow: hidden; pointer-events: none; }
 .icon { display: block; width: 14px; height: 14px; flex: 0 0 auto; }
 .mono { font-family: var(--font); font-variant-numeric: lining-nums; }
@@ -75,28 +73,27 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
   background: var(--paper);
   border: 1px solid var(--border);
   border-radius: 6px;
-  box-shadow: 0 8px 32px rgb(15 23 42 / 6%);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 6%);
 }
 .resume-header {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   height: 140px;
-  padding: 0 0 12px;
-  border-bottom: 1px solid var(--divider);
+  padding: 25px 0 12px;
 }
 .name {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   color: var(--ink);
   font-family: var(--font);
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: 0.18em;
 }
-.contacts { display: flex; flex-direction: column; gap: 6px; }
-.contact-row { display: flex; align-items: center; gap: 14px; }
+.contacts { position: absolute; left: 0; bottom: 12px; }
+.contact-row { display: flex; align-items: center; gap: 22px; }
 .contact-item {
   display: inline-flex;
   align-items: center;
@@ -106,7 +103,7 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
   line-height: 18px;
   white-space: nowrap;
 }
-.contact-item .icon { color: var(--blue); }
+.contact-item .icon { color: var(--accent); }
 .portrait {
   position: absolute;
   top: 0;
@@ -115,9 +112,6 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
   width: 96px;
   height: 128px;
   object-fit: cover;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  box-shadow: 0 3px 14px rgb(15 23 42 / 8%);
 }
 /* 两页 A4：正文 14px / 22px，项目从第二页起，避免把句子压进一页。 */
 .resume-body {
@@ -129,13 +123,10 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
 .resume-body > section { margin: 0; }
 .section-heading {
   position: relative;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
   height: 25px;
   margin-bottom: 6px;
   color: var(--ink);
-  font-size: 16px;
+  font-size: 21px;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 1px;
@@ -144,28 +135,15 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
   position: absolute;
   right: 0;
   bottom: 1px;
-  left: 32px;
-  height: 1px;
+  left: 0;
+  height: 1.5px;
   background: var(--divider);
   content: "";
 }
-.section-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
-  border-radius: 5px;
-  background: var(--blue);
-  color: white;
-  flex: 0 0 auto;
-}
-.section-icon .icon { width: 13px; height: 13px; }
 
 .education-overview {
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: flex-start;
   gap: 4px 12px;
   min-height: 52px;
@@ -175,33 +153,19 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
 .education-overview + .education-overview {
   margin-top: 8px;
   padding-top: 8px;
-  border-top: 1px dashed var(--divider);
 }
-.university-seal {
-  display: flex;
-  grid-row: 1 / span 2;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  flex: 0 0 auto;
-  background: #fff;
-}
-.university-seal img { display: block; width: 44px; height: 44px; object-fit: contain; }
 .school-info { display: contents; }
 .school-name {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 1;
   color: var(--strong);
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 700;
   line-height: 22px;
   white-space: nowrap;
 }
-.major { grid-column: 2; grid-row: 2; font-size: 14px; line-height: 22px; }
-.badges { display: flex; grid-column: 3; grid-row: 2; justify-content: flex-end; align-items: center; gap: 6px; }
+.major { grid-column: 1; grid-row: 2; font-size: 14px; line-height: 22px; }
+.badges { font-size: 12px; }
 .education-achievements {
   grid-column: 2 / -1;
   display: grid;
@@ -210,23 +174,8 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
   line-height: 20px;
 }
 .education-achievements .achievement-row { display: contents; }
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 19px;
-  padding: 0 7px;
-  border: 1px solid var(--badge-border);
-  border-radius: 3px;
-  background: var(--badge-bg);
-  color: var(--badge-text);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 19px;
-  white-space: nowrap;
-}
 .education-dates {
-  grid-column: 3;
+  grid-column: 2;
   grid-row: 1;
   justify-self: end;
   margin-top: 4px;
@@ -251,8 +200,8 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
 }
 .entry-heading h3 {
   color: var(--strong);
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 700;
   line-height: 21px;
 }
 .internships .entry-heading {
@@ -273,12 +222,7 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
   justify-self: start;
 }
 .role {
-  height: 20px;
-  padding: 0 7px;
-  border: 1px solid var(--badge-border);
-  border-radius: 3px;
-  background: var(--badge-bg);
-  color: var(--blue);
+  color: var(--accent);
   font-size: 12px;
   font-weight: 500;
   line-height: 18px;
@@ -291,9 +235,9 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
   justify-content: space-between;
   gap: 12px;
 }
-.ext { color: var(--blue); font-size: 12px; line-height: 18px; }
+.ext { color: var(--accent); font-size: 12px; line-height: 18px; }
 .project-link { display: block; overflow-wrap: anywhere; }
-.em { color: var(--blue); font-weight: 700; white-space: nowrap; }
+.em { color: var(--accent); font-weight: 700; white-space: nowrap; }
 .keep { white-space: nowrap; }
 .entry-details { margin-top: 2px; }
 .entry-details p { margin-top: 4px; line-height: 22px;color: black; }
@@ -336,23 +280,19 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
   .resume { padding: 0; }
   body { font-size: 13.5px; }
   .resume-header { display: block; height: auto; min-height: 180px; padding: 18px; }
-  .name { margin-bottom: 68px; font-size: 28px; letter-spacing: 0.16em; }
+  .name { margin-bottom: 68px; font-size: 34px; letter-spacing: 0.16em; }
   .portrait { top: 16px; right: 16px; width: 75px; height: 100px; }
-  .contact-row { flex-wrap: wrap; gap: 6px 12px; }
+  .contacts { position: relative; left: auto; bottom: auto; top: 8px; }
+  .contact-row { flex-wrap: wrap; gap: 8px 18px; }
   .resume-body { gap: 20px; padding: 14px 18px 28px; }
-  .education-overview { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 6px 12px; padding-left: 0; }
-  .university-seal { grid-row: 1; width: 48px; height: 48px; }
-  .university-seal img { width: 42px; height: 42px; }
-  .school-info { display: block; }
-  .school-name { font-size: 14px; white-space: normal; }
-  .major { margin-top: 2px; font-size: 13.5px; line-height: 22px; }
-  .badges { flex-wrap: wrap; margin-top: 4px; }
-  .badge { padding: 0 5px; }
+  .education-overview { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; }
+  .school-name { font-size: 16px; white-space: normal; }
+  .major { grid-column: 1 / -1; margin-top: 2px; font-size: 13.5px; line-height: 22px; }
   .education-dates { grid-column: 2; grid-row: auto; justify-self: start; margin-top: 0; font-size: 12px; }
   .entry-heading { align-items: flex-start; gap: 8px; }
   .projects .entry-heading { display: flex; flex-wrap: wrap; }
-  .entry-heading h3 { font-size: 14px; }
-  .role { margin-top: 2px; padding: 0 5px; font-size: 10px; }
+  .entry-heading h3 { font-size: 16px; }
+  .role { margin-top: 2px; font-size: 10px; }
   .entry-details p { margin-top: 3px; line-height: 1.6; }
   .education-achievements { row-gap: 3px; line-height: 1.6; }
 }
