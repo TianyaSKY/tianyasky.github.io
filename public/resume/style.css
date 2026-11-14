@@ -165,7 +165,16 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   white-space: nowrap;
 }
 .major { grid-column: 1; grid-row: 2; font-size: 14px; line-height: 22px; }
-.badges { font-size: 12px; }
+/* 学历第二行右侧放亮点标签，与左侧专业名同行对齐。 */
+.education-note {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  color: var(--contact);
+  font-size: 12px;
+  line-height: 22px;
+  white-space: nowrap;
+}
 .education-achievements {
   grid-column: 2 / -1;
   display: grid;
@@ -312,6 +321,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   .school-name { font-size: 16px; white-space: normal; }
   .major { grid-column: 1 / -1; margin-top: 2px; font-size: 13.5px; line-height: 22px; }
   .education-dates { grid-column: 2; grid-row: auto; justify-self: start; margin-top: 0; font-size: 12px; }
+  .education-note { grid-column: 1 / -1; grid-row: auto; justify-self: start; margin-top: 2px; }
   .entry-heading { align-items: flex-start; gap: 8px; }
   .projects .entry-heading { display: flex; flex-wrap: wrap; }
   .entry-heading h3 { font-size: 16px; }
