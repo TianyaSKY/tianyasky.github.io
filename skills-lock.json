@@ -1,0 +1,131 @@
+{
+  "version": 2,
+  "skills": {
+    "ccf-common": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-common/SKILL.md",
+      "computedHash": "cf24c4f46201754324fcc562c4e07846efbd3191cade8e8b1a9fd9b9c064c699"
+    },
+    "ccf-experiment-designer": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-experiment-designer/SKILL.md",
+      "computedHash": "38c9bfe40d3c813f3e0620b098217764ff11a12cf7fd2550f830c82a621a4a2e"
+    },
+    "ccf-humanization": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-humanization/SKILL.md",
+      "computedHash": "270a5fbaeda2c379d24dc7c05b9a98b94286c72e36f73747a9fa001622a2114b"
+    },
+    "ccf-idea-optimizer": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-idea-optimizer/SKILL.md",
+      "computedHash": "c05c6f606f9f2d68bce8e85f53a1a6497703167b021808318a6efd8be45047ac"
+    },
+    "ccf-idea-reviewer": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-idea-reviewer/SKILL.md",
+      "computedHash": "339356724751a6c0dcd56f224c1d33218b85a492ad1c24b3c06e918be9e64743"
+    },
+    "ccf-integrity-auditor": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-integrity-auditor/SKILL.md",
+      "computedHash": "cc9c75e1c91e923ffd35ecc68daf7a6b272b406b1e92237b95f0cab6be0b2a33"
+    },
+    "ccf-literature-monitor": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-literature-monitor/SKILL.md",
+      "computedHash": "6ada94ccf345fc2873dedac3d80ed01b9d6c4e3fa64733f2d625e6935530f9cc"
+    },
+    "ccf-literature-searcher": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-literature-searcher/SKILL.md",
+      "computedHash": "0b5841b08e6d0a6cf6667106924eacbb9c34fdb2933c6ef893e7a2630736df99"
+    },
+    "ccf-paper-reviewer": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-paper-reviewer/SKILL.md",
+      "computedHash": "5189941b8dbd7d124135b3a27b4dcfcfad193ad7dcfbef62e01b3735ff918228"
+    },
+    "ccf-paper-to-exemplar": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-paper-to-exemplar/SKILL.md",
+      "computedHash": "1c4dc746c44ffb6906e121f1ab0af800438494ece93c07859fc886f48210971c"
+    },
+    "ccf-paper-writer": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-paper-writer/SKILL.md",
+      "computedHash": "e6aaea2ad596ec227598cd0c5a2105a6819dfbb0003b283c46edbe093d51e704"
+    },
+    "ccf-pipeline-orchestrator": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-pipeline-orchestrator/SKILL.md",
+      "computedHash": "5bf439bc14b750209716c268fc473c456e00b18dd538b8bd271fa4765d9898d9"
+    },
+    "ccf-project-scaffolder": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-project-scaffolder/SKILL.md",
+      "computedHash": "7bda54bba4b16a7142d8cb92f46e8f394939dac6b69efe63fcbfdffba52dce9b"
+    },
+    "ccf-rebuttal-writer": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-rebuttal-writer/SKILL.md",
+      "computedHash": "d0429b087f7cdde6550b100f6d1e6cce95f49c6b3e5326afab06646ae4a713f5"
+    },
+    "ccf-research-engineer": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-research-engineer/SKILL.md",
+      "computedHash": "567914f40469fb2513ca2b4675c95b940cb996206370dd0f9a94a8825d3de7c9"
+    },
+    "ccf-skill-forger": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-skill-forger/SKILL.md",
+      "computedHash": "dbfd4c1ca6838124624f5479e6840adb72207cbb4761afb6cfa968500fef0949"
+    },
+    "ccf-submission-checker": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-submission-checker/SKILL.md",
+      "computedHash": "b259beb5db25dba4e244c88734c007ca0e6b030150247461e30a78b5b62912c1"
+    },
+    "ccf-visual-composer": {
+      "source": "mikubaka88/CCFA-Skills",
+      "commit": "4c17b3ec21c9514985989f1a35fb8000c3f982c1",
+      "sourceType": "github",
+      "skillPath": "ccf-visual-composer/SKILL.md",
+      "computedHash": "a675044b4bf5af60e631da049a06307d0b7e44650b2177de239fad6195ff5260"
+    }
+  }
+}
