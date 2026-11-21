@@ -110,7 +110,7 @@ function projectShell(project, index) {
   if (project.paperInfo) {
     body += `<h2>论文摘要 / Abstract</h2><p><strong>${esc(project.paperInfo.titleZh)}</strong></p><p>${esc(
       clip(project.paperInfo.abstractZh, 1400)
-    )}</p><p>${esc(project.paperInfo.authors)} — ${esc(project.paperInfo.affiliation)}</p>`;
+    )}</p>`;
   }
 
   return `${shellOpen(
@@ -200,11 +200,6 @@ function projectJsonLd(project, index) {
     url: `${SITE}/projects/${project.id}/`,
     image: project.cover,
     inLanguage: 'zh-CN',
-    author: {
-      '@type': 'Person',
-      name: personalInfo.name,
-      url: `${SITE}/`
-    },
     keywords: (project.tech || []).join(', '),
     position: index + 1
   };
@@ -250,6 +245,10 @@ for (const route of routes) {
   let html = template
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(route.title)}</title>`)
     .replace('<div id="root"></div>', `<div id="root">${route.shell}</div>`);
+
+  if (route.path !== '/') {
+    html = html.replace(/^\s*<meta name="author" content="[^"]*"\s*\/?>\n/m, '');
+  }
 
   html = upsertMeta(html, 'name', 'description', route.description);
   html = upsertMeta(html, 'property', 'og:type', route.ogType);

@@ -9,7 +9,6 @@ import {
   Download,
   ExternalLink,
   Package,
-  BookOpen,
   Sparkles,
   Layers,
   ZoomIn,
@@ -368,38 +367,26 @@ export default function ProjectDetail() {
         <section className="paper-abstract-section" style={{ padding: '3.5rem 0 0', borderTop: '1px solid var(--rule)' }}>
           <div className="paper-abstract-card">
             <header className="paper-card-header">
-              <div className="paper-meta-top">
-                <span className="paper-type-badge">
-                  <BookOpen size={13} style={{ marginRight: 4 }} /> Academic Paper Specification · 学术论文规范
-                </span>
-                <div className="paper-lang-tabs" role="tablist">
-                  <button
-                    type="button"
-                    className={`lang-tab-btn ${abstractLang === 'zh' ? 'active' : ''}`}
-                    onClick={() => setAbstractLang('zh')}
-                  >
-                    中文摘要 (Abstract)
-                  </button>
-                  <button
-                    type="button"
-                    className={`lang-tab-btn ${abstractLang === 'en' ? 'active' : ''}`}
-                    onClick={() => setAbstractLang('en')}
-                  >
-                    English Abstract
-                  </button>
-                </div>
+              <div className="paper-lang-tabs" role="tablist">
+                <button
+                  type="button"
+                  className={`lang-tab-btn ${abstractLang === 'zh' ? 'active' : ''}`}
+                  onClick={() => setAbstractLang('zh')}
+                >
+                  中文摘要 (Abstract)
+                </button>
+                <button
+                  type="button"
+                  className={`lang-tab-btn ${abstractLang === 'en' ? 'active' : ''}`}
+                  onClick={() => setAbstractLang('en')}
+                >
+                  English Abstract
+                </button>
               </div>
 
               <h2 className="paper-main-title">
                 {abstractLang === 'zh' ? project.paperInfo.titleZh : project.paperInfo.titleEn}
               </h2>
-
-              <div className="paper-author-row">
-                <span className="paper-author"><strong>{project.paperInfo.authors}</strong></span>
-                {project.paperInfo.affiliation && (
-                  <span className="paper-affil">{project.paperInfo.affiliation}</span>
-                )}
-              </div>
             </header>
 
             <div className="paper-abstract-body">
@@ -907,7 +894,7 @@ export default function ProjectDetail() {
             kicker="Background & Motivation"
             title={<>问题<span style={{ fontStyle: 'italic', color: 'var(--color-vermilion)' }}>与动机</span></>}
             lead={project.background}
-            figure={project.caseFigures?.background || { src: project.cover, caption: `${project.id} · cover · 1600×900` }}
+            figure={project.caseFigures?.background || { src: project.cover, caption: project.title }}
           />
 
           {/* 02 · Method & Architecture */}

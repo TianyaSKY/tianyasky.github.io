@@ -70,10 +70,7 @@ export default function ProjectHero({ project }) {
         style={{ '--project-cover': `url("${project.cover}")` }}
       >
         <img className="project-hero-cover-image" src={project.cover} alt={project.title} />
-        <figcaption className="project-hero-cover-caption">
-          <span>{project.id}</span>
-          <span>cover · 1600×900</span>
-        </figcaption>
+        <figcaption className="project-hero-cover-caption">{project.id}</figcaption>
       </figure>
     </header>
   );

@@ -2,8 +2,6 @@ export const crowdSigmodDetail = {
   paperInfo: {
     titleZh: "YOLO-PGMD: 概率引导多尺度特征融合与积分守恒人群密度估计网络",
     titleEn: "YOLO-PGMD: Probabilistic-Guided Multi-Scale Feature Fusion with Conserved Density Estimation for Crowd Counting",
-    authors: "陈敏祥 (Minxiang Chen)",
-    affiliation: "大连海洋大学 · 信息工程学院",
     keywordsZh: [
       "人群计数",
       "概率引导注意力",

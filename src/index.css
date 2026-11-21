@@ -387,8 +387,6 @@
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  display: flex;
-  justify-content: space-between;
   z-index: 2;
 }
 
@@ -1273,7 +1271,7 @@
 
 
 /* ============================================================
-   ACADEMIC PAPER SPECIFICATION & BOOKTABS TABLES
+   PAPER ABSTRACT & BOOKTABS TABLES
    ============================================================ */
 
 /* Paper Abstract Block */
@@ -1295,31 +1293,10 @@
   margin-bottom: 1.5rem;
 }
 
-.paper-meta-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.paper-type-badge {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-primary);
-  background: rgba(37, 99, 235, 0.08);
-  border: 1px solid rgba(37, 99, 235, 0.25);
-  padding: 0.35rem 0.75rem;
-}
-
 .paper-lang-tabs {
   display: flex;
+  width: fit-content;
+  margin-bottom: 1rem;
   gap: 4px;
   background: var(--bg-subtle, #f1f5f9);
   padding: 3px;
@@ -1356,26 +1333,7 @@
   font-weight: 700;
   line-height: 1.35;
   color: var(--color-text-main);
-  margin-bottom: 0.75rem;
-}
-
-.paper-author-row {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-}
-
-.paper-author {
-  color: var(--color-text-main);
-  font-family: var(--font-sans);
-}
-
-.paper-affil {
-  font-family: var(--font-serif);
-  font-style: italic;
+  margin: 0;
 }
 
 .paper-abstract-body {

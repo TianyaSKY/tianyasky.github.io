@@ -18,8 +18,6 @@ export const visionPositioningDetail = {
   paperInfo: {
     titleZh: "基于射线夹角几何约束与级联神经网络的结构化杆体单目视觉位姿重建系统",
     titleEn: "Monocular Camera 3D Coordinate Reconstruction via Structured Pole Keypoint Cascaded Networks and Ray-Angle Invariant Optimization",
-    authors: "陈敏祥 (Minxiang Chen), 指导教师: 李明智",
-    affiliation: "大连海洋大学 · 信息工程学院 (Dalian Ocean University · School of Information Engineering)",
     keywordsZh: [
       "单目视觉定位",
       "射线夹角不变性",
