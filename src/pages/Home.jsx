@@ -7,10 +7,10 @@ import Education from '../components/Education';
 import Skills from '../components/Skills';
 import Contact from '../components/Contact';
 
-export default function Home({ onOpenCmdPalette }) {
+export default function Home() {
   return (
     <div id="main" className="academic-main" role="main">
-      <Sidebar onOpenCmdPalette={onOpenCmdPalette} />
+      <Sidebar />
       <article className="page" itemScope itemType="http://schema.org/CreativeWork">
         <meta itemProp="headline" content="Minxiang Chen - Homepage" />
         <div className="page__inner-wrap">

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { personalInfo } from '../data/personalData';
-import { MapPin, Mail, Search } from 'lucide-react';
+import { MapPin, Mail } from 'lucide-react';
 
-export default function Sidebar({ onOpenCmdPalette }) {
+export default function Sidebar() {
   const [isEducation, setIsEducation] = useState(false);
 
   useEffect(() => {
@@ -56,28 +56,9 @@ export default function Sidebar({ onOpenCmdPalette }) {
               </li>
             </ul>
 
-            {onOpenCmdPalette && (
-              <div className="sidebar__search-trigger">
-                <button
-                  type="button"
-                  onClick={onOpenCmdPalette}
-                  className="sidebar-search-btn"
-                  title="Search Site (⌘K / Ctrl+K)"
-                >
-                  <Search size={14} />
-                  <span>Site Search (⌘K)</span>
-                </button>
-              </div>
-            )}
-
             {/* Mobile quick links */}
             <div className="author__urls_sm">
               <a href={`mailto:${personalInfo.email}`} title="Email"><Mail size={18} /></a>
-              {onOpenCmdPalette && (
-                <button type="button" onClick={onOpenCmdPalette} title="Search" className="mobile-search-icon-btn">
-                  <Search size={18} />
-                </button>
-              )}
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Search } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { personalInfo } from '../data/personalData';
 
 const NAV_LINKS = [
@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { id: 'contact', label: 'Contact', hash: '#contact' },
 ];
 
-export default function Navbar({ onOpenCmdPalette }) {
+export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -73,28 +73,14 @@ export default function Navbar({ onOpenCmdPalette }) {
               ))}
             </ul>
 
-            <div className="masthead__actions">
-              {onOpenCmdPalette && (
-                <button
-                  type="button"
-                  onClick={onOpenCmdPalette}
-                  className="nav-search-btn"
-                  title="Search (⌘K)"
-                  aria-label="Search"
-                >
-                  <Search size={16} />
-                </button>
-              )}
-
-              <button
-                type="button"
-                className="nav-toggle"
-                onClick={() => setMobileOpen(!mobileOpen)}
-                aria-label="Toggle navigation"
-              >
-                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
+            <button
+              type="button"
+              className="nav-toggle"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle navigation"
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </nav>
         </div>
 
