@@ -93,7 +93,7 @@ function projectShell(project, index) {
   const kind = project.type === 'research' ? 'RESEARCH' : 'ENGINEERING';
   const links = project.links || {};
   const linkBits = [
-    `<a href="/#projects">← Back to Projects</a>`,
+    `<a href="/?projectType=${esc(project.type)}#projects">← Back to Projects</a>`,
     links.gitee ? `<a href="${esc(links.gitee)}">Gitee Repository</a>` : '',
     links.github ? `<a href="${esc(links.github)}">GitHub</a>` : ''
   ].filter(Boolean);

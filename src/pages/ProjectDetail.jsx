@@ -361,7 +361,7 @@ export default function ProjectDetail() {
     <article className="project-detail">
       {/* Backbar */}
       <div className="project-detail-backbar">
-        <Link to="/#projects" className="btn-link">
+        <Link to={`/?projectType=${project.type}#projects`} className="btn-link">
           <ArrowLeft size={14} /> Back to Projects
         </Link>
       </div>
