@@ -4,9 +4,9 @@ const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 /**
- * 通用可访问弹窗：role="dialog" + aria-modal，Esc / 点击遮罩关闭，
- * Tab / Shift+Tab 焦点圈定在弹窗内，卸载时把焦点还给触发元素。
- * 初始焦点落在标记了 data-dialog-initial-focus 的子元素上。
+ * Accessible modal dialog: role="dialog" + aria-modal, closes on Esc or backdrop click,
+ * traps Tab / Shift+Tab focus inside the modal, and restores focus to the trigger on unmount.
+ * Initial focus lands on the child marked with data-dialog-initial-focus.
  */
 export default function AccessibleDialog({ overlayClassName, dialogClassName, label, onClose, children }) {
   const dialogRef = useRef(null);

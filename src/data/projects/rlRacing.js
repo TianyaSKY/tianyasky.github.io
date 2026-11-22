@@ -2,38 +2,50 @@ export const rlRacingDetail = {
   gallery: [
     {
       src: "/projects/rl-racing/game.png",
-      caption: "3D 赛道环境实机画面"
+      caption: "3D track simulation viewport rendered in Pygame and OpenGL"
     },
     {
       src: "https://media.tianyasky.top/site/projects/rl-racing/training_curves.png",
-      caption: "PPO 训练奖励曲线"
+      caption: "PPO episode reward convergence curve"
     },
     {
       src: "/projects/rl-racing/training_curves_diag.png",
-      caption: "训练诊断曲线"
+      caption: "Policy entropy, value loss, and episode length diagnostics"
     }
   ],
   caseFigures: {
+    background: {
+      src: "/projects/rl-racing/cover.svg",
+      label: "Figure 1",
+      title: "Closed-Circuit 3D Track Simulation & Kinematic Architecture",
+      caption: "Custom 3D racing simulator environment built in Pygame and OpenGL, featuring procedural track generation, 9-ray forward distance sensors, and Gymnasium interface.",
+      kind: "diagram"
+    },
     method: {
       src: "/projects/rl-racing/game.png",
-      caption: "3D 赛道环境实机画面"
+      label: "Figure 2",
+      title: "Real-Time OpenGL Viewport & Multi-Ray Obstacle Detection",
+      caption: "In-game rendering showing real-time vehicle trajectory, waypoint tracking, and 9 fan-shaped raycast distance measurements feeding the 16-D observation vector.",
+      wide: true
     },
     results: {
       src: "https://media.tianyasky.top/site/projects/rl-racing/training_curves.png",
-      caption: "PPO 训练奖励曲线"
+      label: "Figure 3",
+      title: "PPO Policy Reward Trajectory & Diagnostics (10M Timesteps)",
+      caption: "Stable-Baselines3 PPO episode reward convergence curve over 10 million simulation steps across 8 parallel worker subprocesses."
     }
   },
   video: "https://media.tianyasky.top/RacingCar.webm",
   highlights: [
-    "环境建模：用 16 维向量表达车体运动状态与 9 条扇形射线的测距信息，提供标准 Gym 接口",
-    "离散控制与奖励：设计包含加减速与转向的 7 种动作组合，结合速度、居中与碰撞惩罚引导策略学习",
-    "并行训练：基于 Stable-Baselines3 PPO 实现 8 进程 CPU 采样，支持 TensorBoard 监控与断点续训",
-    "实机回放：提供统一命令行入口，支持无渲染批量训练与 OpenGL 窗口实时可视化、人工试驾"
+    "**State & Sensor Modeling**: Encodes 7 vehicle kinematic states and 9 fan-shaped raycast range measurements into a 16-D observation vector under a standard Gymnasium interface",
+    "**Discrete Control & Reward Shaping**: Defines 7 compound throttle/brake/steering actions paired with dense progress, centerline alignment, and collision penalty terms",
+    "**Parallel Rollout Training**: Trains a Stable-Baselines3 PPO (`MlpPolicy`) agent across 8 parallel CPU subprocesses with TensorBoard telemetry and checkpoint resumption",
+    "**Interactive Evaluation CLI**: Provides a unified command-line entry point supporting headless batch training, real-time OpenGL policy playback, and manual keyboard driving"
   ],
-  background: "学习强化学习算法时，如果直接用现成的 Gym 环境，往往容易忽略从零抽象一个实际任务的细节。做这个项目的初衷，是用 Pygame 和 OpenGL 自己动手写一个轻量级的 3D 赛车仿真环境，并封装成标准的 Gymnasium 接口。核心在于如何把车辆运动和障碍物检测整理成合理的观测特征，以及怎样设计奖励函数，让小车学会沿着赛道正常行驶，而不是原地打转或消极制动。",
-  method: "环境遵循 Gymnasium 规范，reset 时随机生成带弯道和障碍物的赛道。每一步返回由 7 项车体运动特征（坐标、朝向、速度、距中心线偏差等）与 9 条扇形虚拟射线测距组成的 16 维观测向量；动作空间定义为 7 种离散控制组合（包含前进、制动、左转、右转及其组合）。奖励函数综合了前进速度、保持在车道中央的引导，以及碰撞和出界的惩罚；算法采用 Stable-Baselines3 的 PPO（MlpPolicy），用 8 个进程在 CPU 上并行采样，训练约 1000 万步，定期保存权重检查点。",
-  results: "经过训练，智能体能够在随机生成的赛道中稳定避开障碍物并平稳过弯。项目整理了统一的命令行工具，支持常规训练、加载断点继续训练、TensorBoard 监控，以及切回 Pygame / OpenGL 窗口查看模型实际驾驶表现，同时也保留了人工键盘控制入口，方便手动检查物理碰撞与环境规则是否正常。",
-  reflection: "目前的定位是一个适合快速实验和验证想法的轻量仿真环境，物理模型做了较多简化，传感器也是理想化的几何射线，和真实的车辆动力学与自动驾驶仍有差距。后续如果要进一步迭代，可以尝试给射线测距加入随机噪声、增加赛道曲率变化，或者引入连续动作空间，逐步提升算法面对复杂环境时的泛化能力。",
+  background: "Training reinforcement learning agents only on pre-packaged benchmarks often obscures how physical task dynamics, sensor geometry, and reward terms interact. This project builds a lightweight 3D autonomous racing simulator from scratch using Pygame and OpenGL and wraps it as a standard Gymnasium environment. The central engineering problem is formulating compact kinematic and obstacle observations alongside a reward structure that guides the vehicle to corner smoothly rather than spinning in place or braking to avoid collisions.",
+  method: "On each `reset`, the environment procedurally generates a closed circuit withrandomized curves and static obstacles. At each timestep, it returns a 16-dimensional observation vector combining 7 vehicle kinematic features (position, heading angle, speed, and lateral centerline offset) with 9 forward fan-shaped raycast distance measurements. The action space consists of 7 discrete control combinations covering acceleration, braking, left/right steering, and coupled throttle-turn maneuvers. The reward function combines forward velocity along the track tangent, a centerline-keeping term, and terminal penalties for wall or obstacle collisions. A Stable-Baselines3 PPO agent (`MlpPolicy`) samples rollouts across 8 parallel CPU worker processes for 10 million timesteps with periodic checkpointing.",
+  results: "After 10 million training steps, the learned policy navigates procedurally generated bends and avoids mid-track obstacles without off-track resets. The repository ships a unified CLI supporting headless training, checkpoint continuation, TensorBoard logging, and real-time OpenGL playback, while retaining a manual keyboard driving mode to verify collision boundaries and track geometry.",
+  reflection: "The simulator uses simplified rigid-body kinematics and noise-free geometric raycasts to support fast policy iteration, leaving a gap to real vehicle dynamics. Adding Gaussian sensor noise to the raycasts, varying road-surface friction, and extending the controller to continuous throttle and steering actions are the next steps for testing policy robustness under closer-to-physical conditions.",
   links: {
     github: "https://github.com/TianyaSKY/RacingCar"
   },

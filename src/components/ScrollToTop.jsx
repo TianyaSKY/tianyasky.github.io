@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// 路由切换时重置滚动位置，或平滑定位到目标锚点
+// Reset scroll position on route change, or smoothly scroll to the target hash anchor
 export default function ScrollToTop() {
   const { pathname, hash } = useLocation();
 

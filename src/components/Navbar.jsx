@@ -55,7 +55,7 @@ export default function Navbar() {
               className="site-title"
               onClick={() => isHome && window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <strong>{personalInfo.name}</strong> / {personalInfo.chineseName}
+              <strong>{personalInfo.name}</strong>
             </Link>
 
             <ul className="visible-links">

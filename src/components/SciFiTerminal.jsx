@@ -5,14 +5,14 @@ import { Terminal, Play, RefreshCw, ChevronDown, ChevronUp, Cpu, Send } from 'lu
 export default function SciFiTerminal({ defaultOpen = false }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const [customInput, setCustomInput] = useState('');
-  const [output, setOutput] = useState('Qwen3.6-27B-4bit-QLoRA 慈欣体续写生成终端就绪。\n输入一段上文（或点击上方预设指令），模型接续刘慈欣风格续写...');
+  const [output, setOutput] = useState('Qwen3.6-27B-4bit-QLoRA sci-fi continuation terminal ready.\nEnter a preceding passage (or select a preset prompt above) to generate Cixin Liu-style continuation...');
   const [isGenerating, setIsGenerating] = useState(false);
   const [tokensPerSec, setTokensPerSec] = useState('110');
 
   const runGeneration = (promptText) => {
     if (isGenerating || !promptText.trim()) return;
     setIsGenerating(true);
-    setOutput(`> INPUT: ${promptText}\n\n[LoRA Attention 权重激活 | VRAM: 16.8GB/32GB | SFT 0.039% 参数量 | 采样温度 T=0.8]\n\n`);
+    setOutput(`> INPUT: ${promptText}\n\n[LoRA Attention Active | VRAM: 16.8GB/32GB | SFT 0.039% Params | Temperature T=0.8]\n\n`);
 
     let fullText = "";
     const matchedPreset = sciFiPresetPrompts.find((p) => promptText.includes(p.label) || promptText.includes(p.prompt));
@@ -20,7 +20,7 @@ export default function SciFiTerminal({ defaultOpen = false }) {
     if (matchedPreset) {
       fullText = matchedPreset.response;
     } else {
-      fullText = `【模拟推演：慈欣体风格生成】\n在无垠的微观量子尺度与宏观宇宙场中，"${promptText}" 展现出了极其冰冷与壮丽的物理秩序。维度折叠场以光速扩散，碳基文明微不足道的挣扎在恒星级能量暴涨面前宛如微尘。死寂不是终点，而是宇宙重组的基态。`;
+      fullText = `[Simulated Continuation: Cixin Liu Hard Sci-Fi Style]\nAcross the microscopic quantum scale and the macroscopic cosmic field, "${promptText}" unfolded with cold physical order. The dimensional folding front propagated at light speed; before stellar-grade energy inflation, the struggles of carbon-based civilization were no more than dust. Silence was not an endpoint, but the ground state of cosmic reconfiguration.`;
     }
 
     let i = 0;
@@ -38,7 +38,7 @@ export default function SciFiTerminal({ defaultOpen = false }) {
   const handleReset = () => {
     setIsGenerating(false);
     setCustomInput('');
-    setOutput('Qwen3.6-27B-4bit-QLoRA 慈欣体续写生成终端就绪。\n输入一段上文（或点击上方预设指令），模型接续刘慈欣风格续写...');
+    setOutput('Qwen3.6-27B-4bit-QLoRA sci-fi continuation terminal ready.\nEnter a preceding passage (or select a preset prompt above) to generate Cixin Liu-style continuation...');
   };
 
   return (
@@ -49,7 +49,7 @@ export default function SciFiTerminal({ defaultOpen = false }) {
         aria-expanded={isOpen}
       >
         <Terminal size={18} />
-        {isOpen ? '收起「慈欣体」大模型生成终端' : '启动「慈欣体」大模型生成终端 (Interactive AI Terminal)'}
+        {isOpen ? 'Collapse Sci-Fi Continuation Terminal' : 'Launch Sci-Fi Continuation Terminal (Interactive AI Terminal)'}
         {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
       </button>
 
@@ -74,7 +74,7 @@ export default function SciFiTerminal({ defaultOpen = false }) {
           <div className="console-body">
             <div className="preset-buttons-group">
               <span style={{ fontSize: '0.82rem', color: '#94a3b8', display: 'flex', alignItems: 'center' }}>
-                选择预设指令：
+                Preset prompts:
               </span>
               {sciFiPresetPrompts.map((preset) => (
                 <button
@@ -94,7 +94,7 @@ export default function SciFiTerminal({ defaultOpen = false }) {
                 disabled={isGenerating}
               >
                 <RefreshCw size={12} style={{ display: 'inline', marginRight: 4 }} />
-                重置
+                Reset
               </button>
             </div>
 
@@ -108,7 +108,7 @@ export default function SciFiTerminal({ defaultOpen = false }) {
             >
               <input
                 type="text"
-                placeholder="或输入自定义科幻场景提示词 (例如: 死星撞击木星)..."
+                placeholder="Or enter a custom sci-fi prompt (e.g., Photoid strike on Jupiter)..."
                 value={customInput}
                 onChange={(e) => setCustomInput(e.target.value)}
                 disabled={isGenerating}
@@ -141,7 +141,7 @@ export default function SciFiTerminal({ defaultOpen = false }) {
                   fontFamily: 'var(--font-mono)',
                 }}
               >
-                <Send size={14} /> 生成
+                <Send size={14} /> Generate
               </button>
             </form>
 

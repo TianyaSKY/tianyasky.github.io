@@ -2,53 +2,64 @@ export const skyOjDetail = {
   gallery: [
     {
       src: "/projects/sky-oj/homepage-landing.png",
-      caption: "平台首页落地页"
+      caption: "Platform landing page and overview"
     },
     {
       src: "/projects/sky-oj/problem-list.png",
-      caption: "题目列表与筛选"
+      caption: "Problem catalog with multi-dimensional filtering"
     },
     {
       src: "/projects/sky-oj/problem-detail-editor.png",
-      caption: "题目详情与在线编辑器"
+      caption: "Problem description and browser-based Monaco code editor"
     },
     {
       src: "/projects/sky-oj/problem-draft.png",
-      caption: "题目草稿与发布"
+      caption: "Problem authoring and draft publication workflow"
     },
     {
       src: "/projects/sky-oj/submission-result.png",
-      caption: "提交与判题结果"
+      caption: "Submission verdict and per-case diagnostic breakdown"
     },
     {
       src: "/projects/sky-oj/teacher-dashboard.png",
-      caption: "教师工作台"
+      caption: "Instructor course and assignment dashboard"
     },
     {
       src: "/projects/sky-oj/admin-problem-management.png",
-      caption: "管理员题目管理"
+      caption: "Administrator problem bank management console"
     }
   ],
   caseFigures: {
+    background: {
+      src: "/projects/sky-oj/homepage-landing.png",
+      label: "Figure 1",
+      title: "Interactive Courseware & Problem Exploration Portal",
+      caption: "SKYOJ landing page providing centralized problem categorization, multi-dimensional tag filtering, and real-time submission statistics for students and instructors."
+    },
     method: {
       src: "/projects/sky-oj/problem-detail-editor.png",
-      caption: "题目详情与在线编辑器"
+      label: "Figure 2",
+      title: "Monaco IDE Workspace with AI Debugging Assistant",
+      caption: "Split-pane web workspace integrating Monaco Editor syntax highlighting, standard input/output test cases, and a guided LLM debugging assistant.",
+      wide: true
     },
     results: {
       src: "/projects/sky-oj/submission-result.png",
-      caption: "提交与判题结果"
+      label: "Figure 3",
+      title: "Multi-Case Verdict Diagnostics & Sandbox Metrics",
+      caption: "Real-time grading verdict breakdown displaying execution time, peak memory usage, and per-test-case pass/fail diagnostics inside isolated Docker containers."
     }
   },
   highlights: [
-    "多题型评测：支持常规标准 I/O 对拍、面向对象单元测试脚本验证，以及基于精度/误差的数据科学类评分",
-    "异步任务队列：API 写入记录后通过 RabbitMQ 投递，Celery Worker 顺序执行判题任务，支持异常超时回收",
-    "安全沙箱隔离：评测容器默认关闭外网，使用 Linux Cgroups 限制 CPU、内存及进程上限，降低越权风险",
-    "AI 辅助排错：接入兼容接口的大模型，引导学生理解报错信息和排查思路，而不直接输出完整题解"
+    "**Multi-Paradigm Evaluation**: Supports standard ACM stdin/stdout diffing, black-box OOP unit-test harness verification, and metric-based data science / Kaggle grading under one schema",
+    "**Asynchronous Task Queues**: Decouples API submission writes from evaluation via RabbitMQ and single-process Celery workers with automated timeout reclamation",
+    "**Hardened Sandbox Isolation**: Executes untrusted student code in ephemeral Docker containers with `network=none` and Linux Cgroups limits on CPU, memory, and PIDs",
+    "**Guided AI Debugging Assistant**: Integrates an OpenAI-compatible LLM endpoint constrained by system prompts to explain compiler/runtime errors and suggest debugging steps without leaking full solutions"
   ],
-  background: "平时计算机专业课程里的编程作业，除了常见的算法题之外，还有很多面向对象设计（OOP）或者数据科学类的作业。传统的在线判题系统（OJ）大多只支持标准输入输出比对，遇到需要测试类接口实现或者计算模型指标的题目就无法自动评测，往往只能靠人工批改。这个项目从实际教学场景出发，尝试在一个平台上兼容这几种常见的评测需求，同时引入大模型作为答疑助手，帮助学生更快看懂报错原因。",
-  method: "前端基于 Vue 3 和 Monaco Editor 构建在线代码编辑与提交界面；后端使用 FastAPI 与 MySQL 管理题目、用户和提交记录；调度层使用 RabbitMQ 与 Celery，把判题、AI 答疑与文件处理拆分成不同队列，Worker 采用单进程模式顺序执行，避免多任务相互争抢资源；执行层在独立的 Docker 容器中运行用户代码，通过关闭网络访问、限制 Cgroups 内存/CPU 配额以及最大进程数来保证沙箱安全。AI 模块则通过提示词工程定位常见语法和逻辑错误，做引导式提示。",
-  results: "项目提供了完整的前后端代码、评测镜像与 Docker Compose 部署配置。目前支持教师在线布置 ACM 算法题、OOP 单元测试题与数据科学评估题；学生提交代码后可以在线查看运行状态与详细的测试反馈；后台也加入了超期任务回收机制，保障了日常教学和练习的可用性。",
-  reflection: "做判题系统时最深刻的体会是安全和隔离必须放在第一位。由于学生提交的代码不可控，网络隔离和资源限制必须卡严。当前采用单任务容器隔离的方式比较稳妥，但在遇到上课集中提交等高峰场景时排队时间会变长；后续如果继续优化，可以考虑引入轻量沙箱容器池来减少每次启动容器的开销，提高并发评测的吞吐量。",
+  background: "University computer science coursework extends well beyond standard algorithmic puzzles to include object-oriented programming (OOP) class design and data-science modeling assignments. Traditional online judge (OJ) platforms typically only compare standard input/output streams, leaving OOP interface testing and quantitative metric grading to manual TA review. SKYOJ unifies these three evaluation paradigms in a single instructional platform while adding a pedagogical LLM assistant that helps students interpret tracebacks and logic bugs.",
+  method: "The frontend uses Vue 3 and Monaco Editor for in-browser coding and submission tracking, while the FastAPI + MySQL backend manages problems, users, and submission records. At the scheduling layer, RabbitMQ and Celery route evaluation, AI tutoring, and file processing into dedicated queues; judge workers execute tasks sequentially in single-process mode to prevent resource contention during timing-sensitive runs. Each submission executes inside an isolated Docker container with external networking disabled (`network=none`) and Cgroups quotas enforcing CPU, memory, and process-count ceilings. The AI debugging module inspects the problem prompt, student code, and error logs to return guided diagnostic hints rather than complete answer code.",
+  results: "The repository includes the full frontend, backend, judge container images, and Docker Compose orchestration. Instructors can author and publish ACM algorithm problems, OOP unit-test assignments, and Kaggle-style data evaluation tasks; students receive real-time execution verdicts and case-by-case feedback in the browser, backed by background reaper tasks that clean up timed-out containers.",
+  reflection: "Running untrusted student submissions makes strict network and resource isolation non-negotiable. While spawning a fresh container per task provides strong isolation, cold container startup latency increases queue wait times during end-of-class submission spikes; introducing a pre-warmed container pool is the next step to raise concurrent evaluation throughput.",
   links: {
     github: "https://github.com/TianyaSKY/SKYOJ"
   },

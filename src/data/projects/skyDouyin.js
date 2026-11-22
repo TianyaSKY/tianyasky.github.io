@@ -1,31 +1,45 @@
+const architectureFigure = {
+  src: "/projects/sky-douyin/cover.svg",
+  label: "Figure 1",
+  title: "End-to-End Microservice Short-Video Ecosystem",
+  caption: "Full-stack short-video architecture integrating React/Android clients, Spring Boot 3 core services, RabbitMQ async messaging, FastAPI recommendation workers, and Milvus vector search.",
+  kind: "diagram"
+};
+
 const uploadFigure = {
   src: "/projects/sky-douyin/upload-and-indexing.png",
-  caption: "从视频分片上传到 RabbitMQ 异步生成向量并写入 Milvus",
-  kind: "diagram"
+  label: "Figure 2",
+  title: "Chunked Video Ingestion & Asynchronous Vector Indexing",
+  caption: "Client-side file hashing with chunked resumable upload; asynchronous event emission via RabbitMQ triggers multimodal embedding extraction and Milvus vector indexing.",
+  kind: "diagram",
+  wide: true
 };
 
 const recommendationFigure = {
   src: "/projects/sky-douyin/cold-start-and-feed.png",
-  caption: "注册兴趣向量冷启动，以及热门与向量候选汇合进入 Feed",
+  label: "Figure 3",
+  title: "Cold-Start Preference Profiling & Hybrid Feed Recall",
+  caption: "Category centroid embedding aggregation for new user onboarding, followed by real-time behavioral telemetry and hybrid vector similarity plus trending fallback.",
   kind: "diagram"
 };
 
 export const skyDouyinDetail = {
-  gallery: [uploadFigure, recommendationFigure],
+  gallery: [architectureFigure, uploadFigure, recommendationFigure],
   caseFigures: {
+    background: architectureFigure,
     method: uploadFigure,
     results: recommendationFigure
   },
   highlights: [
-    "发布链路：支持前端计算文件哈希、分片上传与断点续传；创建视频元数据后异步生成向量，写入 Milvus 后更新发布状态",
-    "行为反馈：Web 端与 Android 端统一上报播放、停留时长和点赞事件，驱动下一次推荐刷新",
-    "冷启动处理：按分类标签预先聚合视频特征，新用户注册时根据所选兴趣计算均值作为初始画像",
-    "服务解耦：业务服务（Spring Boot）、推荐服务（FastAPI）与底层存储分层部署，边界清晰"
+    "**Ingestion & Indexing Pipeline**: Client-side file hashing with chunked, resumable uploads; video metadata creation triggers asynchronous embedding extraction and Milvus indexing before publishing",
+    "**Cross-Client Behavior Telemetry**: Web and Android clients report playback, dwell time, and like events through a unified schema to drive real-time feed refreshes",
+    "**Cold-Start User Profiling**: Pre-aggregates category-level video embeddings so newly registered users receive an initial preference vector averaged from their selected interest tags",
+    "**Decoupled Service Architecture**: Separates transactional business logic (Spring Boot 3), embedding and recommendation services (FastAPI), and storage engines (MySQL, Redis, Milvus)"
   ],
-  background: "不少推荐系统的实验项目往往只写了一个算法接口，或者直接从数据库查几条测试数据。但在实际场景中，从用户上传视频、后台转码与特征提取，到客户端播放、停留、点赞等行为数据的实时采集，再到下一次刷新时的召回与排序，整条链路是环环相扣的。做这个项目的初衷是完整实现一个短视频全栈原型（MVP），把从发布到基于用户行为做推荐的闭环切实跑顺。",
-  method: "前端开发了 Web（React 18）与 Android 两个客户端，负责视频流播放与分片上传；业务后端采用 Spring Boot 3 + MySQL 维护用户、视频元数据及点赞关系，Redis 处理点赞计数与状态缓存。创建视频元数据后通过 RabbitMQ 发送异步事件，由 FastAPI 推荐服务调用模型生成内容向量并写入 Milvus 向量库，入库成功后更新待发布视频的状态。针对新用户冷启动，定期汇总各分类已有视频的标签向量，用户注册时勾选兴趣即可取均值作为初始偏好；整套环境可通过 Docker Compose 统一部署。",
-  results: "目前跑通了用户注册登录、兴趣选择、视频分片上传、沉浸式刷视频、点赞与取消点赞、行为日志采集、以及基于向量相似度召回的推荐流程。Web 端和手机端均能正常交互，推荐服务和业务服务相互解耦，可以单独修改召回策略或接入新的模型进行实验。",
-  reflection: "当前版本重点在于先把整套业务与数据链路打通，所以推荐逻辑主要以向量相似度召回加热门保底为主，还没有接入复杂的重排模型。后续如果继续演进，应该先把埋点上报的可靠性、消息重试与去重机制做扎实，再考虑补充离线评测集以及引入更细致的排序策略，把底层数据基础打牢更稳妥。",
+  background: "Standalone recommendation experiments often stop at an offline ranking script or a static database query, omitting the operational loop between content ingestion, client interaction capture, and online candidate recall. In a production-like short-video system, chunked video uploading, asynchronous feature extraction, real-time telemetry (views, dwell duration, likes), and subsequent feed generation are tightly coupled. SKYDouyin implements a full-stack short-video prototype (MVP) to connect content publishing, behavioral event streaming, and vector-based feed recommendation end to end.",
+  method: "The client layer includes a React 18 web app and a native Android client supporting streaming playback and resumable chunked uploads. A Spring Boot 3 service backed by MySQL manages users, video metadata, and social interactions, while Redis caches like counters and session state. When a video is uploaded, Spring Boot publishes an asynchronous event over RabbitMQ to a FastAPI recommendation service, which extracts multimodal content embeddings, inserts them into Milvus, and updates the video's publication status. To handle user cold start, the system pre-computes centroid embeddings for each content category and initializes a new user's preference vector by averaging the centroids of their chosen registration tags. All services are orchestrated via Docker Compose.",
+  results: "The end-to-end loop—spanning user registration, interest onboarding, chunked video publishing, vertical feed playback, like/unlike interactions, telemetry ingestion, and Milvus vector similarity recall merged with trending fallback—runs across both the Web and Android clients. Because the FastAPI recommendation engine is decoupled from the Spring Boot core via RabbitMQ and REST contracts, recall strategies and embedding models can be swapped independently.",
+  reflection: "This prototype prioritized closing the full data loop from client telemetry to online vector recall, so its ranking layer relies on cosine-similarity retrieval blended with trending candidates rather than a multi-stage deep reranker. Before introducing heavier ranking models, the next engineering priorities are hardening telemetry delivery with idempotent message deduplication and building an offline replay evaluation set.",
   links: {
     github: "https://github.com/TianyaSKY/SKYDouyin"
   },

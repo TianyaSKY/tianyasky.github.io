@@ -1,9 +1,9 @@
-// 构建后静态预渲染：为每个真实路由生成独立的 index.html
-// 解决两件事：
-//   1) SPA 深链接在 GitHub Pages 上返回 HTTP 404（软 404），搜索引擎与社交平台一律视为死链；
-//   2) 分享预览卡片（QQ/微信/Twitter）不执行 JS，只能读 HTML 头部的 OG 标签 —— 之前所有子页共用首页的那一套。
-// 生成的每个文件都是「静态外壳 + 同一个 SPA 挂载点」：爬虫/预览机器人读到真实标题、摘要、正文与 OG 图，
-// 真实用户加载后 React 接管，体验不变。
+// Post-build static prerendering: generates a standalone index.html for each route.
+// Solves two problems:
+//   1) SPA deep links on GitHub Pages otherwise return HTTP 404 (soft 404) to search engines and social crawlers;
+//   2) Social preview cards (Twitter/OpenGraph) do not execute JS and only read head meta tags.
+// Each generated file contains a static SEO shell inside the SPA mount point plus route-specific meta tags;
+// once loaded in a browser, React replaces the shell seamlessly.
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -12,7 +12,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.join(root, 'dist');
 
-// 用 file:// URL 动态导入源码，Windows 下直接 import 绝对路径会报错
+// Dynamically import source modules via file:// URLs for cross-platform compatibility
 const load = (relative) => import(pathToFileURL(path.join(root, relative)).href);
 
 const { projectCatalog } = await load('src/data/projectCatalog.js');
@@ -30,7 +30,7 @@ const detailModules = {
 
 const projects = projectCatalog.map((summary) => ({ ...summary, ...(detailModules[summary.id] || {}) }));
 
-// ── 基础工具 ────────────────────────────────────────────────────────────────
+// ── Utilities ───────────────────────────────────────────────────────────────
 const esc = (s) =>
   String(s ?? '')
     .replace(/&/g, '&amp;')
@@ -38,10 +38,10 @@ const esc = (s) =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 
-// 去掉 KaTeX 的 $ / $$ 定界符，保留公式文本（静态外壳里不做数学渲染）
+// Strip KaTeX $ / $$ delimiters while retaining formula text in the static shell
 const plain = (s) => String(s ?? '').replace(/\$\$?/g, '');
 
-// 只替换 content 值；缺失时插入到 </head> 之前。attribute 用 name / property。
+// Replace meta content value or insert before </head> if missing.
 function upsertMeta(html, attr, key, content) {
   const re = new RegExp(`<meta\\s+${attr}="${key}"\\s+content="[^"]*"\\s*/?>`);
   const tag = `<meta ${attr}="${key}" content="${esc(content)}" />`;
@@ -90,26 +90,26 @@ const statsHtml = (list = []) =>
 
 function projectShell(project, index) {
   const num = String(index + 1).padStart(2, '0');
-  const kind = project.type === 'research' ? 'RESEARCH · 科研' : 'ENGINEERING · 工程';
+  const kind = project.type === 'research' ? 'RESEARCH' : 'ENGINEERING';
   const links = project.links || {};
   const linkBits = [
-    `<a href="/#projects">← 返回主页项目</a>`,
-    links.gitee ? `<a href="${esc(links.gitee)}">Gitee 仓库</a>` : '',
+    `<a href="/#projects">← Back to Projects</a>`,
+    links.gitee ? `<a href="${esc(links.gitee)}">Gitee Repository</a>` : '',
     links.github ? `<a href="${esc(links.github)}">GitHub</a>` : ''
   ].filter(Boolean);
 
   let body = '';
-  if (project.background) body += `<h2>问题与动机 / Background</h2><p>${esc(clip(project.background, 700))}</p>`;
-  if (project.method) body += `<h2>方法与实现 / Method</h2><p>${esc(clip(project.method, 900))}</p>`;
-  if (project.results) body += `<h2>成果与指标 / Results</h2><p>${esc(clip(project.results, 700))}</p>`;
+  if (project.background) body += `<h2>Problem &amp; Motivation</h2><p>${esc(clip(project.background, 700))}</p>`;
+  if (project.method) body += `<h2>Method &amp; Architecture</h2><p>${esc(clip(project.method, 900))}</p>`;
+  if (project.results) body += `<h2>Results &amp; Metrics</h2><p>${esc(clip(project.results, 700))}</p>`;
   if (project.highlights?.length) {
-    body += `<h2>核心亮点 / Highlights</h2><ul>${project.highlights
+    body += `<h2>Technical Highlights</h2><ul>${project.highlights
       .map((h) => `<li>· ${esc(clip(h, 260))}</li>`)
       .join('')}</ul>`;
   }
   if (project.paperInfo) {
-    body += `<h2>论文摘要 / Abstract</h2><p><strong>${esc(project.paperInfo.titleZh)}</strong></p><p>${esc(
-      clip(project.paperInfo.abstractZh, 1400)
+    body += `<h2>Abstract</h2><p><strong>${esc(project.paperInfo.titleEn)}</strong></p><p>${esc(
+      clip(project.paperInfo.abstractEn, 1400)
     )}</p>`;
   }
 
@@ -148,9 +148,7 @@ function homeShell() {
   )}
 <p>${esc(personalInfo.major)} · ${esc(personalInfo.school)} · ${esc(educationInfo.period)}</p>
 <h2>About Me</h2>
-<p>I am ${esc(personalInfo.name)} (${esc(
-    personalInfo.chineseName
-  )}), an undergraduate student in Computer Science and Technology at ${esc(educationInfo.school)}. My work focuses on Computer Vision & 3D Geometry (monocular positioning, crowd counting) and AI-Native Systems & Multi-Agent Engineering (RAG, FastMCP, multi-agent simulation, and secure sandboxing).</p>
+<p>I am ${esc(personalInfo.name)}, an undergraduate student in Computer Science and Technology at ${esc(educationInfo.school)}. My work focuses on Computer Vision &amp; 3D Geometry (monocular positioning, crowd counting) and AI-Native Systems &amp; Multi-Agent Engineering (RAG, FastMCP, multi-agent simulation, and secure sandboxing).</p>
 <p>${personalInfo.taglines.map((t) => esc(t)).join(' · ')}</p>
 <h2>News</h2>
 <ul>${newsList.map((n) => `<li><strong>[${esc(n.date)}]</strong> ${esc(n.text.replace(/<[^>]+>/g, ''))}</li>`).join('')}</ul>
@@ -168,13 +166,12 @@ function homeShell() {
 </div>`;
 }
 
-// ── 每个路由的 SEO 元信息 ───────────────────────────────────────────────────
+// ── Route SEO Metadata ──────────────────────────────────────────────────────
 function personJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: personalInfo.name,
-    alternateName: personalInfo.chineseName,
     jobTitle: 'Undergraduate in Computer Science · Computer Vision & AI Systems Engineering',
     description: `${personalInfo.name}, ${personalInfo.major} at ${personalInfo.school}, focusing on monocular 3D vision, crowd density estimation, LLM agents, and secure sandboxing.`,
     url: `${SITE}/`,
@@ -199,12 +196,12 @@ function projectJsonLd(project, index) {
     description: project.description,
     url: `${SITE}/projects/${project.id}/`,
     image: project.cover,
-    inLanguage: 'zh-CN',
+    inLanguage: 'en',
     keywords: (project.tech || []).join(', '),
     position: index + 1
   };
   if (project.links?.github) data.codeRepository = project.links.github;
-  if (isPaper && project.paperInfo.abstractZh) data.abstract = clip(project.paperInfo.abstractZh, 900);
+  if (isPaper && project.paperInfo.abstractEn) data.abstract = clip(project.paperInfo.abstractEn, 900);
   return data;
 }
 
@@ -213,13 +210,13 @@ function breadcrumbJsonLd(project) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE}/` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
       { '@type': 'ListItem', position: 2, name: project.title, item: `${SITE}/projects/${project.id}/` }
     ]
   };
 }
 
-// 元信息来自 src/utils/routeMeta.js（与运行时共用一份），这里补上「写哪个文件、静态外壳、结构化数据」
+// Route metadata is shared with runtime via src/utils/routeMeta.js; attach output paths, static shells, and JSON-LD here.
 const baseRoutes = buildRoutes();
 const routes = baseRoutes.map((route) => {
   const index = projects.findIndex((p) => `/projects/${p.id}` === route.path);
@@ -233,11 +230,11 @@ const routes = baseRoutes.map((route) => {
   };
 });
 
-// R2 上的 7 张封面尺寸一致（1672×941，约 16:9）。声明宽高能让爬虫/预览服务在不下载图片的情况下排好卡片。
+// Cover dimensions on R2 (1672x941, ~16:9).
 const COVER_W = 1672;
 const COVER_H = 941;
 
-// ── 生成 ────────────────────────────────────────────────────────────────────
+// ── Generation ──────────────────────────────────────────────────────────────
 const template = fs.readFileSync(path.join(distDir, 'index.html'), 'utf8');
 const headEnd = '</head>';
 
@@ -257,7 +254,7 @@ for (const route of routes) {
   html = upsertMeta(html, 'property', 'og:image', route.image);
   html = upsertMeta(html, 'property', 'og:image:width', COVER_W);
   html = upsertMeta(html, 'property', 'og:image:height', COVER_H);
-  html = upsertMeta(html, 'property', 'og:image:alt', `${route.title} — 分享预览图`);
+  html = upsertMeta(html, 'property', 'og:image:alt', `${route.title} — Social Preview`);
   html = upsertMeta(html, 'property', 'og:url', route.url);
   html = upsertMeta(html, 'name', 'twitter:title', route.title);
   html = upsertMeta(html, 'name', 'twitter:description', route.description);
@@ -279,12 +276,12 @@ for (const route of routes) {
   console.log(`  ✓ ${route.outPath}  ←  ${route.url}`);
 }
 
-// robots.txt + sitemap.xml：让搜索引擎能直接发现 7 篇案例研究
+// Generate robots.txt and sitemap.xml
 let lastmod = new Date().toISOString().slice(0, 10);
 try {
   lastmod = execFileSync('git', ['log', '-1', '--format=%cs'], { cwd: root, encoding: 'utf8' }).trim() || lastmod;
 } catch {
-  /* 非 git 环境（如 tarball 构建）沿用今天 */
+  /* Fallback to current date outside git repositories */
 }
 fs.writeFileSync(path.join(distDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 fs.writeFileSync(
@@ -298,5 +295,5 @@ fs.writeFileSync(
     )
     .join('\n')}\n</urlset>\n`
 );
-console.log(`  ✓ robots.txt / sitemap.xml（${routes.length} 个 URL，lastmod ${lastmod}）`);
-console.log(`静态预渲染完成：${routes.length} 个路由，每个都是独立的 200 页面。`);
+console.log(`  ✓ robots.txt / sitemap.xml (${routes.length} URLs, lastmod ${lastmod})`);
+console.log(`Static prerendering complete: ${routes.length} routes generated.`);

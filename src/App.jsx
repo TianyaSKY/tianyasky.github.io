@@ -51,7 +51,7 @@ function Shell() {
       <footer className="page__footer">
         <div className="page__footer-inner">
           <p>
-            © {new Date().getFullYear()} {personalInfo.name} ({personalInfo.chineseName})
+            © {new Date().getFullYear()} {personalInfo.name}
           </p>
           <p className="page__footer-sub">
             Academic Homepage · Hosted on GitHub Pages

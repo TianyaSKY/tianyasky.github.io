@@ -4,23 +4,11 @@ import { projects } from '../data/projectDetails';
 import NotFound from './NotFound';
 import {
   ArrowLeft,
-  Github,
-  ArrowRight,
-  Download,
   ExternalLink,
-  Package,
-  Sparkles,
-  Layers,
   ZoomIn,
   ZoomOut,
   RotateCcw,
-  Maximize2,
-  Compass,
-  Cpu,
-  BarChart3,
-  SearchCode,
-  ShieldCheck,
-  CheckCircle
+  Maximize2
 } from 'lucide-react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
@@ -31,9 +19,9 @@ import AccessibleDialog from '../components/AccessibleDialog';
 
 function renderMathText(text) {
   if (typeof text !== 'string') return text;
-  if (!text.includes('$')) return text;
+  if (!text.includes('$') && !text.includes('`')) return text;
 
-  const parts = text.split(/(\$\$[\s\S]+?\$\$|\$[^\$]+?\$)/g);
+  const parts = text.split(/(\$\$[\s\S]+?\$\$|\$[^\$]+?\$|`[^`]+?`)/g);
   return parts.map((part, i) => {
     if (part.startsWith('$$') && part.endsWith('$$')) {
       const tex = part.slice(2, -2).trim();
@@ -51,6 +39,8 @@ function renderMathText(text) {
       } catch (e) {
         return <code key={i}>{part}</code>;
       }
+    } else if (part.startsWith('`') && part.endsWith('`')) {
+      return <code key={i}>{part.slice(1, -1)}</code>;
     }
     return part;
   });
@@ -67,32 +57,87 @@ function MathBlock({ formula }) {
   return <div className="math-formula-box" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
+function ArxivFigureCaption({ label, title, caption, analysis, onZoom, compact = false }) {
+  let cleanTitle = title ? title.trim() : '';
+  if (cleanTitle && !cleanTitle.endsWith('.') && !cleanTitle.endsWith(':')) {
+    cleanTitle += '.';
+  }
+
+  let cleanLabel = label ? label.trim() : '';
+  if (cleanLabel && !cleanLabel.endsWith('.') && !cleanLabel.endsWith(':')) {
+    cleanLabel += '.';
+  }
+
+  return (
+    <figcaption className={`arxiv-figure-caption ${compact ? 'is-compact' : ''}`}>
+      <div className="arxiv-caption-body">
+        {cleanLabel && <strong className="arxiv-caption-label">{cleanLabel} </strong>}
+        {cleanTitle && <strong className="arxiv-caption-title">{cleanTitle} </strong>}
+        {caption && <span className="arxiv-caption-text">{renderMathText(caption)} </span>}
+        {onZoom && (
+          <button
+            type="button"
+            className="arxiv-zoom-btn"
+            onClick={onZoom}
+            aria-label={`Zoom ${label || 'figure'}`}
+            title="Inspect figure at full resolution"
+          >
+            [Zoom]
+          </button>
+        )}
+      </div>
+
+      {analysis && (
+        <div className="arxiv-analysis-block">
+          <em className="arxiv-analysis-tag">Analysis. </em>
+          <span className="arxiv-analysis-text">{renderMathText(analysis)}</span>
+        </div>
+      )}
+    </figcaption>
+  );
+}
+
+function ArxivTableCaption({ caption }) {
+  if (!caption) return null;
+  const match = caption.match(/^(Table\s+[\dA-Za-z]+)\s*[:|·\-.]\s*(.*)$/i);
+  if (match) {
+    const tableLabel = match[1];
+    let tableText = match[2].trim();
+    if (!tableText.endsWith('.')) tableText += '.';
+    return (
+      <div className="arxiv-table-caption">
+        <strong className="arxiv-table-label">{tableLabel}: </strong>
+        <span className="arxiv-table-title">{renderMathText(tableText)}</span>
+      </div>
+    );
+  }
+  return (
+    <div className="arxiv-table-caption">
+      <strong className="arxiv-table-title">{renderMathText(caption)}</strong>
+    </div>
+  );
+}
+
 function PaperInlineFigure({ figure, onOpen }) {
   return (
     <figure className={`paper-inline-figure ${figure.wide ? 'is-wide' : ''}`}>
       <button
         type="button"
         className="figure-zoom-trigger"
-        aria-label={`放大查看：${figure.title || figure.caption}`}
+        aria-label={`Zoom figure: ${figure.title || figure.caption}`}
         onClick={() => onOpen(figure)}
       >
         <span className="figure-canvas">
-          <img src={figure.src} alt={figure.caption} loading="lazy" />
+          <img src={figure.src} alt={figure.title || figure.caption} loading="lazy" />
         </span>
       </button>
-      <figcaption className="paper-figure-caption">
-        <div className="fig-meta-bar">
-          <span className="fig-tag">{figure.label}</span>
-          <strong className="fig-heading">{figure.title || figure.caption}</strong>
-        </div>
-        <p className="fig-text">{renderMathText(figure.caption)}</p>
-        {figure.analysis && (
-          <div className="fig-analysis-box">
-            <span className="analysis-pill">物理机理与质检分析</span>
-            <p className="analysis-body">{renderMathText(figure.analysis)}</p>
-          </div>
-        )}
-      </figcaption>
+      <ArxivFigureCaption
+        label={figure.label}
+        title={figure.title}
+        caption={figure.caption}
+        analysis={figure.analysis}
+        onZoom={() => onOpen(figure)}
+      />
     </figure>
   );
 }
@@ -176,9 +221,9 @@ function FigureLightboxModal({ figure, onClose }) {
         {/* Header with full inspection tools */}
         <header className="project-modal-header">
           <div className="modal-header-meta">
-            <span className="modal-fig-label">{figure.label || 'FIG'}</span>
+            <span className="modal-fig-label">{figure.label ? `arXiv · ${figure.label}` : 'arXiv · FIG'}</span>
             <span className="project-modal-title">
-              <strong>{figure.title || figure.caption}</strong>
+              <strong>{figure.title || figure.label || 'Figure Inspection'}</strong>
             </span>
           </div>
 
@@ -188,7 +233,7 @@ function FigureLightboxModal({ figure, onClose }) {
                 type="button"
                 className="zoom-btn"
                 onClick={handleZoomOut}
-                title="缩小 (Zoom Out, -)"
+                title="Zoom Out (-)"
               >
                 <ZoomOut size={15} />
               </button>
@@ -197,7 +242,7 @@ function FigureLightboxModal({ figure, onClose }) {
                 type="button"
                 className="zoom-btn"
                 onClick={handleZoomIn}
-                title="放大 (Zoom In, +)"
+                title="Zoom In (+)"
               >
                 <ZoomIn size={15} />
               </button>
@@ -205,17 +250,17 @@ function FigureLightboxModal({ figure, onClose }) {
                 type="button"
                 className="zoom-btn text-btn"
                 onClick={handleReset}
-                title="适应窗口 (Reset, 0)"
+                title="Fit to Window (Reset, 0)"
               >
-                <RotateCcw size={13} style={{ marginRight: 3 }} /> 适应窗口
+                <RotateCcw size={13} style={{ marginRight: 3 }} /> Fit Window
               </button>
               <button
                 type="button"
                 className={`zoom-btn text-btn ${scale > 1 ? 'is-active' : ''}`}
                 onClick={handleActualSize}
-                title="大图细节模式"
+                title="High-Resolution Detail Mode"
               >
-                <Maximize2 size={13} style={{ marginRight: 3 }} /> {scale > 1 ? '还原尺寸' : '高清细节'}
+                <Maximize2 size={13} style={{ marginRight: 3 }} /> {scale > 1 ? 'Reset Size' : 'HD Detail'}
               </button>
             </div>
 
@@ -224,9 +269,9 @@ function FigureLightboxModal({ figure, onClose }) {
               target="_blank"
               rel="noopener noreferrer"
               className="modal-origin-link"
-              title="在新标签页中打开超高清原图"
+              title="Open full-resolution original image in a new tab"
             >
-              <ExternalLink size={14} /> 原图直达
+              <ExternalLink size={14} /> Open Original
             </a>
 
             <button
@@ -235,9 +280,9 @@ function FigureLightboxModal({ figure, onClose }) {
               data-dialog-initial-focus
               onClick={onClose}
               aria-label="Close modal"
-              title="按 ESC 键或点击关闭"
+              title="Press ESC or click to close"
             >
-              ✕ 关闭
+              ✕ Close
             </button>
           </div>
         </header>
@@ -262,21 +307,36 @@ function FigureLightboxModal({ figure, onClose }) {
             draggable={false}
           />
           <div className="modal-canvas-hint">
-            {scale > 1 ? '按住鼠标左键可平移拖拽 · 滚轮缩放 · 双击重置' : '滚轮或双击放大 · 支持拖拽平移查看细节'}
+            {scale > 1 ? 'Hold left mouse button to pan · Scroll to zoom · Double-click to reset' : 'Scroll or double-click to zoom · Drag to pan and inspect details'}
           </div>
         </div>
 
         {/* Informative Captions & Diagnostics Footer */}
         {(figure.caption || figure.analysis) && (
-          <footer className="project-modal-footer">
-            <p className="modal-caption-text">
-              <strong>学术图释：</strong>{renderMathText(figure.caption)}
-            </p>
-            {figure.analysis && (
-              <p className="modal-analysis-text">
-                <strong>实验机理与归因：</strong>{renderMathText(figure.analysis)}
-              </p>
-            )}
+          <footer className="project-modal-footer arxiv-modal-footer">
+            <div className="arxiv-modal-caption-content">
+              <div className="arxiv-caption-body">
+                {figure.label && (
+                  <strong className="arxiv-caption-label">
+                    {figure.label.endsWith('.') || figure.label.endsWith(':') ? figure.label : `${figure.label}.`}{' '}
+                  </strong>
+                )}
+                {figure.title && (
+                  <strong className="arxiv-caption-title">
+                    {figure.title.endsWith('.') || figure.title.endsWith(':') ? figure.title : `${figure.title}.`}{' '}
+                  </strong>
+                )}
+                {figure.caption && (
+                  <span className="arxiv-caption-text">{renderMathText(figure.caption)}</span>
+                )}
+              </div>
+              {figure.analysis && (
+                <div className="arxiv-analysis-block">
+                  <em className="arxiv-analysis-tag">Analysis. </em>
+                  <span className="arxiv-analysis-text">{renderMathText(figure.analysis)}</span>
+                </div>
+              )}
+            </div>
           </footer>
         )}
     </AccessibleDialog>
@@ -291,150 +351,65 @@ export default function ProjectDetail() {
     [project]
   );
 
-  const [abstractLang, setAbstractLang] = useState('zh');
   const [modalFigure, setModalFigure] = useState(null);
 
   const paperArticle = project?.paperArticle;
-  const [activeSecId, setActiveSecId] = useState(paperArticle?.sections?.[0]?.id || 'sec-intro');
-
-  const links = project?.links || {};
 
   if (!project) return <NotFound />;
-
-  const num = String(projects.findIndex((p) => p.id === project.id) + 1).padStart(2, '0');
-  const relatedNumeric = (rid) =>
-    String(projects.findIndex((p) => p.id === rid) + 1).padStart(2, '0');
-
-  React.useEffect(() => {
-    if (!paperArticle) return;
-    const sectionIds = paperArticle.sections.map((s) => s.id);
-
-    const handleScroll = () => {
-      // If near bottom of the page, activate the last section
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120) {
-        setActiveSecId(sectionIds[sectionIds.length - 1]);
-        return;
-      }
-
-      const focusOffset = 180;
-      let currentActive = sectionIds[0];
-
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= focusOffset) {
-            currentActive = id;
-          }
-        }
-      }
-      setActiveSecId(currentActive);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [paperArticle]);
-
-  const scrollToSection = (secId) => {
-    const el = document.getElementById(secId);
-    if (el) {
-      el.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-      setActiveSecId(secId);
-    }
-  };
 
   return (
     <article className="project-detail">
       {/* Backbar */}
       <div className="project-detail-backbar">
-        <Link to="/#projects" className="btn-link" style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
-          <ArrowLeft size={14} /> 返回主页项目
+        <Link to="/#projects" className="btn-link">
+          <ArrowLeft size={14} /> Back to Projects
         </Link>
-        <span className="signoff">
-          ISSUE · 0{num} · {project.type === 'research' ? 'RESEARCH' : 'ENGINEERING'}
-        </span>
       </div>
 
       {/* Hero */}
       <ProjectHero project={project} />
 
-      {/* 00 · Academic Paper Abstract Block (When paperInfo is present) */}
+      {/* Academic Paper Abstract Block (When paperInfo is present) */}
       {project.paperInfo && (
-        <section className="paper-abstract-section" style={{ padding: '3.5rem 0 0', borderTop: '1px solid var(--rule)' }}>
+        <section className="paper-abstract-section">
           <div className="paper-abstract-card">
-            <header className="paper-card-header">
-              <div className="paper-lang-tabs" role="tablist">
-                <button
-                  type="button"
-                  className={`lang-tab-btn ${abstractLang === 'zh' ? 'active' : ''}`}
-                  onClick={() => setAbstractLang('zh')}
-                >
-                  中文摘要 (Abstract)
-                </button>
-                <button
-                  type="button"
-                  className={`lang-tab-btn ${abstractLang === 'en' ? 'active' : ''}`}
-                  onClick={() => setAbstractLang('en')}
-                >
-                  English Abstract
-                </button>
-              </div>
-
-              <h2 className="paper-main-title">
-                {abstractLang === 'zh' ? project.paperInfo.titleZh : project.paperInfo.titleEn}
-              </h2>
-            </header>
+            <h2 className="paper-main-title">
+              {project.paperInfo.titleEn}
+            </h2>
 
             <div className="paper-abstract-body">
-              <div className="abstract-label-pill">ABSTRACT · 论文摘要</div>
               <p className="abstract-text">
-                {abstractLang === 'zh' ? project.paperInfo.abstractZh : project.paperInfo.abstractEn}
+                <strong>Abstract. </strong>
+                {project.paperInfo.abstractEn}
               </p>
             </div>
 
-            <footer className="paper-abstract-footer">
-              <span className="keywords-label">
-                <strong>{abstractLang === 'zh' ? '关键词 (Keywords)：' : 'Keywords:'}</strong>
-              </span>
-              <div className="keywords-list">
-                {(abstractLang === 'zh' ? project.paperInfo.keywordsZh : project.paperInfo.keywordsEn).map((kw, i) => (
-                  <span key={i} className="paper-keyword-tag">{kw}</span>
-                ))}
-              </div>
-            </footer>
+            {project.paperInfo.keywordsEn && project.paperInfo.keywordsEn.length > 0 && (
+              <footer className="paper-abstract-footer">
+                <span className="keywords-label">
+                  <strong>Keywords:</strong>
+                </span>
+                <span className="keywords-list-inline">
+                  {project.paperInfo.keywordsEn.join(' · ')}
+                </span>
+              </footer>
+            )}
           </div>
         </section>
       )}
 
       {/* Interactive AI Terminal or Simulator when available */}
       {project.hasTerminalSim && (
-        <section className="project-interactive-demo" style={{ padding: '4rem 0 0', borderTop: '1px solid var(--rule)' }}>
-          <div className="kicker">00 · Interactive Terminal</div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '1rem', marginTop: '0.5rem', marginBottom: '1.25rem' }}>
-            <h2 className="section-title" style={{ fontSize: '2.4rem', margin: 0 }}>
-              「慈欣体」在线生成终端 / <em>interactive terminal</em>
-            </h2>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--color-text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-              Qwen3.6-27B 4bit QLoRA 续写体验
-            </span>
-          </div>
-          <SciFiTerminal defaultOpen={true} />
+        <section className="project-interactive-demo">
+          <h2 className="section-title">Interactive Sci-Fi Continuation Terminal</h2>
+          <SciFiTerminal defaultOpen={false} />
         </section>
       )}
 
-
-
       {/* Demo · embedded video when recorded */}
       {project.video && (
-        <section className="project-demo" style={{ padding: '4rem 0 0', borderTop: '1px solid var(--rule)' }}>
-          <div className="kicker">00 · Demo</div>
-          <h2 className="section-title" style={{ fontSize: '2.6rem', marginTop: '0.5rem' }}>
-            演示视频 / <em>demo</em>
-          </h2>
+        <section className="project-demo">
+          <h2 className="section-title">Video Walkthrough</h2>
           <video
             className="project-demo-video"
             src={project.video}
@@ -450,23 +425,16 @@ export default function ProjectDetail() {
       {/* ========================================================================= */}
       {paperArticle ? (
         <div className="paper-article-layout">
-          {/* Main Paper Sections Stream */}
           <div className="paper-article-container">
             {paperArticle.sections.map((sec) => (
               <section key={sec.id} id={sec.id} className="paper-section-block">
-                {/* Section Header */}
                 <header className="paper-section-header">
-                  <div className="paper-section-kicker">
-                    <span className="sec-num">{sec.number}</span>
-                    <span className="sec-divider">/</span>
-                    <span className="sec-kicker-text">{sec.kicker}</span>
-                  </div>
-                  <h2 className="paper-section-title">{sec.title}</h2>
+                  <h2 className="paper-section-title">
+                    {sec.number}. {sec.title}
+                  </h2>
                 </header>
 
-                {/* Section Body */}
                 <div className="paper-section-content">
-                  {/* Lead Paragraphs */}
                   {sec.paragraphs && sec.paragraphs.length > 0 && (
                     <div className="paper-paragraphs-group">
                       {sec.paragraphs.map((p, pIdx) => (
@@ -475,44 +443,32 @@ export default function ProjectDetail() {
                     </div>
                   )}
 
-                  {/* Core Contributions (Sec 1) */}
                   {sec.contributions && (
                     <div className="paper-contributions-card">
-                      <div className="contributions-header">
-                        <Sparkles size={16} style={{ color: 'var(--color-primary)' }} />
-                        <strong>核心学术贡献与工程突破 (Core Contributions)</strong>
-                      </div>
-                      <div className="contributions-grid">
+                      <h3 className="paper-subsection-title">Core Contributions</h3>
+                      <ul className="paper-contributions-list">
                         {sec.contributions.map((c, cIdx) => (
-                          <div key={cIdx} className="contribution-item">
-                            <div className="contribution-num">0{cIdx + 1}</div>
-                            <div className="contribution-desc">{renderMathText(c)}</div>
-                          </div>
+                          <li key={cIdx} className="contribution-li">
+                            {renderMathText(c)}
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     </div>
                   )}
 
-                  {/* Math Formula Card (Sec 2, Sec 4, etc.) */}
                   {sec.math && (
-                    <div className="paper-math-card">
-                      <div className="math-card-header">
-                        <span className="math-badge">EQUATION · 公式推导</span>
-                        <h4 className="math-title">{sec.math.title}</h4>
-                      </div>
+                    <div className="paper-math-block">
                       <MathBlock formula={sec.math.formula} />
                       {sec.math.explanation && (
-                        <p className="math-explanation">{renderMathText(sec.math.explanation)}</p>
+                        <p className="paper-p math-explanation">{renderMathText(sec.math.explanation)}</p>
                       )}
                     </div>
                   )}
 
-                  {/* Standalone Embedded Figure (Sec 2, Sec 3, etc.) */}
                   {sec.figure && (
                     <PaperInlineFigure figure={sec.figure} onOpen={setModalFigure} />
                   )}
 
-                  {/* Subsections with architectural explanations (Sec 3) */}
                   {sec.subsections && (
                     <div className="paper-subsections-flow">
                       {sec.subsections.map((sub, sIdx) => (
@@ -527,55 +483,26 @@ export default function ProjectDetail() {
                     </div>
                   )}
 
-                  {/* Training Strategy Pillars (Sec 4) */}
                   {sec.trainingPillars && (
-                    <div className="paper-training-pillars-grid">
+                    <div className="paper-training-pillars">
                       {sec.trainingPillars.map((tp, tpIdx) => (
-                        <div key={tpIdx} className="training-pillar-card">
-                          <div className="pillar-header">
-                            <Cpu size={16} style={{ color: 'var(--color-primary)' }} />
-                            <h4>{tp.title}</h4>
-                          </div>
+                        <div key={tpIdx} className="training-pillar-item">
+                          <h4>{tp.title}</h4>
                           <p>{renderMathText(tp.detail)}</p>
                         </div>
                       ))}
                     </div>
                   )}
 
-                  {/* Quantitative Benchmarks & Tables (Sec 5) */}
                   {sec.id === 'sec-results' && (
                     <div className="paper-benchmark-block">
-                      {/* Figure 3: Dataset Overview */}
                       {sec.datasetFigure && (
-                        <figure
-                          className="paper-inline-figure"
-                        >
-                          <button
-                            type="button"
-                            className="figure-zoom-trigger"
-                            aria-label={`放大查看：${sec.datasetFigure.title || sec.datasetFigure.caption}`}
-                            onClick={() => setModalFigure(sec.datasetFigure)}
-                          >
-                            <span className="figure-canvas">
-                              <img src={sec.datasetFigure.src} alt={sec.datasetFigure.caption} loading="lazy" />
-                            </span>
-                          </button>
-                          <figcaption className="paper-figure-caption">
-                            <div className="fig-meta-bar">
-                              <span className="fig-tag">{sec.datasetFigure.label}</span>
-                              <strong className="fig-heading">{sec.datasetFigure.title}</strong>
-                            </div>
-                            <p className="fig-text">{renderMathText(sec.datasetFigure.caption)}</p>
-                          </figcaption>
-                        </figure>
+                        <PaperInlineFigure figure={sec.datasetFigure} onOpen={setModalFigure} />
                       )}
 
-                      {/* Table 1: All Datasets / Ablation Benchmark Table */}
                       {project.benchmarkTable && (
-                        <div className="academic-table-wrapper" style={{ marginTop: '2.5rem' }}>
-                          <div className="academic-table-caption">
-                            <strong>{project.benchmarkTable.caption}</strong>
-                          </div>
+                        <div className="academic-table-wrapper">
+                          <ArxivTableCaption caption={project.benchmarkTable.caption} />
                           <div className="academic-table-container">
                             <table className="academic-booktabs-table">
                               <thead>
@@ -604,11 +531,7 @@ export default function ProjectDetail() {
                                             }
                                           >
                                             {typeof cell === 'object' ? (
-                                              <>
-                                                {cell.strong !== false ? <strong>{renderMathText(cell.text)}</strong> : renderMathText(cell.text)}
-                                                {cell.badge && <span className="highlight-tag">{cell.badge}</span>}
-                                                {cell.ours && <span className="highlight-tag ours-tag">OURS</span>}
-                                              </>
+                                              cell.strong !== false ? <strong>{renderMathText(cell.text)}</strong> : renderMathText(cell.text)
                                             ) : (
                                               renderMathText(cell)
                                             )}
@@ -621,7 +544,6 @@ export default function ProjectDetail() {
                                     <tr key={idx} className={`${row.highlight ? 'row-highlight' : ''} ${row.isSummary ? 'row-summary' : ''}`}>
                                       <td className="cell-dataset">
                                         <strong>{row.dataset}</strong>
-                                        {row.highlight && <span className="highlight-tag">BEST</span>}
                                       </td>
                                       <td className="col-num">{row.testN}</td>
                                       <td className="col-num val-mae"><strong>{row.mae}</strong></td>
@@ -635,30 +557,26 @@ export default function ProjectDetail() {
                             </table>
                           </div>
                           <div className="table-footnote">
-                            {project.benchmarkTable.footnote || '注：↓ 表示数值越小越优；ShanghaiTech Part A 为模型最显著突破项；Macro Average 仅作多域均值参考。'}
+                            {project.benchmarkTable.footnote || 'Note: ↓ indicates lower is better; Macro Average summarizes performance across domains.'}
                           </div>
                         </div>
                       )}
 
-                      {/* SOTA Comparison Narrative & Table 2 */}
                       {(project.sotaTable || sec.sotaNarrative) && (
-                        <div className="paper-sota-narrative" style={{ marginTop: '3.5rem' }}>
+                        <div className="paper-sota-narrative">
                           <h3 className="paper-subsection-title">
-                            {sec.sotaTitle || "与国际主流顶会 SOTA 模型纵横对比 (SOTA Cross-Benchmark Comparison)"}
+                            {sec.sotaTitle || "Cross-Benchmark Comparison with Published Models"}
                           </h3>
                           <p className="paper-p">
                             {renderMathText(
                               sec.sotaNarrative ||
-                              "我们将 YOLO-PGMD 与近年来在 CVPR、ICCV、NeurIPS 等顶级会议发表的 6 种代表性 SOTA 模型进行了同基准定量对比。在密集度最高的 ShanghaiTech Part A 上，YOLO-PGMD 取得了 48.13 MAE / 74.17 RMSE，超越了包括 CVPR'22 MAN (56.8) 及 NeurIPS'20 DM-Count (59.7) 在内的全部主流基准；在复杂恶劣场景的 JHU-Crowd 上取得 39.73 MAE，验证了显著的跨域泛化优势。"
+                              "We compare YOLO-PGMD with six representative crowd-counting models published at CVPR, ICCV, and NeurIPS under the same benchmark protocols."
                             )}
                           </p>
 
-                          {/* Table 2: SOTA Comparison */}
                           {project.sotaTable && (
-                            <div className="academic-table-wrapper" style={{ marginTop: '1.5rem' }}>
-                              <div className="academic-table-caption">
-                                <strong>{project.sotaTable.caption}</strong>
-                              </div>
+                            <div className="academic-table-wrapper">
+                              <ArxivTableCaption caption={project.sotaTable.caption} />
                               <div className="academic-table-container">
                                 <table className="academic-booktabs-table">
                                   <thead>
@@ -687,13 +605,7 @@ export default function ProjectDetail() {
                                                 }
                                               >
                                                 {typeof cell === 'object' ? (
-                                                  <>
-                                                    {cell.strong !== false ? <strong>{renderMathText(cell.text)}</strong> : renderMathText(cell.text)}
-                                                    {cell.isOurs && <span className="highlight-tag ours-tag">OURS</span>}
-                                                    {cell.venue && <span className="venue-badge">{cell.venue}</span>}
-                                                  </>
-                                                ) : cIdx === row.cells.length - 1 ? (
-                                                  <span className="venue-badge">{cell}</span>
+                                                  cell.strong !== false ? <strong>{renderMathText(cell.text)}</strong> : renderMathText(cell.text)
                                                 ) : (
                                                   renderMathText(cell)
                                                 )}
@@ -706,14 +618,13 @@ export default function ProjectDetail() {
                                         <tr key={idx} className={row.isOurs ? 'row-ours' : ''}>
                                           <td className="cell-model">
                                             <strong>{row.model}</strong>
-                                            {row.isOurs && <span className="highlight-tag ours-tag">OURS</span>}
                                           </td>
                                           <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.shaA}</td>
                                           <td className="col-num">{row.shaB}</td>
                                           <td className="col-num">{row.ucfQnrf}</td>
                                           <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.jhu}</td>
                                           <td className="col-num">{row.ucfCc50}</td>
-                                          <td className="cell-venue"><span className="venue-badge">{row.venue}</span></td>
+                                          <td className="cell-venue">{row.venue}</td>
                                         </tr>
                                       );
                                     })}
@@ -721,71 +632,46 @@ export default function ProjectDetail() {
                                 </table>
                               </div>
                               <div className="table-footnote">
-                                {project.sotaTable.footnote || '对比基准涵盖 CVPR\'18 (CSRNet)、ICCV\'19 (Bayesian Loss)、NeurIPS\'20 (DM-Count)、CVPR\'22 (MAN) 及 arXiv\'24 (CLIP-EBC) 等权威公开工作。'}
+                                {project.sotaTable.footnote || 'Reference models include CSRNet (CVPR\'18), Bayesian Loss (ICCV\'19), DM-Count (NeurIPS\'20), MAN (CVPR\'22), and CLIP-EBC (arXiv\'24).'}
                               </div>
                             </div>
                           )}
 
-                          {/* Figure 4: SOTA Comparison Bar Chart */}
                           {sec.sotaFigure && (
-                            <figure
-                              className="paper-inline-figure"
-                              style={{ marginTop: '2.5rem' }}
-                            >
-                              <button
-                                type="button"
-                                className="figure-zoom-trigger"
-                                aria-label={`放大查看：${sec.sotaFigure.title || sec.sotaFigure.caption}`}
-                                onClick={() => setModalFigure(sec.sotaFigure)}
-                              >
-                                <span className="figure-canvas">
-                                  <img src={sec.sotaFigure.src} alt={sec.sotaFigure.caption} loading="lazy" />
-                                </span>
-                              </button>
-                              <figcaption className="paper-figure-caption">
-                                <div className="fig-meta-bar">
-                                  <span className="fig-tag">{sec.sotaFigure.label}</span>
-                                  <strong className="fig-heading">{sec.sotaFigure.title}</strong>
-                                </div>
-                                <p className="fig-text">{renderMathText(sec.sotaFigure.caption)}</p>
-                              </figcaption>
-                            </figure>
+                            <PaperInlineFigure figure={sec.sotaFigure} onOpen={setModalFigure} />
                           )}
                         </div>
                       )}
 
-                      {/* Scatter Regression Analysis (Figures 5 & 6) */}
                       {sec.scatterFigures && (
-                        <div className="paper-scatter-analysis-block" style={{ marginTop: '3.5rem' }}>
+                        <div className="paper-scatter-analysis-block">
                           <h3 className="paper-subsection-title">
-                            真实人数 vs 预测人数回归拟合一致性分析 (Linear Regression Consistency)
+                            Ground-Truth vs. Predicted Count Regression Consistency
                           </h3>
                           {sec.scatterDiscussion && (
                             <p className="paper-p">{renderMathText(sec.scatterDiscussion)}</p>
                           )}
                           <div className="paper-scatter-grid">
                             {sec.scatterFigures.map((sFig, sfIdx) => (
-                              <figure
-                                key={sfIdx}
-                                className="scatter-figure-card"
-                              >
+                              <figure key={sfIdx} className="scatter-figure-card">
                                 <button
                                   type="button"
                                   className="figure-zoom-trigger"
-                                  aria-label={`放大查看：${sFig.title || sFig.caption}`}
+                                  aria-label={`Zoom figure: ${sFig.title || sFig.caption}`}
                                   onClick={() => setModalFigure(sFig)}
                                 >
                                   <span className="figure-canvas">
-                                    <img src={sFig.src} alt={sFig.caption} loading="lazy" />
+                                    <img src={sFig.src} alt={sFig.title || sFig.caption} loading="lazy" />
                                   </span>
                                 </button>
-                                <figcaption className="scatter-caption">
-                                  <div className="fig-meta-bar">
-                                    <span className="fig-tag">{sFig.label}</span>
-                                    <strong className="fig-heading">{sFig.title}</strong>
-                                  </div>
-                                  <p className="fig-text">{renderMathText(sFig.caption)}</p>
-                                </figcaption>
+                                <ArxivFigureCaption
+                                  label={sFig.label}
+                                  title={sFig.title}
+                                  caption={sFig.caption}
+                                  analysis={sFig.analysis}
+                                  onZoom={() => setModalFigure(sFig)}
+                                  compact={true}
+                                />
                               </figure>
                             ))}
                           </div>
@@ -794,42 +680,17 @@ export default function ProjectDetail() {
                     </div>
                   )}
 
-                  {/* Qualitative Case Studies (Sec 6) */}
                   {sec.cases && (
                     <div className="paper-case-studies-stream">
                       {sec.cases.map((cItem, cIdx) => (
                         <div key={cItem.id || cIdx} className="paper-case-card">
-                          <header className="case-card-header">
-                            <span className="case-tag-badge">{cItem.tag}</span>
-                            <span className="case-dataset-label">{cItem.dataset}</span>
-                          </header>
-                          <figure
-                            className="paper-inline-figure is-wide"
-                          >
-                            <button
-                              type="button"
-                              className="figure-zoom-trigger"
-                              aria-label={`放大查看：${cItem.figure.title || cItem.figure.caption}`}
-                              onClick={() => setModalFigure(cItem.figure)}
-                            >
-                              <span className="figure-canvas">
-                                <img src={cItem.figure.src} alt={cItem.figure.caption} loading="lazy" />
-                              </span>
-                            </button>
-                            <figcaption className="paper-figure-caption">
-                              <div className="fig-meta-bar">
-                                <span className="fig-tag">{cItem.figure.label}</span>
-                                <strong className="fig-heading">{cItem.figure.title}</strong>
-                              </div>
-                              <p className="fig-text">{renderMathText(cItem.figure.caption)}</p>
-                              {cItem.analysis && (
-                                <div className="fig-analysis-box">
-                                  <span className="analysis-pill">实验机理与场景解析</span>
-                                  <p className="analysis-body">{renderMathText(cItem.analysis)}</p>
-                                </div>
-                              )}
-                            </figcaption>
-                          </figure>
+                          <h3 className="paper-subsection-title">
+                            {cItem.tag} {cItem.dataset ? `(${cItem.dataset})` : ''}
+                          </h3>
+                          <PaperInlineFigure
+                            figure={{ ...cItem.figure, wide: true, analysis: cItem.analysis }}
+                            onOpen={setModalFigure}
+                          />
                         </div>
                       ))}
                     </div>
@@ -837,91 +698,37 @@ export default function ProjectDetail() {
                 </div>
               </section>
             ))}
-
-            {project.links && (
-              <div className="project-reflection-links" style={{ marginTop: '2rem', padding: '1rem 0', borderTop: '1px solid var(--rule)' }}>
-                {links.github && (
-                  <a className="btn btn-primary" href={links.github} target="_blank" rel="noopener noreferrer">
-                    <Github size={16} /> 访问 GitHub 开源仓库
-                  </a>
-                )}
-                {links.gitee && (
-                  <a className="btn btn-primary" href={links.gitee} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink size={16} /> 访问 Gitee 仓库
-                  </a>
-                )}
-                {links.download && (
-                  <a
-                    className="btn btn-outline"
-                    href={links.download}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download={links.downloadLabel || 'weights.zip'}
-                  >
-                    <Download size={16} /> 下载模型权重归档
-                  </a>
-                )}
-              </div>
-            )}
           </div>
-
-          {/* Right-Side Minimalist Line + Number TOC Rail */}
-          <aside className="paper-rail-toc" aria-label="Paper section timeline">
-            <div className="rail-toc-track">
-              {paperArticle.sections.map((sec) => (
-                <button
-                  key={sec.id}
-                  type="button"
-                  className={`rail-toc-node ${activeSecId === sec.id ? 'is-active' : ''}`}
-                  onClick={() => scrollToSection(sec.id)}
-                  aria-label={`${sec.number} · ${sec.title}`}
-                >
-                  <span className="rail-node-num">{sec.number}</span>
-                  <span className="rail-tooltip">{sec.title.split('/')[0].trim()}</span>
-                </button>
-              ))}
-            </div>
-          </aside>
         </div>
       ) : (
-        /* ========================================================================= */
-        /* MODE B: Default Project Spread & Gallery Flow for Standard Projects       */
-        /* ========================================================================= */
         <>
-          {/* 01 · Background & Motivation */}
           <ProjectSpread
-            index="01"
-            kicker="Background & Motivation"
-            title={<>问题<span style={{ fontStyle: 'italic', color: 'var(--color-vermilion)' }}>与动机</span></>}
+            index="1"
+            title="Problem & Motivation"
             lead={project.background}
-            figure={project.caseFigures?.background || { src: project.cover, caption: project.title }}
+            figure={project.caseFigures?.background || { src: project.cover, label: "Figure 1", title: "Problem Context", caption: project.description || project.title }}
+            onOpenFigure={setModalFigure}
           />
 
-          {/* 02 · Method & Architecture */}
           <ProjectSpread
-            index="02"
-            kicker="Method & Architecture"
-            title={<>方法与<em>实现</em></>}
+            index="2"
+            title="Method & Architecture"
             lead={project.method}
-            figure={project.caseFigures?.method || { src: typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src || project.cover, caption: `${project.id} · pipeline schematic`, wide: true }}
+            figure={project.caseFigures?.method || { src: typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src || project.cover, label: "Figure 2", title: "Method & Architecture", caption: project.method ? `${project.title} core methodology and technical architecture.` : `${project.id} · pipeline schematic`, wide: true }}
             bullets={project.highlights}
+            onOpenFigure={setModalFigure}
           />
 
-          {/* 03 · Results & Metrics */}
           <ProjectSpread
-            index="03"
-            kicker="Results & Metrics"
-            title={<>成果与<em>指标</em></>}
+            index="3"
+            title="Results & Evaluation"
             lead={project.results}
-            figure={project.caseFigures?.results || { src: typeof project.gallery?.[1] === 'string' ? project.gallery[1] : project.gallery?.[1]?.src || (typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src) || project.cover, caption: `${project.id} · evaluation table` }}
-            stats={project.stats}
+            figure={project.caseFigures?.results || { src: typeof project.gallery?.[1] === 'string' ? project.gallery[1] : project.gallery?.[1]?.src || (typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src) || project.cover, label: "Figure 3", title: "Results & Evaluation", caption: project.results ? `${project.title} experimental verification and performance evaluation.` : `${project.id} · evaluation results` }}
+            onOpenFigure={setModalFigure}
           >
-            {/* Table 1: All Dataset Breakdown (When present) */}
             {project.benchmarkTable && (
-              <div className="academic-table-wrapper" style={{ marginTop: '3.5rem' }}>
-                <div className="academic-table-caption">
-                  <strong>{project.benchmarkTable.caption}</strong>
-                </div>
+              <div className="academic-table-wrapper">
+                <ArxivTableCaption caption={project.benchmarkTable.caption} />
                 <div className="academic-table-container">
                   <table className="academic-booktabs-table">
                     <thead>
@@ -936,7 +743,6 @@ export default function ProjectDetail() {
                         <tr key={idx} className={`${row.highlight ? 'row-highlight' : ''} ${row.isSummary ? 'row-summary' : ''}`}>
                           <td className="cell-dataset">
                             <strong>{row.dataset}</strong>
-                            {row.highlight && <span className="highlight-tag">BEST</span>}
                           </td>
                           <td className="col-num">{row.testN}</td>
                           <td className="col-num val-mae"><strong>{row.mae}</strong></td>
@@ -949,17 +755,14 @@ export default function ProjectDetail() {
                   </table>
                 </div>
                 <div className="table-footnote">
-                  注：↓ 表示数值越小越优；ShanghaiTech Part A 为当前模型最显著突破项；Macro Average 仅作多域均值参考。
+                  Note: ↓ indicates lower is better; Macro Average summarizes performance across domains.
                 </div>
               </div>
             )}
 
-            {/* Table 2: SOTA Comparison Across Venues (When present) */}
             {project.sotaTable && (
-              <div className="academic-table-wrapper" style={{ marginTop: '3.5rem' }}>
-                <div className="academic-table-caption">
-                  <strong>{project.sotaTable.caption}</strong>
-                </div>
+              <div className="academic-table-wrapper">
+                <ArxivTableCaption caption={project.sotaTable.caption} />
                 <div className="academic-table-container">
                   <table className="academic-booktabs-table">
                     <thead>
@@ -974,77 +777,24 @@ export default function ProjectDetail() {
                         <tr key={idx} className={row.isOurs ? 'row-ours' : ''}>
                           <td className="cell-model">
                             <strong>{row.model}</strong>
-                            {row.isOurs && <span className="highlight-tag ours-tag">OURS</span>}
                           </td>
                           <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.shaA}</td>
                           <td className="col-num">{row.shaB}</td>
                           <td className="col-num">{row.ucfQnrf}</td>
                           <td className={`col-num ${row.isOurs ? 'highlight-cell' : ''}`}>{row.jhu}</td>
                           <td className="col-num">{row.ucfCc50}</td>
-                          <td className="cell-venue"><span className="venue-badge">{row.venue}</span></td>
+                          <td className="cell-venue">{row.venue}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
                 <div className="table-footnote">
-                  对比基准包含 CVPR'18 (CSRNet)、ICCV'19 (Bayesian Loss)、NeurIPS'20 (DM-Count)、CVPR'22 (MAN) 及 arXiv'24 (CLIP-EBC) 等权威公开模型。
+                  Reference models include CSRNet (CVPR'18), Bayesian Loss (ICCV'19), DM-Count (NeurIPS'20), MAN (CVPR'22), and CLIP-EBC (arXiv'24).
                 </div>
               </div>
             )}
           </ProjectSpread>
-
-          {/* Download artifacts card */}
-          {links.download && (
-            <section className="project-download-section" style={{ padding: '4rem 0 2rem', borderTop: '1px solid var(--rule)' }}>
-              <div className="kicker">03.5 · Artifacts & Checkpoints</div>
-              <h2 className="section-title" style={{ fontSize: '2.4rem', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
-                训练成果与<em>权重交付</em>
-              </h2>
-
-              <div className="project-download-box">
-                <div className="project-download-header">
-                  <div className="download-meta">
-                    <span className="file-badge"><Package size={14} /> 权重归档包</span>
-                    <h3 className="file-name">{links.downloadLabel || 'checkpoint.zip'}</h3>
-                    <p className="file-desc">
-                      内含模型适配器权重、评估日志与推理示例代码。
-                    </p>
-                  </div>
-
-                  <div className="download-buttons">
-                    <a
-                      href={links.download}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary btn-download"
-                      download={links.downloadLabel || 'checkpoint.zip'}
-                    >
-                      <Download size={16} /> 立即下载训练结果 ({links.downloadLabel || 'ZIP'})
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Links */}
-          {project.links && (
-            <section style={{ padding: '3rem 0', borderTop: '1px solid var(--rule)' }}>
-              <div className="project-reflection-links">
-                {links.gitee && (
-                  <a className="btn btn-primary" href={links.gitee} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink size={16} /> 查看 Gitee 仓库
-                  </a>
-                )}
-                {links.github && (
-                  <a className="btn btn-primary" href={links.github} target="_blank" rel="noopener noreferrer">
-                    <Github size={16} /> 查看 GitHub
-                  </a>
-                )}
-              </div>
-            </section>
-          )}
         </>
       )}
 
@@ -1055,18 +805,19 @@ export default function ProjectDetail() {
 
       {/* Related · next project */}
       {related.length > 0 && (
-        <section className="project-related-block" style={{ marginTop: '4rem' }}>
-          <div className="project-related-title">继续阅读 / Next in series</div>
-          {related.map((r) => (
-            <Link key={r.id} to={`/projects/${r.id}`} className="project-related-row">
-              <span className="idx">0{relatedNumeric(r.id)}</span>
-              <div>
-                <h4 className="ttl">{r.title}</h4>
+        <section className="project-related-block">
+          <h3 className="project-related-title">Related Projects</h3>
+          <ul className="project-related-ul">
+            {related.map((r) => (
+              <li key={r.id}>
+                <Link to={`/projects/${r.id}`}>
+                  <strong>{r.title}</strong>
+                </Link>
+                {' — '}
                 <span className="sub">{r.subtitle}</span>
-              </div>
-              <span className="arr"><ArrowRight size={16} /></span>
-            </Link>
-          ))}
+              </li>
+            ))}
+          </ul>
         </section>
       )}
     </article>

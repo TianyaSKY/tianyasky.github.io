@@ -1,4 +1,4 @@
-// 项目详情聚合导出（各项目具体配置已拆分存放在 ./projects/ 目录）
+// Aggregated project details (individual configurations are located in ./projects/)
 export {
   projectDetailById,
   projects,

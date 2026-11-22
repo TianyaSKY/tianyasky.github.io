@@ -30,7 +30,6 @@ export default function Sidebar() {
         <div className="sidebar-profile-view">
           <div className="author__content">
             <h3 className="author__name">{personalInfo.name}</h3>
-            <p className="author__name-en">{personalInfo.chineseName}</p>
             <p className="author__bio">{personalInfo.title}</p>
           </div>
 

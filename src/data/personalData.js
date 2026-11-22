@@ -1,6 +1,5 @@
 export const personalInfo = {
   name: "Minxiang Chen",
-  chineseName: "陈敏祥",
   englishName: "Minxiang Chen",
   title: "Computer Vision · Natural Language Processing",
   school: "Dalian Ocean University",

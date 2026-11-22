@@ -1,93 +1,141 @@
 import React, { useState } from 'react';
-import { ZoomIn, ExternalLink, Sparkles, CheckCircle } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import AccessibleDialog from '../AccessibleDialog';
+
+function formatRichLine(text) {
+  if (typeof text !== 'string') return text;
+  const parts = text.split(/(\*\*.+?\*\*|`.+?`)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
+    }
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return <code key={i}>{part.slice(1, -1)}</code>;
+    }
+    return part;
+  });
+}
+
+function ArxivFigureCaption({ label, title, caption, analysis, onZoom, compact = false }) {
+  let cleanTitle = title ? title.trim() : '';
+  if (cleanTitle && !cleanTitle.endsWith('.') && !cleanTitle.endsWith(':')) cleanTitle += '.';
+
+  let cleanLabel = label ? label.trim() : '';
+  if (cleanLabel && !cleanLabel.endsWith('.') && !cleanLabel.endsWith(':')) cleanLabel += '.';
+
+  return (
+    <figcaption className={`arxiv-figure-caption ${compact ? 'is-compact' : ''}`}>
+      <div className="arxiv-caption-body">
+        {cleanLabel && <strong className="arxiv-caption-label">{cleanLabel} </strong>}
+        {cleanTitle && <strong className="arxiv-caption-title">{cleanTitle} </strong>}
+        {caption && <span className="arxiv-caption-text">{formatRichLine(caption)} </span>}
+        {onZoom && (
+          <button
+            type="button"
+            className="arxiv-zoom-btn"
+            onClick={onZoom}
+            aria-label={`Zoom ${label || 'figure'}`}
+            title="Inspect figure at full resolution"
+          >
+            [Zoom]
+          </button>
+        )}
+      </div>
+
+      {analysis && (
+        <div className="arxiv-analysis-block">
+          <em className="arxiv-analysis-tag">Analysis. </em>
+          <span className="arxiv-analysis-text">{formatRichLine(analysis)}</span>
+        </div>
+      )}
+    </figcaption>
+  );
+}
 
 export default function ProjectSpread({
   index,
-  kicker,
   title,
   lead,
   figure,
   bullets,
   stats,
-  children
+  children,
+  onOpenFigure
 }) {
   const [modalOpen, setModalOpen] = useState(false);
 
+  const normalizedFigure = figure ? {
+    ...figure,
+    label: figure.label || (index ? `Figure ${index}` : undefined),
+    title: figure.title || (index === "1" ? "Problem Context" : index === "2" ? "Method & Architecture" : index === "3" ? "Results & Evaluation" : undefined)
+  } : null;
+
+  const handleZoom = () => {
+    if (onOpenFigure && normalizedFigure) {
+      onOpenFigure(normalizedFigure);
+    } else {
+      setModalOpen(true);
+    }
+  };
+
   return (
     <section className="project-spread-block">
-      {/* Section Header */}
       <header className="spread-header">
-        <div className="spread-kicker">
-          <span className="spread-idx">{index}</span>
-          <span className="spread-dot">/</span>
-          <span className="spread-kicker-text">
-            {kicker || (index === '01' ? 'Background & Problem' : index === '02' ? 'Method & Architecture' : 'Results & Metrics')}
-          </span>
-        </div>
-        <h2 className="spread-title">{title}</h2>
+        <h2 className="spread-title">
+          {index ? `${index}. ` : ''}
+          {title}
+        </h2>
       </header>
 
-      {/* Main Narrative & Layout */}
       <div className="spread-body">
         {lead && (
           <div className="spread-text-lead">
             {lead.split('\n').map((p, i) => (
-              <p key={i}>{p}</p>
+              <p key={i}>{formatRichLine(p)}</p>
             ))}
           </div>
         )}
 
-        {/* Featured Visual Figure (Full-width / Natural ratio) */}
-        {figure && (
+        {normalizedFigure && (
           <figure
-            className={`spread-figure-showcase${figure.wide ? ' is-wide' : ''}${figure.kind === 'diagram' ? ' is-diagram' : ''}`}
-            title="点击放大查看高清图表"
+            className={`spread-figure-showcase${normalizedFigure.wide ? ' is-wide' : ''}${normalizedFigure.kind === 'diagram' ? ' is-diagram' : ''}`}
+            title="Click to inspect full-resolution figure"
           >
             <button
               type="button"
               className="figure-zoom-trigger"
-              aria-label={`放大查看：${figure.caption || '章节配图'}`}
-              onClick={() => setModalOpen(true)}
+              aria-label={`Zoom figure: ${normalizedFigure.title || normalizedFigure.caption || 'Section figure'}`}
+              onClick={handleZoom}
             >
               <span className="figure-canvas">
-                <img src={figure.src} alt={figure.caption || ''} loading="lazy" />
+                <img src={normalizedFigure.src} alt={normalizedFigure.title || normalizedFigure.caption || ''} loading="lazy" />
               </span>
             </button>
-            <figcaption className="figure-caption">
-              <span className="fig-label">FIG · {index}</span>
-              <span className="fig-desc">{figure.caption}</span>
-              <span className="fig-btn"><ZoomIn size={12} /> 点击放大</span>
-            </figcaption>
+            <ArxivFigureCaption
+              label={normalizedFigure.label}
+              title={normalizedFigure.title}
+              caption={normalizedFigure.caption}
+              analysis={normalizedFigure.analysis}
+              onZoom={handleZoom}
+            />
           </figure>
         )}
 
-        {/* Key Highlights Card Grid */}
         {bullets && bullets.length > 0 && (
           <div className="spread-highlights-container">
-            <div className="highlights-header">
-              <Sparkles size={14} style={{ color: 'var(--color-vermilion)' }} />
-              <span>核心技术亮点与工程突破 / Key Takeaways</span>
-            </div>
-            <div className="spread-highlights-grid">
+            <h3 className="highlights-header">Key Highlights</h3>
+            <ul className="spread-highlights-list">
               {bullets.map((b, i) => (
-                <div key={i} className="spread-highlight-item">
-                  <div className="item-icon">
-                    <span className="bullet-num">0{i + 1}</span>
-                  </div>
-                  <div
-                    className="item-text"
-                    dangerouslySetInnerHTML={{ __html: b.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') }}
-                  />
-                </div>
+                <li key={i} className="spread-highlight-li">
+                  {formatRichLine(b)}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         )}
 
-        {/* Stats Row */}
         {stats && stats.length > 0 && (
-          <div className="project-stat-row" style={{ marginTop: '2.5rem' }}>
+          <div className="project-stat-row">
             {stats.map((s) => (
               <div key={s.label} className="project-stat-cell">
                 <div className="v">{s.value}</div>
@@ -100,24 +148,27 @@ export default function ProjectSpread({
         {children}
       </div>
 
-      {/* Lightbox Zoom Modal */}
-      {modalOpen && figure && (
+      {modalOpen && normalizedFigure && (
         <AccessibleDialog
           overlayClassName="inline-demo-modal"
           dialogClassName="inline-demo-image"
-          label={figure.caption}
+          label={normalizedFigure.title || normalizedFigure.caption}
           onClose={() => setModalOpen(false)}
         >
-            <button className="inline-demo-close" data-dialog-initial-focus onClick={() => setModalOpen(false)}>✕ 关闭</button>
-            <div className="inline-demo-image-viewport">
-              <img src={figure.src} alt={figure.caption || ''} />
+          <button className="inline-demo-close" data-dialog-initial-focus onClick={() => setModalOpen(false)}>✕ Close</button>
+          <div className="inline-demo-image-viewport">
+            <img src={normalizedFigure.src} alt={normalizedFigure.title || normalizedFigure.caption || ''} />
+          </div>
+          <div className="inline-demo-image-bar">
+            <div className="arxiv-modal-caption-content">
+              <strong className="arxiv-caption-label">{normalizedFigure.label || 'FIG'}. </strong>
+              {normalizedFigure.title && <strong className="arxiv-caption-title">{normalizedFigure.title}. </strong>}
+              {normalizedFigure.caption && <span className="arxiv-caption-text">{formatRichLine(normalizedFigure.caption)}</span>}
             </div>
-            <div className="inline-demo-image-bar">
-              <span className="caption">{figure.caption}</span>
-              <a href={figure.src} target="_blank" rel="noopener noreferrer" className="view-origin">
-                <ExternalLink size={14} /> 原图直达
-              </a>
-            </div>
+            <a href={normalizedFigure.src} target="_blank" rel="noopener noreferrer" className="view-origin">
+              <ExternalLink size={14} /> Open Original
+            </a>
+          </div>
         </AccessibleDialog>
       )}
     </section>
