@@ -1,8 +1,8 @@
 const architectureFigure = {
-  src: "/projects/sky-douyin/cover.svg",
+  src: "/projects/sky-douyin/method-overview.png",
   label: "Figure 1",
-  title: "End-to-End Microservice Short-Video Ecosystem",
-  caption: "Full-stack short-video architecture integrating React/Android clients, Spring Boot 3 core services, RabbitMQ async messaging, FastAPI recommendation workers, and Milvus vector search.",
+  title: "SKYDouyin Recommendation Pipeline",
+  caption: "Video ingestion and asynchronous indexing feed cold-start profiling and cosine-similarity recall. Trending candidates supplement vector results, and playback, dwell time, and likes inform feed refreshes.",
   kind: "diagram"
 };
 
