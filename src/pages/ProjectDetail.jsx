@@ -343,6 +343,11 @@ function FigureLightboxModal({ figure, onClose }) {
   );
 }
 
+const toFigureList = (value) => {
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+};
+
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = useMemo(() => projects.find((p) => p.id === id), [id]);
@@ -498,6 +503,10 @@ export default function ProjectDetail() {
                     <div className="paper-benchmark-block">
                       {sec.datasetFigure && (
                         <PaperInlineFigure figure={sec.datasetFigure} onOpen={setModalFigure} />
+                      )}
+
+                      {sec.datasetOverview && (
+                        <PaperInlineFigure figure={sec.datasetOverview} onOpen={setModalFigure} />
                       )}
 
                       {project.benchmarkTable && (
@@ -706,7 +715,9 @@ export default function ProjectDetail() {
             index="1"
             title="Problem & Motivation"
             lead={project.background}
-            figure={project.caseFigures?.background || { src: project.cover, label: "Figure 1", title: "Problem Context", caption: project.description || project.title }}
+            figures={toFigureList(project.caseFigures?.background).length
+              ? toFigureList(project.caseFigures.background)
+              : [{ src: project.cover, label: "Figure 1", title: "Problem Context", caption: project.description || project.title }]}
             onOpenFigure={setModalFigure}
           />
 
@@ -714,7 +725,9 @@ export default function ProjectDetail() {
             index="2"
             title="Method & Architecture"
             lead={project.method}
-            figure={project.caseFigures?.method || { src: typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src || project.cover, label: "Figure 2", title: "Method & Architecture", caption: project.method ? `${project.title} core methodology and technical architecture.` : `${project.id} · pipeline schematic`, wide: true }}
+            figures={toFigureList(project.caseFigures?.method).length
+              ? toFigureList(project.caseFigures.method)
+              : [{ src: project.cover, label: "Figure 2", title: "Method & Architecture", caption: project.method ? `${project.title} core methodology and technical architecture.` : `${project.id} · pipeline schematic`, wide: true }]}
             bullets={project.highlights}
             onOpenFigure={setModalFigure}
           />
@@ -723,7 +736,9 @@ export default function ProjectDetail() {
             index="3"
             title="Results & Evaluation"
             lead={project.results}
-            figure={project.caseFigures?.results || { src: typeof project.gallery?.[1] === 'string' ? project.gallery[1] : project.gallery?.[1]?.src || (typeof project.gallery?.[0] === 'string' ? project.gallery[0] : project.gallery?.[0]?.src) || project.cover, label: "Figure 3", title: "Results & Evaluation", caption: project.results ? `${project.title} experimental verification and performance evaluation.` : `${project.id} · evaluation results` }}
+            figures={toFigureList(project.caseFigures?.results).length
+              ? toFigureList(project.caseFigures.results)
+              : [{ src: project.cover, label: "Figure 3", title: "Results & Evaluation", caption: project.results ? `${project.title} experimental verification and performance evaluation.` : `${project.id} · evaluation results` }]}
             onOpenFigure={setModalFigure}
           >
             {project.benchmarkTable && (

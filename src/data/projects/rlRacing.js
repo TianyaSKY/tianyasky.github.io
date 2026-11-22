@@ -1,18 +1,4 @@
 export const rlRacingDetail = {
-  gallery: [
-    {
-      src: "/projects/rl-racing/game.png",
-      caption: "3D track simulation viewport rendered in Pygame and OpenGL"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/rl-racing/training_curves.png",
-      caption: "PPO episode reward convergence curve"
-    },
-    {
-      src: "/projects/rl-racing/training_curves_diag.png",
-      caption: "Policy entropy, value loss, and episode length diagnostics"
-    }
-  ],
   caseFigures: {
     background: {
       src: "/projects/rl-racing/cover.svg",
@@ -28,12 +14,21 @@ export const rlRacingDetail = {
       caption: "In-game rendering showing real-time vehicle trajectory, waypoint tracking, and 9 fan-shaped raycast distance measurements feeding the 16-D observation vector.",
       wide: true
     },
-    results: {
-      src: "https://media.tianyasky.top/site/projects/rl-racing/training_curves.png",
-      label: "Figure 3",
-      title: "PPO Policy Reward Trajectory & Diagnostics (10M Timesteps)",
-      caption: "Stable-Baselines3 PPO episode reward convergence curve over 10 million simulation steps across 8 parallel worker subprocesses."
-    }
+    results: [
+      {
+        src: "https://media.tianyasky.top/site/projects/rl-racing/training_curves.png",
+        label: "Figure 3",
+        title: "PPO Policy Reward Trajectory (10M Timesteps)",
+        caption: "Stable-Baselines3 PPO episode reward convergence curve over 10 million simulation steps across 8 parallel worker subprocesses.",
+        wide: true
+      },
+      {
+        src: "/projects/rl-racing/training_curves_diag.png",
+        label: "Figure 4",
+        title: "Policy Entropy, Value Loss, and Episode-Length Diagnostics",
+        caption: "Policy entropy decays as the driving policy stabilizes, value loss tracks critic fitting, and episode length grows once collisions become rare."
+      }
+    ]
   },
   video: "https://media.tianyasky.top/RacingCar.webm",
   highlights: [

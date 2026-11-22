@@ -1,6 +1,15 @@
+const pipelineOverview = {
+  src: "/projects/cixin-singularity/pipeline.png",
+  label: "Figure 2",
+  title: "Qwen3.6-27B QLoRA Pipeline Overview",
+  caption: "Six stages trace the run from data preparation to checkpoint selection. The ChatML examples illustrate which tokens contribute to training loss.",
+  aspect: "wide",
+  kind: "diagram"
+};
+
 const trainingFigure = {
   src: "/projects/cixin-singularity/training-pipeline.png",
-  label: "Figure 2",
+  label: "Figure 3",
   title: "Document-Contiguous Partitioning & QLoRA Training Pipeline",
   caption: "Curated 2,375 passage-continuation pairs formatted in ChatML; prompt tokens masked with -100 labels to ensure loss computation strictly on continuation tokens during 4-bit NF4 fine-tuning.",
   aspect: "wide",
@@ -8,23 +17,6 @@ const trainingFigure = {
 };
 
 export const cixinSingularityDetail = {
-  gallery: [
-    trainingFigure,
-    {
-      src: "/projects/cixin-singularity/loss-curves.svg",
-      label: "Figure 3",
-      title: "Training Convergence & Token Prediction Accuracy",
-      caption: "Training / validation loss convergence and token-level accuracy curves over 2 epochs (238 optimization steps).",
-      aspect: "chart"
-    },
-    {
-      src: "/projects/cixin-singularity/dynamics.svg",
-      label: "Figure 1",
-      title: "Optimization Dynamics & Hardware Telemetry",
-      caption: "Learning-rate schedule, gradient norm stability, and RTX 5090 VRAM footprint held consistently within 16–18 GB.",
-      aspect: "chart"
-    }
-  ],
   caseFigures: {
     background: {
       src: "/projects/cixin-singularity/dynamics.svg",
@@ -32,10 +24,10 @@ export const cixinSingularityDetail = {
       title: "Optimization Dynamics & Hardware Telemetry",
       caption: "Learning-rate schedule, gradient norm stability, and RTX 5090 VRAM footprint held consistently within 16–18 GB across 238 optimization steps."
     },
-    method: trainingFigure,
+    method: [pipelineOverview, trainingFigure],
     results: {
       src: "/projects/cixin-singularity/loss-curves.svg",
-      label: "Figure 3",
+      label: "Figure 4",
       title: "Training Convergence & Generalization Plateau",
       caption: "Training and validation loss trajectories demonstrating steady convergence with validation loss plateauing at 3.12 after 1.5 epochs."
     }

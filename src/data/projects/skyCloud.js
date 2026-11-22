@@ -1,60 +1,85 @@
+const figure = (name, label, title, caption) => ({
+  src: `/projects/sky-cloud/${name}`,
+  label,
+  title,
+  caption,
+  kind: "diagram"
+});
+
+const screenshot = (name, label, title, caption, wide = true) => ({
+  ...figure(name, label, title, caption),
+  kind: "screenshot",
+  wide
+});
+
 export const skyCloudDetail = {
-  gallery: [
-    {
-      src: "/projects/sky-cloud/agent_chat.png",
-      caption: "RAG assistant conversation with grounded file citations"
-    },
-    {
-      src: "/projects/sky-cloud/workspace.png",
-      caption: "Isolated OpenCode container workspace"
-    },
-    {
-      src: "/projects/sky-cloud/work-finish.png",
-      caption: "Agent task completion and artifact write-back"
-    },
-    {
-      src: "/projects/sky-cloud/work_file.png",
-      caption: "In-browser preview of agent-generated documents"
-    },
-    {
-      src: "/projects/sky-cloud/mcp.png",
-      caption: "FastMCP access token and external client configuration"
-    },
-    {
-      src: "/projects/sky-cloud/token-usage.png",
-      caption: "Model token consumption telemetry dashboard"
-    },
-    {
-      src: "/projects/sky-cloud/file_preview.png",
-      caption: "Online Markdown document preview"
-    },
-    {
-      src: "/projects/sky-cloud/share.png",
-      caption: "Time-bounded file sharing management"
-    }
-  ],
   caseFigures: {
-    background: {
-      src: "/projects/sky-cloud/agent_chat.png",
-      label: "Figure 1",
-      title: "Grounded Knowledge Retrieval & Conversational Interface",
-      caption: "Interactive web assistant combining streaming responses with verifiable document chunk citations and file grounding."
-    },
-    method: {
-      src: "/projects/sky-cloud/architecture.png",
-      label: "Figure 2",
-      title: "Four-Tier System Blueprint & Sandboxed Runtimes",
-      caption: "End-to-end architecture decoupling read-only file retrieval, asynchronous vector indexing via Celery/RabbitMQ, and sandboxed Docker agent environments.",
-      kind: "diagram",
-      wide: true
-    },
-    results: {
-      src: "/projects/sky-cloud/rag-retrieval.png",
-      label: "Figure 3",
-      title: "Parallel Multi-Query Recall & RRF Fusion Pipeline",
-      caption: "Dual query recall spanning original and rewritten user prompts, fused via Reciprocal Rank Fusion (RRF) and cross-encoder reranking prior to streaming generation.",
-      kind: "diagram"
-    }
+    background: [
+      screenshot(
+        "agent-chat.png",
+        "Figure 1",
+        "Grounded Assistant with File Citations",
+        "A workspace question receives a grounded answer with the source files it references, keeping every claim traceable to stored content."
+      )
+    ],
+    method: [
+      figure(
+        "method-overview.png",
+        "Figure 2",
+        "Four-Layer Method Overview: Storage, Hybrid RAG, Control, and Sandboxed Execution",
+        "Multi-modal files are chunked and indexed asynchronously; hybrid dense and lexical recall feeds a dual-mode controller; Expert mode provisions a Docker sandbox with human approval and writes verified artifacts back to storage."
+      ),
+      figure(
+        "rag-retrieval.png",
+        "Figure 3",
+        "Parallel Multi-Query Recall & RRF Fusion Pipeline",
+        "Original and rewritten prompts feed dense and lexical recall. Reciprocal Rank Fusion merges candidates before optional cross-encoder reranking and a cited streaming answer."
+      )
+    ],
+    results: [
+      screenshot(
+        "workspace.png",
+        "Figure 4",
+        "Isolated OpenCode Container Workspace",
+        "Each Expert-mode session runs in its own container with the task files mounted; commands require explicit approval before execution."
+      ),
+      screenshot(
+        "work-finish.png",
+        "Figure 5",
+        "Agent Task Completion and Artifact Write-Back",
+        "Completed tasks report changed files and write the generated artifacts back into the workspace for review."
+      ),
+      screenshot(
+        "work-file.png",
+        "Figure 6",
+        "In-Browser Preview of Agent-Generated Documents",
+        "Generated documents can be opened directly in the browser without downloading them first."
+      ),
+      screenshot(
+        "file-preview.png",
+        "Figure 7",
+        "Online Markdown Document Preview",
+        "Markdown files are rendered with their formatting intact, so stored notes remain readable inside the workspace."
+      ),
+      screenshot(
+        "mcp.png",
+        "Figure 8",
+        "FastMCP Access Token and External Client Configuration",
+        "A scoped access token connects Cursor or Claude Desktop to the same 16 workspace tools exposed to the built-in assistant."
+      ),
+      screenshot(
+        "token-usage.png",
+        "Figure 9",
+        "Per-Account Input and Output Token Totals",
+        "Token accounting records prompt and completion usage for each account so retrieval and agent workloads stay observable."
+      ),
+      screenshot(
+        "share.png",
+        "Figure 10",
+        "File Share-Link Expiry and Revocation Controls",
+        "Share links carry an explicit expiration time and can be revoked without deleting the underlying file."
+      )
+    ]
   },
   highlights: [
     "**Cloud Storage Foundation**: Supports chunked large-file uploads, hash-based instant deduplication, resumable transfers, online previews, batch operations, and expiring share links",

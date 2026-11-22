@@ -24,7 +24,6 @@ const recommendationFigure = {
 };
 
 export const skyDouyinDetail = {
-  gallery: [architectureFigure, uploadFigure, recommendationFigure],
   caseFigures: {
     background: architectureFigure,
     method: uploadFigure,

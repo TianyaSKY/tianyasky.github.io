@@ -1,54 +1,64 @@
 export const skyOjDetail = {
-  gallery: [
-    {
-      src: "/projects/sky-oj/homepage-landing.png",
-      caption: "Platform landing page and overview"
-    },
-    {
-      src: "/projects/sky-oj/problem-list.png",
-      caption: "Problem catalog with multi-dimensional filtering"
-    },
-    {
-      src: "/projects/sky-oj/problem-detail-editor.png",
-      caption: "Problem description and browser-based Monaco code editor"
-    },
-    {
-      src: "/projects/sky-oj/problem-draft.png",
-      caption: "Problem authoring and draft publication workflow"
-    },
-    {
-      src: "/projects/sky-oj/submission-result.png",
-      caption: "Submission verdict and per-case diagnostic breakdown"
-    },
-    {
-      src: "/projects/sky-oj/teacher-dashboard.png",
-      caption: "Instructor course and assignment dashboard"
-    },
-    {
-      src: "/projects/sky-oj/admin-problem-management.png",
-      caption: "Administrator problem bank management console"
-    }
-  ],
   caseFigures: {
-    background: {
-      src: "/projects/sky-oj/homepage-landing.png",
-      label: "Figure 1",
-      title: "Interactive Courseware & Problem Exploration Portal",
-      caption: "SKYOJ landing page providing centralized problem categorization, multi-dimensional tag filtering, and real-time submission statistics for students and instructors."
-    },
-    method: {
-      src: "/projects/sky-oj/problem-detail-editor.png",
-      label: "Figure 2",
-      title: "Monaco IDE Workspace with AI Debugging Assistant",
-      caption: "Split-pane web workspace integrating Monaco Editor syntax highlighting, standard input/output test cases, and a guided LLM debugging assistant.",
-      wide: true
-    },
-    results: {
-      src: "/projects/sky-oj/submission-result.png",
-      label: "Figure 3",
-      title: "Multi-Case Verdict Diagnostics & Sandbox Metrics",
-      caption: "Real-time grading verdict breakdown displaying execution time, peak memory usage, and per-test-case pass/fail diagnostics inside isolated Docker containers."
-    }
+    background: [
+      {
+        src: "/projects/sky-oj/homepage-landing.png",
+        label: "Figure 1",
+        title: "Interactive Courseware & Problem Exploration Portal",
+        caption: "SKYOJ landing page providing centralized problem categorization, multi-dimensional tag filtering, and real-time submission statistics for students and instructors.",
+        wide: true
+      }
+    ],
+    method: [
+      {
+        src: "/projects/sky-oj/method-overview.png",
+        label: "Figure 2",
+        title: "SKYOJ: Asynchronous Grading and On-Demand Tutoring",
+        caption: "FastAPI schedules ACM, OOP, and Kaggle submissions for Celery workers, which run code in isolated Docker sandboxes and return verdicts and case diagnostics. Students can separately request guided debugging hints from the LLM tutor.",
+        kind: "diagram",
+        wide: true
+      },
+      {
+        src: "/projects/sky-oj/problem-list.png",
+        label: "Figure 3",
+        title: "Problem Catalog with Multi-Dimensional Filtering",
+        caption: "Problems are grouped by algorithmic topic and difficulty, with tag filters and live submission statistics visible from the catalog.",
+        wide: true
+      },
+      {
+        src: "/projects/sky-oj/problem-detail-editor.png",
+        label: "Figure 4",
+        title: "Problem Statement and Monaco Editor Workspace",
+        caption: "The split-pane workspace combines the problem statement, sample cases, and an in-browser Monaco editor with the guided AI debugging assistant."
+      },
+      {
+        src: "/projects/sky-oj/problem-draft.png",
+        label: "Figure 5",
+        title: "Problem Authoring and Draft Publication Workflow",
+        caption: "Instructors author problem statements, test data, and evaluation modes, then review drafts before publishing them to a course."
+      }
+    ],
+    results: [
+      {
+        src: "/projects/sky-oj/submission-result.png",
+        label: "Figure 6",
+        title: "Multi-Case Verdict Diagnostics & Sandbox Metrics",
+        caption: "Real-time grading verdict breakdown displaying execution time, peak memory usage, and per-test-case pass/fail diagnostics inside isolated Docker containers.",
+        wide: true
+      },
+      {
+        src: "/projects/sky-oj/teacher-dashboard.png",
+        label: "Figure 7",
+        title: "Instructor Course and Assignment Dashboard",
+        caption: "Instructors track assignments, submission status, and per-student progress from a single course dashboard."
+      },
+      {
+        src: "/projects/sky-oj/admin-problem-management.png",
+        label: "Figure 8",
+        title: "Administrator Problem-Bank Management Console",
+        caption: "Administrators review, edit, and retire problems across the shared problem bank while keeping course assignments linked to stable problem versions."
+      }
+    ]
   },
   highlights: [
     "**Multi-Paradigm Evaluation**: Supports standard ACM stdin/stdout diffing, black-box OOP unit-test harness verification, and metric-based data science / Kaggle grading under one schema",

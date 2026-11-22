@@ -278,6 +278,13 @@ export const crowdSigmodDetail = {
           title: "Cross-Benchmark Evaluation Metrics (MAE, RMSE, and NAE)",
           caption: "Comparison of MAE, RMSE, and NAE across ShanghaiTech, JHU-Crowd, UCF-QNRF, and UCF-CC50."
         },
+        datasetOverview: {
+          src: "/projects/crowd-sigmod/academic_dataset_overview.svg",
+          label: "Figure 3b",
+          title: "Dataset-Level Error Profile Across Four Public Benchmarks",
+          caption: "MAE and RMSE reported side by side for every benchmark split, showing the error scale spanned by sparse street scenes and ultra-dense crowds.",
+          wide: true
+        },
         sotaFigure: {
           src: "/projects/crowd-sigmod/academic_sota_comparison.svg",
           label: "Figure 4",
@@ -409,58 +416,6 @@ export const crowdSigmodDetail = {
       caption: "Quantitative evaluation on ShanghaiTech Part A against CSRNet, Bayesian Loss, DM-Count, MAN, and CLIP-EBC."
     }
   },
-  gallery: [
-    {
-      src: "/projects/crowd-sigmod/pipeline.png",
-      caption: "YOLO multi-scale feature fusion, probability-guided spatial attention, and MSR refinement architecture",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/crowd-sigmod/academic_sota_comparison.svg",
-      caption: "ShanghaiTech Part A comparison against published models (CVPR / ICCV / NeurIPS)",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/crowd-sigmod/academic_dataset_overview.svg",
-      caption: "Cross-benchmark MAE, RMSE, and NAE evaluation overview across four public datasets",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/crowd-sigmod/scatter_part_a.png",
-      caption: "ShanghaiTech Part A ground-truth vs. predicted count regression scatter plot (MAE 48.13 / RMSE 74.17)",
-      aspect: "chart"
-    },
-    {
-      src: "/projects/crowd-sigmod/scatter_part_b.png",
-      caption: "ShanghaiTech Part B ground-truth vs. predicted count regression scatter plot (MAE 13.20 / RMSE 24.65)",
-      aspect: "chart"
-    },
-    {
-      src: "/projects/crowd-sigmod/vis_shanghaitech_a_172.jpg",
-      caption: "ShanghaiTech Part A (N=172) four-panel verification of point annotations, conserved Gaussian density, and probability mask",
-      aspect: "wide"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/crowd-sigmod/vis_shanghaitech_a_502.jpg",
-      caption: "ShanghaiTech Part A (N=502) four-panel qualitative verification on a dense crowd scene",
-      aspect: "wide"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/crowd-sigmod/vis_ucf_qnrf_977.jpg",
-      caption: "UCF-QNRF (N=977) qualitative density estimation across wide head-scale variations",
-      aspect: "wide"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/crowd-sigmod/vis_jhu_463.jpg",
-      caption: "JHU-Crowd (N=463) qualitative density and probability prior verification under low light",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/crowd-sigmod/benchmark.png",
-      caption: "Automated cross-dataset benchmark evaluation chart",
-      aspect: "chart"
-    }
-  ],
   highlights: [
     "**Mass-Conserved Gaussian Labels**: Locally re-normalizes truncated boundary kernels with dataset-level assertion checks ($\\sum D = N$) to eliminate border mass loss",
     "**Decoupled Probability & Density Heads**: Supervises a foreground likelihood branch with BCE + 0.2 Dice as a spatial gating prior inside PG-Attention",

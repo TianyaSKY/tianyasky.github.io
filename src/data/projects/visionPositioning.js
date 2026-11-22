@@ -430,6 +430,18 @@ export const visionPositioningDetail = {
               caption: "Visual trace from raw input frame to Harris corner cloud, CNN confidence filtering, class-wise NMS deduplication, and sub-pixel corner refinement."
             },
             analysis: "Step-by-step inspection confirms that class-wise NMS collapses dense clusters of 10–20 raw Harris corners around each structural vertex into a single peak before sub-pixel refinement."
+          },
+          {
+            id: "case-5",
+            tag: "Case Study 5 · On-Site Camera Calibration",
+            dataset: "Coastal Dalian Test Stations",
+            figure: {
+              src: "/projects/vision-positioning/real_world/calib_pos01.jpg",
+              label: "Figure 13",
+              title: "On-Site Checkerboard Intrinsic Calibration",
+              caption: "Checkerboard target captured at the coastal test station to recover the camera intrinsic matrix $K$ and distortion coefficients before pose evaluation."
+            },
+            analysis: "Recovering $K$ on site keeps the back-projected rays consistent with the physical pole geometry despite lens changes between deployments."
           }
         ]
       }
@@ -458,90 +470,6 @@ export const visionPositioningDetail = {
       caption: "Qualitative keypoint detection and semantic classification comparison across six ablation variants in simulation and field trials."
     }
   },
-  gallery: [
-    {
-      src: "/projects/vision-positioning/figure_overall_pipeline.png",
-      caption: "System architecture: five-stage cascaded perception and multi-start ray-angle NLLS optimization",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/vision-positioning/ray-angle-geometry.png",
-      caption: "3D perspective projection and ray-angle invariance constraint model",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/vision-positioning/ray-angle-derivation.png",
-      caption: "Unit ray back-projection and pairwise angular distance constraints",
-      aspect: "wide"
-    },
-    patchCnnFigure,
-    landmarkFigure,
-    {
-      src: "/projects/vision-positioning/figure_corner_order_render.png",
-      caption: "Projected landmark indices and background class annotations in the synthetic viewport",
-      aspect: "wide"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/vision-positioning/figure_ablation_grid.png",
-      caption: "Ablation comparison across Ours-Full, No Mask, No CNN, No Post-Processing, and Pure Harris",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/vision-positioning/figure_ablation_statistics.png",
-      caption: "Candidate corner count vs. final retained keypoint count across ablation variants",
-      aspect: "chart"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/vision-positioning/figure_training_panel.png",
-      caption: "Three-panel training diagnostics: YOLO loss/mAP curves, YOLO confusion matrix, and SimpleCNN confusion matrix",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/vision-positioning/software-architecture.png",
-      caption: "Layered software architecture blueprint of the monocular visual localization system",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/vision-positioning/multi-start-workflow.png",
-      caption: "Multi-start solver workflow running parallel LM / TRF optimization with residual gating",
-      aspect: "wide"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/vision-positioning/ours-full_result.jpg",
-      caption: "Ours-Full keypoint detection and semantic classification output in a wide-field scene",
-      aspect: "wide"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/vision-positioning/single_image_result.png",
-      caption: "Single-frame stage inspection: ROI mask, Harris corners, class-wise NMS, and sub-pixel refinement",
-      aspect: "wide"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/vision-positioning/academic_poster.png",
-      caption: "Academic poster presented at the 13th Liaoning Provincial Undergraduate Innovation Annual Conference",
-      aspect: "chart"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/vision-positioning/real_world/dsc00438.jpg",
-      caption: "Sony α6400 (ILCE-6400) 6000×4000 field trial raw capture (DSC00438)",
-      aspect: "wide"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/vision-positioning/real_world/dsc00445.jpg",
-      caption: "Multi-angle structural pole field acquisition in coastal Dalian (DSC00445)",
-      aspect: "wide"
-    },
-    {
-      src: "https://media.tianyasky.top/site/projects/vision-positioning/real_world/yolo_boxes.jpg",
-      caption: "YOLO pole detection and bounding-box regression on real-world coastal test frames",
-      aspect: "wide"
-    },
-    {
-      src: "/projects/vision-positioning/real_world/calib_pos01.jpg",
-      caption: "On-site checkerboard camera intrinsic calibration image set",
-      aspect: "wide"
-    }
-  ],
   highlights: [
     "**Five-Stage Cascaded Perception**: Combines YOLO ROI masking, Harris corner extraction, 9-class SimpleCNN patch classification, class-wise NMS, and sub-pixel refinement",
     "**Ray-Angle Invariant NLLS**: Formulates 3D camera localization via back-projected inter-ray angle conservation, decoupling rotation $R$ to avoid collinear PnP degeneracy",

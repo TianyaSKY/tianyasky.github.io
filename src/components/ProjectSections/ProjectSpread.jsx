@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { ExternalLink } from 'lucide-react';
-import AccessibleDialog from '../AccessibleDialog';
+import React from 'react';
 
 function formatRichLine(text) {
   if (typeof text !== 'string') return text;
@@ -56,27 +54,14 @@ export default function ProjectSpread({
   index,
   title,
   lead,
-  figure,
+  figures = [],
   bullets,
   stats,
   children,
   onOpenFigure
 }) {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const normalizedFigure = figure ? {
-    ...figure,
-    label: figure.label || (index ? `Figure ${index}` : undefined),
-    title: figure.title || (index === "1" ? "Problem Context" : index === "2" ? "Method & Architecture" : index === "3" ? "Results & Evaluation" : undefined)
-  } : null;
-
-  const handleZoom = () => {
-    if (onOpenFigure && normalizedFigure) {
-      onOpenFigure(normalizedFigure);
-    } else {
-      setModalOpen(true);
-    }
-  };
+  const defaultLabel = index ? `Figure ${index}` : undefined;
+  const defaultTitle = index === "1" ? "Problem Context" : index === "2" ? "Method & Architecture" : index === "3" ? "Results & Evaluation" : undefined;
 
   return (
     <section className="project-spread-block">
@@ -96,30 +81,37 @@ export default function ProjectSpread({
           </div>
         )}
 
-        {normalizedFigure && (
-          <figure
-            className={`spread-figure-showcase${normalizedFigure.wide ? ' is-wide' : ''}${normalizedFigure.kind === 'diagram' ? ' is-diagram' : ''}`}
-            title="Click to inspect full-resolution figure"
-          >
-            <button
-              type="button"
-              className="figure-zoom-trigger"
-              aria-label={`Zoom figure: ${normalizedFigure.title || normalizedFigure.caption || 'Section figure'}`}
-              onClick={handleZoom}
+        {figures.map((figure, figureIdx) => {
+          const label = figure.label || defaultLabel;
+          const figureTitle = figure.title || defaultTitle;
+          const isWide = figure.wide || figure.aspect === "wide";
+          const handleZoom = () => onOpenFigure({ ...figure, label, title: figureTitle });
+          return (
+            <figure
+              key={`${figure.src}-${figureIdx}`}
+              className={`spread-figure-showcase${isWide ? ' is-wide' : ''}${figure.kind === 'diagram' ? ' is-diagram' : ''}`}
+              title="Click to inspect full-resolution figure"
             >
-              <span className="figure-canvas">
-                <img src={normalizedFigure.src} alt={normalizedFigure.title || normalizedFigure.caption || ''} loading="lazy" />
-              </span>
-            </button>
-            <ArxivFigureCaption
-              label={normalizedFigure.label}
-              title={normalizedFigure.title}
-              caption={normalizedFigure.caption}
-              analysis={normalizedFigure.analysis}
-              onZoom={handleZoom}
-            />
-          </figure>
-        )}
+              <button
+                type="button"
+                className="figure-zoom-trigger"
+                aria-label={`Zoom figure: ${figureTitle || figure.caption || 'Section figure'}`}
+                onClick={handleZoom}
+              >
+                <span className="figure-canvas">
+                  <img src={figure.src} alt={figureTitle || figure.caption || ''} loading="lazy" />
+                </span>
+              </button>
+              <ArxivFigureCaption
+                label={label}
+                title={figureTitle}
+                caption={figure.caption}
+                analysis={figure.analysis}
+                onZoom={handleZoom}
+              />
+            </figure>
+          );
+        })}
 
         {bullets && bullets.length > 0 && (
           <div className="spread-highlights-container">
@@ -147,30 +139,6 @@ export default function ProjectSpread({
 
         {children}
       </div>
-
-      {modalOpen && normalizedFigure && (
-        <AccessibleDialog
-          overlayClassName="inline-demo-modal"
-          dialogClassName="inline-demo-image"
-          label={normalizedFigure.title || normalizedFigure.caption}
-          onClose={() => setModalOpen(false)}
-        >
-          <button className="inline-demo-close" data-dialog-initial-focus onClick={() => setModalOpen(false)}>✕ Close</button>
-          <div className="inline-demo-image-viewport">
-            <img src={normalizedFigure.src} alt={normalizedFigure.title || normalizedFigure.caption || ''} />
-          </div>
-          <div className="inline-demo-image-bar">
-            <div className="arxiv-modal-caption-content">
-              <strong className="arxiv-caption-label">{normalizedFigure.label || 'FIG'}. </strong>
-              {normalizedFigure.title && <strong className="arxiv-caption-title">{normalizedFigure.title}. </strong>}
-              {normalizedFigure.caption && <span className="arxiv-caption-text">{formatRichLine(normalizedFigure.caption)}</span>}
-            </div>
-            <a href={normalizedFigure.src} target="_blank" rel="noopener noreferrer" className="view-origin">
-              <ExternalLink size={14} /> Open Original
-            </a>
-          </div>
-        </AccessibleDialog>
-      )}
     </section>
   );
 }
