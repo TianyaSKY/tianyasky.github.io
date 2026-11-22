@@ -94,6 +94,7 @@ function projectShell(project, index) {
   const links = project.links || {};
   const linkBits = [
     `<a href="/?projectType=${esc(project.type)}#projects">← Back to Projects</a>`,
+    links.visualizer ? `<a href="${esc(links.visualizer)}">Open 3D Visualizer</a>` : '',
     links.gitee ? `<a href="${esc(links.gitee)}">Gitee Repository</a>` : '',
     links.github ? `<a href="${esc(links.github)}">GitHub</a>` : ''
   ].filter(Boolean);

@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build && node scripts/prerender.mjs",
     "lint": "vite build",
+    "test:racing": "node --test src/rl-racing-visualizer/sim/rlRacingMath.test.ts",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,12 +15,15 @@
     "lucide-react": "^0.469.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.9.4"
+    "react-router-dom": "^7.9.4",
+    "three": "^0.187.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.3.3",
     "vite": "^6.0.5"
   }
 }

@@ -26,8 +26,13 @@ export default function ProjectHero({ project }) {
 
       {project.links && (
         <div className="project-hero-actions">
+          {project.links.visualizer && (
+            <a className="btn btn-primary" href={project.links.visualizer}>
+              Open 3D Visualizer →
+            </a>
+          )}
           {project.links.github && (
-            <a className="btn btn-primary" href={project.links.github} target="_blank" rel="noopener noreferrer">
+            <a className={`btn ${project.links.visualizer ? 'btn-outline' : 'btn-primary'}`} href={project.links.github} target="_blank" rel="noopener noreferrer">
               GitHub Repository →
             </a>
           )}
