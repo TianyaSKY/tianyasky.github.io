@@ -8,6 +8,7 @@
     "build": "vite build && node scripts/prerender.mjs",
     "lint": "vite build",
     "test:racing": "node --test src/rl-racing-visualizer/sim/rlRacingMath.test.ts",
+    "test:vision": "node --test src/vision-positioning-visualizer/geometry/visionMath.test.ts",
     "preview": "vite preview"
   },
   "dependencies": {

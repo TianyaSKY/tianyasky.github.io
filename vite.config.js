@@ -15,7 +15,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: fileURLToPath(new URL('./index.html', import.meta.url)),
-        racingVisualizer: fileURLToPath(new URL('./projects/rl-racing/visualizer/index.html', import.meta.url))
+        racingVisualizer: fileURLToPath(new URL('./projects/rl-racing/visualizer/index.html', import.meta.url)),
+        visionVisualizer: fileURLToPath(new URL('./projects/vision-positioning/visualizer/index.html', import.meta.url))
       }
     },
     sourcemap: false

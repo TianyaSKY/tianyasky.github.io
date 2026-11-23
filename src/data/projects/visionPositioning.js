@@ -482,6 +482,7 @@ export const visionPositioningDetail = {
   results: "Validated across synthetic benchmarks and 8 surveyed coastal test stations in Dalian, the full cascade achieves a $1.10 \\times 10^{-5}\\,\\text{m}$ mean position error in noise-free simulation. Ablations confirm that removing SimpleCNN semantic classification causes heuristic 2D–3D mismatches ($5.380\\,\\text{m}$ error), while removing class-wise NMS leaves dense duplicate clusters ($6.132\\,\\text{m}$ error). Deployed on a Jetson Orin edge module, the system runs at 26 FPS in real time, maintaining 10–15 cm localization RMSE and $<0.6^\\circ$ relative heading error in coastal trials, accompanied by a registered PyQt5/SQLite desktop engineering suite.",
   reflection: "Two practical limitations motivate future work. First, under heavy wave-induced camera pitch and roll, frame-by-frame optimization exhibits high-frequency jitter; coupling the ray-angle visual residuals with an Inertial Measurement Unit (IMU) inside an Extended Kalman Filter (EKF) or sliding-window factor graph is the direct path to smoother trajectories. Second, specular water glare and lens spray degrade corner contrast at long range, motivating synthetic glare augmentation during Patch CNN training.",
   links: {
+    visualizer: "/projects/vision-positioning/visualizer/",
     github: "https://github.com/TianyaSKY",
     gitee: "https://gitee.com/TianyaSKY"
   },

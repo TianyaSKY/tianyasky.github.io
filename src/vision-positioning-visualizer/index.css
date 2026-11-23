@@ -1,0 +1,70 @@
+@import "tailwindcss" source("./");
+@source "../../projects/vision-positioning/visualizer/index.html";
+
+@layer base {
+  :root {
+    --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+  }
+
+  .font-mono-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom precision range slider */
+input[type="range"].precision-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"].precision-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.14);
+}
+
+input[type="range"].precision-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  margin-top: -5px;
+  border-radius: 9999px;
+  background: #0284c7;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.28);
+}
+
+input[type="range"].precision-slider:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+}
+
+input[type="range"].precision-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.14);
+}
+
+input[type="range"].precision-slider::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  border-radius: 9999px;
+  background: #0284c7;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.28);
+}
