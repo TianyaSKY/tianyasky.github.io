@@ -104,27 +104,27 @@ export function compositePublicationDiagram(
   ctx.stroke();
 
   ctx.fillStyle = inkPrimary;
-  ctx.font = '700 32px "Plus Jakarta Sans", "Noto Sans SC", sans-serif';
-  ctx.fillText('RL Racing 3D · 16-D 观测空间与 9 向 LiDAR 射线图解', 48, 48);
+  ctx.font = '700 32px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('RL Racing 3D · Observation Space and LiDAR', 48, 48);
 
   ctx.fillStyle = inkMuted;
-  ctx.font = '500 19px "Plus Jakarta Sans", "Noto Sans SC", sans-serif';
+  ctx.font = '500 19px "Plus Jakarta Sans", sans-serif';
   ctx.fillText(
-    `场景: ${scenarioTitle}   ·   PPO (MlpPolicy)   ·   Box(16,) Observation   ·   Action #${snapshot.action.id}: ${snapshot.action.labelZh}`,
+    `Scenario: ${scenarioTitle}   ·   PPO (MlpPolicy)   ·   Box(16,) observation   ·   Action #${snapshot.action.id}: ${snapshot.action.label}`,
     48,
     86,
   );
 
   // Right-aligned legend cleanly positioned on top row with zero overlap
   const legendItems = [
-    { label: '命中射线 Hit', color: '#dc2626' },
-    { label: '畅通射线 Clear', color: '#0284c7' },
-    { label: '轮胎速度 v', color: '#059669' },
-    { label: '中心线偏差', color: '#7c3aed' },
-    { label: '朝向角 θ', color: '#d97706' },
+    { label: 'Hit ray', color: '#dc2626' },
+    { label: 'Clear ray', color: '#0284c7' },
+    { label: 'Tire velocity', color: '#059669' },
+    { label: 'Centerline offset', color: '#7c3aed' },
+    { label: 'Heading angle', color: '#d97706' },
   ];
   let lx = outW - 48;
-  ctx.font = '600 18px "Plus Jakarta Sans", "Noto Sans SC", sans-serif';
+  ctx.font = '600 18px "Plus Jakarta Sans", sans-serif';
   for (let i = legendItems.length - 1; i >= 0; i--) {
     const item = legendItems[i];
     const tw = ctx.measureText(item.label).width;
@@ -183,7 +183,7 @@ export function compositePublicationDiagram(
   // Pre-compute callout bounding boxes so ray micro-badges never collide with them
   const callouts: CalloutSpec[] = buildCalloutLayout(anchors, snapshot, layers);
   const cardW = 450;
-  const cardH = 104;
+  const cardH = 82;
   const calloutRects = callouts.map((c) => ({
     x: c.side === 'left' ? 44 : outW - 44 - cardW,
     y: headerH + c.boxY * sceneH,
@@ -291,25 +291,20 @@ export function compositePublicationDiagram(
     ctx.lineWidth = 1.8;
     ctx.stroke();
 
-    // Top row: obs index tag + Chinese title
+    // Top row: observation index and callout title
     ctx.fillStyle = c.accentHex;
     ctx.font = '700 18px "JetBrains Mono", monospace';
     ctx.fillText(c.obsTag, boxX + 18, boxY + 32);
 
     const tagW = ctx.measureText(c.obsTag).width;
     ctx.fillStyle = inkPrimary;
-    ctx.font = '700 22px "Plus Jakarta Sans", "Noto Sans SC", sans-serif';
-    ctx.fillText(c.titleZh, boxX + 28 + tagW, boxY + 32);
-
-    // Subtitle English
-    ctx.fillStyle = inkMuted;
-    ctx.font = '500 15px "Plus Jakarta Sans", sans-serif';
-    ctx.fillText(c.titleEn, boxX + 18, boxY + 56);
+    ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText(c.title, boxX + 28 + tagW, boxY + 32);
 
     // Value readout in tabular monospace
     ctx.fillStyle = inkPrimary;
     ctx.font = '600 19px "JetBrains Mono", monospace';
-    ctx.fillText(c.valueText, boxX + 18, boxY + 86);
+    ctx.fillText(c.valueText, boxX + 18, boxY + 62);
   }
   ctx.restore();
 
@@ -327,8 +322,8 @@ export function compositePublicationDiagram(
   ctx.stroke();
 
   ctx.fillStyle = inkPrimary;
-  ctx.font = '700 21px "Plus Jakarta Sans", "Noto Sans SC", sans-serif';
-  ctx.fillText('16-D 观测向量实时快照  Box(16,) Normalized Observation Vector', 48, footY + 38);
+  ctx.font = '700 21px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('16-D Normalized Observation Vector', 48, footY + 38);
 
   // Reward summary right side of footer header
   const r = snapshot.reward;
@@ -372,7 +367,7 @@ export function compositePublicationDiagram(
 
     // Key / angle
     ctx.fillStyle = inkPrimary;
-    ctx.font = '600 15px "Plus Jakarta Sans", "Noto Sans SC", sans-serif';
+    ctx.font = '600 15px "Plus Jakarta Sans", sans-serif';
     const shortName =
       dim.group === 'lidar'
         ? `${snapshot.rays[i - 7].angleDeg >= 0 ? '+' : ''}${snapshot.rays[i - 7].angleDeg}°`

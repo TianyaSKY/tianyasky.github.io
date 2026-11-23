@@ -98,9 +98,7 @@ export default function App() {
   }, []);
 
   const handleRenderDiagram = useCallback(() => {
-    const result = sceneRef.current?.renderHighResDiagram(
-      `${activeScenario.nameZh} (${activeScenario.nameEn})`,
-    );
+    const result = sceneRef.current?.renderHighResDiagram(activeScenario.name);
     if (result) {
       setRenderedFigure(result);
     }
@@ -132,12 +130,12 @@ export default function App() {
     return (
       <main className="grid min-h-dvh place-items-center bg-slate-100 p-5 text-slate-900">
         <div className="max-w-md rounded-xl border border-slate-200 bg-white p-6">
-          <h1 className="text-lg font-semibold">无法启动 RL Racing 3D 可视化</h1>
+          <h1 className="text-lg font-semibold">Unable to start the RL Racing 3D visualizer</h1>
           <p className="my-3 text-sm text-slate-600">
-            此浏览器未能启动 WebGL 2。请启用图形加速后重试，或返回项目页观看录像。
+            WebGL 2 could not start. Enable hardware acceleration and try again, or return to the project page to watch the video.
           </p>
           <a href="/projects/rl-racing/" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-blue-700 hover:underline">
-            <ArrowLeft aria-hidden="true" className="size-4" /> 返回项目
+            <ArrowLeft aria-hidden="true" className="size-4" /> Back to project
           </a>
         </div>
       </main>
@@ -187,19 +185,19 @@ export default function App() {
           }`}
         >
           <a href="/projects/rl-racing/" className="mb-1 inline-flex min-h-6 items-center gap-1.5 text-xs font-medium hover:underline">
-            <ArrowLeft aria-hidden="true" className="size-3.5" /> 返回项目
+            <ArrowLeft aria-hidden="true" className="size-3.5" /> Back to project
           </a>
           <h1 className="text-sm font-semibold tracking-tight leading-tight">
-            RL Racing 3D 观测与射线图解
+            RL Racing 3D Visualizer
           </h1>
           <div
             className={`hidden sm:flex items-center gap-1.5 text-[11px] font-mono-tabular mt-0.5 ${
               darkMode ? 'text-slate-400' : 'text-slate-500'
             }`}
           >
-            <span>Box(16,) 观测空间</span>
+            <span>16-D observation</span>
             <span aria-hidden="true">·</span>
-            <span>9 向 LiDAR</span>
+            <span>9-ray LiDAR</span>
             <span aria-hidden="true">·</span>
             <span>Discrete(7) PPO</span>
           </div>
@@ -209,7 +207,7 @@ export default function App() {
           <button
             type="button"
             onClick={() => setDarkMode((d) => !d)}
-            aria-label={darkMode ? '切换浅色论文主题' : '切换深色工程主题'}
+            aria-label={darkMode ? 'Switch to light theme' : 'Switch to dark theme'}
             className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 px-3 rounded-xl text-xs font-medium border transition-colors cursor-pointer whitespace-nowrap ${
               darkMode
                 ? 'bg-[#0e131e]/94 border-white/10 text-slate-200 hover:bg-slate-800 shadow-[0_8px_24px_rgba(0,0,0,0.4)]'
@@ -217,13 +215,13 @@ export default function App() {
             }`}
           >
             {darkMode ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-            <span className="hidden sm:inline">{darkMode ? '浅色' : '深色'}</span>
+            <span className="hidden sm:inline">{darkMode ? 'Light' : 'Dark'}</span>
           </button>
 
           <button
             type="button"
             onClick={handleRenderDiagram}
-            aria-label="渲染高清图解"
+            aria-label="Render diagram"
             className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap sm:px-4 ${
               darkMode
                 ? 'bg-slate-100 text-slate-950 hover:bg-white shadow-[0_8px_24px_rgba(0,0,0,0.45)]'
@@ -231,7 +229,7 @@ export default function App() {
             }`}
           >
             <ImageDown className="w-4 h-4" />
-            <span className="hidden sm:inline">渲染高清图解</span>
+            <span className="hidden sm:inline">Render diagram</span>
           </button>
         </div>
       </header>

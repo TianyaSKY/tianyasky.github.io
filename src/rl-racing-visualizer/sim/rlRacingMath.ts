@@ -29,20 +29,19 @@ export const RAY_ANGLES_DEG = [-90, -30, -15, -5, 0, 5, 15, 30, 90] as const;
 
 export interface DiscreteActionDef {
   id: number;
-  labelZh: string;
-  labelEn: string;
+  label: string;
   throttle: -1 | 0 | 1;
   steer: -1 | 0 | 1; // -1 = left, 1 = right
 }
 
 export const DISCRETE_ACTIONS: readonly DiscreteActionDef[] = [
-  { id: 0, labelZh: '无动作', labelEn: 'Coast', throttle: 0, steer: 0 },
-  { id: 1, labelZh: '加速', labelEn: 'Accelerate', throttle: 1, steer: 0 },
-  { id: 2, labelZh: '刹车/倒车', labelEn: 'Brake', throttle: -1, steer: 0 },
-  { id: 3, labelZh: '左转', labelEn: 'Steer Left', throttle: 0, steer: -1 },
-  { id: 4, labelZh: '右转', labelEn: 'Steer Right', throttle: 0, steer: 1 },
-  { id: 5, labelZh: '加速 + 左转', labelEn: 'Accel + Left', throttle: 1, steer: -1 },
-  { id: 6, labelZh: '加速 + 右转', labelEn: 'Accel + Right', throttle: 1, steer: 1 },
+  { id: 0, label: 'Coast', throttle: 0, steer: 0 },
+  { id: 1, label: 'Accelerate', throttle: 1, steer: 0 },
+  { id: 2, label: 'Brake', throttle: -1, steer: 0 },
+  { id: 3, label: 'Steer left', throttle: 0, steer: -1 },
+  { id: 4, label: 'Steer right', throttle: 0, steer: 1 },
+  { id: 5, label: 'Accel + left', throttle: 1, steer: -1 },
+  { id: 6, label: 'Accel + right', throttle: 1, steer: 1 },
 ] as const;
 
 export interface Vec2 {
@@ -89,8 +88,6 @@ export interface ObservationDimension {
   index: number;
   group: 'position' | 'heading' | 'speed' | 'centerline' | 'lidar';
   key: string;
-  labelZh: string;
-  labelEn: string;
   formula: string;
   rawDisplay: string;
   normalized: number;
@@ -117,9 +114,7 @@ export interface VehiclePoseParams {
 
 export interface ScenarioPreset {
   id: string;
-  nameZh: string;
-  nameEn: string;
-  descriptionZh: string;
+  name: string;
   pose: VehiclePoseParams;
   obstacles: Array<{
     id: string;
@@ -153,9 +148,7 @@ export interface ObservationSnapshot {
 export const SCENARIO_PRESETS: readonly ScenarioPreset[] = [
   {
     id: 'corner-avoidance',
-    nameZh: '弯道避障',
-    nameEn: 'Corner Avoidance',
-    descriptionZh: '高速入弯，前方与左侧障碍物触发多条 LiDAR 射线近距命中',
+    name: 'Corner avoidance',
     pose: {
       trackSampleIndex: 14,
       lateralOffset: 2.6,
@@ -195,9 +188,7 @@ export const SCENARIO_PRESETS: readonly ScenarioPreset[] = [
   },
   {
     id: 'high-speed-center',
-    nameZh: '高速贴线直道',
-    nameEn: 'High-Speed Centerline',
-    descriptionZh: '满速贴近赛道中心线行驶，正前方 0° 与 ±5° 射线精准锁定障碍',
+    name: 'Fast straight',
     pose: {
       trackSampleIndex: 0,
       lateralOffset: 0.4,
@@ -237,9 +228,7 @@ export const SCENARIO_PRESETS: readonly ScenarioPreset[] = [
   },
   {
     id: 'edge-recovery',
-    nameZh: '出界边缘纠偏',
-    nameEn: 'Edge Recovery',
-    descriptionZh: '车辆逼近 12.0m 出界容差线，展示大偏移量与强烈中心线回正向量',
+    name: 'Edge recovery',
     pose: {
       trackSampleIndex: 16,
       lateralOffset: 8.6,
@@ -600,8 +589,6 @@ export function computeObservationSnapshot(
       index: 0,
       group: 'position',
       key: 'x',
-      labelZh: '世界坐标 X',
-      labelEn: 'World Pos X',
       formula: 'x / 400',
       rawDisplay: `${carX.toFixed(1)} m`,
       normalized: normX,
@@ -610,8 +597,6 @@ export function computeObservationSnapshot(
       index: 1,
       group: 'position',
       key: 'z',
-      labelZh: '世界坐标 Z',
-      labelEn: 'World Pos Z',
       formula: 'z / 400',
       rawDisplay: `${carZ.toFixed(1)} m`,
       normalized: normZ,
@@ -620,8 +605,6 @@ export function computeObservationSnapshot(
       index: 2,
       group: 'heading',
       key: 'angle',
-      labelZh: '车头朝向角 θ',
-      labelEn: 'Heading Angle',
       formula: '(θ%360)/180 - 1',
       rawDisplay: `${wrappedAngle.toFixed(1)}°`,
       normalized: normAngle,
@@ -630,8 +613,6 @@ export function computeObservationSnapshot(
       index: 3,
       group: 'speed',
       key: 'speed',
-      labelZh: '当前速度 v',
-      labelEn: 'Tire Velocity',
       formula: 'v / 0.8',
       rawDisplay: `${speed.toFixed(2)} u/f`,
       normalized: normSpeed,
@@ -640,8 +621,6 @@ export function computeObservationSnapshot(
       index: 4,
       group: 'centerline',
       key: 'track_dist',
-      labelZh: '中心线距离 d',
-      labelEn: 'Centerline Dist',
       formula: 'd / (2·W)',
       rawDisplay: `${trackDist.toFixed(2)} m`,
       normalized: normTrackDist,
@@ -650,8 +629,6 @@ export function computeObservationSnapshot(
       index: 5,
       group: 'centerline',
       key: 'track_dir_x',
-      labelZh: '中心线方向 dx',
-      labelEn: 'Center Dir X',
       formula: 'dx / 20',
       rawDisplay: `${dxToCenter.toFixed(2)} m`,
       normalized: normTrackDirX,
@@ -660,8 +637,6 @@ export function computeObservationSnapshot(
       index: 6,
       group: 'centerline',
       key: 'track_dir_z',
-      labelZh: '中心线方向 dz',
-      labelEn: 'Center Dir Z',
       formula: 'dz / 20',
       rawDisplay: `${dzToCenter.toFixed(2)} m`,
       normalized: normTrackDirZ,
@@ -670,8 +645,6 @@ export function computeObservationSnapshot(
       index: ray.obsIndex,
       group: 'lidar' as const,
       key: `ray_${ray.index}`,
-      labelZh: `射线 ${ray.angleDeg >= 0 ? `+${ray.angleDeg}` : ray.angleDeg}°`,
-      labelEn: `Ray ${ray.angleDeg >= 0 ? `+${ray.angleDeg}` : ray.angleDeg}°`,
       formula: 'd / 80',
       rawDisplay: ray.hit ? `${ray.distance.toFixed(1)} m` : '80.0 m',
       normalized: ray.normalized,

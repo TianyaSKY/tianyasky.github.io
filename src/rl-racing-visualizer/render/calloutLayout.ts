@@ -30,8 +30,7 @@ export interface ProjectedSceneAnchors {
 export interface CalloutSpec {
   id: string;
   obsTag: string;      // e.g. "obs[3]"
-  titleZh: string;
-  titleEn: string;
+  title: string;
   valueText: string;   // e.g. "v = 0.68 / 0.80 → 0.850"
   accentHex: string;
   anchorX: number;     // [0, 1]
@@ -70,8 +69,7 @@ export function buildCalloutLayout(
     raw.push({
       id: 'tire-speed',
       obsTag: 'obs[3]',
-      titleZh: '轮胎速度向量',
-      titleEn: 'Tire Velocity v',
+      title: 'Tire velocity',
       valueText: `${snapshot.speed.toFixed(2)} / ${CONFIG.CAR_BASE_SPEED.toFixed(1)} = ${snapshot.vector[3].toFixed(3)}`,
       accentHex: '#059669',
       anchorX: anchors.tireSpeed.x,
@@ -87,8 +85,7 @@ export function buildCalloutLayout(
     raw.push({
       id: 'lidar-hit-primary',
       obsTag: `obs[${r.obsIndex}]`,
-      titleZh: `障碍命中射线 (${sign})`,
-      titleEn: 'Obstacle Hit Ray',
+      title: `Hit ray (${sign})`,
       valueText: `d = ${r.distance.toFixed(1)}m / 80m = ${r.normalized.toFixed(3)}`,
       accentHex: '#dc2626',
       anchorX: r.x,
@@ -104,8 +101,7 @@ export function buildCalloutLayout(
     raw.push({
       id: 'lidar-clear',
       obsTag: `obs[${r.obsIndex}]`,
-      titleZh: `9向扇形畅通射线 (${sign})`,
-      titleEn: 'Clear Fan LiDAR',
+      title: `Clear ray (${sign})`,
       valueText: `d = 80.0m (Max) → 1.000`,
       accentHex: '#0284c7',
       anchorX: r.x,
@@ -119,8 +115,7 @@ export function buildCalloutLayout(
     raw.push({
       id: 'centerline-vec',
       obsTag: 'obs[4..6]',
-      titleZh: '中心线偏差与方向向量',
-      titleEn: 'Centerline Offset (d, dx, dz)',
+      title: 'Centerline offset',
       valueText: `d = ${snapshot.trackDist.toFixed(2)}m → ${snapshot.vector[4].toFixed(3)}`,
       accentHex: '#7c3aed',
       anchorX: anchors.centerlineVec.x,
@@ -134,8 +129,7 @@ export function buildCalloutLayout(
     raw.push({
       id: 'heading-angle',
       obsTag: 'obs[2]',
-      titleZh: '车头朝向角 θ',
-      titleEn: 'Vehicle Heading Yaw',
+      title: 'Heading angle θ',
       valueText: `θ = ${snapshot.carAngleDeg.toFixed(1)}° → ${snapshot.vector[2].toFixed(3)}`,
       accentHex: '#d97706',
       anchorX: anchors.headingArc.x,
@@ -149,8 +143,7 @@ export function buildCalloutLayout(
     raw.push({
       id: 'world-pos',
       obsTag: 'obs[0..1]',
-      titleZh: '车辆世界坐标 (x, z)',
-      titleEn: 'World Coordinates /400',
+      title: 'World position (x, z)',
       valueText: `(${snapshot.carX.toFixed(1)}, ${snapshot.carZ.toFixed(1)}) → (${snapshot.vector[0].toFixed(2)}, ${snapshot.vector[1].toFixed(2)})`,
       accentHex: '#2563eb',
       anchorX: anchors.worldOrigin.x,
@@ -164,8 +157,7 @@ export function buildCalloutLayout(
     raw.push({
       id: 'obstacle-aabb',
       obsTag: 'R = -100',
-      titleZh: '障碍物 AABB 碰撞体',
-      titleEn: 'Obstacle AABB Penalty',
+      title: 'Obstacle AABB',
       valueText: 'Collision → Done (-100)',
       accentHex: '#b45309',
       anchorX: anchors.obstacleBox.x,
@@ -223,8 +215,7 @@ export function buildCalloutLayout(
       placed.push({
         id: it.id,
         obsTag: it.obsTag,
-        titleZh: it.titleZh,
-        titleEn: it.titleEn,
+        title: it.title,
         valueText: it.valueText,
         accentHex: it.accentHex,
         anchorX: it.anchorX,

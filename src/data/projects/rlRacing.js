@@ -1,11 +1,11 @@
 export const rlRacingDetail = {
   caseFigures: {
     background: {
-      src: "/projects/rl-racing/cover.svg",
+      src: "/projects/rl-racing/observation-diagram.webp",
       label: "Figure 1",
-      title: "Closed-Circuit 3D Track Simulation & Kinematic Architecture",
-      caption: "Custom 3D racing simulator environment built in Pygame and OpenGL, featuring procedural track generation, 9-ray forward distance sensors, and Gymnasium interface.",
-      kind: "diagram"
+      title: "3D Racing Environment: Observation Space and LiDAR",
+      caption: "Corner avoidance scenario rendered in the browser visualizer. The diagram shows the nine LiDAR rays, vehicle kinematics, centerline offset, obstacle collision boxes, and the resulting 16-dimensional observation vector.",
+      wide: true
     },
     method: {
       src: "/projects/rl-racing/game.png",

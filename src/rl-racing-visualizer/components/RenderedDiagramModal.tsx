@@ -18,7 +18,7 @@ export const RenderedDiagramModal: React.FC<RenderedDiagramModalProps> = ({
 
   return (
     <AccessibleDialog
-      label="高清渲染图解预览"
+      label="Diagram preview"
       onClose={onClose}
       overlayClassName="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 p-4 md:p-8"
       dialogClassName={`relative flex flex-col max-w-6xl w-full max-h-[92dvh] rounded-xl border shadow-2xl overflow-hidden ${
@@ -33,14 +33,14 @@ export const RenderedDiagramModal: React.FC<RenderedDiagramModalProps> = ({
         >
           <div className="min-w-0">
             <h2 className="text-base font-semibold tracking-tight">
-              已渲染高清 3D 数据图解 · {result.width} × {result.height} PNG
+              Rendered diagram · {result.width} × {result.height} PNG
             </h2>
             <p
               className={`text-xs mt-0.5 truncate ${
                 darkMode ? 'text-slate-400' : 'text-slate-500'
               }`}
             >
-              包含 9 向 LiDAR 射线测距标注、轮胎速度指向箭头、中心线偏差向量与完整 16-D 观测矩阵
+              9-ray LiDAR, tire velocity, centerline offset, and the 16-D observation vector
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -50,12 +50,12 @@ export const RenderedDiagramModal: React.FC<RenderedDiagramModalProps> = ({
               className="inline-flex min-h-11 items-center gap-2 px-4 rounded-lg text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors whitespace-nowrap"
             >
               <Download className="w-4 h-4" />
-              下载高清 PNG
+              Download PNG
             </a>
             <button
               type="button"
               onClick={onClose}
-              aria-label="关闭预览弹窗"
+              aria-label="Close preview"
               data-dialog-initial-focus
               className={`grid min-h-11 min-w-11 place-items-center rounded-lg transition-colors cursor-pointer ${
                 darkMode

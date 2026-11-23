@@ -604,7 +604,7 @@ export const RacingSceneCanvas = React.forwardRef<RacingSceneHandle, RacingScene
       <div
         ref={mountRef}
         className="fixed inset-0 overflow-hidden"
-        aria-label="RL Racing 3D 可视化视口"
+        aria-label="RL Racing 3D viewport"
       />
     );
   },

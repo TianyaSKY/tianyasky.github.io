@@ -172,7 +172,7 @@ export const DiagramCalloutLayer: React.FC<DiagramCalloutLayerProps> = ({
           >
             <div className="flex items-baseline justify-between gap-2">
               <span className="text-[13px] font-semibold tracking-tight truncate">
-                {c.titleZh}
+                {c.title}
               </span>
               <span
                 className="text-[11px] font-mono-tabular font-bold shrink-0"

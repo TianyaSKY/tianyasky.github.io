@@ -41,10 +41,10 @@ interface StudioControlDockProps {
 type DockTab = 'camera' | 'params' | 'layers' | 'vector';
 
 const CAMERA_OPTIONS: Array<{ id: CameraPresetId; label: string }> = [
-  { id: 'hero', label: '主视图' },
-  { id: 'top-radar', label: '俯视雷达' },
-  { id: 'wheel-speed', label: '轮胎特写' },
-  { id: 'centerline', label: '赛道偏差' },
+  { id: 'hero', label: 'Overview' },
+  { id: 'top-radar', label: 'Top-down' },
+  { id: 'wheel-speed', label: 'Tire close-up' },
+  { id: 'centerline', label: 'Centerline' },
 ];
 
 export const StudioControlDock: React.FC<StudioControlDockProps> = ({
@@ -98,18 +98,18 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
           type="button"
           onClick={onToggleCollapse}
           aria-expanded={false}
-          aria-label="展开控制面板"
+          aria-label="Expand controls"
           className={`inline-flex items-center gap-3 px-4 py-2 rounded-xl border text-xs font-medium transition-transform duration-150 hover:-translate-y-0.5 cursor-pointer whitespace-nowrap ${dockShell}`}
         >
-          <span className="font-semibold">{activeScenario.nameZh}</span>
+          <span className="max-w-[40vw] truncate font-semibold">{activeScenario.name}</span>
           <span className={`h-3 w-px ${dividerCol}`} aria-hidden="true" />
           <span className={`font-mono-tabular ${mutedText}`}>
             R {snapshot.reward.total >= 0 ? '+' : ''}
-            {snapshot.reward.total.toFixed(2)} · 命中 {hitCount}/9
+            {snapshot.reward.total.toFixed(2)} · {hitCount}/9 hits
           </span>
           <span className={`h-3 w-px ${dividerCol}`} aria-hidden="true" />
           <span className="inline-flex items-center gap-1 font-medium">
-            展开控制栏
+            Expand
             <ChevronUp className="w-3.5 h-3.5" />
           </span>
         </button>
@@ -134,10 +134,10 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
           >
             {(
               [
-                { id: 'camera', label: '视角与工况', icon: Camera },
-                { id: 'params', label: '状态调节', icon: SlidersHorizontal },
-                { id: 'layers', label: '标注图层', icon: Layers },
-                { id: 'vector', label: '16-D 向量', icon: Table2 },
+                { id: 'camera', label: 'Views', icon: Camera },
+                { id: 'params', label: 'State', icon: SlidersHorizontal },
+                { id: 'layers', label: 'Layers', icon: Layers },
+                { id: 'vector', label: '16-D vector', icon: Table2 },
               ] as const
             ).map((tab) => {
               const Icon = tab.icon;
@@ -181,7 +181,7 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
               <span className={mutedText} aria-hidden="true">
                 ·
               </span>
-              <span className={mutedText}>命中 {hitCount}/9</span>
+              <span className={mutedText}>{hitCount}/9 hits</span>
             </div>
 
             <span className={`hidden md:block h-3.5 w-px ${dividerCol}`} aria-hidden="true" />
@@ -189,8 +189,8 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
             <button
               type="button"
               onClick={onToggleAnimating}
-              aria-label={isAnimating ? '暂停轮胎动态' : '轮胎动态旋转'}
-              title={isAnimating ? '暂停轮胎动态' : '轮胎动态旋转'}
+              aria-label={isAnimating ? 'Pause tire rotation' : 'Animate tire rotation'}
+              title={isAnimating ? 'Pause tire rotation' : 'Animate tire rotation'}
               className={`inline-flex items-center gap-1.5 px-1.5 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer whitespace-nowrap shrink-0 sm:px-2.5 ${
                 isAnimating
                   ? darkMode
@@ -200,15 +200,15 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
               }`}
             >
               {isAnimating ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-              <span className="hidden sm:inline">{isAnimating ? '暂停' : '动态'}</span>
+              <span className="hidden sm:inline">{isAnimating ? 'Pause' : 'Animate'}</span>
             </button>
 
             <button
               type="button"
               onClick={onToggleCollapse}
               aria-expanded={true}
-              aria-label="收起控制面板"
-              title="收起控制栏 (H)"
+              aria-label="Collapse controls"
+              title="Collapse controls (H)"
               className={`p-1.5 rounded-lg transition-colors cursor-pointer ${subtleHover}`}
             >
               <ChevronDown className="w-4 h-4" />
@@ -223,7 +223,7 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
               {/* Camera segmented control */}
               <div className="flex flex-wrap items-center gap-2">
                 <span className={`text-[11px] font-medium whitespace-nowrap ${mutedText}`}>
-                  视角
+                  Camera
                 </span>
                 <div className={`inline-flex flex-wrap items-center gap-0.5 p-0.5 rounded-lg ${wellBg}`}>
                   {CAMERA_OPTIONS.map((cam) => (
@@ -247,7 +247,7 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
               {/* Scenario segmented control */}
               <div className="flex flex-wrap items-center gap-2">
                 <span className={`text-[11px] font-medium whitespace-nowrap ${mutedText}`}>
-                  工况
+                  Scenario
                 </span>
                 <div className={`inline-flex flex-wrap items-center gap-0.5 p-0.5 rounded-lg ${wellBg}`}>
                   {SCENARIO_PRESETS.map((sc) => (
@@ -260,7 +260,7 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
                         scenarioId === sc.id ? activeSoft : subtleHover
                       }`}
                     >
-                      {sc.nameZh}
+                      {sc.name}
                     </button>
                   ))}
                 </div>
@@ -273,7 +273,7 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <label className="flex flex-col gap-1.5">
                   <div className="flex items-baseline justify-between text-[11px]">
-                    <span className={mutedText}>轮胎速度 v</span>
+                    <span className={mutedText}>Tire speed v</span>
                     <span className="font-mono-tabular font-semibold">
                       {pose.speed.toFixed(2)}{' '}
                       <span className={`font-normal ${mutedText}`}>/ {CONFIG.CAR_BASE_SPEED}</span>
@@ -294,7 +294,7 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
 
                 <label className="flex flex-col gap-1.5">
                   <div className="flex items-baseline justify-between text-[11px]">
-                    <span className={mutedText}>中心线偏移</span>
+                    <span className={mutedText}>Lateral offset</span>
                     <span className="font-mono-tabular font-semibold">
                       {pose.lateralOffset >= 0 ? '+' : ''}
                       {pose.lateralOffset.toFixed(1)} m
@@ -315,7 +315,7 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
 
                 <label className="flex flex-col gap-1.5">
                   <div className="flex items-baseline justify-between text-[11px]">
-                    <span className={mutedText}>车头偏航角 θ</span>
+                    <span className={mutedText}>Heading offset θ</span>
                     <span className="font-mono-tabular font-semibold">
                       {pose.relativeYawDeg >= 0 ? '+' : ''}
                       {pose.relativeYawDeg.toFixed(0)}°
@@ -338,7 +338,7 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
               {/* Clean inline Discrete(7) action selector bar */}
               <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-500/10">
                 <span className={`text-[11px] font-medium whitespace-nowrap ${mutedText}`}>
-                  离散动作
+                  Discrete action
                 </span>
                 <div className={`inline-flex flex-wrap items-center gap-0.5 p-0.5 rounded-lg ${wellBg}`}>
                   {DISCRETE_ACTIONS.map((a) => (
@@ -351,8 +351,8 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
                         pose.actionId === a.id ? activeSegment : subtleHover
                       }`}
                     >
-                      <span className="font-mono-tabular opacity-65 mr-1">{a.id}</span>
-                      {a.labelZh}
+                      <span className="font-mono-tabular opacity-65 mr-1">{a.id}</span>{' '}
+                      {a.label}
                     </button>
                   ))}
                 </div>
@@ -364,13 +364,13 @@ export const StudioControlDock: React.FC<StudioControlDockProps> = ({
             <div className="flex flex-wrap items-center gap-1.5">
               {(
                 [
-                  { key: 'rays', label: '9向 LiDAR 射线' },
-                  { key: 'rayBadges', label: '射线端测距' },
-                  { key: 'speedArrow', label: '轮胎速度箭头' },
-                  { key: 'centerline', label: '中心线向量' },
-                  { key: 'headingAndPos', label: '朝向角与坐标' },
-                  { key: 'aabbBoxes', label: 'AABB 碰撞框' },
-                  { key: 'callouts', label: '工程引线卡' },
+                  { key: 'rays', label: '9-ray LiDAR' },
+                  { key: 'rayBadges', label: 'Ray distance labels' },
+                  { key: 'speedArrow', label: 'Tire velocity arrow' },
+                  { key: 'centerline', label: 'Centerline vector' },
+                  { key: 'headingAndPos', label: 'Heading and position' },
+                  { key: 'aabbBoxes', label: 'AABB collision boxes' },
+                  { key: 'callouts', label: 'Callout cards' },
                 ] as const
               ).map((item) => {
                 const active = layers[item.key];
