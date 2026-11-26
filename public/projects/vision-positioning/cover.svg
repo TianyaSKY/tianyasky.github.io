@@ -61,7 +61,7 @@
 <circle cx="906" cy="270" r="22"/>
 </g>
 <!-- 角点标注 -->
-<g font-family="JetBrains Mono, monospace" font-size="14" fill="#e8b478">
+<g font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" font-size="14" fill="#e8b478">
 <text x="240" y="195" letter-spacing="2">P1</text>
 <text x="430" y="195" letter-spacing="2">P2</text>
 <text x="240" y="540" letter-spacing="2">P3</text>
@@ -75,12 +75,12 @@
 <polygon points="120,0 108,-6 108,6" fill="#b53a2a"/>
 <polygon points="0,-90 -6,-78 6,-78" fill="#3a7a52"/>
 <polygon points="-60,60 -52,52 -64,48" fill="#3a6b9c"/>
-<text x="125" y="4" fill="#b53a2a" font-family="JetBrains Mono, monospace" font-size="16">X</text>
-<text x="-4" y="-95" fill="#3a7a52" font-family="JetBrains Mono, monospace" font-size="16">Y</text>
-<text x="-72" y="58" fill="#3a6b9c" font-family="JetBrains Mono, monospace" font-size="16">Z</text>
+<text x="125" y="4" fill="#b53a2a" font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" font-size="16">X</text>
+<text x="-4" y="-95" fill="#3a7a52" font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" font-size="16">Y</text>
+<text x="-72" y="58" fill="#3a6b9c" font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" font-size="16">Z</text>
 </g>
 <!-- Telemetry -->
-<g font-family="JetBrains Mono, monospace" fill="#f3e1c5">
+<g font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" fill="#f3e1c5">
 <rect x="1280" y="600" width="240" height="160" fill="#0c111d" stroke="#e8b478" stroke-width="1"/>
 <text x="1300" y="630" font-size="11" letter-spacing="3" fill="#e8b478">POSE ESTIMATION</text>
 <text x="1300" y="660" font-size="22" fill="#f3e1c5" font-weight="700">x = 12.7 m</text>
@@ -89,7 +89,7 @@
 <text x="1300" y="740" font-size="11" letter-spacing="2" fill="#b53a2a">RMSE 11.2 cm · 26 FPS</text>
 </g>
 <!-- Bottom credit -->
-<g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="3" fill="#f3e1c5">
+<g font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" font-size="11" letter-spacing="3" fill="#f3e1c5">
 <text x="80" y="50">VISION · ISSUE 01</text>
 <text x="80" y="75" fill="#e8b478">AUG · 2026</text>
 <line x1="80" y1="90" x2="280" y2="90" stroke="#e8b478" stroke-width="1"/>

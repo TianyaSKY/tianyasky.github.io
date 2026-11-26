@@ -1,3 +1,4 @@
+import { FIGURE_FONT_FAMILY } from '../../utils/figureFont';
 import type {
   CameraIntrinsics,
   LandmarkSpec,
@@ -144,7 +145,7 @@ export function SensorPreviewSvg({
                   y={pr.v - 10}
                   fill="#f8fafc"
                   fontSize="34"
-                  fontFamily="JetBrains Mono, monospace"
+                  fontFamily={FIGURE_FONT_FAMILY}
                   fontWeight="600"
                 >
                   {lm.id}

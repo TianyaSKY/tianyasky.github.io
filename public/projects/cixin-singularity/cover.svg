@@ -239,29 +239,29 @@
 <ellipse cx="800" cy="500" rx="500" ry="140" fill="none" stroke="#f3e1c5" stroke-width="0.6" opacity="0.25" transform="rotate(-15 800 500)"/>
 <ellipse cx="800" cy="500" rx="320" ry="90" fill="none" stroke="#f3e1c5" stroke-width="0.5" opacity="0.18" transform="rotate(-15 800 500)"/>
 <!-- 巨字 -->
-<g font-family="Noto Serif SC, serif" text-anchor="middle">
+<g font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" text-anchor="middle">
 <text x="800" y="430" font-size="160" font-weight="900" fill="#f3e1c5" letter-spacing="-4">二 向 箔</text>
 <text x="800" y="470" font-size="22" font-style="italic" fill="#b53a2a" letter-spacing="10">TWO-DIMENSIONAL FOIL</text>
 </g>
 <!-- 副标 -->
-<g font-family="Noto Serif SC, serif" text-anchor="middle" fill="#dfe7ee">
+<g font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" text-anchor="middle" fill="#dfe7ee">
 <text x="800" y="540" font-size="26" font-style="italic">「维度收缩场已降临目标星域。」</text>
 <text x="800" y="585" font-size="18" letter-spacing="2" fill="#94a0b0">— 刘慈欣体 · Qwen3.6-27B · 4bit QLoRA 微调</text>
 </g>
 <!-- 上眉头部 -->
-<g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="4" fill="#94a0b0">
+<g font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" font-size="11" letter-spacing="4" fill="#94a0b0">
 <text x="80" y="50">SINGULARITY · ISSUE 02</text>
 <line x1="80" y1="65" x2="280" y2="65" stroke="#b53a2a" stroke-width="1"/>
 <text x="80" y="92">SCI-FI · LANGUAGE MODEL FINE-TUNING</text>
 </g>
 <!-- 右下小章 -->
-<g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="3" fill="#94a0b0">
+<g font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" font-size="11" letter-spacing="3" fill="#94a0b0">
 <rect x="1320" y="780" width="200" height="60" fill="none" stroke="#b53a2a" stroke-width="1"/>
 <text x="1335" y="805" fill="#f3e1c5">trained on</text>
 <text x="1335" y="825" fill="#b53a2a">2375 条续写 · 20MB</text>
 </g>
 <!-- 左下版次 -->
-<g font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="3" fill="#94a0b0">
+<g font-family="'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive" font-size="10" letter-spacing="3" fill="#94a0b0">
 <text x="80" y="820">VOL. 01 — 2026.08</text>
 <text x="80" y="840">CHEN MINXIANG · 个人实验</text>
 </g>

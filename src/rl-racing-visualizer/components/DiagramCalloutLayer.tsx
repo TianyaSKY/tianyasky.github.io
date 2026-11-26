@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { FIGURE_FONT_FAMILY } from '../../utils/figureFont';
 import { ObservationSnapshot } from '../sim/rlRacingMath';
 import {
   LayerVisibility,
@@ -35,6 +36,7 @@ export const DiagramCalloutLayer: React.FC<DiagramCalloutLayerProps> = ({
   return (
     <div
       className="pointer-events-none fixed inset-0 z-10 overflow-hidden"
+      style={{ fontFamily: FIGURE_FONT_FAMILY }}
       aria-hidden="true"
       data-testid="diagram-callout-layer"
     >
@@ -140,7 +142,7 @@ export const DiagramCalloutLayer: React.FC<DiagramCalloutLayerProps> = ({
               style={{
                 transform: `translate(${Math.round(px)}px, ${Math.round(py - 22)}px) translate(-50%, -50%)`,
               }}
-              className={`absolute top-0 left-0 px-1.5 py-0.5 rounded text-[11px] font-mono-tabular font-semibold whitespace-nowrap border ${
+              className={`absolute top-0 left-0 px-1.5 py-0.5 rounded text-[11px] font-semibold whitespace-nowrap border ${
                 tip.hit
                   ? 'bg-red-600 text-white border-red-300 shadow-sm'
                   : darkMode
@@ -175,14 +177,14 @@ export const DiagramCalloutLayer: React.FC<DiagramCalloutLayerProps> = ({
                 {c.title}
               </span>
               <span
-                className="text-[11px] font-mono-tabular font-bold shrink-0"
+                className="text-[11px] font-bold shrink-0"
                 style={{ color: c.accentHex }}
               >
                 {c.obsTag}
               </span>
             </div>
             <div
-              className={`text-[11px] font-mono-tabular mt-0.5 truncate ${
+              className={`text-[11px] mt-0.5 truncate ${
                 darkMode ? 'text-slate-300' : 'text-slate-700'
               }`}
             >

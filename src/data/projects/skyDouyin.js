@@ -16,7 +16,7 @@ const uploadFigure = {
 };
 
 const recommendationFigure = {
-  src: "/projects/sky-douyin/cold-start-and-feed.png",
+  src: "/projects/sky-douyin/cold-start-and-feed.svg",
   label: "Figure 3",
   title: "Cold-Start Preference Profiling & Hybrid Feed Recall",
   caption: "Category centroid embedding aggregation for new user onboarding, followed by real-time behavioral telemetry and hybrid vector similarity plus trending fallback.",

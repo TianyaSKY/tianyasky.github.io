@@ -17,7 +17,7 @@
   </rdf:RDF>
  </metadata>
  <defs>
-  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt} text{font-family: 'Comic Sans MS', 'Comic Neue', 'Noto Sans SC', cursive}</style>
  </defs>
  <g id="figure_1">
   <g id="patch_1">
@@ -50,25 +50,7 @@ L 0 3.5
       </g>
      </g>
      <g id="text_1">
-      <!-- 0 -->
-      <g transform="translate(51.22625 261.926283) scale(0.105 -0.105)">
-       <defs>
-        <path id="NotoSansCJKsc-Regular-11" d="M 1779 -83 
-C 2669 -83 3238 723 3238 2362 
-C 3238 3987 2669 4774 1779 4774 
-C 883 4774 320 3987 320 2362 
-C 320 723 883 -83 1779 -83 
-z
-M 1779 390 
-C 1248 390 883 986 883 2362 
-C 883 3731 1248 4314 1779 4314 
-C 2310 4314 2675 3731 2675 2362 
-C 2675 986 2310 390 1779 390 
-z
-" transform="scale(0.015625)"/>
-       </defs>
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-      </g>
+      <text x="54.14" y="261.926283" text-anchor="middle" font-size="10.5">0</text>
      </g>
     </g>
     <g id="xtick_2">
@@ -78,31 +60,7 @@ z
       </g>
      </g>
      <g id="text_2">
-      <!-- 50 -->
-      <g transform="translate(110.16352 261.926283) scale(0.105 -0.105)">
-       <defs>
-        <path id="NotoSansCJKsc-Regular-16" d="M 1677 -83 
-C 2464 -83 3213 499 3213 1523 
-C 3213 2560 2573 3021 1798 3021 
-C 1517 3021 1306 2950 1094 2835 
-L 1216 4192 
-L 2982 4192 
-L 2982 4691 
-L 704 4691 
-L 550 2502 
-L 864 2304 
-C 1133 2483 1331 2579 1645 2579 
-C 2234 2579 2618 2182 2618 1510 
-C 2618 826 2176 403 1619 403 
-C 1075 403 730 653 467 922 
-L 173 538 
-C 493 224 941 -83 1677 -83 
-z
-" transform="scale(0.015625)"/>
-       </defs>
-       <use xlink:href="#NotoSansCJKsc-Regular-16"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-      </g>
+      <text x="115.99102" y="261.926283" text-anchor="middle" font-size="10.5">50</text>
      </g>
     </g>
     <g id="xtick_3">
@@ -112,28 +70,7 @@ z
       </g>
      </g>
      <g id="text_3">
-      <!-- 100 -->
-      <g transform="translate(169.100791 261.926283) scale(0.105 -0.105)">
-       <defs>
-        <path id="NotoSansCJKsc-Regular-12" d="M 563 0 
-L 3136 0 
-L 3136 486 
-L 2195 486 
-L 2195 4691 
-L 1747 4691 
-C 1491 4544 1190 4435 774 4358 
-L 774 3987 
-L 1613 3987 
-L 1613 486 
-L 563 486 
-L 563 0 
-z
-" transform="scale(0.015625)"/>
-       </defs>
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="177.842041" y="261.926283" text-anchor="middle" font-size="10.5">100</text>
      </g>
     </g>
     <g id="xtick_4">
@@ -143,12 +80,7 @@ z
       </g>
      </g>
      <g id="text_4">
-      <!-- 150 -->
-      <g transform="translate(230.951811 261.926283) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-16" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="239.693061" y="261.926283" text-anchor="middle" font-size="10.5">150</text>
      </g>
     </g>
     <g id="xtick_5">
@@ -158,33 +90,11 @@ z
       </g>
      </g>
      <g id="text_5">
-      <!-- 200 -->
-      <g transform="translate(292.802832 261.926283) scale(0.105 -0.105)">
-       <defs>
-        <path id="NotoSansCJKsc-Regular-13" d="M 282 0 
-L 3232 0 
-L 3232 506 
-L 1933 506 
-C 1696 506 1408 480 1165 461 
-C 2266 1504 3008 2458 3008 3398 
-C 3008 4230 2477 4774 1638 4774 
-C 1043 4774 634 4506 256 4090 
-L 595 3757 
-C 858 4070 1184 4301 1568 4301 
-C 2150 4301 2432 3910 2432 3373 
-C 2432 2566 1754 1632 282 346 
-L 282 0 
-z
-" transform="scale(0.015625)"/>
-       </defs>
-       <use xlink:href="#NotoSansCJKsc-Regular-13"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="301.544082" y="261.926283" text-anchor="middle" font-size="10.5">200</text>
      </g>
     </g>
     <g id="text_6">
-    <text x="205.68" y="276.43" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 10.5px; fill: #000000">Optimization Step</text>
+    <text x="205.68" y="276.43" text-anchor="middle" style="font-size: 10.5px; fill: #000000">Optimization Step</text>
    </g>
    </g>
    <g id="matplotlib.axis_2">
@@ -205,22 +115,7 @@ L -3.5 0
       </g>
      </g>
      <g id="text_7">
-      <!-- 0.25 -->
-      <g transform="translate(26.738828 220.96948) scale(0.105 -0.105)">
-       <defs>
-        <path id="NotoSansCJKsc-Regular-f" d="M 890 -83 
-C 1120 -83 1312 96 1312 358 
-C 1312 627 1120 806 890 806 
-C 653 806 467 627 467 358 
-C 467 96 653 -83 890 -83 
-z
-" transform="scale(0.015625)"/>
-       </defs>
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-13" transform="translate(83.296875 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-16" transform="translate(138.796875 0)"/>
-      </g>
+      <text x="47.14" y="220.96948" text-anchor="end" font-size="10.5">0.25</text>
      </g>
     </g>
     <g id="ytick_2">
@@ -235,34 +130,7 @@ L 357.21 183.349321
       </g>
      </g>
      <g id="text_8">
-      <!-- 0.30 -->
-      <g transform="translate(26.738828 187.969321) scale(0.105 -0.105)">
-       <defs>
-        <path id="NotoSansCJKsc-Regular-14" d="M 1683 -83 
-C 2522 -83 3194 416 3194 1254 
-C 3194 1901 2752 2310 2202 2445 
-L 2202 2477 
-C 2701 2650 3034 3034 3034 3603 
-C 3034 4346 2458 4774 1664 4774 
-C 1126 4774 710 4538 358 4218 
-L 672 3846 
-C 941 4115 1267 4301 1645 4301 
-C 2138 4301 2438 4006 2438 3558 
-C 2438 3053 2112 2662 1139 2662 
-L 1139 2214 
-C 2227 2214 2598 1843 2598 1274 
-C 2598 736 2208 403 1645 403 
-C 1114 403 762 659 486 941 
-L 186 563 
-C 493 224 954 -83 1683 -83 
-z
-" transform="scale(0.015625)"/>
-       </defs>
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-14" transform="translate(83.296875 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(138.796875 0)"/>
-      </g>
+      <text x="47.14" y="187.969321" text-anchor="end" font-size="10.5">0.30</text>
      </g>
     </g>
     <g id="ytick_3">
@@ -277,13 +145,7 @@ L 357.21 150.349162
       </g>
      </g>
      <g id="text_9">
-      <!-- 0.35 -->
-      <g transform="translate(26.738828 154.969162) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-14" transform="translate(83.296875 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-16" transform="translate(138.796875 0)"/>
-      </g>
+      <text x="47.14" y="154.969162" text-anchor="end" font-size="10.5">0.35</text>
      </g>
     </g>
     <g id="ytick_4">
@@ -298,37 +160,7 @@ L 357.21 117.349003
       </g>
      </g>
      <g id="text_10">
-      <!-- 0.40 -->
-      <g transform="translate(26.738828 121.969003) scale(0.105 -0.105)">
-       <defs>
-        <path id="NotoSansCJKsc-Regular-15" d="M 2176 0 
-L 2726 0 
-L 2726 1293 
-L 3354 1293 
-L 3354 1760 
-L 2726 1760 
-L 2726 4691 
-L 2080 4691 
-L 128 1677 
-L 128 1293 
-L 2176 1293 
-L 2176 0 
-z
-M 2176 1760 
-L 736 1760 
-L 1805 3360 
-C 1939 3590 2067 3827 2182 4051 
-L 2208 4051 
-C 2195 3814 2176 3430 2176 3200 
-L 2176 1760 
-z
-" transform="scale(0.015625)"/>
-       </defs>
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-15" transform="translate(83.296875 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(138.796875 0)"/>
-      </g>
+      <text x="47.14" y="121.969003" text-anchor="end" font-size="10.5">0.40</text>
      </g>
     </g>
     <g id="ytick_5">
@@ -343,17 +175,11 @@ L 357.21 84.348844
       </g>
      </g>
      <g id="text_11">
-      <!-- 0.45 -->
-      <g transform="translate(26.738828 88.968844) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-15" transform="translate(83.296875 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-16" transform="translate(138.796875 0)"/>
-      </g>
+      <text x="47.14" y="88.968844" text-anchor="end" font-size="10.5">0.45</text>
      </g>
     </g>
     <g id="text_12">
-    <text transform="translate(20.28 161.85) rotate(-90)" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 10.5px; fill: #000000">Token Accuracy</text>
+    <text transform="translate(20.28 161.85) rotate(-90)" text-anchor="middle" style="font-size: 10.5px; fill: #000000">Token Accuracy</text>
    </g>
    </g>
    <g id="line2d_16">
@@ -527,7 +353,7 @@ L 357.21 245.686283
 " style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_13">
-    <text x="205.68" y="70.01" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 11px; font-weight: 600; fill: #000000">(a) Mean Token Accuracy</text>
+    <text x="205.68" y="70.01" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: #000000">(a) Mean Token Accuracy</text>
    </g>
    <g id="legend_1">
     <g id="patch_5">
@@ -553,7 +379,7 @@ L 323.91 219.856283
      </g>
     </g>
     <g id="text_14">
-    <text x="331.11" y="223.01" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 9px; fill: #000000">Train</text>
+    <text x="331.11" y="223.01" style="font-size: 9px; fill: #000000">Train</text>
    </g>
     <g id="line2d_22">
      <path d="M 305.91 233.356283 
@@ -565,7 +391,7 @@ L 323.91 233.356283
      </g>
     </g>
     <g id="text_15">
-    <text x="331.11" y="236.51" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 9px; fill: #000000">Eval</text>
+    <text x="331.11" y="236.51" style="font-size: 9px; fill: #000000">Eval</text>
    </g>
    </g>
   </g>
@@ -586,10 +412,7 @@ z
       </g>
      </g>
      <g id="text_16">
-      <!-- 0 -->
-      <g transform="translate(402.67625 261.926283) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-      </g>
+      <text x="405.59" y="261.926283" text-anchor="middle" font-size="10.5">0</text>
      </g>
     </g>
     <g id="xtick_7">
@@ -599,11 +422,7 @@ z
       </g>
      </g>
      <g id="text_17">
-      <!-- 50 -->
-      <g transform="translate(461.61352 261.926283) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-16"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-      </g>
+      <text x="467.44102" y="261.926283" text-anchor="middle" font-size="10.5">50</text>
      </g>
     </g>
     <g id="xtick_8">
@@ -613,12 +432,7 @@ z
       </g>
      </g>
      <g id="text_18">
-      <!-- 100 -->
-      <g transform="translate(520.550791 261.926283) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="529.292041" y="261.926283" text-anchor="middle" font-size="10.5">100</text>
      </g>
     </g>
     <g id="xtick_9">
@@ -628,12 +442,7 @@ z
       </g>
      </g>
      <g id="text_19">
-      <!-- 150 -->
-      <g transform="translate(582.401811 261.926283) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-16" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="591.143061" y="261.926283" text-anchor="middle" font-size="10.5">150</text>
      </g>
     </g>
     <g id="xtick_10">
@@ -643,16 +452,11 @@ z
       </g>
      </g>
      <g id="text_20">
-      <!-- 200 -->
-      <g transform="translate(644.252832 261.926283) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-13"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="652.994082" y="261.926283" text-anchor="middle" font-size="10.5">200</text>
      </g>
     </g>
     <g id="text_21">
-    <text x="557.13" y="276.43" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 10.5px; fill: #000000">Optimization Step</text>
+    <text x="557.13" y="276.43" text-anchor="middle" style="font-size: 10.5px; fill: #000000">Optimization Step</text>
    </g>
    </g>
    <g id="matplotlib.axis_4">
@@ -668,12 +472,7 @@ L 708.66 242.184588
       </g>
      </g>
      <g id="text_22">
-      <!-- 1.0 -->
-      <g transform="translate(384.016328 246.804588) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(83.296875 0)"/>
-      </g>
+      <text x="398.59" y="246.804588" text-anchor="end" font-size="10.5">1.0</text>
      </g>
     </g>
     <g id="ytick_7">
@@ -688,12 +487,7 @@ L 708.66 207.333675
       </g>
      </g>
      <g id="text_23">
-      <!-- 1.5 -->
-      <g transform="translate(384.016328 211.953675) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-16" transform="translate(83.296875 0)"/>
-      </g>
+      <text x="398.59" y="211.953675" text-anchor="end" font-size="10.5">1.5</text>
      </g>
     </g>
     <g id="ytick_8">
@@ -708,12 +502,7 @@ L 708.66 172.482761
       </g>
      </g>
      <g id="text_24">
-      <!-- 2.0 -->
-      <g transform="translate(384.016328 177.102761) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-13"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(83.296875 0)"/>
-      </g>
+      <text x="398.59" y="177.102761" text-anchor="end" font-size="10.5">2.0</text>
      </g>
     </g>
     <g id="ytick_9">
@@ -728,12 +517,7 @@ L 708.66 137.631847
       </g>
      </g>
      <g id="text_25">
-      <!-- 2.5 -->
-      <g transform="translate(384.016328 142.251847) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-13"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-16" transform="translate(83.296875 0)"/>
-      </g>
+      <text x="398.59" y="142.251847" text-anchor="end" font-size="10.5">2.5</text>
      </g>
     </g>
     <g id="ytick_10">
@@ -748,16 +532,11 @@ L 708.66 102.780933
       </g>
      </g>
      <g id="text_26">
-      <!-- 3.0 -->
-      <g transform="translate(384.016328 107.400933) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-14"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-f" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(83.296875 0)"/>
-      </g>
+      <text x="398.59" y="107.400933" text-anchor="end" font-size="10.5">3.0</text>
      </g>
     </g>
     <g id="text_27">
-    <text transform="translate(377.56 161.85) rotate(-90)" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 10.5px; fill: #000000">Entropy</text>
+    <text transform="translate(377.56 161.85) rotate(-90)" text-anchor="middle" style="font-size: 10.5px; fill: #000000">Entropy</text>
    </g>
    </g>
    <g id="line2d_38">
@@ -910,7 +689,7 @@ L 708.66 245.686283
 " style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_28">
-    <text x="557.13" y="70.01" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 11px; font-weight: 600; fill: #000000">(b) Output Entropy</text>
+    <text x="557.13" y="70.01" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: #000000">(b) Output Entropy</text>
    </g>
    <g id="legend_2">
     <g id="patch_9">
@@ -936,7 +715,7 @@ L 675.36 219.856283
      </g>
     </g>
     <g id="text_29">
-    <text x="682.56" y="223.01" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 9px; fill: #000000">Train</text>
+    <text x="682.56" y="223.01" style="font-size: 9px; fill: #000000">Train</text>
    </g>
     <g id="line2d_44">
      <path d="M 657.36 233.356283 
@@ -948,7 +727,7 @@ L 675.36 233.356283
      </g>
     </g>
     <g id="text_30">
-    <text x="682.56" y="236.51" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 9px; fill: #000000">Eval</text>
+    <text x="682.56" y="236.51" style="font-size: 9px; fill: #000000">Eval</text>
    </g>
    </g>
   </g>
@@ -969,10 +748,7 @@ z
       </g>
      </g>
      <g id="text_31">
-      <!-- 0 -->
-      <g transform="translate(51.22625 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-      </g>
+      <text x="54.14" y="491.3" text-anchor="middle" font-size="10.5">0</text>
      </g>
     </g>
     <g id="xtick_12">
@@ -982,11 +758,7 @@ z
       </g>
      </g>
      <g id="text_32">
-      <!-- 50 -->
-      <g transform="translate(110.16352 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-16"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-      </g>
+      <text x="115.99102" y="491.3" text-anchor="middle" font-size="10.5">50</text>
      </g>
     </g>
     <g id="xtick_13">
@@ -996,12 +768,7 @@ z
       </g>
      </g>
      <g id="text_33">
-      <!-- 100 -->
-      <g transform="translate(169.100791 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="177.842041" y="491.3" text-anchor="middle" font-size="10.5">100</text>
      </g>
     </g>
     <g id="xtick_14">
@@ -1011,12 +778,7 @@ z
       </g>
      </g>
      <g id="text_34">
-      <!-- 150 -->
-      <g transform="translate(230.951811 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-16" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="239.693061" y="491.3" text-anchor="middle" font-size="10.5">150</text>
      </g>
     </g>
     <g id="xtick_15">
@@ -1026,16 +788,11 @@ z
       </g>
      </g>
      <g id="text_35">
-      <!-- 200 -->
-      <g transform="translate(292.802832 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-13"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="301.544082" y="491.3" text-anchor="middle" font-size="10.5">200</text>
      </g>
     </g>
     <g id="text_36">
-    <text x="205.68" y="505.8" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 10.5px; fill: #000000">Optimization Step</text>
+    <text x="205.68" y="505.8" text-anchor="middle" style="font-size: 10.5px; fill: #000000">Optimization Step</text>
    </g>
    </g>
    <g id="matplotlib.axis_6">
@@ -1051,12 +808,7 @@ L 357.21 414.275519
       </g>
      </g>
      <g id="text_37">
-      <!-- $\mathdefault{10^{0}}$ -->
-      <g transform="translate(30.97 419.210519) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12" transform="translate(0 0.484375)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.499954 0.484375)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111.95694 41.784375) scale(0.7)"/>
-      </g>
+      <text x="47.14" y="419.210519" text-anchor="end" font-size="10.5">10<tspan font-size="70%" baseline-shift="super">0</tspan></text>
      </g>
     </g>
     <g id="ytick_12">
@@ -1071,12 +823,7 @@ L 357.21 335.380346
       </g>
      </g>
      <g id="text_38">
-      <!-- $\mathdefault{10^{1}}$ -->
-      <g transform="translate(30.97 340.262846) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12" transform="translate(0 0.392188)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.499954 0.392188)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-12" transform="translate(111.95694 41.692188) scale(0.7)"/>
-      </g>
+      <text x="47.14" y="340.262846" text-anchor="end" font-size="10.5">10<tspan font-size="70%" baseline-shift="super">1</tspan></text>
      </g>
     </g>
     <g id="ytick_13">
@@ -1204,101 +951,7 @@ L -2 0
      </g>
     </g>
     <g id="text_39">
-     <!-- grad norm -->
-     <g transform="translate(24.345 416.745702) rotate(-90) scale(0.105 -0.105)">
-      <defs>
-       <path id="NotoSansCJKsc-Regular-48" d="M 1760 -1600 
-C 2835 -1600 3520 -1043 3520 -397 
-C 3520 179 3110 429 2310 429 
-L 1626 429 
-C 1158 429 1018 589 1018 806 
-C 1018 998 1114 1114 1242 1222 
-C 1395 1146 1587 1101 1754 1101 
-C 2470 1101 3027 1568 3027 2310 
-C 3027 2611 2912 2867 2746 3027 
-L 3456 3027 
-L 3456 3475 
-L 2246 3475 
-C 2125 3526 1952 3565 1754 3565 
-C 1056 3565 454 3085 454 2323 
-C 454 1907 678 1568 909 1389 
-L 909 1363 
-C 723 1235 525 1005 525 717 
-C 525 442 659 256 838 147 
-L 838 115 
-C 512 -83 326 -371 326 -672 
-C 326 -1267 915 -1600 1760 -1600 
-z
-M 1754 1498 
-C 1357 1498 1018 1818 1018 2323 
-C 1018 2835 1350 3136 1754 3136 
-C 2170 3136 2496 2835 2496 2323 
-C 2496 1818 2157 1498 1754 1498 
-z
-M 1843 -1197 
-C 1210 -1197 838 -960 838 -589 
-C 838 -390 941 -179 1190 0 
-C 1344 -38 1510 -51 1638 -51 
-L 2240 -51 
-C 2701 -51 2944 -166 2944 -493 
-C 2944 -851 2515 -1197 1843 -1197 
-z
-" transform="scale(0.015625)"/>
-       <path id="NotoSansCJKsc-Regular-45" d="M 1773 -83 
-C 2189 -83 2560 141 2829 410 
-L 2848 410 
-L 2899 0 
-L 3379 0 
-L 3379 5094 
-L 2790 5094 
-L 2790 3757 
-L 2822 3162 
-C 2515 3411 2253 3565 1843 3565 
-C 1050 3565 339 2861 339 1734 
-C 339 576 902 -83 1773 -83 
-z
-M 1901 410 
-C 1293 410 941 902 941 1741 
-C 941 2534 1389 3072 1946 3072 
-C 2234 3072 2502 2970 2790 2707 
-L 2790 883 
-C 2502 563 2221 410 1901 410 
-z
-" transform="scale(0.015625)"/>
-       <path id="NotoSansCJKsc-Regular-4e" d="M 589 0 
-L 1178 0 
-L 1178 2522 
-C 1491 2880 1786 3053 2048 3053 
-C 2490 3053 2694 2778 2694 2125 
-L 2694 0 
-L 3277 0 
-L 3277 2522 
-C 3603 2880 3885 3053 4154 3053 
-C 4595 3053 4800 2778 4800 2125 
-L 4800 0 
-L 5382 0 
-L 5382 2202 
-C 5382 3085 5043 3565 4333 3565 
-C 3904 3565 3546 3290 3181 2899 
-C 3040 3309 2758 3565 2221 3565 
-C 1805 3565 1446 3302 1139 2970 
-L 1126 2970 
-L 1069 3475 
-L 589 3475 
-L 589 0 
-z
-" transform="scale(0.015625)"/>
-      </defs>
-      <use xlink:href="#NotoSansCJKsc-Regular-48"/>
-      <use xlink:href="#NotoSansCJKsc-Regular-53" transform="translate(56.40625 0)"/>
-      <use xlink:href="#NotoSansCJKsc-Regular-42" transform="translate(92.5 0)"/>
-      <use xlink:href="#NotoSansCJKsc-Regular-45" transform="translate(148.796875 0)"/>
-      <use xlink:href="#NotoSansCJKsc-Regular-1" transform="translate(210.796875 0)"/>
-      <use xlink:href="#NotoSansCJKsc-Regular-4f" transform="translate(233.203125 0)"/>
-      <use xlink:href="#NotoSansCJKsc-Regular-50" transform="translate(294.203125 0)"/>
-      <use xlink:href="#NotoSansCJKsc-Regular-53" transform="translate(354.796875 0)"/>
-      <use xlink:href="#NotoSansCJKsc-Regular-4e" transform="translate(393.59375 0)"/>
-     </g>
+     <text transform="translate(24.345 416.745702) rotate(-90)" font-size="10.5">grad norm</text>
     </g>
    </g>
    <g id="line2d_71">
@@ -1448,10 +1101,10 @@ L 66.146113 311.445782
 " style="fill: none; stroke: #000000; stroke-width: 0.9; stroke-linecap: round"/>
    </g>
    <g id="text_40">
-    <text x="91.25" y="297.74" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 9px; fill: #333333">warmup peak 18.1</text>
+    <text x="91.25" y="297.74" style="font-size: 9px; fill: #333333">warmup peak 18.1</text>
    </g>
    <g id="text_41">
-    <text x="205.68" y="299.38" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 11px; font-weight: 600; fill: #000000">(c) Gradient Norm (log scale)</text>
+    <text x="205.68" y="299.38" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: #000000">(c) Gradient Norm (log scale)</text>
    </g>
   </g>
   <g id="axes_4">
@@ -1471,10 +1124,7 @@ z
       </g>
      </g>
      <g id="text_42">
-      <!-- 0 -->
-      <g transform="translate(402.67625 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-      </g>
+      <text x="405.59" y="491.3" text-anchor="middle" font-size="10.5">0</text>
      </g>
     </g>
     <g id="xtick_17">
@@ -1484,11 +1134,7 @@ z
       </g>
      </g>
      <g id="text_43">
-      <!-- 50 -->
-      <g transform="translate(461.61352 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-16"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-      </g>
+      <text x="467.44102" y="491.3" text-anchor="middle" font-size="10.5">50</text>
      </g>
     </g>
     <g id="xtick_18">
@@ -1498,12 +1144,7 @@ z
       </g>
      </g>
      <g id="text_44">
-      <!-- 100 -->
-      <g transform="translate(520.550791 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="529.292041" y="491.3" text-anchor="middle" font-size="10.5">100</text>
      </g>
     </g>
     <g id="xtick_19">
@@ -1513,12 +1154,7 @@ z
       </g>
      </g>
      <g id="text_45">
-      <!-- 150 -->
-      <g transform="translate(582.401811 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-16" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="591.143061" y="491.3" text-anchor="middle" font-size="10.5">150</text>
      </g>
     </g>
     <g id="xtick_20">
@@ -1528,16 +1164,11 @@ z
       </g>
      </g>
      <g id="text_46">
-      <!-- 200 -->
-      <g transform="translate(644.252832 491.3) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-13"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(55.5 0)"/>
-       <use xlink:href="#NotoSansCJKsc-Regular-11" transform="translate(111 0)"/>
-      </g>
+      <text x="652.994082" y="491.3" text-anchor="middle" font-size="10.5">200</text>
      </g>
     </g>
     <g id="text_47">
-    <text x="557.13" y="505.8" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 10.5px; fill: #000000">Optimization Step</text>
+    <text x="557.13" y="505.8" text-anchor="middle" style="font-size: 10.5px; fill: #000000">Optimization Step</text>
    </g>
    </g>
    <g id="matplotlib.axis_8">
@@ -1553,10 +1184,7 @@ L 708.66 467.552081
       </g>
      </g>
      <g id="text_48">
-      <!-- 0 -->
-      <g transform="translate(392.7625 472.172081) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-11"/>
-      </g>
+      <text x="398.59" y="472.172081" text-anchor="end" font-size="10.5">0</text>
      </g>
     </g>
     <g id="ytick_31">
@@ -1571,10 +1199,7 @@ L 708.66 437.040933
       </g>
      </g>
      <g id="text_49">
-      <!-- 1 -->
-      <g transform="translate(392.7625 441.660933) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-12"/>
-      </g>
+      <text x="398.59" y="441.660933" text-anchor="end" font-size="10.5">1</text>
      </g>
     </g>
     <g id="ytick_32">
@@ -1589,10 +1214,7 @@ L 708.66 406.529785
       </g>
      </g>
      <g id="text_50">
-      <!-- 2 -->
-      <g transform="translate(392.7625 411.149785) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-13"/>
-      </g>
+      <text x="398.59" y="411.149785" text-anchor="end" font-size="10.5">2</text>
      </g>
     </g>
     <g id="ytick_33">
@@ -1607,10 +1229,7 @@ L 708.66 376.018637
       </g>
      </g>
      <g id="text_51">
-      <!-- 3 -->
-      <g transform="translate(392.7625 380.638637) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-14"/>
-      </g>
+      <text x="398.59" y="380.638637" text-anchor="end" font-size="10.5">3</text>
      </g>
     </g>
     <g id="ytick_34">
@@ -1625,10 +1244,7 @@ L 708.66 345.507489
       </g>
      </g>
      <g id="text_52">
-      <!-- 4 -->
-      <g transform="translate(392.7625 350.127489) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-15"/>
-      </g>
+      <text x="398.59" y="350.127489" text-anchor="end" font-size="10.5">4</text>
      </g>
     </g>
     <g id="ytick_35">
@@ -1643,14 +1259,11 @@ L 708.66 314.996341
       </g>
      </g>
      <g id="text_53">
-      <!-- 5 -->
-      <g transform="translate(392.7625 319.616341) scale(0.105 -0.105)">
-       <use xlink:href="#NotoSansCJKsc-Regular-16"/>
-      </g>
+      <text x="398.59" y="319.616341" text-anchor="end" font-size="10.5">5</text>
      </g>
     </g>
     <g id="text_54">
-    <text transform="translate(387.50 391.43) rotate(-90)" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 10.5px; fill: #000000">Learning Rate (×1e-5)</text>
+    <text transform="translate(387.50 391.43) rotate(-90)" text-anchor="middle" style="font-size: 10.5px; fill: #000000">Learning Rate (×1e-5)</text>
    </g>
    </g>
    <g id="line2d_92">
@@ -1729,11 +1342,11 @@ L 708.66 475.06
 " style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_55">
-    <text x="557.13" y="299.38" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 11px; font-weight: 600; fill: #000000">(d) Learning Rate (cosine, 3% warmup)</text>
+    <text x="557.13" y="299.38" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: #000000">(d) Learning Rate (cosine, 3% warmup)</text>
    </g>
   </g>
   <g id="text_56">
-    <text x="360.0" y="19.22" text-anchor="middle" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 700; fill: #000000">Fig. 3: Training Dynamics (dashed lines: checkpoints at 1.0 / 1.5 / 2.0 epochs)</text>
+    <text x="360.0" y="19.22" text-anchor="middle" style="font-size: 13px; font-weight: 700; fill: #000000">Fig. 3: Training Dynamics (dashed lines: checkpoints at 1.0 / 1.5 / 2.0 epochs)</text>
    </g>
  </g>
  <defs>

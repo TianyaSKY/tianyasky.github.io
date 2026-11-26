@@ -1,3 +1,4 @@
+import { FIGURE_FONT_FAMILY } from '../../utils/figureFont';
 import { CONFIG, ObservationSnapshot } from '../sim/rlRacingMath';
 import {
   CalloutSpec,
@@ -104,11 +105,11 @@ export function compositePublicationDiagram(
   ctx.stroke();
 
   ctx.fillStyle = inkPrimary;
-  ctx.font = '700 32px "Plus Jakarta Sans", sans-serif';
+  ctx.font = `700 32px ${FIGURE_FONT_FAMILY}`;
   ctx.fillText('RL Racing 3D · Observation Space and LiDAR', 48, 48);
 
   ctx.fillStyle = inkMuted;
-  ctx.font = '500 19px "Plus Jakarta Sans", sans-serif';
+  ctx.font = `500 19px ${FIGURE_FONT_FAMILY}`;
   ctx.fillText(
     `Scenario: ${scenarioTitle}   ·   PPO (MlpPolicy)   ·   Box(16,) observation   ·   Action #${snapshot.action.id}: ${snapshot.action.label}`,
     48,
@@ -124,7 +125,7 @@ export function compositePublicationDiagram(
     { label: 'Heading angle', color: '#d97706' },
   ];
   let lx = outW - 48;
-  ctx.font = '600 18px "Plus Jakarta Sans", sans-serif';
+  ctx.font = `600 18px ${FIGURE_FONT_FAMILY}`;
   for (let i = legendItems.length - 1; i >= 0; i--) {
     const item = legendItems[i];
     const tw = ctx.measureText(item.label).width;
@@ -204,7 +205,7 @@ export function compositePublicationDiagram(
   // 3. INDIVIDUAL RAY ANGLE & DISTANCE MICRO-BADGES
   // ===================================================
   if (layers.rays && layers.rayBadges) {
-    ctx.font = '600 17px "JetBrains Mono", monospace';
+    ctx.font = `600 17px ${FIGURE_FONT_FAMILY}`;
     for (const tip of anchors.rayTips) {
       if (!tip.visible) continue;
       const pt = mapNormToCanvas(tip.x, tip.y);
@@ -293,17 +294,17 @@ export function compositePublicationDiagram(
 
     // Top row: observation index and callout title
     ctx.fillStyle = c.accentHex;
-    ctx.font = '700 18px "JetBrains Mono", monospace';
+    ctx.font = `700 18px ${FIGURE_FONT_FAMILY}`;
     ctx.fillText(c.obsTag, boxX + 18, boxY + 32);
 
     const tagW = ctx.measureText(c.obsTag).width;
     ctx.fillStyle = inkPrimary;
-    ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+    ctx.font = `700 22px ${FIGURE_FONT_FAMILY}`;
     ctx.fillText(c.title, boxX + 28 + tagW, boxY + 32);
 
-    // Value readout in tabular monospace
+    // Value readout
     ctx.fillStyle = inkPrimary;
-    ctx.font = '600 19px "JetBrains Mono", monospace';
+    ctx.font = `600 19px ${FIGURE_FONT_FAMILY}`;
     ctx.fillText(c.valueText, boxX + 18, boxY + 62);
   }
   ctx.restore();
@@ -322,14 +323,14 @@ export function compositePublicationDiagram(
   ctx.stroke();
 
   ctx.fillStyle = inkPrimary;
-  ctx.font = '700 21px "Plus Jakarta Sans", sans-serif';
+  ctx.font = `700 21px ${FIGURE_FONT_FAMILY}`;
   ctx.fillText('16-D Normalized Observation Vector', 48, footY + 38);
 
   // Reward summary right side of footer header
   const r = snapshot.reward;
   const rewardSummary = `Step Reward R = ${r.total >= 0 ? '+' : ''}${r.total.toFixed(2)}   [ Step ${r.stepPenalty.toFixed(1)} | Speed +${r.speedReward.toFixed(2)} (v×2.5) | Center +${r.centerlineReward.toFixed(2)} | Collision/OOB -100 ]`;
   ctx.fillStyle = inkMuted;
-  ctx.font = '600 17px "JetBrains Mono", monospace';
+  ctx.font = `600 17px ${FIGURE_FONT_FAMILY}`;
   const rw = ctx.measureText(rewardSummary).width;
   ctx.fillText(rewardSummary, outW - 48 - rw, footY + 38);
 
@@ -362,12 +363,12 @@ export function compositePublicationDiagram(
 
     // Index
     ctx.fillStyle = accent;
-    ctx.font = '700 15px "JetBrains Mono", monospace';
+    ctx.font = `700 15px ${FIGURE_FONT_FAMILY}`;
     ctx.fillText(`[${i}]`, cx + 10, cellY + 24);
 
     // Key / angle
     ctx.fillStyle = inkPrimary;
-    ctx.font = '600 15px "Plus Jakarta Sans", sans-serif';
+    ctx.font = `600 15px ${FIGURE_FONT_FAMILY}`;
     const shortName =
       dim.group === 'lidar'
         ? `${snapshot.rays[i - 7].angleDeg >= 0 ? '+' : ''}${snapshot.rays[i - 7].angleDeg}°`
@@ -376,17 +377,17 @@ export function compositePublicationDiagram(
 
     // Raw value
     ctx.fillStyle = inkMuted;
-    ctx.font = '500 13px "JetBrains Mono", monospace';
+    ctx.font = `500 13px ${FIGURE_FONT_FAMILY}`;
     ctx.fillText(dim.rawDisplay, cx + 10, cellY + 76);
 
     // Formula
     ctx.fillStyle = inkMuted;
-    ctx.font = '400 12px "JetBrains Mono", monospace';
+    ctx.font = `400 12px ${FIGURE_FONT_FAMILY}`;
     ctx.fillText(dim.formula, cx + 10, cellY + 98);
 
     // Normalized numeric readout
     ctx.fillStyle = isHitRay ? '#dc2626' : inkPrimary;
-    ctx.font = '700 18px "JetBrains Mono", monospace';
+    ctx.font = `700 18px ${FIGURE_FONT_FAMILY}`;
     ctx.fillText(dim.normalized.toFixed(3), cx + 10, cellY + 132);
   });
 

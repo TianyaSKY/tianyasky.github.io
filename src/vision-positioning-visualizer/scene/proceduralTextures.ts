@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { FIGURE_FONT_FAMILY } from '../../utils/figureFont';
 
 export interface ProceduralTexturePack {
   steelBump: THREE.CanvasTexture;
@@ -156,7 +157,7 @@ export function createBadgeSpriteTexture(
     ctx.stroke();
 
     ctx.fillStyle = accentHex;
-    ctx.font = '700 40px "JetBrains Mono", monospace';
+    ctx.font = `700 40px ${FIGURE_FONT_FAMILY}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(primaryText, w / 2, h / 2 + 2);
@@ -189,14 +190,14 @@ export function createBadgeSpriteTexture(
     const subColor = isSelected || variant === 'angle' ? '#e2e8f0' : '#334155';
 
     ctx.fillStyle = textColor;
-    ctx.font = '700 28px "JetBrains Mono", monospace';
+    ctx.font = `700 28px ${FIGURE_FONT_FAMILY}`;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
 
     if (secondaryText) {
       ctx.fillText(primaryText, pad + 26, h / 2 - 14);
       ctx.fillStyle = subColor;
-      ctx.font = '600 19px "JetBrains Mono", monospace';
+      ctx.font = `600 19px ${FIGURE_FONT_FAMILY}`;
       ctx.fillText(secondaryText, pad + 26, h / 2 + 17);
     } else {
       ctx.fillText(primaryText, pad + 26, h / 2 + 1);

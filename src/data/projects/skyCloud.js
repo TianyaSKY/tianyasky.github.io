@@ -24,7 +24,7 @@ export const skyCloudDetail = {
     ],
     method: [
       figure(
-        "method-overview.png",
+        "method-overview.svg",
         "Figure 2",
         "Four-Layer Method Overview: Storage, Hybrid RAG, Control, and Sandboxed Execution",
         "Multi-modal files are chunked and indexed asynchronously; hybrid dense and lexical recall feeds a dual-mode controller; Expert mode provisions a Docker sandbox with human approval and writes verified artifacts back to storage."

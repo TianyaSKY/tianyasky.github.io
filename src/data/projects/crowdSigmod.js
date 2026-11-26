@@ -219,7 +219,7 @@ export const crowdSigmodDetail = {
           "The multi-scale fusion module projects P2, P3, and P4 to 64 channels each via $1 \\times 1$ convolutions and bilinearly upsamples P3 and P4 to match the P2 Stride-4 grid ($160 \\times 160$). Concatenating the three branches followed by a $1 \\times 1$ projection and a C2f residual block yields the fused representation $F \\in \\mathbb{R}^{B \\times 128 \\times 160 \\times 160}$."
         ],
         figure: {
-          src: "/projects/crowd-sigmod/pipeline.png",
+          src: "/projects/crowd-sigmod/pipeline.svg",
           label: "Figure 2",
           title: "YOLO-PGMD End-to-End Multi-Scale Feature Extraction, PG-Attention, and MSR Refinement Pipeline",
           caption: "From a 640×640 input, YOLO extracts P2/P3/P4 features and fuses them at Stride-4 (160×160). The foreground probability map $P$ gates spatial features after ECA channel weighting; three MSR blocks with parallel dilation rates 1/2/3 refine the representation. Combined with a long residual shortcut from the fused features, a Softplus head outputs a non-negative density map $D$ whose spatial sum yields the estimated count.",
