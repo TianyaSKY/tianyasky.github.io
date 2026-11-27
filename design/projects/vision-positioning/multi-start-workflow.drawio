@@ -1,0 +1,152 @@
+<mxfile host="Electron" agent="draw.io" version="24.7.0">
+  <diagram id="vp-multistart" name="Multi-Start-NLLS-Workflow">
+    <mxGraphModel dx="1240" dy="740" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1240" pageHeight="740" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="box_11" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:16.5px;font-weight:bold;color:#1E3A8A;&quot;&gt;Previous Frame &lt;i&gt;C&lt;sub&gt;t&amp;minus;1&lt;/sub&gt;&lt;/i&gt;&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#475569;&quot;&gt;Temporal motion prior&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#DBEAFE;strokeColor=#1E3A8A;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="110" y="26" width="280" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_12" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:16.5px;font-weight:bold;color:#1E3A8A;&quot;&gt;Coarse PnP &lt;i&gt;&amp;minus;R&lt;sup&gt;T&lt;/sup&gt;t&lt;/i&gt;&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#475569;&quot;&gt;Viewpoint-jump recovery&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#DBEAFE;strokeColor=#1E3A8A;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="480" y="26" width="280" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_13" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:16.5px;font-weight:bold;color:#1E3A8A;&quot;&gt;Anchor Centroid &lt;span style=&quot;text-decoration:overline;&quot;&gt;&lt;i&gt;P&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#475569;&quot;&gt;Cold-start 3D mean&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#DBEAFE;strokeColor=#1E3A8A;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="850" y="26" width="280" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="dot_14" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1E3A8A;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="410.5" y="117.5" width="9.0" height="9.0" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_15" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#1E3A8A;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="94" as="sourcePoint"/>
+            <mxPoint x="415" y="152" as="targetPoint"/>
+            <Array as="points"><mxPoint x="250" y="122"/><mxPoint x="415" y="122"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_16" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#1E3A8A;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="94" as="sourcePoint"/>
+            <mxPoint x="415" y="152" as="targetPoint"/>
+            <Array as="points"><mxPoint x="620" y="122"/><mxPoint x="415" y="122"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_17" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#1E3A8A;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="990" y="94" as="sourcePoint"/>
+            <mxPoint x="415" y="152" as="targetPoint"/>
+            <Array as="points"><mxPoint x="990" y="122"/><mxPoint x="415" y="122"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_18" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:17px;font-weight:bold;color:#0F172A;&quot;&gt;Multi-Start Seed Pool &lt;i&gt;S&lt;/i&gt;&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#334155;&quot;&gt;3 complementary 3D initializations&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=28;fillColor=#EFF6FF;strokeColor=#1E3A8A;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="245" y="152" width="340" height="66" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_19" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:17px;font-weight:bold;color:#134E4A;&quot;&gt;Ray-Angle Residual &lt;i&gt;r(C)&lt;/i&gt;&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#0F766E;&quot;&gt;Pairwise angular objective &lt;i&gt;&amp;phi;&lt;sub&gt;ij&lt;/sub&gt;(C) &amp;minus; &amp;theta;&lt;sub&gt;ij&lt;/sub&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=28;fillColor=#ECFDF5;strokeColor=#0D9488;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="655" y="152" width="355" height="66" as="geometry"/>
+        </mxCell>
+        <mxCell id="dot_20" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0F172A;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="614.5" y="244.5" width="11.0" height="11.0" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_21" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#0F172A;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="415" y="218" as="sourcePoint"/>
+            <mxPoint x="620" y="250" as="targetPoint"/>
+            <Array as="points"><mxPoint x="415" y="250"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_22" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#0F172A;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="832" y="218" as="sourcePoint"/>
+            <mxPoint x="620" y="250" as="targetPoint"/>
+            <Array as="points"><mxPoint x="832" y="250"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_23" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#0F172A;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="250" as="sourcePoint"/>
+            <mxPoint x="415" y="314" as="targetPoint"/>
+            <Array as="points"><mxPoint x="620" y="278"/><mxPoint x="415" y="278"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_24" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#0F172A;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="250" as="sourcePoint"/>
+            <mxPoint x="825" y="314" as="targetPoint"/>
+            <Array as="points"><mxPoint x="620" y="278"/><mxPoint x="825" y="278"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_25" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=1.8;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;dashed=1;dashPattern=6 4;" vertex="1" parent="1">
+          <mxGeometry x="215" y="294" width="810" height="108" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_26" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:15.5px;font-weight:bold;color:#92400E;line-height:1.3;&quot;&gt;Per-Seed Parallel&lt;br&gt;NLLS Optimization&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="318" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_27" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:17px;font-weight:bold;color:#78350F;&quot;&gt;Levenberg&amp;ndash;Marquardt (LM)&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#92400E;&quot;&gt;Unconstrained damped Gauss&amp;ndash;Newton&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=28;fillColor=#FDE68A;strokeColor=#B45309;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="255" y="314" width="320" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_28" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:17px;font-weight:bold;color:#78350F;&quot;&gt;Trust Region Reflective (TRF)&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#92400E;&quot;&gt;Box-constrained trust-region step&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=28;fillColor=#FDE68A;strokeColor=#B45309;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="665" y="314" width="320" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="dot_29" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0F172A;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="615.5" y="413.5" width="9.0" height="9.0" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_30" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#0F172A;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="415" y="382" as="sourcePoint"/>
+            <mxPoint x="620" y="442" as="targetPoint"/>
+            <Array as="points"><mxPoint x="415" y="418"/><mxPoint x="620" y="418"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_31" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#0F172A;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="825" y="382" as="sourcePoint"/>
+            <mxPoint x="620" y="442" as="targetPoint"/>
+            <Array as="points"><mxPoint x="825" y="418"/><mxPoint x="620" y="418"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_32" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:17px;font-weight:bold;color:#0F172A;&quot;&gt;Filter Converged Solutions&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#475569;&quot;&gt;Verify residual acceptance threshold&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=28;fillColor=#E2E8F0;strokeColor=#1E293B;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="405" y="442" width="430" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="dot_33" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0F766E;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="614.5" y="526.5" width="11.0" height="11.0" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_34" value="Accepted Solution" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#059669;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#065F46;fontStyle=1;labelBackgroundColor=#FFFFFF;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="504" as="sourcePoint"/>
+            <mxPoint x="355" y="562" as="targetPoint"/>
+            <Array as="points"><mxPoint x="620" y="532"/><mxPoint x="355" y="532"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_35" value="Fallback (No Valid Basin)" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#64748B;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#475569;fontStyle=1;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="532" as="sourcePoint"/>
+            <mxPoint x="885" y="562" as="targetPoint"/>
+            <Array as="points"><mxPoint x="885" y="532"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_36" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:17px;font-weight:bold;color:#065F46;&quot;&gt;Minimum-Residual Estimate&lt;/div&gt;&lt;div style=&quot;font-size:12.5px;color:#047857;&quot;&gt;argmin&lt;sub&gt;&lt;i&gt;s&amp;isin;S&lt;/i&gt;&lt;/sub&gt; &amp;Vert;&lt;i&gt;r(C)&lt;/i&gt;&amp;Vert;&lt;sup&gt;2&lt;/sup&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=28;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="175" y="562" width="360" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_37" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:17px;font-weight:bold;color:#334155;&quot;&gt;Coarse PnP / Temporal Prior&lt;/div&gt;&lt;div style=&quot;font-size:12.5px;color:#64748B;&quot;&gt;Prevents single-frame trajectory spikes&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=28;fillColor=#F1F5F9;strokeColor=#64748B;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="705" y="562" width="360" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_38" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#059669;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="626" as="sourcePoint"/>
+            <mxPoint x="620" y="672" as="targetPoint"/>
+            <Array as="points"><mxPoint x="355" y="646"/><mxPoint x="620" y="646"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_39" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#64748B;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885" y="626" as="sourcePoint"/>
+            <mxPoint x="620" y="672" as="targetPoint"/>
+            <Array as="points"><mxPoint x="885" y="646"/><mxPoint x="620" y="646"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_40" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:18.5px;font-weight:bold;color:#064E3B;&quot;&gt;Current-Frame Camera Position &lt;i&gt;C&lt;sup&gt;*&lt;/sup&gt;&lt;/i&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#CCFBF1;strokeColor=#0F766E;strokeWidth=2.5;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="405" y="672" width="430" height="56" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

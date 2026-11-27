@@ -394,28 +394,6 @@ export const crowdSigmodDetail = {
       }
     ]
   },
-  caseFigures: {
-    background: {
-      src: "/projects/crowd-sigmod/vis_shanghaitech_a_172.jpg",
-      label: "Figure 1",
-      title: "Mass-Conserved Gaussian Labels & Probability Masks",
-      caption: "Four-panel verification of point annotations, discrete density re-normalization (sum D = N), and foreground probability gating."
-    },
-    method: {
-      src: "/projects/crowd-sigmod/pipeline.png",
-      label: "Figure 2",
-      title: "YOLO-PGMD Architecture & MSR Refinement",
-      caption: "End-to-end multi-scale feature fusion (P2/P3/P4), probability-guided spatial attention, and Multi-Scale Residual (MSR) blocks.",
-      wide: true,
-      kind: "diagram"
-    },
-    results: {
-      src: "https://media.tianyasky.top/site/projects/crowd-sigmod/academic_sota_comparison.png",
-      label: "Figure 4",
-      title: "Cross-Benchmark Comparison with Published Models",
-      caption: "Quantitative evaluation on ShanghaiTech Part A against CSRNet, Bayesian Loss, DM-Count, MAN, and CLIP-EBC."
-    }
-  },
   highlights: [
     "**Mass-Conserved Gaussian Labels**: Locally re-normalizes truncated boundary kernels with dataset-level assertion checks ($\\sum D = N$) to eliminate border mass loss",
     "**Decoupled Probability & Density Heads**: Supervises a foreground likelihood branch with BCE + 0.2 Dice as a spatial gating prior inside PG-Attention",

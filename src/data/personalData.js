@@ -6,7 +6,6 @@ export const personalInfo = {
   college: "School of Information Engineering",
   major: "B.Eng. in Computer Science and Technology (2023.09 — 2027.07)",
   avatar: "https://media.tianyasky.top/site/avatar.png",
-  schoolLogo: "./school_logo.png",
   email: "tianyaguest@qq.com",
   github: "https://github.com/TianyaSKY",
   phone: "+86 135-1700-1469",

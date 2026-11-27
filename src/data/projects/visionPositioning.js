@@ -1,5 +1,5 @@
 const patchCnnFigure = {
-  src: "/projects/vision-positioning/patch-cnn-architecture.png",
+  src: "/projects/vision-positioning/patch-cnn-architecture.svg",
   label: "Figure 2a",
   title: "SimpleCNN Convolutional Architecture and 9-Class Output",
   caption: "A 64×64 RGB image patch passes through three convolution-pooling blocks and two fully connected layers before a Softmax head outputs probabilities for eight physical corner classes and one background class.",
@@ -7,7 +7,7 @@ const patchCnnFigure = {
 };
 
 const landmarkFigure = {
-  src: "/projects/vision-positioning/landmark-ids.png",
+  src: "/projects/vision-positioning/landmark-ids.svg",
   label: "Figure 2b",
   title: "Eight 3D Reference Landmarks on the Structured Pole",
   caption: "Upper-tier corners at z=8 are indexed 1, 3, 5, 7, and lower-tier corners at z=4 are indexed 0, 2, 4, 6. Class 8 denotes background clutter and does not map to a 3D anchor.",
@@ -250,7 +250,7 @@ export const visionPositioningDetail = {
           explanation: "Here $\\tilde{u}_i = [u_i^*, v_i^*, 1]^T$ is the homogeneous pixel coordinate of landmark $i$, $K$ is the camera intrinsic matrix, $P_i \\in \\mathbb{R}^3$ is the surveyed 3D world position of landmark $i$, and $C = (X_c, Y_c, Z_c)^T$ is the unknown camera optical center. Eliminating $R$ from the objective reduces the 6-DoF coupled pose problem to a 3-DoF position optimization over $\\binom{N}{2}$ pairwise angle residuals, avoiding the rotational singularities triggered by slender vertical poles."
         },
         figure: {
-          src: "/projects/vision-positioning/ray-angle-geometry.png",
+          src: "/projects/vision-positioning/ray-angle-geometry.svg",
           label: "Figure 1",
           title: "Geometric Consistency Between Back-Projected Image Rays and 3D World Line-of-Sight Vectors",
           caption: "Perspective geometry linking the camera optical center $C$, image-plane keypoints $u_1, u_2$ (with back-projected unit rays $r_1, r_2$ and inter-ray angle $\\theta_{12}$), and surveyed 3D world anchors $P_1, P_2$ (with line-of-sight vectors $v_1, v_2$ and subtended angle $\\phi_{12}$).",
@@ -266,7 +266,7 @@ export const visionPositioningDetail = {
           "To extract physical pole vertices reliably against water reflections, sky gradients, and port clutter, the front-end perception module narrows the candidate set through five sequential stages: coarse pole bounding-box gating, masked Harris corner detection, local patch semantic classification, class-wise duplicate suppression, and sub-pixel gradient refinement."
         ],
         figure: {
-          src: "/projects/vision-positioning/figure_overall_pipeline.png",
+          src: "/projects/vision-positioning/figure_overall_pipeline.svg",
           label: "Figure 2",
           title: "Five-Stage Cascaded Visual Perception and Multi-Start Ray-Angle NLLS Localization Pipeline",
           caption: "System architecture divided into front-end perception and back-end geometric localization: YOLO detects structural poles to generate a binary ROI mask; Harris corners are extracted inside the ROI and cropped into 64×64 RGB patches for 9-class SimpleCNN classification; confidence thresholding, class-wise NMS, and cornerSubPix refinement yield the final 2D–3D correspondences fed into the multi-start ray-angle NLLS optimizer.",
@@ -361,7 +361,7 @@ export const visionPositioningDetail = {
             caption: "Visible pole vertices indexed 0, 1, 2, 3 in the camera viewport. Class 8 denotes background candidates excluded from 2D–3D correspondence."
           },
           {
-            src: "/projects/vision-positioning/ray-angle-derivation.png",
+            src: "/projects/vision-positioning/ray-angle-derivation.svg",
             label: "Figure 7",
             title: "Unit Ray Back-Projection and Pairwise Angular Geometry",
             caption: "Left: back-projecting 2D pixels through $K^{-1}$ into unit directional rays. Right: geometric relationship between pairwise ray angles and 3D anchor positions optimized directly over the camera center $C$."
@@ -400,7 +400,7 @@ export const visionPositioningDetail = {
             tag: "Case Study 2 · Multi-Start Nonlinear Optimization Workflow",
             dataset: "Multi-Start NLLS Schematic",
             figure: {
-              src: "/projects/vision-positioning/multi-start-workflow.png",
+              src: "/projects/vision-positioning/multi-start-workflow.svg",
               label: "Figure 10",
               title: "Parallel Multi-Start LM / TRF Optimization, Residual Selection, and Fallback Logic",
               caption: "Seeds from the previous frame, coarse PnP, and anchor centroid are optimized in parallel by LM and TRF; the lowest-residual valid solution is emitted, with fallback to coarse PnP or temporal prediction if residuals exceed the gate."
@@ -412,7 +412,7 @@ export const visionPositioningDetail = {
             tag: "Case Study 3 · Layered Software Architecture",
             dataset: "System Engineering Blueprint",
             figure: {
-              src: "/projects/vision-positioning/software-architecture.png",
+              src: "/projects/vision-positioning/software-architecture.svg",
               label: "Figure 11",
               title: "Layered Software Architecture of the Monocular 3D Localization Workstation",
               caption: "Five decoupled layers: video ingestion, deep learning perception, geometric NLLS optimization, SQLite persistence, and PyQt5 interactive visualization."
@@ -446,29 +446,6 @@ export const visionPositioningDetail = {
         ]
       }
     ]
-  },
-  caseFigures: {
-    background: {
-      src: "/projects/vision-positioning/ray-angle-geometry.png",
-      label: "Figure 1",
-      title: "Ray-Angle Geometric Invariance Principle",
-      caption: "Perspective geometry linking camera optical center, image rays, and surveyed 3D pole anchors to decouple camera position from rotation.",
-      kind: "diagram"
-    },
-    method: {
-      src: "/projects/vision-positioning/figure_overall_pipeline.png",
-      label: "Figure 2",
-      title: "Five-Stage Cascaded Detection Pipeline",
-      caption: "End-to-end perception (YOLO ROI gating, Harris corner extraction, 9-class SimpleCNN) and multi-start ray-angle NLLS optimizer.",
-      wide: true,
-      kind: "diagram"
-    },
-    results: {
-      src: "https://media.tianyasky.top/site/projects/vision-positioning/figure_ablation_grid.png",
-      label: "Figure 3",
-      title: "Ablation Suite & Error Attribution",
-      caption: "Qualitative keypoint detection and semantic classification comparison across six ablation variants in simulation and field trials."
-    }
   },
   highlights: [
     "**Five-Stage Cascaded Perception**: Combines YOLO ROI masking, Harris corner extraction, 9-class SimpleCNN patch classification, class-wise NMS, and sub-pixel refinement",

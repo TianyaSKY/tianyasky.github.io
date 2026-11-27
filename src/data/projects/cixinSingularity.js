@@ -1,5 +1,5 @@
 const pipelineOverview = {
-  src: "/projects/cixin-singularity/pipeline.png",
+  src: "/projects/cixin-singularity/pipeline.svg",
   label: "Figure 2",
   title: "Qwen3.6-27B QLoRA Pipeline Overview",
   caption: "Six stages trace the run from data preparation to checkpoint selection. The ChatML examples illustrate which tokens contribute to training loss.",
@@ -8,7 +8,7 @@ const pipelineOverview = {
 };
 
 const trainingFigure = {
-  src: "/projects/cixin-singularity/training-pipeline.png",
+  src: "/projects/cixin-singularity/training-pipeline.svg",
   label: "Figure 3",
   title: "Document-Contiguous Partitioning & QLoRA Training Pipeline",
   caption: "Curated 2,375 passage-continuation pairs formatted in ChatML; prompt tokens masked with -100 labels to ensure loss computation strictly on continuation tokens during 4-bit NF4 fine-tuning.",

@@ -11,7 +11,7 @@ export const skyOjDetail = {
     ],
     method: [
       {
-        src: "/projects/sky-oj/method-overview.png",
+        src: "/projects/sky-oj/method-overview.svg",
         label: "Figure 2",
         title: "SKYOJ: Asynchronous Grading and On-Demand Tutoring",
         caption: "FastAPI schedules ACM, OOP, and Kaggle submissions for Celery workers, which run code in isolated Docker sandboxes and return verdicts and case diagnostics. Students can separately request guided debugging hints from the LLM tutor.",

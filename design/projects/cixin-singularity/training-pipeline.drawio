@@ -1,0 +1,250 @@
+<mxfile host="Electron" agent="draw.io" version="24.7.0">
+  <diagram id="cixin-training" name="QLoRA-Training-and-Partitioning">
+    <mxGraphModel dx="1400" dy="690" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="690" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="box_11" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#F8FAFF;strokeColor=#6366F1;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="25" y="20" width="1350" height="286" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_12" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:17px;font-weight:bold;color:#312E81;&quot;&gt;A. Document-Contiguous Chapter Partitioning &amp;amp; Completion-Only Token Masking&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="45" y="28" width="950" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_13" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#FFFFFF;strokeColor=#312E81;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="48" y="124" width="235" height="88" as="geometry"/>
+        </mxCell>
+        <mxCell id="ico_14" value="" style="shape=image;html=1;imageAspect=1;aspect=fixed;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2248%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%3E%3Crect%20width%3D%2224%22%20height%3D%2224%22%20rx%3D%226%22%20fill%3D%22%23EEF2FF%22%2F%3E%3Cg%20stroke%3D%22%234338CA%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M4%2019.5A2.5%202.5%200%200%201%206.5%2017H20%22%2F%3E%3Cpath%20d%3D%22M6.5%202H20v20H6.5A2.5%202.5%200%200%201%204%2019.5v-15A2.5%202.5%200%200%201%206.5%202z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E;" vertex="1" parent="1">
+          <mxGeometry x="62" y="146.0" width="44" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_15" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:15.5px;font-weight:bold;color:#0F172A;&quot;&gt;2,375 Pairs&lt;/div&gt;&lt;div style=&quot;font-size:12.5px;color:#334155;margin-top:4px;&quot;&gt;Curated Cixin Liu prose&lt;br&gt;Instr. / context / continuation&lt;/div&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="116" y="130" width="157" height="76" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_16" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#312E81;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="283" y="168" as="sourcePoint"/>
+            <mxPoint x="325" y="168" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_17" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;&quot;&gt;&lt;div style=&quot;font-size:15px;font-weight:bold;color:#312E81;&quot;&gt;Chapter Split&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#475569;margin-top:3px;&quot;&gt;Contiguous order&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFFFF;strokeColor=#312E81;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="325" y="130" width="150" height="76" as="geometry"/>
+        </mxCell>
+        <mxCell id="dot_18" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#312E81;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="493.5" y="163.5" width="9.0" height="9.0" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_19" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#312E81;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="475" y="168" as="sourcePoint"/>
+            <mxPoint x="525" y="96" as="targetPoint"/>
+            <Array as="points"><mxPoint x="498" y="168"/><mxPoint x="498" y="96"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_20" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#312E81;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="475" y="168" as="sourcePoint"/>
+            <mxPoint x="525" y="168" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_21" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#64748B;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="475" y="168" as="sourcePoint"/>
+            <mxPoint x="525" y="240" as="targetPoint"/>
+            <Array as="points"><mxPoint x="498" y="168"/><mxPoint x="498" y="240"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_22" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:14.5px;font-weight:bold;color:#1E3A8A;&quot;&gt;Train: 1,900&lt;/div&gt;&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:11.5px;color:#475569;&quot;&gt;80% supervision split&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#EFF6FF;strokeColor=#2563EB;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="525" y="68" width="165" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_23" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:14.5px;font-weight:bold;color:#92400E;&quot;&gt;Validation: 238&lt;/div&gt;&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:11.5px;color:#78350F;&quot;&gt;Checkpoint eval only&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="525" y="140" width="165" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_24" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:14.5px;font-weight:bold;color:#334155;&quot;&gt;Test: 237 (Held-Out)&lt;/div&gt;&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:11.5px;color:#64748B;&quot;&gt;Excluded from training &amp;amp; selection&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#F1F5F9;strokeColor=#94A3B8;strokeWidth=1.8;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;dashed=1;dashPattern=6 4;" vertex="1" parent="1">
+          <mxGeometry x="525" y="212" width="245" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_25" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#2563EB;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="96" as="sourcePoint"/>
+            <mxPoint x="735" y="96" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_26" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:15px;font-weight:bold;color:#1E3A8A;&quot;&gt;ChatML&lt;/div&gt;&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:11px;color:#475569;&quot;&gt;Tokenize&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="735" y="68" width="118" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_27" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#2563EB;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="853" y="96" as="sourcePoint"/>
+            <mxPoint x="895" y="96" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_28" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#1E293B;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="895" y="48" width="452" height="118" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_29" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:13px;font-weight:bold;color:#475569;text-align:center;&quot;&gt;Prompt Context&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="910" y="53" width="205" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_30" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:13px;font-weight:bold;color:#047857;text-align:center;&quot;&gt;Target Continuation&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1125" y="53" width="205" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_31" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:13px;font-weight:bold;color:#64748B;&quot;&gt;p₁&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#F1F5F9;strokeColor=#94A3B8;strokeWidth=1.6;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="912" y="78" width="62" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_32" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:13px;font-weight:bold;color:#64748B;&quot;&gt;p₂&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#F1F5F9;strokeColor=#94A3B8;strokeWidth=1.6;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="980" y="78" width="62" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_33" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:13px;font-weight:bold;color:#64748B;&quot;&gt;…&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#F1F5F9;strokeColor=#94A3B8;strokeWidth=1.6;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="1048" y="78" width="62" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_34" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:13px;font-weight:bold;color:#065F46;&quot;&gt;y₁&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=1.8;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="1126" y="78" width="62" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_35" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:13px;font-weight:bold;color:#065F46;&quot;&gt;y₂&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=1.8;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="1194" y="78" width="62" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_36" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:13px;font-weight:bold;color:#065F46;&quot;&gt;…&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=1.8;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="1262" y="78" width="62" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_37" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:11.5px;font-weight:bold;color:#64748B;text-align:center;&quot;&gt;label = -100 &amp;middot; Ignored&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="908" y="125" width="210" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_38" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:11.5px;font-weight:bold;color:#047857;text-align:center;&quot;&gt;completion_mask &amp;middot; In Loss&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1122" y="125" width="214" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_39" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#F5F3FF;strokeColor=#8B5CF6;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="25" y="330" width="665" height="172" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_40" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:16.5px;font-weight:bold;color:#4C1D95;&quot;&gt;B. Quantized Foundation Backbone &amp;amp; Trainable LoRA Overlay&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="45" y="338" width="620" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_41" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#FFFFFF;strokeColor=#4C1D95;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="45" y="382" width="205" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="ico_42" value="" style="shape=image;html=1;imageAspect=1;aspect=fixed;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2248%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%3E%3Crect%20width%3D%2224%22%20height%3D%2224%22%20rx%3D%226%22%20fill%3D%22%23EEF2FF%22%2F%3E%3Cg%20stroke%3D%22%234F46E5%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%222%22%2F%3E%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%226%22%20height%3D%226%22%2F%3E%3Cline%20x1%3D%229%22%20y1%3D%221%22%20x2%3D%229%22%20y2%3D%224%22%2F%3E%3Cline%20x1%3D%2215%22%20y1%3D%221%22%20x2%3D%2215%22%20y2%3D%224%22%2F%3E%3Cline%20x1%3D%229%22%20y1%3D%2220%22%20x2%3D%229%22%20y2%3D%2223%22%2F%3E%3Cline%20x1%3D%2215%22%20y1%3D%2220%22%20x2%3D%2215%22%20y2%3D%2223%22%2F%3E%3Cline%20x1%3D%2220%22%20y1%3D%229%22%20x2%3D%2223%22%20y2%3D%229%22%2F%3E%3Cline%20x1%3D%2220%22%20y1%3D%2214%22%20x2%3D%2223%22%20y2%3D%2214%22%2F%3E%3Cline%20x1%3D%221%22%20y1%3D%229%22%20x2%3D%224%22%20y2%3D%229%22%2F%3E%3Cline%20x1%3D%221%22%20y1%3D%2214%22%20x2%3D%224%22%20y2%3D%2214%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E;" vertex="1" parent="1">
+          <mxGeometry x="59" y="408.0" width="44" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_43" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:15.5px;font-weight:bold;color:#0F172A;&quot;&gt;Qwen3.6-27B&lt;/div&gt;&lt;div style=&quot;font-size:12.5px;color:#334155;margin-top:4px;&quot;&gt;Causal LM branch&lt;br&gt;27B total params&lt;/div&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="113" y="388" width="127" height="84" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_44" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#4C1D95;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="430" as="sourcePoint"/>
+            <mxPoint x="290" y="430" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_45" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.35;&quot;&gt;&lt;div style=&quot;font-size:15px;font-weight:bold;color:#334155;&quot;&gt;Frozen Base&lt;/div&gt;&lt;div style=&quot;font-size:12.5px;color:#475569;margin-top:4px;&quot;&gt;4-bit NF4 weights&lt;br&gt;BF16 compute&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#E2E8F0;strokeColor=#475569;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="290" y="382" width="182" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_46" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.35;&quot;&gt;&lt;div style=&quot;font-size:15px;font-weight:bold;color:#065F46;&quot;&gt;Trainable LoRA&lt;/div&gt;&lt;div style=&quot;font-size:12.5px;color:#047857;margin-top:4px;&quot;&gt;&lt;b&gt;r = 16, &amp;alpha; = 32&lt;/b&gt;&lt;br&gt;&lt;code&gt;q / k / v / o&lt;/code&gt; projections&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=2.4;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="472" y="382" width="196" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_47" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.8;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="25" y="522" width="665" height="146" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_48" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:14px;font-weight:bold;color:#1E293B;&quot;&gt;Continuation Register Samples (Prompt &amp;rarr; Target Prose)&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="45" y="528" width="620" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_49" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:12.5px;color:#3730A3;&quot;&gt;&lt;b&gt;Prompt:&lt;/b&gt; &amp;ldquo;The beacon went dark.&amp;rdquo;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;fillColor=#EEF2FF;strokeColor=#818CF8;strokeWidth=1.5;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="45" y="558" width="285" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_50" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#64748B;strokeWidth=1.6;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="578" as="sourcePoint"/>
+            <mxPoint x="365" y="578" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_51" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:12.5px;color:#065F46;&quot;&gt;&lt;b&gt;Completion:&lt;/b&gt; &amp;ldquo;A faint pulse answered.&amp;rdquo;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;fillColor=#ECFDF5;strokeColor=#34D399;strokeWidth=1.5;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="365" y="558" width="305" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_52" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:12.5px;color:#3730A3;&quot;&gt;&lt;b&gt;Prompt:&lt;/b&gt; &amp;ldquo;The probe lost Earth.&amp;rdquo;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;fillColor=#EEF2FF;strokeColor=#818CF8;strokeWidth=1.5;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="45" y="608" width="285" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_53" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#64748B;strokeWidth=1.6;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="628" as="sourcePoint"/>
+            <mxPoint x="365" y="628" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_54" value="&lt;span style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:12.5px;color:#065F46;&quot;&gt;&lt;b&gt;Completion:&lt;/b&gt; &amp;ldquo;Its clock kept counting.&amp;rdquo;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;fillColor=#ECFDF5;strokeColor=#34D399;strokeWidth=1.5;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="365" y="608" width="305" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_55" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#F0FDF4;strokeColor=#10B981;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="330" width="655" height="338" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_56" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;font-size:16.5px;font-weight:bold;color:#065F46;&quot;&gt;C. Supervised Fine-Tuning &amp;amp; Checkpoint Selection&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="740" y="338" width="610" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="box_57" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#FFFFFF;strokeColor=#059669;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="750" y="382" width="320" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="ico_58" value="" style="shape=image;html=1;imageAspect=1;aspect=fixed;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2248%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%3E%3Crect%20width%3D%2224%22%20height%3D%2224%22%20rx%3D%226%22%20fill%3D%22%23ECFDF5%22%2F%3E%3Cg%20stroke%3D%22%23059669%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22%3E%3Cpolygon%20points%3D%2213%202%203%2014%2012%2014%2011%2022%2021%2010%2012%2010%2013%202%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E;" vertex="1" parent="1">
+          <mxGeometry x="764" y="408.0" width="44" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_59" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:15.5px;font-weight:bold;color:#0F172A;&quot;&gt;SFTTrainer (trl)&lt;/div&gt;&lt;div style=&quot;font-size:12.5px;color:#334155;margin-top:4px;&quot;&gt;Paged AdamW 8-bit &amp;middot; lr &lt;code&gt;5e-5&lt;/code&gt;&lt;br&gt;Effective batch: 16 &amp;middot; 238 steps&lt;/div&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="818" y="388" width="242" height="84" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_60" value="Masked Train Tokens" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#2563EB;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;labelBackgroundColor=#F8FAFF;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1121" y="166" as="sourcePoint"/>
+            <mxPoint x="910" y="382" as="targetPoint"/>
+            <Array as="points"><mxPoint x="1121" y="240"/><mxPoint x="910" y="240"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_61" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#059669;strokeWidth=2.4;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="668" y="430" as="sourcePoint"/>
+            <mxPoint x="750" y="430" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_62" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#059669;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="910" y="478" as="sourcePoint"/>
+            <mxPoint x="910" y="504" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_63" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#FFFFFF;strokeColor=#0D9488;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="750" y="504" width="320" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="ico_64" value="" style="shape=image;html=1;imageAspect=1;aspect=fixed;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2248%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%3E%3Crect%20width%3D%2224%22%20height%3D%2224%22%20rx%3D%226%22%20fill%3D%22%23ECFDF5%22%2F%3E%3Cg%20stroke%3D%22%230D9488%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22%3E%3Cpolygon%20points%3D%2212%202%202%207%2012%2012%2022%207%2012%202%22%2F%3E%3Cpolyline%20points%3D%222%2017%2012%2022%2022%2017%22%2F%3E%3Cpolyline%20points%3D%222%2012%2012%2017%2022%2012%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E;" vertex="1" parent="1">
+          <mxGeometry x="764" y="516.0" width="44" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="txt_65" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;line-height:1.3;&quot;&gt;&lt;div style=&quot;font-size:15.5px;font-weight:bold;color:#0F172A;&quot;&gt;LoRA Checkpoints&lt;/div&gt;&lt;div style=&quot;font-size:12.5px;color:#334155;margin-top:4px;&quot;&gt;Saved at Epochs &lt;b&gt;1.0 / 1.5 / 2.0&lt;/b&gt; (20 MB)&lt;/div&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="818" y="510" width="242" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_66" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#B45309;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="910" y="572" as="sourcePoint"/>
+            <mxPoint x="875" y="598" as="targetPoint"/>
+            <Array as="points"><mxPoint x="910" y="585"/><mxPoint x="875" y="585"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_67" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;&quot;&gt;&lt;div style=&quot;font-size:14.5px;font-weight:bold;color:#92400E;&quot;&gt;Checkpoint Evaluation&lt;/div&gt;&lt;div style=&quot;font-size:11.5px;color:#78350F;&quot;&gt;Val loss: 3.24 &amp;rarr; 3.12&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=2.0;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="750" y="598" width="250" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="edg_68" value="Val Split (238)" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#D97706;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#92400E;fontStyle=1;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="168" as="sourcePoint"/>
+            <mxPoint x="960" y="598" as="targetPoint"/>
+            <Array as="points"><mxPoint x="815" y="168"/><mxPoint x="815" y="202"/><mxPoint x="1332" y="202"/><mxPoint x="1332" y="584"/><mxPoint x="960" y="584"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edg_69" value="" style="endArrow=blockThin;endFill=1;startArrow=none;strokeColor=#B45309;strokeWidth=2.2;rounded=1;arcSize=12;html=1;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;fontSize=12;fontColor=#1E293B;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1000" y="625" as="sourcePoint"/>
+            <mxPoint x="1055" y="625" as="targetPoint"/>
+            
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_70" value="&lt;div style=&quot;font-family:&#x27;Comic Sans MS&#x27;, &#x27;Comic Neue&#x27;, cursive, sans-serif;&quot;&gt;&lt;div style=&quot;font-size:14.5px;font-weight:bold;color:#78350F;&quot;&gt;Manual Style Comparison&lt;/div&gt;&lt;div style=&quot;font-size:12px;color:#92400E;&quot;&gt;Blind side-by-side prose review&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FEF3C7;strokeColor=#B45309;strokeWidth=2.2;fontFamily=Comic Sans MS, Comic Neue, cursive, sans-serif;align=center;verticalAlign=middle;spacingLeft=0;spacingTop=0;" vertex="1" parent="1">
+          <mxGeometry x="1055" y="594" width="298" height="62" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

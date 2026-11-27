@@ -1,5 +1,5 @@
 const architectureFigure = {
-  src: "/projects/sky-douyin/method-overview.png",
+  src: "/projects/sky-douyin/method-overview.svg",
   label: "Figure 1",
   title: "SKYDouyin Recommendation Pipeline",
   caption: "Video ingestion and asynchronous indexing feed cold-start profiling and cosine-similarity recall. Trending candidates supplement vector results, and playback, dwell time, and likes inform feed refreshes.",
@@ -7,7 +7,7 @@ const architectureFigure = {
 };
 
 const uploadFigure = {
-  src: "/projects/sky-douyin/upload-and-indexing.png",
+  src: "/projects/sky-douyin/upload-and-indexing.svg",
   label: "Figure 2",
   title: "Chunked Video Ingestion & Asynchronous Vector Indexing",
   caption: "Client-side file hashing with chunked resumable upload; asynchronous event emission via RabbitMQ triggers multimodal embedding extraction and Milvus vector indexing.",

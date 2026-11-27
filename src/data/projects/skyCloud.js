@@ -30,7 +30,7 @@ export const skyCloudDetail = {
         "Multi-modal files are chunked and indexed asynchronously; hybrid dense and lexical recall feeds a dual-mode controller; Expert mode provisions a Docker sandbox with human approval and writes verified artifacts back to storage."
       ),
       figure(
-        "rag-retrieval.png",
+        "rag-retrieval.svg",
         "Figure 3",
         "Parallel Multi-Query Recall & RRF Fusion Pipeline",
         "Original and rewritten prompts feed dense and lexical recall. Reciprocal Rank Fusion merges candidates before optional cross-encoder reranking and a cited streaming answer."
